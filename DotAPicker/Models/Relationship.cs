@@ -7,6 +7,8 @@ namespace DotAPicker.Models
 {
     public class Relationship: PatchRelative
     {
+        public int ID { get; set; }
+
         public string Hero1 { get; set; }
         public string Hero2 { get; set; }
 

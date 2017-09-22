@@ -7,7 +7,8 @@ namespace DotAPicker.Models
 {
     public class Hero
     {
-        public string Name { get; set; } //this is a unique ID
+        public int ID { get; set; }
+        public string Name { get; set; }
         public string AltNames { get; set; } //can be searched as well so that, for example, BS can find Bloodseeker
 
         public string Notes { get; set; }

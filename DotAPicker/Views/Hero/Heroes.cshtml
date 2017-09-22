@@ -18,7 +18,7 @@
         foreach(var hero in Model)
         {
             <tr>
-                <td>@Html.ActionLink(hero.Name, "Edit", new { id = hero.Name })</td>
+                <td>@Html.ActionLink(hero.Name, "Edit", new { id = hero.ID })</td>
                 <td>@hero.AltNames</td>
                 <td>@hero.Notes</td>
                 <td>@hero.Preference</td>

@@ -25,7 +25,7 @@ namespace DotAPicker.Controllers
         // GET: Hero/Create
         public ActionResult Create()
         {
-            return View("Create");
+            return View("Create", new Hero() { ID = db.Heroes.Max(h => h.ID) + 1 });
         }
 
         // POST: Hero/Create
@@ -37,15 +37,20 @@ namespace DotAPicker.Controllers
                 throw new Exception("This name is already in use");
             }
 
+            if (db.Heroes.Any(h => h.ID == model.ID))
+            {
+                throw new Exception("Hero ID collision");
+            }
+
             db.Heroes.Add(model);
             db.Save();
             return Index();
         }
 
         // GET: Hero/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.Name == id);
+            var hero = db.Heroes.FirstOrDefault(h => h.ID == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
@@ -58,7 +63,7 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Hero model)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.Name == model.Name);
+            var hero = db.Heroes.FirstOrDefault(h => h.ID == model.ID);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
@@ -74,9 +79,9 @@ namespace DotAPicker.Controllers
         }
 
         // GET: Hero/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.Name == id);
+            var hero = db.Heroes.FirstOrDefault(h => h.ID == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
