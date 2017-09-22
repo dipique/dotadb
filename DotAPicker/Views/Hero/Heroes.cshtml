@@ -1,4 +1,5 @@
-﻿@model List<DotAPicker.Models.Hero>
+﻿@using DotAPicker.Models
+@model IEnumerable<Hero>
 
 @{
     ViewBag.Title = "Heroes";
@@ -7,25 +8,72 @@
 
 
 <h1>Heroes</h1>
-<table border="1">
-    <tr>
-        <td>Name</td>
-        <td>Alternative Names</td>
-        <td>Notes</td>
-        <td>Preference</td>
-    </tr>
-    @{ 
-        foreach(var hero in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(hero.Name, "Edit", new { id = hero.ID })</td>
-                <td>@hero.AltNames</td>
-                <td>@hero.Notes</td>
-                <td>@hero.Preference</td>
-            </tr>
-        }
+
+<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
+<select id="filterPreference" onchange="filterFunction()">
+    <option value="">Search by hero preference</option>
+    @foreach(string option in Enum.GetNames(typeof(HeroPreference)))
+    {
+        <option value="@option">@option</option>
     }
-    
+</select>
+<table>
+    <tr><td>
+    <table id="filterTable">
+        <tr class="header">
+            <td>Name</td>
+            <td style="display:none">Alternative Names</td>
+            <td style="display:none">Notes</td>
+            <td>Preference</td>
+            <td>Actions</td>
+        </tr>
+        @{
+            foreach (var hero in Model)
+            {
+                <tr>
+                    <td>@hero.Name</td>
+                    <td style="display:none">@hero.AltNames</td>
+                    <td style="display:none">@hero.Notes</td>
+                    <td>@hero.Preference</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</td>
+                </tr>
+            }
+        }
+    </table>
+    </td></tr>
+    <tr>
+        <td align="right">
+            <input type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
+        </td>
+    </tr>
 </table>
 
-@Html.ActionLink("New", "Create")
+<script>
+    //https://www.w3schools.com/howto/howto_js_filter_table.asp
+    function filterFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("filterInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("filterTable");
+        tr = table.getElementsByTagName("tr");
+        searchPreference = document.getElementById("filterPreference").value;
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 1; i < tr.length; i++) {
+            td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase();
+            td_altNames = tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
+            td_preference = tr[i].getElementsByTagName("td")[3].innerHTML;
+            
+            if (td_heroName) {
+                if ((td_heroName.indexOf(filter) > -1 ||
+                    td_altNames.indexOf(filter) > -1) &&
+                    (searchPreference == "" || td_preference == searchPreference)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

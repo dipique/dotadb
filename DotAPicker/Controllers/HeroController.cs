@@ -13,7 +13,7 @@ namespace DotAPicker.Controllers
         // GET: Hero
         public ActionResult Index()
         {
-            return View("Heroes", db.Heroes);
+            return View("Heroes", db.Heroes.OrderBy(h => h.Name));
         }
 
         // GET: Hero/Details/5
