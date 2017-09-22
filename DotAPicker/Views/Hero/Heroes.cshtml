@@ -1,0 +1,31 @@
+﻿@model List<DotAPicker.Models.Hero>
+
+@{
+    ViewBag.Title = "Heroes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Heroes</h1>
+<table border="1">
+    <tr>
+        <td>Name</td>
+        <td>Alternative Names</td>
+        <td>Notes</td>
+        <td>Preference</td>
+    </tr>
+    @{ 
+        foreach(var hero in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(hero.Name, "Edit", new { id = hero.Name })</td>
+                <td>@hero.AltNames</td>
+                <td>@hero.Notes</td>
+                <td>@hero.Preference</td>
+            </tr>
+        }
+    }
+    
+</table>
+
+@Html.ActionLink("New", "Create")
