@@ -43,6 +43,11 @@ namespace DotAPicker.Controllers
             return Index();
         }
 
+        public ActionResult Detail(int id)
+        {
+            return PartialView(db.HeroDetails(id));
+        }
+
         // GET: Hero/Edit/5
         public ActionResult Edit(int id)
         {
