@@ -212,6 +212,8 @@
     <Content Include="Views\Tip\Edit.cshtml" />
     <Content Include="Views\Tip\Create.cshtml" />
     <Content Include="Views\Relationship\Relationships.cshtml" />
+    <Content Include="Views\Relationship\Edit.cshtml" />
+    <Content Include="Views\Relationship\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

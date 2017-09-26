@@ -7,9 +7,6 @@ namespace DotAPicker.Models
 {
     public class Relationship: PatchRelative
     {
-        public int ID { get; set; }
-
-
         public int Hero1ID { get; set; }        
         public int Hero2ID { get; set; }
 
@@ -20,7 +17,6 @@ namespace DotAPicker.Models
         /// </summary>
         public RelationshipType Type { get; set; }
         public string Description { get; set; }
-        public string Source { get; set; }
     }
 
     public enum RelationshipType
