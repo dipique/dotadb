@@ -16,16 +16,12 @@ namespace DotAPicker.Controllers
             return View("Heroes", db.Heroes.OrderBy(h => h.Name));
         }
 
-        // GET: Hero/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Hero/Create
         public ActionResult Create()
         {
-            return View("Create", new Hero() { ID = db.Heroes.Max(h => h.ID) + 1 });
+            var hero = new Hero();
+            if (db.Heroes.Count() > 0) hero.ID = db.Heroes.Max(h => h.ID) + 1;
+            return View("Create", hero);
         }
 
         // POST: Hero/Create

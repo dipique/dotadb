@@ -9,7 +9,9 @@ namespace DotAPicker.Models
     {
         public int ID { get; set; }
 
-        public string Hero { get; set; }
+        public int HeroID { get; set; }
+
+
         public TipType Type { get; set; } = TipType.Other;
         public string Text { get; set; }
         public string Source { get; set; } //where you found the tip

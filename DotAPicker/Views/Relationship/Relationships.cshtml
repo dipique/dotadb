@@ -1,18 +1,18 @@
 ﻿@using DotAPicker.Models
-@model IEnumerable<Hero>
+@model IEnumerable<Relationship>
 
 @{
-    ViewBag.Title = "Heroes";
+    ViewBag.Title = "Tip";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h1>Heroes</h1>
+<h1>Tips</h1>
 
 <input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
 <select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by hero preference</option>
-    @foreach(string option in Enum.GetNames(typeof(HeroPreference)))
+    <option value="">Search by relationship type</option>
+    @foreach (string option in Enum.GetNames(typeof(RelationshipType)))
     {
         <option value="@option">@option</option>
     }
@@ -21,21 +21,23 @@
     <tr><td>
     <table id="filterTable">
         <tr class="header">
-            <td>Name</td>
+            <td>Hero 1 Name</td>
+            <td>Hero 2 Name</td>
             <td style="display:none">Alternative Names</td>
-            <td style="display:none">Notes</td>
-            <td>Preference</td>
+            <td>Type</td>
+            <td>Text</td>
             <td>Actions</td>
         </tr>
         @{
-            foreach (var hero in Model)
+            foreach (var relationship in Model)
             {
                 <tr>
-                    <td>@hero.Name</td>
-                    <td style="display:none">@hero.AltNames</td>
-                    <td style="display:none">@hero.Notes</td>
-                    <td>@hero.Preference</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</td>
+                    <td>@relationship.Hero1.Name</td>
+                    <td>@relationship.Hero2.Name</td>
+                    <td style="display:none">@relationship.AltNameSet</td>
+                    <td>@relationship.Type</td>
+                    <td>@relationship.Description</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = relationship.ID })</td>
                 </tr>
             }
         }
@@ -43,7 +45,7 @@
     </td></tr>
     <tr>
         <td align="right">
-            <input type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
+            <input type="button" value="New Tip" onclick="location.href='@Url.Action("Create")'" />
         </td>
     </tr>
 </table>
@@ -61,8 +63,8 @@
 
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 1; i < tr.length; i++) {
-            td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase();
-            td_altNames = tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
+            td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase() + tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
+            td_altNames = tr[i].getElementsByTagName("td")[2].innerHTML.toUpperCase();
             td_preference = tr[i].getElementsByTagName("td")[3].innerHTML;
             
             if (td_heroName) {

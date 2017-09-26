@@ -1,0 +1,61 @@
+﻿@using DotAPicker.Models;
+@model HeroDetailViewModel
+
+<div>
+    <h4>Hero Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+
+<h5>Hero</h5>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>@Model.Hero.ID</td>
+    </tr>
+    <tr>
+        <td>Alt. Names</td>
+        <td>@Model.Hero.AltNames</td>
+    </tr>
+    <tr>
+        <td>Notes</td>
+        <td>@Model.Hero.Notes</td>
+    </tr>
+</table>
+
+<h5>Tips</h5>
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Text</td>
+        <td>Source</td>
+    </tr>
+    @foreach(Tip t in Model.Tips)
+    {
+        <tr>
+            <td>@t.Type</td>
+            <td>@t.Text</td>
+            <td>@t.Source</td>
+        </tr>
+    }
+</table>
+
+<h5>Relationships</h5>
+<table>
+    <tr>
+        <td>Hero 1</td>
+        <td>Hero 2</td>
+        <td>Type</td>
+        <td>Text</td>
+        <td>Source</td>
+    </tr>
+    @foreach (Tip t in Model.Tips)
+    {
+        <tr>
+            <td>@t.Type</td>
+            <td>@t.Text</td>
+            <td>@t.Source</td>
+        </tr>
+    }
+</table>

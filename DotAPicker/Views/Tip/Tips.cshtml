@@ -1,18 +1,18 @@
-﻿@using DotAPicker.Models
-@model IEnumerable<Hero>
+﻿@using DotAPicker.ViewModels
+@model IEnumerable<TipViewModel>
 
 @{
-    ViewBag.Title = "Heroes";
+    ViewBag.Title = "Tip";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h1>Heroes</h1>
+<h1>Tips</h1>
 
 <input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
 <select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by hero preference</option>
-    @foreach(string option in Enum.GetNames(typeof(HeroPreference)))
+    <option value="">Search by tip type</option>
+    @foreach (string option in Enum.GetNames(typeof(TipType)))
     {
         <option value="@option">@option</option>
     }
@@ -21,21 +21,21 @@
     <tr><td>
     <table id="filterTable">
         <tr class="header">
-            <td>Name</td>
+            <td>Hero Name</td>
             <td style="display:none">Alternative Names</td>
-            <td style="display:none">Notes</td>
-            <td>Preference</td>
+            <td>Type</td>
+            <td>Text</td>
             <td>Actions</td>
         </tr>
         @{
-            foreach (var hero in Model)
+            foreach (var tip in Model)
             {
                 <tr>
-                    <td>@hero.Name</td>
-                    <td style="display:none">@hero.AltNames</td>
-                    <td style="display:none">@hero.Notes</td>
-                    <td>@hero.Preference</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</td>
+                    <td>@tip.HeroName</td>
+                    <td style="display:none">@tip.HeroAltNames</td>
+                    <td>@tip.Type</td>
+                    <td>@tip.Text</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = tip.ID })</td>
                 </tr>
             }
         }
@@ -43,7 +43,7 @@
     </td></tr>
     <tr>
         <td align="right">
-            <input type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
+            <input type="button" value="New Tip" onclick="location.href='@Url.Action("Create")'" />
         </td>
     </tr>
 </table>
@@ -63,7 +63,7 @@
         for (i = 1; i < tr.length; i++) {
             td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase();
             td_altNames = tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
-            td_preference = tr[i].getElementsByTagName("td")[3].innerHTML;
+            td_preference = tr[i].getElementsByTagName("td")[2].innerHTML;
             
             if (td_heroName) {
                 if ((td_heroName.indexOf(filter) > -1 ||
