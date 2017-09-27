@@ -29,6 +29,6 @@ namespace DotAPicker.Controllers
                 Text = h.Name,
                 Value = h.ID.ToString(),
                 Selected = selection == h.ID
-            });
+            }).OrderBy(s => s.Text);
     }
 }
