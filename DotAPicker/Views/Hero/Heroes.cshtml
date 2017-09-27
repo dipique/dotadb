@@ -53,12 +53,14 @@
     </tr>
     <tr>
         <td align="right" valign="top">
-            <input type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
+            <input id="newHeroBtn" type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
         </td>
     </tr>
 </table>
 
 <script>
+
+    document.addEventListener('keyup', keyUp, false);
 
     $('#filterTable tr').click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
@@ -90,6 +92,13 @@
                     tr[i].style.display = "none";
                 }
             }
+        }
+    }
+
+    function keyUp(e) {
+        if (e.ctrlKey && e.keyCode == 13)
+        {  
+            $('#newHeroBtn').click();
         }
     }
 </script>
