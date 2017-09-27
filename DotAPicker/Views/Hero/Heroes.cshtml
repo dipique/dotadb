@@ -4,6 +4,13 @@
 @{
     ViewBag.Title = "Heroes";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.SelectedHeroID > 0)
+    {
+
+    } else
+    {
+        ViewBag.SelectedHeroID = Model.FirstOrDefault()?.ID ?? 0;
+    }
 }
 
 
@@ -36,7 +43,7 @@
                 @{
                     foreach (var hero in Model)
                     {
-                        <tr id="@hero.ID">
+                        <tr id="@hero.ID" @(ViewBag.SelectedHeroID == hero.ID ? "class=selected" : "")>
                             <td>@hero.Name</td>
                             <td style="display:none">@hero.AltNames</td>
                             <td style="display:none">@hero.Notes</td>
