@@ -34,6 +34,14 @@ namespace DotAPicker.Controllers
             return View("Create", tvm);
         }
 
+        // GET: Relationship/Create
+        public ActionResult Add(int heroID)
+        {
+            var tvm = new RelationshipViewModel() { Patch = db.CurrentPatch, HeroOptions = GetHeroOptions(heroID), Hero1ID = heroID };
+            if (db.Relationships.Count() > 0) tvm.ID = db.Relationships.Max(h => h.ID) + 1;
+            return View("Create", tvm);
+        }
+
         // POST: Relationship/Create
         [HttpPost]
         public ActionResult Create(RelationshipViewModel model)

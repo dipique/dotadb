@@ -31,9 +31,11 @@ namespace DotAPicker.Controllers
 
 
         // GET: Tip/Create
-        public ActionResult Create()
+        public ActionResult Create(int heroID = -1)
         {
-            var tvm = new TipViewModel() { Patch = db.CurrentPatch, HeroOptions = GetHeroOptions() };
+            var heroOptions = GetHeroOptions(heroID);
+            var tvm = new TipViewModel() { Patch = db.CurrentPatch, HeroOptions = heroOptions };
+            if (heroID != -1) tvm.HeroID = heroID;
             if (db.Tips.Count() > 0) tvm.ID = db.Tips.Max(h => h.ID) + 1;
             return View("Create", tvm);
         }
