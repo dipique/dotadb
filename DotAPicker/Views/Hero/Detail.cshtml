@@ -33,20 +33,19 @@
     }
 </table>
 
-<h4>Relationships</h4>@Html.ActionLink("(new)", "Add", "Relationship", new { heroID = Model.Hero.ID }, new { })
+<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID }, new { })
 <table id="detailTable">
     <tr>
-        <td>Hero 1</td>
-        <td>Hero 2</td>
+        <td>Hero</td>
         <td>Type</td>
         <td>Text</td>
         <td>Source</td>
     </tr>
     @foreach (var r in Model.Relationships)
     {
+        var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
         <tr>
-            <td>@r.Hero1.Name</td>
-            <td>@r.Hero2.Name</td>
+            <td>@heroName</td>
             <td>@r.Type</td>
             <td>@r.Description</td>
             <td>@r.Source</td>
