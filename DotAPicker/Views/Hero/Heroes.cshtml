@@ -20,7 +20,11 @@
 </select>
 <table>
     <tr>
-        <td>
+        <td><h4>Hero Options</h4></td>
+        <td style="padding-left: 8px"><h4>Hero Details</h4></td>
+    </tr>
+    <tr>
+        <td valign="top">
             <table id="filterTable">
                 <tr class="header">
                     <td>Name</td>
@@ -43,12 +47,12 @@
                 }
             </table>
         </td>
-        <td rowspan="2">
+        <td rowspan="2" style="padding-left: 8px">
             <div class="heroDetails"></div>
         </td>
     </tr>
     <tr>
-        <td align="right">
+        <td align="right" valign="top">
             <input type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
         </td>
     </tr>
@@ -60,10 +64,6 @@
         $(this).addClass('selected').siblings().removeClass('selected');
         $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + this.id);
     });
-
-    @*$('.ShowHeroDetails').click(function (id) {
-        $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' +  + )
-    });*@
 
     https://www.w3schools.com/howto/howto_js_filter_table.asp
     function filterFunction() {

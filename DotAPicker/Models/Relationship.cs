@@ -10,7 +10,7 @@ namespace DotAPicker.Models
         public int Hero1ID { get; set; }        
         public int Hero2ID { get; set; }
 
-        public bool IncludesHero(int ID) => Hero1ID == ID && Hero2ID == ID;
+        public bool IncludesHero(int ID) => Hero1ID == ID || Hero2ID == ID;
 
         /// <summary>
         /// always 1->2, so if the type is "counter", it means "Hero1 counters Hero2"

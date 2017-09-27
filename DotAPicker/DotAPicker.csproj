@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Models\DotADB.cs" />
     <Compile Include="Models\Hero.cs" />
+    <Compile Include="Models\Utilities.cs" />
     <Compile Include="ViewModels\HeroDetailViewModel.cs" />
     <Compile Include="Models\PatchRelative.cs" />
     <Compile Include="Models\Relationship.cs" />

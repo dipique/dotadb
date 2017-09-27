@@ -17,7 +17,7 @@
 }
 
 .selected {
-    background-color: lightslategray;
+    background-color: lightpink;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -40,8 +40,7 @@ textarea {
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#filterPreference {
-    width: 100%; /* Full-width */
+#filterPreference {    
     font-size: 16px; /* Increase font-size */
     padding: 12px 12px 12px 12px; /* Add some padding */
     border: 1px solid #ddd; /* Add a grey border */
@@ -51,14 +50,14 @@ textarea {
 
 #filterTable {
     border-collapse: collapse; /* Collapse borders */
-    min-width: 720px;
+    min-width: 500px;
     border: 1px solid #ddd; /* Add a grey border */
-    font-size: 18px; /* Increase font-size */
+    font-size: 16px; /* Increase font-size */
 }
 
     #filterTable th, #filterTable td {
         text-align: left; /* Left-align text */
-        padding: 12px; /* Add padding */
+        padding: 6px; /* Add padding */
     }
 
     #filterTable tr {
@@ -69,4 +68,46 @@ textarea {
         #filterTable tr.header, #filterTable tr:hover {
             /* Add a grey background color to the table header and on hover */
             background-color: #f1f1f1;
-        }
+    }
+
+#detailLeftTable {
+    border-collapse: collapse; /* Collapse borders */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 14px; /* Increase font-size */
+}
+
+    #detailLeftTable th, #detailLeftTable td {
+        text-align: left; /* Left-align text */
+        padding: 4px; /* Add padding */
+    }
+
+    #detailLeftTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+        #detailLeftTable td.header, #detailLeftTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+    }
+
+#detailTable {
+    border-collapse: collapse; /* Collapse borders */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 14px; /* Increase font-size */
+}
+
+    #detailTable th, #detailTable td {
+        text-align: left; /* Left-align text */
+        padding: 4px; /* Add padding */
+    }
+
+    #detailTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+    #detailTable tr.header, #detailTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+    }

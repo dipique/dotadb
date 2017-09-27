@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using DotAPicker.Models;
 using DotAPicker.ViewModels;
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -14,7 +15,7 @@ namespace DotAPicker.Controllers
         // GET: Tip
         public ActionResult Index()
         {
-            var tipVMs = db.Tips.Select(t => DownCast<Tip, TipViewModel>(t)).ToList();
+            var tipVMs = db.Tips.Select(t => Casting.DownCast<Tip, TipViewModel>(t)).ToList();
             foreach(var tipVM in tipVMs)
             {
                 var hero = db.Heroes.FirstOrDefault(h => h.ID == tipVM.HeroID);
@@ -46,7 +47,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Tip ID collision");
             }
 
-            db.Tips.Add(UpCast<Tip, TipViewModel>(model));
+            db.Tips.Add(Casting.UpCast<Tip, TipViewModel>(model));
             db.Save();
             return Index();
         }
@@ -60,7 +61,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Tip not found.");
             }
 
-            var tvm = DownCast<Tip, TipViewModel>(tip);
+            var tvm = Casting.DownCast<Tip, TipViewModel>(tip);
             tvm.HeroOptions = GetHeroOptions(id);
 
             return View("Edit", tvm);
@@ -78,7 +79,7 @@ namespace DotAPicker.Controllers
 
             //Repace the Tip with the edited Tip
             db.Tips.Remove(tip);
-            db.Tips.Add(UpCast<Tip, TipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
+            db.Tips.Add(Casting.UpCast<Tip, TipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
 
             db.Save();
             db = DotADB.Load();

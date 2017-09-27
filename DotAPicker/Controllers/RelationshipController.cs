@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using DotAPicker.ViewModels;
 using DotAPicker.Models;
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -14,7 +15,7 @@ namespace DotAPicker.Controllers
         // GET: Relationship
         public ActionResult Index()
         {
-            var relationshipVMs = db.Relationships.Select(t => DownCast<Relationship, RelationshipViewModel>(t)).ToList();
+            var relationshipVMs = db.Relationships.Select(t => Casting.DownCast<Relationship, RelationshipViewModel>(t)).ToList();
             foreach (var relationshipVM in relationshipVMs)
             {
                 relationshipVM.Hero1 = db.Heroes.FirstOrDefault(h => h.ID == relationshipVM.Hero1ID);
@@ -42,7 +43,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Relationship ID collision");
             }
 
-            db.Relationships.Add(UpCast<Relationship, RelationshipViewModel>(model));
+            db.Relationships.Add(Casting.UpCast<Relationship, RelationshipViewModel>(model));
             db.Save();
             return Index();
         }
@@ -56,7 +57,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Relationship not found.");
             }
 
-            var tvm = DownCast<Relationship, RelationshipViewModel>(relationship);
+            var tvm = Casting.DownCast<Relationship, RelationshipViewModel>(relationship);
             tvm.HeroOptions = GetHeroOptions(id);
 
             return View("Edit", tvm);
@@ -74,7 +75,7 @@ namespace DotAPicker.Controllers
 
             //Repace the Relationship with the edited Relationship
             db.Relationships.Remove(relationship);
-            db.Relationships.Add(UpCast<Relationship, RelationshipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
+            db.Relationships.Add(Casting.UpCast<Relationship, RelationshipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
 
             db.Save();
             db = DotADB.Load();

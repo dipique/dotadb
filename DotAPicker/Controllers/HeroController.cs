@@ -45,7 +45,7 @@ namespace DotAPicker.Controllers
 
         public ActionResult Detail(int id)
         {
-            return PartialView(db.HeroDetails(id));
+            return PartialView(new HeroDetailViewModel(id, db));
         }
 
         // GET: Hero/Edit/5
