@@ -32,27 +32,25 @@
     </tr>
     <tr>
         <td valign="top">
-            <table id="filterTable">
-                <tr class="header">
-                    <td>Name</td>
-                    <td style="display:none">Alternative Names</td>
-                    <td style="display:none">Notes</td>
-                    <td>Preference</td>
-                    <td>Actions</td>
-                </tr>
-                @{
-                    foreach (var hero in Model)
+            <div class="scrolling-container">
+                <div class="header-scrolling-container">
+                    <div class="header-cell" style="min-width: 200px">Name</div>
+                    <div class="header-cell" style="display:none">Alt Names</div>
+                    <div class="header-cell">Preference</div>
+                    <div class="header-cell">Actions</div>
+                </div>
+                <div class="data-scrolling-container" id="filterHeroTable">
+                    @foreach (var hero in Model)
                     {
-                        <tr id="@hero.ID" @(ViewBag.SelectedHeroID == hero.ID ? "class=selected" : "")>
-                            <td>@hero.Name</td>
-                            <td style="display:none">@hero.AltNames</td>
-                            <td style="display:none">@hero.Notes</td>
-                            <td>@hero.Preference</td>
-                            <td>@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</td>
-                        </tr>
+                        <div class=@(ViewBag.SelectedHeroID == hero.ID ? "data-row selected" : "data-row") id="@hero.ID">
+                            <div class="data-row-cell" style="min-width: 200px">@hero.Name</div>
+                            <div class="data-row-cell" style="display:none">@hero.AltNames</div>
+                            <div class="data-row-cell">@hero.Preference</div>
+                            <div class="data-row-cell">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
+                        </div>
                     }
-                }
-            </table>
+                </div>
+            </div>
         </td>
         <td rowspan="2" style="padding-left: 8px" valign="top">
             <div class="heroDetails"></div>
@@ -69,7 +67,7 @@
 
     document.addEventListener('keyup', keyUp, false);
 
-    $('#filterTable tr').click(function () {
+    $('.data-row').click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + this.id);
     });
@@ -80,15 +78,15 @@
         var input, filter, table, tr, i, searchPreference, td_preference, td_altNames, td_hero_Name;
         input = document.getElementById("filterInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("filterTable");
-        tr = table.getElementsByTagName("tr");
+        table = document.getElementById("filterHeroTable");
+        tr = table.getElementsByTagName("data-row");
         searchPreference = document.getElementById("filterPreference").value;
 
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 1; i < tr.length; i++) {
-            td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase();
-            td_altNames = tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
-            td_preference = tr[i].getElementsByTagName("td")[3].innerHTML;
+            td_heroName = tr[i].getElementsByTagName("data-row-cell")[0].innerHTML.toUpperCase();
+            td_altNames = tr[i].getElementsByTagName("data-row-cell")[1].innerHTML.toUpperCase();
+            td_preference = tr[i].getElementsByTagName("data-row-cell")[2].innerHTML;
 
             if (td_heroName) {
                 if ((td_heroName.indexOf(filter) > -1 ||

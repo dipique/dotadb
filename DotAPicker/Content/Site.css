@@ -16,7 +16,7 @@
     white-space: normal;
 }
 
-.selected {
+tr .selected {
     background-color: lightpink;
 }
 
@@ -50,7 +50,6 @@ textarea {
 
 #filterTable {
     border-collapse: collapse; /* Collapse borders */
-    min-width: 500px;
     border: 1px solid #ddd; /* Add a grey border */
     font-size: 16px; /* Increase font-size */
 }
@@ -111,3 +110,53 @@ textarea {
             /* Add a grey background color to the table header and on hover */
             background-color: #f1f1f1;
     }
+
+/* Instead of making a scrolling table, these are for divs to make a scrolling list */
+
+.scrolling-container {    
+    height: 600px;
+    position: relative;
+}
+
+.header-scrolling-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+.header-cell {
+    min-width: 100px; /* Header & data cell widths need to be coordinated if larger */
+    background-color: #f1f1f1;
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
+
+.data-scrolling-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline-block;
+    height: 560px;
+    margin-top: 40px; /* This is what prevents the first row from disappearing */
+}
+
+.data-row {
+    display: flex;
+}
+
+    .data-row:hover .data-row-cell {
+        background-color: #f1f1f1;
+    }
+
+.selected .data-row-cell {
+    background-color: lightpink;
+}
+
+.data-row-cell {
+    min-width: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
