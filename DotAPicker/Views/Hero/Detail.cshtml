@@ -1,20 +1,20 @@
 ﻿@using DotAPicker.Models;
 @model HeroDetailViewModel
 
-<table id="detailLeftTable">
-    <tr>
-        <td>ID</td>
-        <td>@Model.Hero.ID</td>
-    </tr>
-    <tr>
-        <td>Alt. Names</td>
-        <td>@Model.Hero.AltNames</td>
-    </tr>
-    <tr>
-        <td>Notes</td>
-        <td>@Model.Hero.Notes</td>
-    </tr>
-</table>
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">ID</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Alt Names</div>
+</div>
+<div class="hor-data-row">
+    <div class="hor-data-cell">@Model.Hero.ID</div>
+    <div class="hor-data-cell" style="min-width: 300px">@Model.Hero.AltNames</div>
+</div>
+<div class="hor-data-row" style="max-width: 400px;">
+    <span class="hor-data-cell" style="min-width: 400px; max-width: 400px; min-height: 100px; max-height: 300px">
+        @Html.EditorFor(m => m.Hero.Notes, new { htmlAttributes = new { @class = "form-control" } })
+    </span>
+</div>
+
 
 <h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
 <table id="detailTable">

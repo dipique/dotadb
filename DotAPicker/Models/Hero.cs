@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotAPicker.Models
 {
@@ -15,6 +16,7 @@ namespace DotAPicker.Models
         [DisplayName("Alt. Names")]
         public string AltNames { get; set; } //can be searched as well so that, for example, BS can find Bloodseeker
 
+        [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;        
     }

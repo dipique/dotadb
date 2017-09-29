@@ -160,3 +160,32 @@ textarea {
     font-size: 14px; /* Increase font-size */
     padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
 }
+
+/* Hero detail formatting */
+.hor-title-header-row {
+    display:flex;
+}
+.hor-title-header-cell {
+    min-width: 100px; /* Header & data cell widths need to be coordinated if larger */
+    background-color: #f1f1f1;
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
+
+.hor-data-row {
+    display: flex;
+}
+
+.hor-data-cell {
+    min-width: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
+
+#Hero_Notes {
+    max-width: 400px;
+    min-height: 100px;
+}
