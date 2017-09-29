@@ -17,7 +17,7 @@
 <h1>Heroes</h1>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
+<input type="text" id="filterInput" placeholder="Search hero name..." />
 <select id="filterPreference" onchange="filterFunction()">
     <option value="">Search by hero preference</option>
     @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
@@ -44,10 +44,10 @@
                     {
                         var rowClass = ViewBag.SelectedHeroID == hero.ID ? "data-row selected" : "data-row";
                         <div class="@rowClass" id="@hero.ID">
-                            <div class="data-row-cell" style="min-width: 200px">@hero.Name</div>
-                            <div class="data-row-cell" style="display:none">@hero.AltNames</div>
-                            <div class="data-row-cell">@hero.Preference</div>
-                            <div class="data-row-cell">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
+                            <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
+                            <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
+                            <div class="data-row-cell" id="heroPreference">@hero.Preference</div>
+                            <div class="data-row-cell" id="heroActions">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
                         </div>
                     }
                 </div>
@@ -65,47 +65,86 @@
 </table>
 
 <script>
-
+    //Keyboard shortcut for adding a new hero (Ctrl-Enter)
     document.addEventListener('keyup', keyUp, false);
-
     function keyUp(e) {
         if (e.ctrlKey && e.keyCode == 13) {
             $('#newHeroBtn').click();
         }
     }
 
+    //Register keyboard events
+    $('#filterInput').keyup(function () {
+        filterFunction();
+    });
+
+    //Causes clicking a row to load the detail partial view
     $('.data-row').click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + this.id);
     });
 
-    //Make the first hero auto-load
+    //Make the first hero auto-load details
     $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);
 
-    https://www.w3schools.com/howto/howto_js_filter_table.asp
+
+    //Derived from: https://www.w3schools.com/howto/howto_js_filter_table.asp
+    //This is what enables filtering the hero list by name and preference
     function filterFunction() {
-        // Declare variables
-        var input, filter, table, tr, i, searchPreference, td_preference, td_altNames, td_hero_Name;
-        input = document.getElementById("filterInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("filterHeroTable");
-        tr = table.getElementsByTagName("data-row");
-        searchPreference = document.getElementById("filterPreference").value;
+        // Get search criteria
+        var input = document.getElementById("filterInput");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("filterHeroTable");
+        var searchPreference = document.getElementById("filterPreference").value;
 
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 1; i < tr.length; i++) {
-            td_heroName = tr[i].getElementsByTagName("data-row-cell")[0].innerHTML.toUpperCase();
-            td_altNames = tr[i].getElementsByTagName("data-row-cell")[1].innerHTML.toUpperCase();
-            td_preference = tr[i].getElementsByTagName("data-row-cell")[2].innerHTML;
-
-            if (td_heroName) {
-                if ((td_heroName.indexOf(filter) > -1 ||
-                    td_altNames.indexOf(filter) > -1) &&
-                    (searchPreference == "" || td_preference == searchPreference)) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+        //loop through the table rows
+        for (var i = 0; i < table.childNodes.length; i++)
+        {
+            //skip elements other than table rows
+            var row = table.childNodes[i];
+            if (typeof (row.className) == "undefined") {
+                continue;
+            } else if (row.className.indexOf("data-row") == -1) {
+                continue;
+            }
+            
+            //get the cell contents
+            var heroName, heroAltNames, heroPreference;
+            for (var j = 0; j < row.childNodes.length; j++)
+            {
+                //only process the loop for cells
+                var cell = row.childNodes[j];
+                if (typeof (cell.className) == "undefined") {
+                    continue;
+                } else if (cell.className.indexOf("data-row-cell") == -1) {
+                    continue;
                 }
+
+                //get the cell contents
+                switch (cell.id)
+                {
+                    case "heroName":
+                        heroName = cell.innerHTML.toUpperCase();
+                        break;
+                    case "heroAltNames":
+                        heroAltNames = cell.innerHTML.toUpperCase();
+                        break;
+                    case "heroPreference":
+                        heroPreference = cell.innerHTML.toUpperCase();
+                        break;
+                }
+            }
+
+            //determine whether to hide the row
+            var searchPreferenceMatch = searchPreference == "" || heroPreference == searchPreference;
+            var nameMatch = heroName.indexOf(filter) > -1 || heroAltNames.indexOf(filter) > -1;
+            var hideRow = !(searchPreferenceMatch && nameMatch);
+
+            //hide the row, if necessary
+            if (!hideRow) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
             }
         }
     }
