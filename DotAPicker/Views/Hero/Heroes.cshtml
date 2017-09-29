@@ -42,7 +42,8 @@
                 <div class="data-scrolling-container" id="filterHeroTable">
                     @foreach (var hero in Model)
                     {
-                        <div class=@(ViewBag.SelectedHeroID == hero.ID ? "data-row selected" : "data-row") id="@hero.ID">
+                        var rowClass = ViewBag.SelectedHeroID == hero.ID ? "data-row selected" : "data-row";
+                        <div class="@rowClass" id="@hero.ID">
                             <div class="data-row-cell" style="min-width: 200px">@hero.Name</div>
                             <div class="data-row-cell" style="display:none">@hero.AltNames</div>
                             <div class="data-row-cell">@hero.Preference</div>
@@ -67,10 +68,19 @@
 
     document.addEventListener('keyup', keyUp, false);
 
+    function keyUp(e) {
+        if (e.ctrlKey && e.keyCode == 13) {
+            $('#newHeroBtn').click();
+        }
+    }
+
     $('.data-row').click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + this.id);
     });
+
+    //Make the first hero auto-load
+    $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);
 
     https://www.w3schools.com/howto/howto_js_filter_table.asp
     function filterFunction() {
@@ -97,13 +107,6 @@
                     tr[i].style.display = "none";
                 }
             }
-        }
-    }
-
-    function keyUp(e) {
-        if (e.ctrlKey && e.keyCode == 13)
-        {  
-            $('#newHeroBtn').click();
         }
     }
 </script>
