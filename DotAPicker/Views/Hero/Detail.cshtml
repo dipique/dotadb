@@ -16,7 +16,7 @@
     </tr>
 </table>
 
-<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID }, new { })
+<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
 <table id="detailTable">
     <tr>
         <td>Type</td>

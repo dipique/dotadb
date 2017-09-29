@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,8 +32,16 @@ namespace DotAPicker.Controllers
 
 
         // GET: Tip/Create
-        public ActionResult Create(int heroID = -1)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="heroID"></param>
+        /// <param name="requestOrigin"></param>
+        /// <returns></returns>
+        public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
+            ViewBag.ReturnToHeroList = returnToHeroList;
+
             var heroOptions = GetHeroOptions(heroID);
             var tvm = new TipViewModel() { Patch = db.CurrentPatch, HeroOptions = heroOptions };
             if (heroID != -1) tvm.HeroID = heroID;
@@ -42,7 +51,7 @@ namespace DotAPicker.Controllers
 
         // POST: Tip/Create
         [HttpPost]
-        public ActionResult Create(TipViewModel model)
+        public ActionResult Create(TipViewModel model, bool returnToHeroList = false)
         {
             if (db.Tips.Any(h => h.ID == model.ID))
             {
@@ -51,7 +60,11 @@ namespace DotAPicker.Controllers
 
             db.Tips.Add(Casting.UpCast<Tip, TipViewModel>(model));
             db.Save();
-            return Index();
+
+            if (!returnToHeroList) return Index();
+
+            TempData["SelectedHeroID"] = model.HeroID;
+            return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Tip/Edit/5

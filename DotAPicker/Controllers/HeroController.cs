@@ -13,6 +13,7 @@ namespace DotAPicker.Controllers
         // GET: Hero
         public ActionResult Index()
         {
+            ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
             return View("Heroes", db.Heroes.OrderBy(h => h.Name));
         }
 
