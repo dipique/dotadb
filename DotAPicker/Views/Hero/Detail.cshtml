@@ -33,7 +33,7 @@
     }
 </table>
 
-<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID }, new { })
+<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
 <table id="detailTable">
     <tr>
         <td>Hero</td>

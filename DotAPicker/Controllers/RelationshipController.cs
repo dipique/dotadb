@@ -27,8 +27,10 @@ namespace DotAPicker.Controllers
 
 
         // GET: Relationship/Create
-        public ActionResult Create(int heroID = -1)
+        public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
+            ViewBag.ReturnToHeroList = returnToHeroList;
+
             var tvm = new RelationshipViewModel() { Patch = db.CurrentPatch, HeroOptions = GetHeroOptions(heroID) };
             if (heroID != -1) tvm.Hero1ID = heroID;
             if (db.Relationships.Count() > 0) tvm.ID = db.Relationships.Max(h => h.ID) + 1;
@@ -37,7 +39,7 @@ namespace DotAPicker.Controllers
 
         // POST: Relationship/Create
         [HttpPost]
-        public ActionResult Create(RelationshipViewModel model)
+        public ActionResult Create(RelationshipViewModel model, bool returnToHeroList = false)
         {
             if (db.Relationships.Any(h => h.ID == model.ID))
             {
@@ -46,7 +48,11 @@ namespace DotAPicker.Controllers
 
             db.Relationships.Add(Casting.UpCast<Relationship, RelationshipViewModel>(model));
             db.Save();
-            return Index();
+
+            if (!returnToHeroList) return Index();
+
+            TempData["SelectedHeroID"] = model.Hero1ID;
+            return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Relationship/Edit/5
