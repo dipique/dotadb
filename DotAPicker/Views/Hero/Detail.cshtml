@@ -9,46 +9,45 @@
     <div class="hor-data-cell">@Model.Hero.ID</div>
     <div class="hor-data-cell" style="min-width: 300px">@Model.Hero.AltNames</div>
 </div>
-<div class="hor-data-row" style="max-width: 400px;">
-    <span class="hor-data-cell" style="min-width: 400px; max-width: 400px; min-height: 100px; max-height: 300px">
-        @Html.EditorFor(m => m.Hero.Notes, new { htmlAttributes = new { @class = "form-control" } })
-    </span>
+<div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
+    @Model.Hero.Notes
 </div>
 
 
 <h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
-<table id="detailTable">
-    <tr>
-        <td>Type</td>
-        <td>Text</td>
-        <td>Source</td>
-    </tr>
-    @foreach(Tip t in Model.Tips)
-    {
-        <tr>
-            <td>@t.Type</td>
-            <td>@t.Text</td>
-            <td>@t.Source</td>
-        </tr>
-    }
-</table>
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">Type</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
+</div>
+
+@foreach(Tip t in Model.Tips)
+{ 
+    <div class="hor-data-row">
+        <div class="hor-data-cell">@t.Type</div>
+        <div class="hor-data-cell" style="min-width: 300px">@t.Source</div>
+    </div>
+    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
+        @t.Text
+    </div>
+}
+
 
 <h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
-<table id="detailTable">
-    <tr>
-        <td>Hero</td>
-        <td>Type</td>
-        <td>Text</td>
-        <td>Source</td>
-    </tr>
-    @foreach (var r in Model.Relationships)
-    {
-        var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
-        <tr>
-            <td>@heroName</td>
-            <td>@r.Type</td>
-            <td>@r.Description</td>
-            <td>@r.Source</td>
-        </tr>
-    }
-</table>
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">Hero</div>
+    <div class="hor-title-header-cell">Type</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
+</div>
+
+@foreach (var r in Model.Relationships)
+{
+    var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
+    <div class="hor-data-row">
+        <div class="hor-data-cell">@heroName</div>
+        <div class="hor-data-cell">@r.Type</div>
+        <div class="hor-data-cell" style="min-width: 300px">@r.Source</div>
+    </div>
+    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
+        @r.Description
+    </div>
+}
