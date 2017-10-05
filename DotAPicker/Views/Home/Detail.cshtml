@@ -1,0 +1,53 @@
+﻿@using DotAPicker.Models;
+@model HeroDetailViewModel
+
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">ID</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Alt Names</div>
+</div>
+<div class="hor-data-row">
+    <div class="hor-data-cell">@Model.Hero.ID</div>
+    <div class="hor-data-cell" style="min-width: 300px">@Model.Hero.AltNames</div>
+</div>
+<div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
+    @Model.Hero.Notes
+</div>
+
+
+<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">Type</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
+</div>
+
+@foreach(Tip t in Model.Tips)
+{ 
+    <div class="hor-data-row">
+        <div class="hor-data-cell">@t.Type</div>
+        <div class="hor-data-cell" style="min-width: 300px">@t.Source</div>
+    </div>
+    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
+        @t.Text
+    </div>
+}
+
+
+<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
+<div class="hor-title-header-row">
+    <div class="hor-title-header-cell">Hero</div>
+    <div class="hor-title-header-cell">Type</div>
+    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
+</div>
+
+@foreach (var r in Model.Relationships)
+{
+    var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
+    <div class="hor-data-row">
+        <div class="hor-data-cell">@heroName</div>
+        <div class="hor-data-cell">@r.Type</div>
+        <div class="hor-data-cell" style="min-width: 300px">@r.Source</div>
+    </div>
+    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
+        @r.Description
+    </div>
+}

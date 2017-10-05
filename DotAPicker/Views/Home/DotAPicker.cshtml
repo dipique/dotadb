@@ -1,0 +1,284 @@
+﻿@using DotAPicker.Models
+@model IEnumerable<Hero>
+
+@{
+    ViewBag.Title = "Heros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Heroes</h1>
+<input type="text" id="filterInput" placeholder="Search hero name..." />
+<select id="filterPreference" onchange="filterFunction()">
+    <option value="">Search by hero preference</option>
+    @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
+    {
+        <option value="@option">@option</option>
+    }
+</select>
+<table>
+    <tr>
+        <td><h4>Hero Options</h4></td>
+        <td style="padding-left: 8px"><h4>Allies</h4></td>
+        <td style="padding-left: 8px"><h4>Enemies</h4></td>
+    </tr>
+    <tr>
+        <td valign="top">
+            <div class="scrolling-container">
+                <div class="header-scrolling-container">
+                    <div class="header-cell" style="min-width: 175px">Name</div>
+                    <div class="header-cell" style="display:none">Alt Names</div>
+                    <div class="header-cell">Preference</div>
+                    <div class="header-cell" style="min-width: 140px">Add to...</div>
+                </div>
+                <div class="data-scrolling-container" id="filterHeroTable">
+                    @foreach (var hero in Model)
+                    {
+                        <div class="data-row" id="@hero.ID">
+                            <div class="data-row-cell" style="min-width: 175px" id="heroName">@hero.Name</div>
+                            <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
+                            <div class="data-row-cell" id="heroPreference">@hero.Preference</div>
+                            <div class="data-row-cell" id="addTo" style="min-width: 140px">
+                                <a href="" class="add-ally" id="@hero.ID">(allies)</a> <a href="" class="add-enemy" id="@hero.ID">(enemies)</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </td>
+        <td rowspan="2" style="padding-left: 8px" valign="top">
+            <div class="allyDetails">
+                <div class="allyDetail" id="1"></div>
+                <div class="allyDetail" id="2"></div>
+                <div class="allyDetail" id="3"></div>
+                <div class="allyDetail" id="4"></div>
+                <div class="allyDetail" id="5"></div>
+            </div>
+        </td>
+        <td rowspan="2" style="padding-left: 8px" valign="top">
+            <div class="enemyDetails">
+                <div class="enemyDetail" id="1"></div>
+                <div class="enemyDetail" id="2"></div>
+                <div class="enemyDetail" id="3"></div>
+                <div class="enemyDetail" id="4"></div>
+                <div class="enemyDetail" id="5"></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    var allyArray = [-1, -1, -1, -1, -1];
+    var enemyArray = [-1, -1, -1, -1, -1];
+
+    //Register keyboard events
+    $('#filterInput').keyup(function (e) {
+        //alert(e.keyCode);
+        //if enter is pressed
+        if (e.keyCode == 13) {
+            //and there is only one visible hero
+            if (countVisibleHeroes() == 1) {
+                //if shift key is pressed (meaning ally add)
+                if (e.shiftKey) {
+                    //if there's at least one open slot for an ally
+                    if (nextAllyIndex() != -1) {
+                        //if there's a valid hero ID selected
+                        var i = firstVisibleHeroIndex();
+                        if (i != -1) {
+                            //Add to the list of allies
+                            addAlly(i);
+                        }
+                    }
+                } else {  //Add to enemies
+                    //if there's at least one open slot for an enemy
+                    if (nextEnemyIndex() != -1) {
+                        //if there's a valid hero ID selected
+                        var i = firstVisibleHeroIndex();
+                        if (i != -1) {
+                            //Add to the list of enemies
+                            addEnemy(i);
+                        }
+                    }
+
+                }
+            }
+        } else {
+            //if enter wasn't pushed, just filter the table
+            filterFunction();
+        }
+    });
+
+    $(".add-ally").click(function () {
+        addAlly($(this).val());
+    });
+    $(".add-enemy").click(function () {
+        addEnemy($(this).val());
+    });
+
+    function nextAllyIndex() {
+        for (var x = 0; x < 5; x++) {
+            if (allyArray[x] == -1) {
+                return x;
+            }
+        }
+
+        //if no indices are available...
+        return -1;
+    }
+
+    function nextEnemyIndex() {
+        for (var x = 0; x < 5; x++) {
+            if (enemyArray[x] == -1) {
+                return x;
+            }
+        }
+
+        //if no indices are available...
+        return -1;
+    }
+
+    function addAlly(id)
+    {
+        var index = nextAllyIndex();
+        var selector = ".allyDetail#" + (index + 1);
+        $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
+        allyArray[index] = id;
+
+        //clear search and make sure it doesn't appear on the list anymore
+        resetSearch();
+    }
+
+    function addEnemy(id) {
+        var index = nextEnemyIndex();       
+
+
+        var selector = ".enemyDetails #" + (index + 1);
+        $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
+        enemyArray[index] = id;
+
+        //clear search and make sure it doesn't appear on the list anymore
+        resetSearch();
+    }
+
+    function resetSearch() {
+        //reset the hero search text
+        $("#filterInput").val("");
+        filterFunction();
+
+        //if keeping the preference means there aren't any results, reset it as well
+        if (countVisibleHeroes() < 1 && $("#filterPreference").val() != "") {
+            $("#filterPreference").val("");
+            filterFunction();
+        }
+    }
+
+    function countVisibleHeroes() {
+        // Get search criteria
+        var table = document.getElementById("filterHeroTable");
+        var visibleCount = 0;
+
+        //loop through the table rows
+        for (var i = 0; i < table.childNodes.length; i++) {
+            //skip elements other than table rows
+            var row = table.childNodes[i];
+            if (typeof (row.className) == "undefined") {
+                continue;
+            } else if (row.className.indexOf("data-row") == -1) {
+                continue;
+            }
+
+            //record if it is visible
+            if (row.style.display == "") {
+                visibleCount++;
+            }
+        }
+
+        return visibleCount;
+    }
+
+    function firstVisibleHeroIndex() {
+        // Get search criteria
+        var table = document.getElementById("filterHeroTable");
+
+        //loop through the table rows
+        for (var i = 0; i < table.childNodes.length; i++) {
+            //skip elements other than table rows
+            var row = table.childNodes[i];
+            if (typeof (row.className) == "undefined") {
+                continue;
+            } else if (row.className.indexOf("data-row") == -1) {
+                continue;
+            }
+
+            //return the row ID if it is visible
+            if (row.style.display == "") {
+                return row.id;
+            }
+        }
+
+        return -1;
+    }
+
+
+    //Derived from: https://www.w3schools.com/howto/howto_js_filter_table.asp
+    //This is what enables filtering the hero list by name and preference
+    function filterFunction() {
+        // Get search criteria
+        var input = document.getElementById("filterInput");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("filterHeroTable");
+        var searchPreference = document.getElementById("filterPreference").value;
+
+        //loop through the table rows
+        for (var i = 0; i < table.childNodes.length; i++)
+        {
+            //skip elements other than table rows
+            var row = table.childNodes[i];
+            if (typeof (row.className) == "undefined") {
+                continue;
+            } else if (row.className.indexOf("data-row") == -1) {
+                continue;
+            }
+
+            //get the cell contents
+            var heroName, heroAltNames, heroPreference;
+            for (var j = 0; j < row.childNodes.length; j++)
+            {
+                //only process the loop for cells
+                var cell = row.childNodes[j];
+                if (typeof (cell.className) == "undefined") {
+                    continue;
+                } else if (cell.className.indexOf("data-row-cell") == -1) {
+                    continue;
+                }
+
+                //get the cell contents
+                switch (cell.id)
+                {
+                    case "heroName":
+                        heroName = cell.innerHTML.toUpperCase();
+                        break;
+                    case "heroAltNames":
+                        heroAltNames = cell.innerHTML.toUpperCase();
+                        break;
+                    case "heroPreference":
+                        heroPreference = cell.innerHTML;
+                        break;
+                }
+            }
+
+            //determine whether to hide the row
+            var searchPreferenceMatch = searchPreference == "" || heroPreference == searchPreference;
+            var nameMatch = heroName.indexOf(filter) > -1 || heroAltNames.indexOf(filter) > -1;
+            var listMatch = allyArray.indexOf(row.id) > -1 || enemyArray.indexOf(row.id) > -1;
+            var hideRow = !(searchPreferenceMatch && nameMatch) || listMatch;
+
+            //hide the row, if necessary
+            if (!hideRow) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+</script>

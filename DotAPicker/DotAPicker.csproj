@@ -240,6 +240,8 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Settings\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Home\DotAPicker.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

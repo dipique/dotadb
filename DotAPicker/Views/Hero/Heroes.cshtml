@@ -15,8 +15,6 @@
 
 
 <h1>Heroes</h1>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <input type="text" id="filterInput" placeholder="Search hero name..." />
 <select id="filterPreference" onchange="filterFunction()">
     <option value="">Search by hero preference</option>
@@ -130,7 +128,7 @@
                         heroAltNames = cell.innerHTML.toUpperCase();
                         break;
                     case "heroPreference":
-                        heroPreference = cell.innerHTML.toUpperCase();
+                        heroPreference = cell.innerHTML;
                         break;
                 }
             }

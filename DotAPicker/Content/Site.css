@@ -190,3 +190,10 @@ textarea {
     max-width: 400px;
     min-height: 100px;
 }
+
+.add-ally {
+    display: inline;
+}
+.add-enemy {
+    display: inline;
+}
