@@ -11,11 +11,12 @@ namespace DotAPicker.Models
     public class DotADB
     {
         private const string DB_PATH_SETTING = "DBPath";
-        public string CurrentPatch { get; set; } = "7.06"; //TODO: get this from a "current patch" setting
+        public string CurrentPatch => Settings.CurrentPatch;
 
         public List<Hero> Heroes { get; set; } = new List<Hero>();
         public List<Tip> Tips { get; set; } = new List<Tip>();
         public List<Relationship> Relationships { get; set; } = new List<Relationship>();
+        public DotASettings Settings { get; set; } = new DotASettings();
 
         /// <summary>
         /// Defaults to the path in the web config
