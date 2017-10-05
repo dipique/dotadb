@@ -34,9 +34,19 @@ namespace DotAPicker.Models
         public void FillTipsAndRelationships(DotADB db)
         {
             Tips = db.Tips.Where(t => t.HeroID == Hero.ID);
+            if (!db.Settings.ShowDeprecatedTips)
+            {
+                Tips = Tips.Where(t => !t.Deprecated);
+            }
+
             Relationships = db.Relationships.Where(r => r.IncludesHero(Hero.ID))
                                             .Select(r => Casting.DownCast<Relationship, RelationshipViewModel>(r)
                                                                 .FillRelationships(db));
+
+            if (!db.Settings.ShowDeprecatedRelationships)
+            {
+                Relationships = Relationships.Where(r => !r.Deprecated);
+            }
         }
     }
 }
