@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 
 using System.Text.RegularExpressions;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotAPicker.Models
 {
@@ -11,6 +13,7 @@ namespace DotAPicker.Models
     {
         public const string PATCH_REGEX = @"^(\d+\.\d{2}([a-zA-Z])?)$";
         private string currentPatch = "7.06"; //default patch
+        [DisplayName("Current Patch")]
         public string CurrentPatch
         {
             get => currentPatch;
@@ -32,7 +35,10 @@ namespace DotAPicker.Models
         /// <returns></returns>
         public bool ValidatePatchNumber(string patch) => new Regex(PATCH_REGEX).IsMatch(patch);
 
+        [DisplayName("Show Deprecated Tips")]
         public bool ShowDeprecatedTips { get; set; } = false;
+
+        [DisplayName("Show Deprecated Relationships")]
         public bool ShowDeprecatedRelationships { get; set; } = false;
         
     }
