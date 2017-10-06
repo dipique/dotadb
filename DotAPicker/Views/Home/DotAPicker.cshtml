@@ -47,21 +47,21 @@
             </div>
         </td>
         <td rowspan="2" style="padding-left: 8px" valign="top">
-            <div class="allyDetails">
-                <div class="allyDetail" id="1"></div>
-                <div class="allyDetail" id="2"></div>
-                <div class="allyDetail" id="3"></div>
-                <div class="allyDetail" id="4"></div>
-                <div class="allyDetail" id="5"></div>
+            <div class="allyDetails" id="allyDetails">
+                <div class="allyDetail" id="ad1"><p>ad1</p></div>
+                <div class="allyDetail" id="ad2"><p>ad2</p></div>
+                <div class="allyDetail" id="ad3"><p>ad3</p></div>
+                <div class="allyDetail" id="ad4"><p>ad4</p></div>
+                <div class="allyDetail" id="ad5"><p>ad5</p></div>
             </div>
         </td>
         <td rowspan="2" style="padding-left: 8px" valign="top">
-            <div class="enemyDetails">
-                <div class="enemyDetail" id="1"></div>
-                <div class="enemyDetail" id="2"></div>
-                <div class="enemyDetail" id="3"></div>
-                <div class="enemyDetail" id="4"></div>
-                <div class="enemyDetail" id="5"></div>
+            <div class="enemyDetails" id="enemyDetails">
+                <div class="enemyDetail" id="ed1"><p>ed1</p></div>
+                <div class="enemyDetail" id="ed2"><p>ed2</p></div>
+                <div class="enemyDetail" id="ed3"><p>ed3</p></div>
+                <div class="enemyDetail" id="ed4"><p>ed4</p></div>
+                <div class="enemyDetail" id="ed5"><p>ed5</p></div>
             </div>
         </td>
     </tr>
@@ -109,10 +109,12 @@
     });
 
     $(".add-ally").click(function () {
-        addAlly($(this).val());
+        addAlly(this.id);
+        return false;
     });
     $(".add-enemy").click(function () {
-        addEnemy($(this).val());
+        addEnemy(this.id);
+        return false;
     });
 
     function nextAllyIndex() {
@@ -137,10 +139,9 @@
         return -1;
     }
 
-    function addAlly(id)
-    {
+    function addAlly(id) {
         var index = nextAllyIndex();
-        var selector = ".allyDetail#" + (index + 1);
+        var selector = ".allyDetails #ad" + (index + 1);
         $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
         allyArray[index] = id;
 
@@ -149,10 +150,8 @@
     }
 
     function addEnemy(id) {
-        var index = nextEnemyIndex();       
-
-
-        var selector = ".enemyDetails #" + (index + 1);
+        var index = nextEnemyIndex();
+        var selector = ".enemyDetails #ed" + (index + 1);
         $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
         enemyArray[index] = id;
 
