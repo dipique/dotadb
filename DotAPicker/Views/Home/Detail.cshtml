@@ -5,12 +5,10 @@
 
 
 <div class="hor-title-header-row">
-    <div class="hor-title-header-cell">ID</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Alt Names</div>
+    <div class="hor-title-header-cell">Name</div>
 </div>
 <div class="hor-data-row">
-    <div class="hor-data-cell">@Model.Hero.ID</div>
-    <div class="hor-data-cell" style="min-width: 300px">@Model.Hero.AltNames</div>
+    <div class="hor-data-cell">@Model.Hero.Name</div>
 </div>
 <div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
     @Model.Hero.Notes
@@ -20,14 +18,12 @@
 <h4>Tips</h4>
 <div class="hor-title-header-row">
     <div class="hor-title-header-cell">Type</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
 </div>
 
 @foreach(Tip t in Model.Tips)
 { 
     <div class="hor-data-row">
         <div class="hor-data-cell">@t.Type</div>
-        <div class="hor-data-cell" style="min-width: 300px">@t.Source</div>
     </div>
     <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
         @t.Text
@@ -39,7 +35,6 @@
 <div class="hor-title-header-row">
     <div class="hor-title-header-cell">Hero</div>
     <div class="hor-title-header-cell">Type</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
 </div>
 
 @foreach (var r in Model.Relationships)
@@ -48,7 +43,6 @@
     <div class="hor-data-row">
         <div class="hor-data-cell">@heroName</div>
         <div class="hor-data-cell">@r.Type</div>
-        <div class="hor-data-cell" style="min-width: 300px">@r.Source</div>
     </div>
     <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
         @r.Description
