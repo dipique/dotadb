@@ -3,12 +3,12 @@
 @model IEnumerable<RelationshipViewModel>
 
 @{
-    ViewBag.Title = "Tip";
+    ViewBag.Title = "Relationships";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h1>Tips</h1>
+<h1>Relationships</h1>
 
 <input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
 <select id="filterPreference" onchange="filterFunction()">
@@ -22,8 +22,8 @@
     <tr><td>
     <table id="filterTable">
         <tr class="header">
-            <td>Hero 1 Name</td>
-            <td>Hero 2 Name</td>
+            <td>Hero 1</td>
+            <td>Hero 2</td>
             <td style="display:none">Alternative Names</td>
             <td>Type</td>
             <td>Text</td>
