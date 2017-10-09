@@ -38,7 +38,7 @@
                     <td style="display:none">@relationship.AltNameSet</td>
                     <td>@relationship.Type</td>
                     <td>@relationship.Description</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = relationship.ID })</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = relationship.ID }) @Html.ActionLink("(delete)", "Delete", new { id = relationship.ID })</td>
                 </tr>
             }
         }

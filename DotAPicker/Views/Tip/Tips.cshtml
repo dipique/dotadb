@@ -36,7 +36,7 @@
                     <td style="display:none">@tip.HeroAltNames</td>
                     <td>@Html.DisplayFor(m => m.First(t => t.ID == tip.ID).Type)</td>
                     <td>@tip.Text</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = tip.ID })</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = tip.ID }) @Html.ActionLink("(delete)", "Delete", new { id = tip.ID })</td>
                 </tr>
             }
         }
