@@ -2,20 +2,6 @@
 <DotADB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Heroes>
     <Hero>
-      <ID>1</ID>
-      <Name>Axe</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>2</ID>
-      <Name>Crystal Maiden</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>3</ID>
       <Name>Dazzle</Name>
       <AltNames />
@@ -121,13 +107,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>18</ID>
-      <Name>Sven</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>19</ID>
       <Name>Tidehunter</Name>
       <AltNames />
@@ -156,13 +135,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>23</ID>
-      <Name>Zeus</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>24</ID>
       <Name>Slardar</Name>
       <AltNames />
@@ -186,13 +158,6 @@
     <Hero>
       <ID>27</ID>
       <Name>Tiny</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>28</ID>
-      <Name>Viper</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -268,13 +233,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>39</ID>
-      <Name>Tinker</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>40</ID>
       <Name>Weaver</Name>
       <AltNames />
@@ -298,20 +256,6 @@
     <Hero>
       <ID>44</ID>
       <Name>Doom</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>45</ID>
-      <Name>Chen</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>46</ID>
-      <Name>Juggernaut</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -345,13 +289,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>51</ID>
-      <Name>Wraith King</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>52</ID>
       <Name>Broodmother</Name>
       <AltNames />
@@ -380,13 +317,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>56</ID>
-      <Name>Omniknight</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>57</ID>
       <Name>Dragon Knight</Name>
       <AltNames />
@@ -396,13 +326,6 @@
     <Hero>
       <ID>58</ID>
       <Name>Warlock</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>59</ID>
-      <Name>Alchemist</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -443,20 +366,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>65</ID>
-      <Name>Spirit Breaker</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>66</ID>
-      <Name>Invoker</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>67</ID>
       <Name>Clinkz</Name>
       <AltNames />
@@ -487,20 +396,6 @@
     <Hero>
       <ID>71</ID>
       <Name>Lycan</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>72</ID>
-      <Name>Lone Druid</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>73</ID>
-      <Name>Brewmaster</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -576,20 +471,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>85</ID>
-      <Name>Templar Assassin</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>86</ID>
-      <Name>Naga Siren</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>87</ID>
       <Name>Nyx Assassin</Name>
       <AltNames />
@@ -606,13 +487,6 @@
     <Hero>
       <ID>89</ID>
       <Name>Visage</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>90</ID>
-      <Name>Meepo</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -660,20 +534,6 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>97</ID>
-      <Name>Tusk</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>98</ID>
-      <Name>Bristleback</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>99</ID>
       <Name>Skywrath Mage</Name>
       <AltNames />
@@ -681,22 +541,8 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
-      <ID>100</ID>
-      <Name>Elder Titan</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
       <ID>102</ID>
       <Name>Ember Spirit</Name>
-      <AltNames />
-      <Notes />
-      <Preference>Indifferent</Preference>
-    </Hero>
-    <Hero>
-      <ID>103</ID>
-      <Name>Earth Spirit</Name>
       <AltNames />
       <Notes />
       <Preference>Indifferent</Preference>
@@ -776,37 +622,135 @@
       <Preference>Indifferent</Preference>
     </Hero>
     <Hero>
+      <ID>65</ID>
+      <Name>Spirit Breaker</Name>
+      <AltNames>sb barafu</AltNames>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>18</ID>
+      <Name>Sven</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>45</ID>
+      <Name>Chen</Name>
+      <Preference>Hated</Preference>
+    </Hero>
+    <Hero>
+      <ID>2</ID>
+      <Name>Crystal Maiden</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>98</ID>
+      <Name>Bristleback</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>66</ID>
+      <Name>Invoker</Name>
+      <Preference>Hated</Preference>
+    </Hero>
+    <Hero>
+      <ID>103</ID>
+      <Name>Earth Spirit</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>46</ID>
+      <Name>Juggernaut</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>56</ID>
+      <Name>Omniknight</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>28</ID>
+      <Name>Viper</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
       <ID>110</ID>
       <Name>Arc Warden</Name>
       <AltNames>aw</AltNames>
       <Notes>I have notes here!</Notes>
-      <Preference>Indifferent</Preference>
+      <Preference>Hated</Preference>
+    </Hero>
+    <Hero>
+      <ID>59</ID>
+      <Name>Alchemist</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>1</ID>
+      <Name>Axe</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>73</ID>
+      <Name>Brewmaster</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>100</ID>
+      <Name>Elder Titan</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>86</ID>
+      <Name>Naga Siren</Name>
+      <Preference>Hated</Preference>
+    </Hero>
+    <Hero>
+      <ID>90</ID>
+      <Name>Meepo</Name>
+      <Preference>Hated</Preference>
+    </Hero>
+    <Hero>
+      <ID>51</ID>
+      <Name>Wraith King</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>23</ID>
+      <Name>Zeus</Name>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>39</ID>
+      <Name>Tinker</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>97</ID>
+      <Name>Tusk</Name>
+      <Preference>Disliked</Preference>
+    </Hero>
+    <Hero>
+      <ID>85</ID>
+      <Name>Templar Assassin</Name>
+      <AltNames>ta, lanaya</AltNames>
+      <Notes>TA is a mid hero; she benefits a lot from early levels and needs them to get kills so she can get deso/blink and snowball. Absent early farm she can be very underwhelming.</Notes>
+      <Preference>Favorite</Preference>
     </Hero>
     <Hero>
       <ID>101</ID>
       <Name>Abaddon</Name>
-      <AltNames>longest alt name field ever yoooooo</AltNames>
-      <Notes>I have notes here!</Notes>
-      <Preference>Indifferent</Preference>
+      <Notes>Abaddon is versatile and can be played as core or support. I prefer playing him as a support, maxing aphotic shield so my carry is unkillable.</Notes>
+      <Preference>Preferred</Preference>
+    </Hero>
+    <Hero>
+      <ID>72</ID>
+      <Name>Lone Druid</Name>
+      <AltNames>LD</AltNames>
+      <Notes>LD can be played as a bear-focused hero or as a sniper-style damage dealer.</Notes>
+      <Preference>Preferred</Preference>
     </Hero>
   </Heroes>
   <Tips>
-    <Tip>
-      <ID>0</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>false</Deprecated>
-      <HeroID>1</HeroID>
-      <Type>Counter</Type>
-      <Text>test am tip</Text>
-    </Tip>
-    <Tip>
-      <ID>1</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>false</Deprecated>
-      <HeroID>0</HeroID>
-      <Type>Other</Type>
-      <Text>Get that battefury as fast as possible!</Text>
-    </Tip>
     <Tip>
       <ID>2</ID>
       <Patch>7.06</Patch>
@@ -814,30 +758,6 @@
       <HeroID>47</HeroID>
       <Type>Other</Type>
       <Text>Use bloodrage on both you and a squishy enemy for max damage</Text>
-    </Tip>
-    <Tip>
-      <ID>4</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>false</Deprecated>
-      <HeroID>0</HeroID>
-      <Type>Other</Type>
-      <Text>Manta is neato</Text>
-    </Tip>
-    <Tip>
-      <ID>6</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>false</Deprecated>
-      <HeroID>1</HeroID>
-      <Type>Other</Type>
-      <Text>Max counter helix</Text>
-    </Tip>
-    <Tip>
-      <ID>7</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>false</Deprecated>
-      <HeroID>35</HeroID>
-      <Type>Other</Type>
-      <Text>Ult is a sick aoe stun</Text>
     </Tip>
     <Tip>
       <ID>8</ID>
@@ -848,30 +768,36 @@
       <Text>Nightmare supports to keep them from counter-initiating, then use fiend's grip</Text>
     </Tip>
     <Tip>
-      <ID>9</ID>
+      <ID>11</ID>
       <Patch>7.06</Patch>
       <Deprecated>false</Deprecated>
-      <Source>www.mysourceysource.com</Source>
-      <HeroID>42</HeroID>
-      <Type>Counter</Type>
-      <Text>This is a long, lengthy tippity tip. Because reasons. This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.</Text>
+      <HeroID>85</HeroID>
+      <Type>AbilityBuild</Type>
+      <Text>Max psi blades first for maximum lane push, or max refraction for best defense. Either way these are the best two abilities.</Text>
     </Tip>
     <Tip>
-      <ID>10</ID>
+      <ID>12</ID>
       <Patch>7.06</Patch>
       <Deprecated>false</Deprecated>
-      <Source>another test source, but this time not a link</Source>
-      <HeroID>42</HeroID>
-      <Type>AbilityUse</Type>
-      <Text>Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. </Text>
-    </Tip>
-    <Tip>
-      <ID>3</ID>
-      <Patch>7.06</Patch>
-      <Deprecated>true</Deprecated>
-      <HeroID>101</HeroID>
+      <HeroID>85</HeroID>
       <Type>Other</Type>
-      <Text>Test tip</Text>
+      <Text>Stack ancients starting early; as many stacks as possible. She can take them at level 8/9 with shrine, or earlier with DD rune.</Text>
+    </Tip>
+    <Tip>
+      <ID>13</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>85</HeroID>
+      <Type>Other</Type>
+      <Text>TA does burst physical damage, so take out squishy heros in team fights first before they can react.</Text>
+    </Tip>
+    <Tip>
+      <ID>6</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>1</HeroID>
+      <Type>Other</Type>
+      <Text>Max counter helix. The pure damage is incredibly powerful early and can be used as a farming tool, defensively, and offensively.</Text>
     </Tip>
   </Tips>
   <Relationships>
@@ -901,6 +827,114 @@
       <Hero2ID>25</Hero2ID>
       <Type>Other</Type>
       <Description>BKB piercing lasso ends black hole</Description>
+    </Relationship>
+    <Relationship>
+      <ID>3</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>1</Hero1ID>
+      <Hero2ID>31</Hero2ID>
+      <Type>Counter</Type>
+      <Description>Can use taunt to cancel TP</Description>
+    </Relationship>
+    <Relationship>
+      <ID>4</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>85</Hero1ID>
+      <Hero2ID>78</Hero2ID>
+      <Type>Counter</Type>
+      <Description>TA doesn't fair well against illusion heroes that can break through diffraction</Description>
+    </Relationship>
+    <Relationship>
+      <ID>5</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>85</Hero1ID>
+      <Hero2ID>74</Hero2ID>
+      <Type>Counter</Type>
+      <Description>TA doesn't fair well against illusion heroes that can break through diffraction</Description>
+    </Relationship>
+    <Relationship>
+      <ID>6</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>85</Hero1ID>
+      <Hero2ID>25</Hero2ID>
+      <Type>Counter</Type>
+      <Description>Eidelons can break through diffraction and black hole stops her from doing damage.</Description>
+    </Relationship>
+    <Relationship>
+      <ID>7</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>85</Hero1ID>
+      <Hero2ID>16</Hero2ID>
+      <Type>Synergy</Type>
+      <Description>SS can disable a hero while TA does massive amounts of damage</Description>
+    </Relationship>
+    <Relationship>
+      <ID>8</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>85</Hero1ID>
+      <Hero2ID>25</Hero2ID>
+      <Type>Synergy</Type>
+      <Description>Black hole can group people together to receive lots of damage from psi blades</Description>
+    </Relationship>
+    <Relationship>
+      <ID>9</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>18</Hero1ID>
+      <Hero2ID>25</Hero2ID>
+      <Type>Synergy</Type>
+      <Description>Black hole can group people together to receive lots of damage from cleave</Description>
+    </Relationship>
+    <Relationship>
+      <ID>10</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>58</Hero1ID>
+      <Hero2ID>85</Hero2ID>
+      <Type>Synergy</Type>
+      <Description>Fatal bonds spreads TA's psi blade damage even farther</Description>
+    </Relationship>
+    <Relationship>
+      <ID>11</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>101</Hero1ID>
+      <Hero2ID>7</Hero2ID>
+      <Type>Counter</Type>
+      <Description>Lina can burst through abaddon without triggering ult if timed correctly</Description>
+    </Relationship>
+    <Relationship>
+      <ID>12</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>74</Hero1ID>
+      <Hero2ID>51</Hero2ID>
+      <Type>Other</Type>
+      <Description>PL's mana burn makes it so WK doesn't have the mana to reincarnate</Description>
+    </Relationship>
+    <Relationship>
+      <ID>13</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>0</Hero1ID>
+      <Hero2ID>51</Hero2ID>
+      <Type>Counter</Type>
+      <Description>AM's mana burn makes it so WK doesn't have the mana to reincarnate</Description>
+    </Relationship>
+    <Relationship>
+      <ID>14</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>47</Hero1ID>
+      <Hero2ID>17</Hero2ID>
+      <Type>Counter</Type>
+      <Description>Rupture makes it difficult for SS to ball lightning away</Description>
     </Relationship>
   </Relationships>
   <Settings>
