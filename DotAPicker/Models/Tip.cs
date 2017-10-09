@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.ComponentModel.DataAnnotations;
+
 namespace DotAPicker.Models
 {
     public class Tip: PatchRelative
@@ -17,10 +19,18 @@ namespace DotAPicker.Models
     public enum TipType
     {
         Counter,
+
         Strategy,
+
+        [Display(Name = "Item Build")]
         ItemBuild,
+
+        [Display(Name = "Ability Build")]
         AbilityBuild,
+
+        [Display(Name = "Abilty Use")]
         AbilityUse,
+
         Other
     }
 }
