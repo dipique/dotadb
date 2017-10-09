@@ -1,0 +1,911 @@
+<?xml version="1.0"?>
+<DotADB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Heroes>
+    <Hero>
+      <ID>1</ID>
+      <Name>Axe</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>2</ID>
+      <Name>Crystal Maiden</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>3</ID>
+      <Name>Dazzle</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>4</ID>
+      <Name>Drow Ranger</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>5</ID>
+      <Name>Earthshaker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>6</ID>
+      <Name>Lich</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>7</ID>
+      <Name>Lina</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>8</ID>
+      <Name>Lion</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>9</ID>
+      <Name>Mirana</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>10</ID>
+      <Name>Morphling</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>11</ID>
+      <Name>Necrophos</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>12</ID>
+      <Name>Puck</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>13</ID>
+      <Name>Pudge</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>14</ID>
+      <Name>Razor</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>15</ID>
+      <Name>Sand King</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>16</ID>
+      <Name>Shadow Shaman</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>17</ID>
+      <Name>Storm Spirit</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>18</ID>
+      <Name>Sven</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>19</ID>
+      <Name>Tidehunter</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>20</ID>
+      <Name>Vengeful Spirit</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>21</ID>
+      <Name>Windranger</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>22</ID>
+      <Name>Witch Doctor</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>23</ID>
+      <Name>Zeus</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>24</ID>
+      <Name>Slardar</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>25</ID>
+      <Name>Enigma</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>26</ID>
+      <Name>Faceless Void</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>27</ID>
+      <Name>Tiny</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>28</ID>
+      <Name>Viper</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>29</ID>
+      <Name>Venomancer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>30</ID>
+      <Name>Clockwerk</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>31</ID>
+      <Name>Nature's Prophet</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>32</ID>
+      <Name>Dark Seer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>33</ID>
+      <Name>Sniper</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>34</ID>
+      <Name>Pugna</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>35</ID>
+      <Name>Beastmaster</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>36</ID>
+      <Name>Enchantress</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>37</ID>
+      <Name>Leshrac</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>38</ID>
+      <Name>Shadow Fiend</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>39</ID>
+      <Name>Tinker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>40</ID>
+      <Name>Weaver</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>41</ID>
+      <Name>Night Stalker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>43</ID>
+      <Name>Spectre</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>44</ID>
+      <Name>Doom</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>45</ID>
+      <Name>Chen</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>46</ID>
+      <Name>Juggernaut</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>47</ID>
+      <Name>Bloodseeker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>48</ID>
+      <Name>Kunkka</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>49</ID>
+      <Name>Riki</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>50</ID>
+      <Name>Queen of Pain</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>51</ID>
+      <Name>Wraith King</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>52</ID>
+      <Name>Broodmother</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>53</ID>
+      <Name>Huskar</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>54</ID>
+      <Name>Jakiro</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>55</ID>
+      <Name>Batrider</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>56</ID>
+      <Name>Omniknight</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>57</ID>
+      <Name>Dragon Knight</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>58</ID>
+      <Name>Warlock</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>59</ID>
+      <Name>Alchemist</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>60</ID>
+      <Name>Lifestealer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>61</ID>
+      <Name>Death Prophet</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>62</ID>
+      <Name>Ursa</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>63</ID>
+      <Name>Bounty Hunter</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>64</ID>
+      <Name>Silencer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>65</ID>
+      <Name>Spirit Breaker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>66</ID>
+      <Name>Invoker</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>67</ID>
+      <Name>Clinkz</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>68</ID>
+      <Name>Outworld Devourer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>69</ID>
+      <Name>Bane</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>70</ID>
+      <Name>Shadow Demon</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>71</ID>
+      <Name>Lycan</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>72</ID>
+      <Name>Lone Druid</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>73</ID>
+      <Name>Brewmaster</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>74</ID>
+      <Name>Phantom Lancer</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>75</ID>
+      <Name>Treant Protector</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>77</ID>
+      <Name>Gyrocopter</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>78</ID>
+      <Name>Chaos Knight</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>79</ID>
+      <Name>Phantom Assassin</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>80</ID>
+      <Name>Rubick</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>81</ID>
+      <Name>Luna</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>82</ID>
+      <Name>Io</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>83</ID>
+      <Name>Undying</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>84</ID>
+      <Name>Disruptor</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>85</ID>
+      <Name>Templar Assassin</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>86</ID>
+      <Name>Naga Siren</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>87</ID>
+      <Name>Nyx Assassin</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>88</ID>
+      <Name>Keeper of the Light</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>89</ID>
+      <Name>Visage</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>90</ID>
+      <Name>Meepo</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>91</ID>
+      <Name>Magnus</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>92</ID>
+      <Name>Centaur Warrunner</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>93</ID>
+      <Name>Slark</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>94</ID>
+      <Name>Timbersaw</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>95</ID>
+      <Name>Medusa</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>96</ID>
+      <Name>Troll Warlord</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>97</ID>
+      <Name>Tusk</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>98</ID>
+      <Name>Bristleback</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>99</ID>
+      <Name>Skywrath Mage</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>100</ID>
+      <Name>Elder Titan</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>102</ID>
+      <Name>Ember Spirit</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>103</ID>
+      <Name>Earth Spirit</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>104</ID>
+      <Name>Legion Commander</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>105</ID>
+      <Name>Phoenix</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>106</ID>
+      <Name>Terrorblade</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>107</ID>
+      <Name>Techies</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>108</ID>
+      <Name>Oracle</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>109</ID>
+      <Name>Winter Wyvern</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>111</ID>
+      <Name>Underlord</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>112</ID>
+      <Name>Monkey King</Name>
+      <AltNames />
+      <Notes />
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>42</ID>
+      <Name>Ancient Apparition</Name>
+      <AltNames>aa</AltNames>
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>0</ID>
+      <Name>Anti-Mage</Name>
+      <AltNames>Antimage AM</AltNames>
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>76</ID>
+      <Name>Ogre Magi</Name>
+      <AltNames>om</AltNames>
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>110</ID>
+      <Name>Arc Warden</Name>
+      <AltNames>aw</AltNames>
+      <Notes>I have notes here!</Notes>
+      <Preference>Indifferent</Preference>
+    </Hero>
+    <Hero>
+      <ID>101</ID>
+      <Name>Abaddon</Name>
+      <AltNames>longest alt name field ever yoooooo</AltNames>
+      <Notes>I have notes here!</Notes>
+      <Preference>Indifferent</Preference>
+    </Hero>
+  </Heroes>
+  <Tips>
+    <Tip>
+      <ID>0</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>1</HeroID>
+      <Type>Counter</Type>
+      <Text>test am tip</Text>
+    </Tip>
+    <Tip>
+      <ID>1</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>0</HeroID>
+      <Type>Other</Type>
+      <Text>Get that battefury as fast as possible!</Text>
+    </Tip>
+    <Tip>
+      <ID>2</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>47</HeroID>
+      <Type>Other</Type>
+      <Text>Use bloodrage on both you and a squishy enemy for max damage</Text>
+    </Tip>
+    <Tip>
+      <ID>4</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>0</HeroID>
+      <Type>Other</Type>
+      <Text>Manta is neato</Text>
+    </Tip>
+    <Tip>
+      <ID>6</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>1</HeroID>
+      <Type>Other</Type>
+      <Text>Max counter helix</Text>
+    </Tip>
+    <Tip>
+      <ID>7</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>35</HeroID>
+      <Type>Other</Type>
+      <Text>Ult is a sick aoe stun</Text>
+    </Tip>
+    <Tip>
+      <ID>8</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <HeroID>69</HeroID>
+      <Type>Strategy</Type>
+      <Text>Nightmare supports to keep them from counter-initiating, then use fiend's grip</Text>
+    </Tip>
+    <Tip>
+      <ID>9</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Source>www.mysourceysource.com</Source>
+      <HeroID>42</HeroID>
+      <Type>Counter</Type>
+      <Text>This is a long, lengthy tippity tip. Because reasons. This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.This is a long, lengthy tippity tip. Because reasons.</Text>
+    </Tip>
+    <Tip>
+      <ID>10</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Source>another test source, but this time not a link</Source>
+      <HeroID>42</HeroID>
+      <Type>AbilityUse</Type>
+      <Text>Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. Hey, here's another tip. </Text>
+    </Tip>
+    <Tip>
+      <ID>3</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>true</Deprecated>
+      <HeroID>101</HeroID>
+      <Type>Other</Type>
+      <Text>Test tip</Text>
+    </Tip>
+  </Tips>
+  <Relationships>
+    <Relationship>
+      <ID>0</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>0</Hero1ID>
+      <Hero2ID>47</Hero2ID>
+      <Type>Counter</Type>
+      <Description>BS can use rupture to make it difficult for AM to flee</Description>
+    </Relationship>
+    <Relationship>
+      <ID>1</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>59</Hero1ID>
+      <Hero2ID>0</Hero2ID>
+      <Type>Synergy</Type>
+      <Description>Antimage benefits a lot from an aghs that doesn't take up an item slot</Description>
+    </Relationship>
+    <Relationship>
+      <ID>2</ID>
+      <Patch>7.06</Patch>
+      <Deprecated>false</Deprecated>
+      <Hero1ID>55</Hero1ID>
+      <Hero2ID>25</Hero2ID>
+      <Type>Other</Type>
+      <Description>BKB piercing lasso ends black hole</Description>
+    </Relationship>
+  </Relationships>
+  <Settings>
+    <CurrentPatch>7.06</CurrentPatch>
+    <ShowDeprecatedTips>false</ShowDeprecatedTips>
+    <ShowDeprecatedRelationships>false</ShowDeprecatedRelationships>
+  </Settings>
+</DotADB>
