@@ -117,6 +117,35 @@
         return false;
     });
 
+    $("div").on("click", ".detail-remove", function () {
+        //remove the details
+        this.parentElement.innerHTML = "";
+
+        //clear that element in the array so a new hero can be added
+        var heroID = this.id;
+        removeHeroFromArray(heroID);
+
+        //refresh selection list to re-add the hero
+        filterFunction();
+    });
+
+    function removeHeroFromArray(heroID)
+    {
+        for (var x = 0; x < 5; x++) {
+            //check for matching ally index
+            if (allyArray[x] == heroID) {
+                allyArray[x] = -1;
+                break;
+            }
+
+            //check for matching enemy index
+            if (enemyArray[x] == heroID) {
+                enemyArray[x] = -1;
+                break;
+            }
+        }
+    }
+
     function nextAllyIndex() {
         for (var x = 0; x < 5; x++) {
             if (allyArray[x] == -1) {
