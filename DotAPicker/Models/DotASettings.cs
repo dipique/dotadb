@@ -40,6 +40,14 @@ namespace DotAPicker.Models
 
         [DisplayName("Show Deprecated Relationships")]
         public bool ShowDeprecatedRelationships { get; set; } = false;
-        
+
+        //public List<string> Labels { get; set; } = new List<string>();
+
+        public LabelSet Labels { get; set; } = new LabelSet();
+
+    }
+
+    public class LabelSet: List<string>
+    {
     }
 }

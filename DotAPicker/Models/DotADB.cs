@@ -34,6 +34,9 @@ namespace DotAPicker.Models
             var fs = new FileStream(filename, FileMode.Open); //todo: what if file can't be accessed, is invalid, etc.
             var retVal = (DotADB)s.Deserialize(fs);
             fs.Close();
+
+            //if (retVal.Settings.Labels.Count() == 0) retVal.Settings.Labels = new List<string>() { "Support", "Nuker", "Disabler", "Pusher" };
+
             return retVal;
         }
 

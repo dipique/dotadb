@@ -1,0 +1,99 @@
+﻿@using DotAPicker.Models
+@model LabelSet
+
+
+@{
+    <input class="text-box single-line add-label" onkeyup="" type="text" value="">
+    <div class="label-set">
+        @for (int x = 0; x < Model.Count(); x++)
+        {
+        <div class="label-div" id="@x">
+            @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box" } })
+            <a href="javascript: void(0)" class="remove-label" id="@x">(remove)</a>
+        </div>
+        }
+    </div>
+}
+
+<script>
+    $("form").submit(function (e) {
+        if ($(".add-label")[0] === document.activeElement) {
+            e.preventDefault();
+            return false;
+        }        
+    });
+
+    $(".remove-label").click(function () {
+        $(".label-div #" + this.id).remove();
+    });
+
+    const labelTemplate = "<div class='label-div' id='{index}'><input class='text-box single-line' id='Labels_{index}_' name='Labels[{index}]' type='text' value='{value}'></div>";
+
+    $(".add-label").keyup(function (e) {
+        var text = this.value.trim();
+        if (e.keyCode == 13 && text != "") { //enter
+            //make sure this isn't a duplicated value
+            if (labelAlreadyUsed(text)) {
+                alert("Duplicate label");
+                return;
+            }
+
+            //get the first unused index
+            var newIndex = firstUnusedIndex();
+
+            //create the elements to be added
+            var input = $("<input/>", {
+                class: 'label-input-box text-box single-line',
+                id: 'Labels_' + newIndex + '_',
+                name: 'Labels[' + newIndex + ']',
+                type: 'text',
+                value: text
+            });
+            var link = $("<a/>", {
+                href: 'javascript: void(0)',
+                class: 'remove-label',
+                id: newIndex
+            }).text("(remove)");
+            var div = $("<div/>", {
+                class: 'label-div',
+                id: firstUnusedIndex
+            });
+            input.appendTo(div);
+            link.appendTo(div);
+
+            //add to the dom
+            div.appendTo(".label-set");
+
+            //clear the text
+            this.value = "";
+        }
+    });
+
+    function labelAlreadyUsed(newLabel) {
+        var dup = false;
+        $(".label-input-box").each(function () {
+            if (this.value.trim().toUpperCase() == newLabel.toUpperCase()) {
+                dup = true;
+            }
+        });
+
+        return dup;
+    }
+
+    function firstUnusedIndex() {
+        var found = false;
+        var i = 0;
+
+        //loop until a selector comes back with nothing
+        while (!found) {
+            var element = $(".label-div #" + i);
+            if (element.length == 0) {
+                return i;
+            } else {
+                i++;
+            }
+        }
+    }
+</script>
+
+
