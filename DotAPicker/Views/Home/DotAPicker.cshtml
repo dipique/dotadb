@@ -119,7 +119,7 @@
 
     $("div").on("click", ".detail-remove", function () {
         //remove the details
-        this.parentElement.parentElement.innerHTML = "";
+        this.parentElement.parentElement.parentElement.innerHTML = "";
 
         //clear that element in the array so a new hero can be added
         var heroID = this.id;

@@ -3,13 +3,15 @@
 @model HeroDetailViewModel
 
 <div class="hor-data-row">
-    <strong>@Model.Hero.Name</strong> <a class="detail-remove" href="javascript: void(0)" id="@Model.Hero.ID">(remove)</a>
-</div>
-<div class="hor-data-row">
     <div class="hor-data-cell" style="border: none;">
-        <img alt="Image" src="@Model.GetImgName()" style="align-content: center" width="80" height="45">
+        <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+        <strong>@Model.Hero.Name</strong> 
+        <a class="detail-remove" href="javascript: void(0)" id="@Model.Hero.ID">
+            (remove)
+        </a>
+        <br />
+        @Model.Hero.Notes
     </div>
-    <div class="hor-data-cell" style="border: none;">@Model.Hero.Notes</div>
 </div>
 
 
