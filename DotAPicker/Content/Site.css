@@ -158,7 +158,7 @@ textarea {
     background-color: white;
     border-bottom: 1px solid #ddd;
     font-size: 14px; /* Increase font-size */
-    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+    padding: 3px 5px 3px 5px; /* Add some padding (TRBL) */
 }
 
 /* Hero detail formatting */
@@ -183,7 +183,7 @@ textarea {
     background-color: white;
     border-bottom: 1px solid #ddd;
     font-size: 14px; /* Increase font-size */
-    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+    padding: 3px 5px 3px 5px; /* Add some padding (TRBL) */
 }
 
 #Hero_Notes {
@@ -191,9 +191,31 @@ textarea {
     min-height: 100px;
 }
 
-.add-ally {
+div.add-ally, div.add-enemy {
     display: inline;
 }
-.add-enemy {
-    display: inline;
+
+.hor-more p.more {
+    display: none;
+}
+
+span.hor-more {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.allyDetail, div.enemyDetail {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 6px;
+}
+
+div.counter-row, div.synergy-row, div.tip-row {
+    border: none;
+    box-shadow: 0 2px 4px rgba(51, 51, 51, .25);
+    margin: 2px 2px;
+}
+
+div.tip-header, div.relationship-header {
+    text-decoration: underline;
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
+
 using Newtonsoft.Json;
 
 namespace DotAPicker.Utilities
@@ -27,5 +30,21 @@ namespace DotAPicker.Utilities
             string output = JsonConvert.SerializeObject(childObj);
             return JsonConvert.DeserializeObject<TParent>(output);
         }
+    }
+
+    public static class EnumExt
+    {
+        public static T GetAttribute<T>(this Enum enumValue) where T : Attribute
+        {
+            var memberInfo = enumValue.GetType()
+                                      .GetMember(enumValue.ToString())
+                                      .FirstOrDefault();
+            if (memberInfo == null) return null;
+
+            return (T)memberInfo.GetCustomAttributes(typeof(T), false)
+                                .FirstOrDefault();
+        }
+
+        public static string GetDisplayName(this Enum enumValue) => GetAttribute<DisplayAttribute>(enumValue)?.Name ?? enumValue.ToString();
     }
 }
