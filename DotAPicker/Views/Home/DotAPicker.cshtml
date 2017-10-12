@@ -19,8 +19,16 @@
 <table>
     <tr>
         <td><h4>Hero Selection</h4></td>
-        <td style="padding-left: 8px"><h4>Allies</h4></td>
-        <td style="padding-left: 8px"><h4>Enemies</h4></td>
+        <td style="padding-left: 8px">
+            <div class="detail-column">
+                <h4>Allies</h4>
+            </div>            
+        </td>
+        <td style="padding-left: 8px">
+            <div class="detail-column">
+                <h4>Enemies</h4>
+            </div>        
+        </td>
     </tr>
     <tr>
         <td valign="top">
@@ -46,8 +54,8 @@
                 </div>
             </div>
         </td>
-        <td rowspan="2" style="padding-left: 8px" valign="top">
-            <div class="allyDetails" id="allyDetails">
+        <td class="detail-column" rowspan="2" style="padding-left: 8px" valign="top">
+            <div class="allyDetails detail-column" id="allyDetails">
                 <div class="allyDetail" id="ad1"></div>
                 <div class="allyDetail" id="ad2"></div>
                 <div class="allyDetail" id="ad3"></div>
@@ -56,7 +64,7 @@
             </div>
         </td>
         <td rowspan="2" style="padding-left: 8px" valign="top">
-            <div class="enemyDetails" id="enemyDetails">
+            <div class="enemyDetails detail-column" id="enemyDetails">
                 <div class="enemyDetail" id="ed1"></div>
                 <div class="enemyDetail" id="ed2"></div>
                 <div class="enemyDetail" id="ed3"></div>
@@ -110,10 +118,16 @@
 
     $(".add-ally").click(function () {
         addAlly(this.id);
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
         return false;
     });
     $(".add-enemy").click(function () {
         addEnemy(this.id);
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
         return false;
     });
 
@@ -127,6 +141,13 @@
 
         //refresh selection list to re-add the hero
         filterFunction();
+
+        //hide the detail columns if there are no more details to show
+        if (noSelectedHeroes()) {
+            $("div.detail-column").each(function () {
+                this.style.display = "none";
+            });
+        }
     });
 
     function removeHeroFromArray(heroID)
@@ -198,6 +219,22 @@
             $("#filterPreference").val("");
             filterFunction();
         }
+    }
+
+    function noSelectedHeroes() {
+        for (var x = 0; x < 5; x++) {
+            if (enemyArray[x] != -1) {
+                return false;
+            }
+        }
+
+        for (var x = 0; x < 5; x++) {
+            if (allyArray[x] != -1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     function countVisibleHeroes() {
