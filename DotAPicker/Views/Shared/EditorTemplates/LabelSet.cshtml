@@ -9,7 +9,7 @@
         {
         <div class="label-div" id="@x">
             @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box" } })
-            <a href="javascript: void(0)" class="remove-label" id="@x">(remove)</a>
+            <a href="#" class="remove-label" id="@x">(remove)</a>
         </div>
         }
     </div>
@@ -23,11 +23,34 @@
         }        
     });
 
-    $(".remove-label").click(function () {
-        $(".label-div #" + this.id).remove();
+    $(document).on("click", ".remove-label", function () {
+        var id = parseInt(this.id); //wacky things happen without this conversion
+        var lastElement = firstUnusedIndex() - 1;
+
+        //to be irritating, if the removal of an element results in an index gap,
+        //any entries AFTER the index gap will be unceremoniously removed. That means
+        //if we've created a gap, we need to...well, uncreate it
+        var needToMove = lastElement > id;
+        if (needToMove) {
+            for (var i = id; i < lastElement; i++) {
+                var newValue = getLabelValue(i + 1);
+                setLabelValue(i, newValue);
+            }
+        }
+
+        //remove the last element (the value of which is now a duplicate of things
+        //needed to be shuffled around)
+        var lastLabel = $(".label-div#" + lastElement)[0].remove();
     });
 
-    const labelTemplate = "<div class='label-div' id='{index}'><input class='text-box single-line' id='Labels_{index}_' name='Labels[{index}]' type='text' value='{value}'></div>";
+    function getLabelValue(index) {
+        var element = $(".label-input-box#Labels_" + index + "_");
+        return element[0].value;
+    }
+
+    function setLabelValue(index, newVal) {
+        $(".label-input-box#Labels_" + index + "_")[0].value = newVal;
+    }
 
     $(".add-label").keyup(function (e) {
         var text = this.value.trim();
@@ -50,7 +73,7 @@
                 value: text
             });
             var link = $("<a/>", {
-                href: 'javascript: void(0)',
+                href: '#',
                 class: 'remove-label',
                 id: newIndex
             }).text("(remove)");
@@ -86,7 +109,7 @@
 
         //loop until a selector comes back with nothing
         while (!found) {
-            var element = $(".label-div #" + i);
+            var element = $(".label-div#" + i);
             if (element.length == 0) {
                 return i;
             } else {
