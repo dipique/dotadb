@@ -1,0 +1,26 @@
+﻿@using DotAPicker.Models
+@model LabelSet
+
+
+@{
+    LabelSet options = ViewBag.LabelOptions;
+
+    <select class="text-box single-line add-label">
+        <option value="" selected="selected">Add a label...</option>
+        @foreach (var option in options.Where(o => !Model.Any(m => m == o))) //options that aren't already selected
+        {
+            <option value="@option">@option</option>
+        }
+    </select>    
+    <input type="button" class="add-label-button" value="Add" />
+    <hr style="margin: 5px" />
+    <div class="label-set" id="@ViewData.TemplateInfo.HtmlFieldPrefix">
+        @for (int x = 0; x < Model.Count(); x++)
+        {
+            <div class="label-div" id="@x">
+                @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box", disabled = "disabled" } })
+                <a href="#" class="remove-label" id="@x">(remove)</a>
+            </div>
+        }
+    </div>
+}

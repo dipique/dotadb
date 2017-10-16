@@ -18,12 +18,14 @@ namespace DotAPicker.Models
 
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
-        public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;        
+        public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
+
+        public LabelSet Synergies { get; set; } = new LabelSet();
+        public LabelSet Counters { get; set; } = new LabelSet();
     }
 
     public enum HeroPreference
-    {
-        
+    {        
         Hated = 0,
         Disliked = 1,
         Indifferent = 2,

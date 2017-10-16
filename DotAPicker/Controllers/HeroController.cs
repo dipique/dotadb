@@ -58,6 +58,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Hero not found.");
             }
 
+            ViewBag.LabelOptions = db.Settings.Labels;
             return View("Edit", hero);
         }
 

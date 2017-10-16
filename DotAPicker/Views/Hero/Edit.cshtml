@@ -8,6 +8,7 @@
 <h2>Edit</h2>
 
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -51,6 +52,26 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Synergies, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Synergies)
+                    @Html.ValidationMessageFor(model => model.Synergies, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Counters, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Counters)
+                    @Html.ValidationMessageFor(model => model.Counters, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -64,4 +85,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/labelset-assign.js"></script>
 }

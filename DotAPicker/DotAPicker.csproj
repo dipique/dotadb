@@ -325,6 +325,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\labelset-assign.js" />
+    <Content Include="Scripts\labelset-maint.js" />
+    <Content Include="Scripts\util.js" />
+    <Content Include="Scripts\labelset.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -359,6 +363,7 @@
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\LabelSet.cshtml" />
+    <Content Include="Views\Hero\EditorTemplates\LabelSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
