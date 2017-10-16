@@ -1,51 +1,216 @@
 ﻿@using DotAPicker.Models;
+@using DotAPicker.Utilities;
 @model HeroDetailViewModel
 
-<img src="@Model.GetImgName()" alt="Image" />
-
-<a href="javascript: void(0)" id="@Model.Hero.ID" class="detail-remove">(remove)</a>
-
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">Name</div>
-</div>
 <div class="hor-data-row">
-    <div class="hor-data-cell">@Model.Hero.Name</div>
-</div>
-<div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
-    @Model.Hero.Notes
-</div>
-
-
-<h4>Tips</h4>
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">Type</div>
-</div>
-
-@foreach(Tip t in Model.Tips)
-{ 
-    <div class="hor-data-row">
-        <div class="hor-data-cell">@t.Type</div>
+    <div class="hor-data-cell" style="border: none;">
+        <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+        <strong>@Model.Hero.Name</strong> 
+        <a class="detail-remove" href="javascript: void(0)" id="@Model.Hero.ID">
+            (remove)
+        </a>
+        <br />
+        @Model.Hero.Notes
     </div>
-    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
-        @t.Text
-    </div>
+</div>
+
+
+@{  //Tips
+
+    //Tips are in 3-column sets, so we start by figuring out how many columns/rows we'll have
+    const int COL_COUNT = 3;
+    int remainder = Model.Tips.Count() % COL_COUNT; //if this isn't 0, we'll need to deal with the missing column
+    int fullRows = (Model.Tips.Count() - remainder) / COL_COUNT;
+
+    //The loop unit is rows, and we need an extra row for remainders
+    int loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
+
+    if (loopCount > 0)
+    { 
+        //opening div for the tip section
+        <div class="hor-data-row tip-row"><div class="hor-data-cell" style="border:none">        
+            @{
+                //create each row
+                for (int x = 0; x < loopCount; x++)
+                {
+                    //opening div
+                    <div class="type hor-data-row">
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var tip = @Model.Tips.Skip(x).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="tip-header">
+                                    @tip.Type.GetDisplayName()
+                                </div>                            
+                                <p>@tip.Text</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                tip = @Model.Tips.Skip(x + 1).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="tip-header">
+                                        @tip.Type.GetDisplayName()
+                                    </div>
+                                    <p>@tip.Text</p>
+                                </div>
+                            }
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                tip = @Model.Tips.Skip(x + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="tip-header">
+                                        @tip.Type.GetDisplayName()
+                                    </div>
+                                    <p>@tip.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }        
+        </div></div>
+    }
 }
 
+@{
+    //Relationships - counters
+    var relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Counter);
+    remainder = relationships.Count() % COL_COUNT;
+    fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
-<h4>Relationships</h4>
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">Hero</div>
-    <div class="hor-title-header-cell">Type</div>
-</div>
+    //The loop unit is rows, and we need an extra row for remainders
+    loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
 
-@foreach (var r in Model.Relationships)
-{
-    var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
-    <div class="hor-data-row">
-        <div class="hor-data-cell">@heroName</div>
-        <div class="hor-data-cell">@r.Type</div>
-    </div>
-    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
-        @r.Description
-    </div>
+    if (loopCount > 0)
+    {
+        //opening div for the tip section
+        <div class="hor-data-row counter-row"><div class="hor-data-cell" style="border:none"> 
+            <strong>Counters</strong>
+            @{
+                //create each row
+                for (int x = 0; x < loopCount; x++)
+                {
+                    //opening div
+                    <div class="type hor-data-row">
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var r = relationships.Skip(x).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="relationship-header">
+                                    @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                </div>                            
+                                <p>@r.Description</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                r = relationships.Skip(x + 1).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    </div>
+                                    <p>@r.Description</p>
+                                </div>
+                            }
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                r = relationships.Skip(x + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    </div>
+                                    <p>@r.Description</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div></div>
+    }
+}
+
+@{
+    //Relationships - Synergies
+    relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Synergy);
+    remainder = relationships.Count() % COL_COUNT;
+    fullRows = (relationships.Count() - remainder) / COL_COUNT;
+
+    //The loop unit is rows, and we need an extra row for remainders
+    loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
+
+    if (loopCount > 0)
+    {
+        //opening div for the tip section
+        <div class="hor-data-row synergy-row">
+            <div class="hor-data-cell" style="border:none">
+                <strong>Synergies</strong>
+                @{
+                    //create each row
+                    for (int x = 0; x < loopCount; x++)
+                    {
+                        //opening div
+                        <div class="type hor-data-row">
+                            @{
+                                //first column
+                                bool partialRow = fullRows <= x;
+                                var r = relationships.Skip(x).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    </div>
+                                    <p>@r.Description</p>
+                                </div>
+
+                                //second column
+                                if (!partialRow || remainder == 2)
+                                {
+                                    r = relationships.Skip(x + 1).Take(1).First();
+                                    <div class="hor-data-cell" style="border:none">
+                                        <div class="relationship-header">
+                                            @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        </div>
+                                        <p>@r.Description</p>
+                                    </div>
+                                }
+
+                                //third column
+                                if (!partialRow)
+                                {
+                                    r = relationships.Skip(x + 2).Take(1).First();
+                                    <div class="hor-data-cell" style="border:none">
+                                        <div class="relationship-header">
+                                            @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        </div>
+                                        <p>@r.Description</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
 }
