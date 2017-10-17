@@ -18,7 +18,7 @@
         @for (int x = 0; x < Model.Count(); x++)
         {
             <div class="label-div" id="@x">
-                @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box", disabled = "disabled" } })
+                @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box form-control", disabled = "disabled" } })
                 <a href="#" class="remove-label" id="@x">(remove)</a>
             </div>
         }

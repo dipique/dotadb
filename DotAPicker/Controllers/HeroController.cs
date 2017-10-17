@@ -58,6 +58,9 @@ namespace DotAPicker.Controllers
                 throw new Exception("Hero not found.");
             }
 
+            ///test
+            //if (hero.Counters.Count() == 0) hero.Counters.Add("disables");
+
             ViewBag.LabelOptions = db.Settings.Labels;
             return View("Edit", hero);
         }

@@ -17,8 +17,10 @@ function setLabelValue(index, setName, newVal) {
 
 function removeLabel(txtLabel) {
     var id = parseInt(txtLabel.id); //wacky things happen without this conversion
-    var lastElement = firstUnusedIndex() - 1;
-    var textOfRemovedLabel = txtLabel.value;
+    var labelSet = $(txtLabel.parentElement.parentElement)[0];
+    var labelSetName = labelSet.id;
+    var lastElement = firstUnusedIndex(labelSet) - 1;
+    var textOfRemovedLabel = getLabelValue(id, labelSetName);
 
     //to be irritating, if the removal of an element results in an index gap,
     //any entries AFTER the index gap will be unceremoniously removed. That means
@@ -26,26 +28,26 @@ function removeLabel(txtLabel) {
     var needToMove = lastElement > id;
     if (needToMove) {
         for (var i = id; i < lastElement; i++) {
-            var newValue = getLabelValue(i + 1);
-            setLabelValue(i, newValue);
+            var newValue = getLabelValue(i + 1, labelSetName);
+            setLabelValue(i, labelSetName, newValue);
         }
     }
 
     //remove the last element (the value of which is now a duplicate of things
     //needed to be shuffled around)
-    var labelSet = $(this.parentElement.parentElement);
-    labelSet.find(".label-div#" + lastElement)[0].remove();
+    var labelDiv = $(labelSet).find(".label-div#" + lastElement)[0];
+    $(labelDiv).remove();
 
     //add the removed label back to the list of options, if applicable
-    var selectQuery = labelSet.find("select.add-label");
+    var selectQuery = $(labelSet).find("select.add-label");
     if (selectQuery.length > 0) {
         var select = selectQuery[0];
-        addOptionToSelect(select, text, text, text);
+        addOptionToSelect(select, textOfRemovedLabel, textOfRemovedLabel, textOfRemovedLabel);
     }    
 }
 
 function addLabel(labelSetDiv, text) {
-    var txtBox = $(labelSetDiv).find(".add-label")[0];
+    var txtBox = $(labelSetDiv.parentElement).find(".add-label")[0];
     var fldName = labelSetDiv.id;
     if (text != "") { //enter
         //make sure this isn't a duplicated value
@@ -59,7 +61,7 @@ function addLabel(labelSetDiv, text) {
 
         //create the elements to be added
         var input = $("<input/>", {
-            class: 'label-input-box text-box single-line',
+            class: 'label-input-box text-box single-line form-control valid',
             id: fldName + '_' + newIndex + '_',
             name: fldName + '[' + newIndex + ']',
             type: 'text',
@@ -86,7 +88,7 @@ function addLabel(labelSetDiv, text) {
 function labelAlreadyUsed(labelSetDiv, newLabel) {
     var dup = false;
 
-    labelSetDiv.find(".label-input-box").each(function () {
+    $(labelSetDiv).find(".label-input-box").each(function () {
         if (this.value.trim().toUpperCase() == newLabel.toUpperCase()) {
             dup = true;
         }
@@ -101,7 +103,7 @@ function firstUnusedIndex(labelSetDiv) {
 
     //loop until a selector comes back with nothing
     while (!found) {
-        var element = labelSetDiv.find(".label-div#" + i);
+        var element = $(labelSetDiv).find(".label-div#" + i);
         if (element.length == 0) {
             return i;
         } else {

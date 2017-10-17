@@ -4,12 +4,12 @@
 
 @{
     <input class="text-box single-line add-label" onkeyup="" type="text" value="" placeholder="New label..." />
-    <input type="button" value="Add" />
+    <input type="button" class="add-button-label" value="Add" />
     <hr style="margin: 5px" />
     <div class="label-set" id="@ViewData.TemplateInfo.HtmlFieldPrefix">
         @for (int x = 0; x < Model.Count(); x++) {
         <div class="label-div" id="@x">
-            @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box" } })
+            @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box valid" } })
             <a href="#" class="remove-label" id="@x">(remove)</a>
         </div>
         }
