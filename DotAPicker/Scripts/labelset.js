@@ -15,9 +15,9 @@ function setLabelValue(index, setName, newVal) {
     $(".label-input-box#" + setName + "_" + index + "_")[0].value = newVal;
 }
 
-function removeLabel(txtLabel) {
-    var id = parseInt(txtLabel.id); //wacky things happen without this conversion
-    var labelSet = $(txtLabel.parentElement.parentElement)[0];
+function removeLabel(lnkLabel) {
+    var id = parseInt(lnkLabel.id); //wacky things happen without this conversion
+    var labelSet = $(lnkLabel.parentElement.parentElement)[0];
     var labelSetName = labelSet.id;
     var lastElement = firstUnusedIndex(labelSet) - 1;
     var textOfRemovedLabel = getLabelValue(id, labelSetName);
@@ -46,7 +46,11 @@ function removeLabel(txtLabel) {
     }    
 }
 
-function addLabel(labelSetDiv, text) {
+function addLabel(labelSetDiv, text, disabled) {
+    if (disabled != true) {
+        disabled = false;
+    }
+
     var txtBox = $(labelSetDiv.parentElement).find(".add-label")[0];
     var fldName = labelSetDiv.id;
     if (text != "") { //enter
@@ -68,6 +72,10 @@ function addLabel(labelSetDiv, text) {
             value: text,
             disabled: "disabled"
         });
+        if (!disabled) {
+            input.removeAttr("disabled");
+        }
+
         var link = $("<a/>", {
             href: '#',
             class: 'remove-label',

@@ -7,6 +7,6 @@ $("input.add-label-button").click(function () {
 
     var labelSetName = this.parentElement.id;
     var labelSet = $("div.label-set#" + labelSetName)[0];
-    addLabel(labelSet, selectBox.options[selectBox.selectedIndex].text);
+    addLabel(labelSet, selectBox.options[selectBox.selectedIndex].text, true);
     selectBox.removeChild(selectBox.options[selectBox.selectedIndex]);
 });
