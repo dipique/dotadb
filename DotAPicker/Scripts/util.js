@@ -28,10 +28,10 @@ function addOptionToSelect(sel, txt, val, obj) {
         opt.value = val;
     }
 
-    if (!obj) {
+    //if (!obj) {
         sel.appendChild(opt);
         return;
-    }
+    //}
 }
 
 //gets the parent (or grandparent, etc) of an element given a class name. Gets the nearest parent if

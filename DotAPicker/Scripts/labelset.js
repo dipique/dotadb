@@ -39,7 +39,7 @@ function removeLabel(lnkLabel) {
     $(labelDiv).remove();
 
     //add the removed label back to the list of options, if applicable
-    var selectQuery = $(labelSet).find("select.add-label");
+    var selectQuery = $("select#" + labelSetName);
     if (selectQuery.length > 0) {
         var select = selectQuery[0];
         addOptionToSelect(select, textOfRemovedLabel, textOfRemovedLabel, textOfRemovedLabel);

@@ -5,7 +5,7 @@
 @{
     LabelSet options = ViewBag.LabelOptions;
 
-    <select class="text-box single-line add-label">
+    <select class="text-box single-line add-label" id="@ViewData.TemplateInfo.HtmlFieldPrefix">
         <option value="" selected="selected">Add a label...</option>
         @foreach (var option in options.Where(o => !Model.Any(m => m == o))) //options that aren't already selected
         {
