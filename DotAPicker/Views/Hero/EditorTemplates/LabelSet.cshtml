@@ -20,6 +20,7 @@
             <div class="label-div" id="@x">
                 @Html.EditorFor(m => m[x], new { htmlAttributes = new { @class = "label-input-box form-control", disabled = "disabled" } })
                 <a href="#" class="remove-label" id="@x">(remove)</a>
+                @Html.HiddenFor(m => m[x], new { @class = "label-hidden-box" })
             </div>
         }
     </div>

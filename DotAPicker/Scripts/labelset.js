@@ -13,6 +13,12 @@ function getLabelValue(index, setName) {
 
 function setLabelValue(index, setName, newVal) {
     $(".label-input-box#" + setName + "_" + index + "_")[0].value = newVal;
+
+    //make sure to check if this one exists, since it doesn't always
+    var hiddenBox = $(".label-hidden-box#" + setName + "_" + index + "_");
+    if (hiddenBox.length > 0) {
+        hiddenBox[0].value = newVal;
+    }    
 }
 
 function removeLabel(lnkLabel) {
@@ -65,7 +71,7 @@ function addLabel(labelSetDiv, text, disabled) {
 
         //create the elements to be added
         var input = $("<input/>", {
-            class: 'label-input-box text-box single-line form-control valid',
+            class: 'label-input-box text-box single-line form-control',
             id: fldName + '_' + newIndex + '_',
             name: fldName + '[' + newIndex + ']',
             type: 'text',
@@ -87,6 +93,19 @@ function addLabel(labelSetDiv, text, disabled) {
         });
         indentedAppend(div[0], input[0]); //the indents ensure consistent spacing; appendTo changes the appearance
         indentedAppend(div[0], link[0]);
+
+        //if it's disabled, add a hidden input, otherwise it won't post back
+        if (disabled) {
+            var hidden = $("<input/>", {
+                id: fldName + '_' + newIndex + '_',
+                name: fldName + '[' + newIndex + ']',
+                type: hidden,
+                value: text,
+                class: "label-hidden-box",
+                style: "display:none"
+            });
+            indentedAppend(div[0], hidden[0]);
+        }
 
         //add to the dom
         indentedAppend(labelSetDiv, div[0]);
