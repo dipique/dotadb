@@ -9,8 +9,11 @@ namespace DotAPicker.Models
 {
     public class Relationship: PatchRelative
     {
-        public int Hero1ID { get; set; }        
+        public int Hero1ID { get; set; }      
+        public Hero Hero1 { get; set; }
+
         public int Hero2ID { get; set; }
+        public Hero Hero2 { get; set; }
 
         public bool IncludesHero(int ID) => Hero1ID == ID || Hero2ID == ID;
 

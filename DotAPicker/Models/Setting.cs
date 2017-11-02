@@ -5,16 +5,14 @@ using System.Web;
 
 namespace DotAPicker.Models
 {
-    public abstract class PatchRelative
+    public class Setting
     {
         public int ID { get; set; }
 
         public int UserID { get; set; }
         public User User { get; set; }
 
-        public string Patch { get; set; }
-        public bool Deprecated { get; set; } = false;
-
-        public string Source { get; set; } //where you found the tip
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

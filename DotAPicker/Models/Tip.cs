@@ -10,6 +10,7 @@ namespace DotAPicker.Models
     public class Tip: PatchRelative
     {
         public int HeroID { get; set; }
+        public Hero Hero { get; set; }
 
 
         public TipType Type { get; set; } = TipType.Other;

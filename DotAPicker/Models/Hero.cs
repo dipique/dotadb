@@ -13,6 +13,9 @@ namespace DotAPicker.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
+        public int UserID { get; set; }
+        public User User { get; set; }
+
         [DisplayName("Alt. Names")]
         public string AltNames { get; set; } //can be searched as well so that, for example, BS can find Bloodseeker
 
@@ -20,8 +23,7 @@ namespace DotAPicker.Models
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
-        public LabelSet Synergies { get; set; } = new LabelSet();
-        public LabelSet Counters { get; set; } = new LabelSet();
+        public List<HeroLabel> Labels = new List<HeroLabel>();
     }
 
     public enum HeroPreference
