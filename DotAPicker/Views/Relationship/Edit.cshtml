@@ -1,4 +1,4 @@
-﻿@model DotAPicker.ViewModels.RelationshipViewModel
+﻿@model DotAPicker.Models.Relationship
 
 @{
     ViewBag.Title = "Edit";
@@ -19,6 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Patch, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.UserID)
                 @Html.EditorFor(model => model.Patch, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Patch, "", new { @class = "text-danger" })
             </div>
@@ -37,14 +38,14 @@
         <div class="form-group">
             @Html.Label("Hero 1", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Hero1ID", Model.HeroOptions, new { @class = "form-control" })
+                @Html.DropDownList("Hero1ID", (IEnumerable<SelectListItem>)ViewBag.HeroOptions, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Hero 2", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Hero2ID", Model.HeroOptions, new { @class = "form-control" })
+                @Html.DropDownList("Hero2ID", (IEnumerable<SelectListItem>)ViewBag.HeroOptions, new { @class = "form-control" })
             </div>
         </div>
 

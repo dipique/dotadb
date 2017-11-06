@@ -14,14 +14,13 @@ namespace DotAPicker.Controllers
         public ActionResult Index()
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
-            return View("DotAPicker", db.Heroes.OrderBy(h => h.Name));
+            return View("DotAPicker", CurrentUser.Heroes.OrderBy(h => h.Name));
         }
 
         // GET: Hero/Create
         public ActionResult Create()
         {
-            var hero = new Hero();
-            if (db.Heroes.Count() > 0) hero.ID = db.Heroes.Max(h => h.ID) + 1;
+            var hero = new Hero() { UserID = CurrentUser.ID };
             return View("Create", hero);
         }
 
@@ -29,7 +28,7 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Create(Hero model)
         {
-            if (db.Heroes.Any(h => h.Name == model.Name))
+            if (CurrentUser.Heroes.Any(h => h.Name == model.Name))
             {
                 throw new Exception("This name is already in use");
             }
@@ -40,28 +39,27 @@ namespace DotAPicker.Controllers
             }
 
             db.Heroes.Add(model);
-            db.Save();
+            db.SaveChanges();
             return Index();
         }
 
         public ActionResult Detail(int id)
         {
-            return PartialView(new HeroDetailViewModel(id, db));
+            return PartialView(CurrentUser.Heroes.FirstOrDefault(h => h.ID == id));
         }
 
         // GET: Hero/Delete/5
         public ActionResult Delete(int id)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
             }
 
             db.Heroes.Remove(hero);
+            db.SaveChanges();
 
-            db.Save();
-            db = DotADB.Load();
             return Index();
         }
     }

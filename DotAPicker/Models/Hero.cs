@@ -24,6 +24,17 @@ namespace DotAPicker.Models
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
         public List<HeroLabel> Labels = new List<HeroLabel>();
+
+        public List<Tip> Tips { get; set; }
+        public List<Relationship> Relationships { get; set; }
+
+        public string GetImgName(string heroName)
+        {
+            string working = heroName.Replace(' ', '_');
+            return $"img/hero/120px-{working}_icon.png";
+        }
+
+        public string GetImgName() => GetImgName(Name);
     }
 
     public enum HeroPreference

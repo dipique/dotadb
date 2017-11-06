@@ -1,6 +1,5 @@
 ﻿@using DotAPicker.Models
-@using DotAPicker.ViewModels
-@model IEnumerable<TipViewModel>
+@model IEnumerable<Tip>
 
 @{
     ViewBag.Title = "Tip";
@@ -32,8 +31,8 @@
             foreach (var tip in Model)
             {
                 <tr>
-                    <td>@tip.HeroName</td>
-                    <td style="display:none">@tip.HeroAltNames</td>
+                    <td>@tip.Hero.Name</td>
+                    <td style="display:none">@tip.Hero.AltNames</td>
                     <td>@Html.DisplayFor(m => m.First(t => t.ID == tip.ID).Type)</td>
                     <td>@tip.Text</td>
                     <td>@Html.ActionLink("(edit)", "Edit", new { id = tip.ID }) @Html.ActionLink("(delete)", "Delete", new { id = tip.ID })</td>

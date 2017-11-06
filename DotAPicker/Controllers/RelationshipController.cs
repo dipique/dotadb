@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using DotAPicker.ViewModels;
 using DotAPicker.Models;
 using DotAPicker.Utilities;
 
@@ -15,12 +15,7 @@ namespace DotAPicker.Controllers
         // GET: Relationship
         public ActionResult Index()
         {
-            var relationshipVMs = db.Relationships.Select(t => Casting.DownCast<Relationship, RelationshipViewModel>(t)).ToList();
-            foreach (var relationshipVM in relationshipVMs)
-            {
-                relationshipVM.Hero1 = db.Heroes.FirstOrDefault(h => h.ID == relationshipVM.Hero1ID);
-                relationshipVM.Hero2 = db.Heroes.FirstOrDefault(h => h.ID == relationshipVM.Hero2ID);
-            }
+            var relationshipVMs = db.Relationships.Include(r => r.Hero1).Include(r => r.Hero2);
 
             return View("Relationships", relationshipVMs);
         }
@@ -30,24 +25,19 @@ namespace DotAPicker.Controllers
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
+            ViewBag.HeroOptions = GetHeroOptions(heroID);
 
-            var tvm = new RelationshipViewModel() { Patch = db.CurrentPatch, HeroOptions = GetHeroOptions(heroID) };
+            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.ID };
             if (heroID != -1) tvm.Hero1ID = heroID;
-            if (db.Relationships.Count() > 0) tvm.ID = db.Relationships.Max(h => h.ID) + 1;
             return View("Create", tvm);
         }
 
         // POST: Relationship/Create
         [HttpPost]
-        public ActionResult Create(RelationshipViewModel model, bool returnToHeroList = false)
+        public ActionResult Create(Relationship model, bool returnToHeroList = false)
         {
-            if (db.Relationships.Any(h => h.ID == model.ID))
-            {
-                throw new Exception("Relationship ID collision");
-            }
-
-            db.Relationships.Add(Casting.UpCast<Relationship, RelationshipViewModel>(model));
-            db.Save();
+            db.Relationships.Add(model);
+            db.SaveChanges();
 
             if (!returnToHeroList) return Index();
 
@@ -58,41 +48,32 @@ namespace DotAPicker.Controllers
         // GET: Relationship/Edit/5
         public ActionResult Edit(int id)
         {
-            var relationship = db.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");
             }
 
-            var tvm = Casting.DownCast<Relationship, RelationshipViewModel>(relationship);
-            tvm.HeroOptions = GetHeroOptions(id);
+            ViewBag.HeroOptions = GetHeroOptions(id);
 
-            return View("Edit", tvm);
+            return View("Edit", relationship);
         }
 
         // POST: Relationship/Edit/5
         [HttpPost]
-        public ActionResult Edit(RelationshipViewModel model)
+        public ActionResult Edit(Relationship model)
         {
-            var relationship = db.Relationships.FirstOrDefault(h => h.ID == model.ID);
-            if (relationship == null)
-            {
-                throw new Exception("Relationship not found.");
-            }
+            //Update the edited Relationship
+            db.Relationships.Attach(model);
+            db.SaveChanges();
 
-            //Repace the Relationship with the edited Relationship
-            db.Relationships.Remove(relationship);
-            db.Relationships.Add(Casting.UpCast<Relationship, RelationshipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
-
-            db.Save();
-            db = DotADB.Load();
             return Index();
         }
 
         // GET: Relationship/Delete/5
         public ActionResult Delete(int id)
         {
-            var relationship = db.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");
@@ -100,8 +81,7 @@ namespace DotAPicker.Controllers
 
             db.Relationships.Remove(relationship);
 
-            db.Save();
-            db = DotADB.Load();
+            db.SaveChanges();
             return Index();
         }
     }

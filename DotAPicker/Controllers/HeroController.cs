@@ -14,14 +14,13 @@ namespace DotAPicker.Controllers
         public ActionResult Index()
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
-            return View("Heroes", db.Heroes.OrderBy(h => h.Name));
+            return View("Heroes", CurrentUser.Heroes.OrderBy(h => h.Name));
         }
 
         // GET: Hero/Create
         public ActionResult Create()
         {
-            var hero = new Hero();
-            if (db.Heroes.Count() > 0) hero.ID = db.Heroes.Max(h => h.ID) + 1;
+            var hero = new Hero() { UserID = CurrentUser.ID };
             return View("Create", hero);
         }
 
@@ -29,7 +28,7 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Create(Hero model)
         {
-            if (db.Heroes.Any(h => h.Name == model.Name))
+            if (CurrentUser.Heroes.Any(h => h.Name == model.Name))
             {
                 throw new Exception("This name is already in use");
             }
@@ -40,19 +39,19 @@ namespace DotAPicker.Controllers
             }
 
             db.Heroes.Add(model);
-            db.Save();
+            db.SaveChanges();
             return Index();
         }
 
         public ActionResult Detail(int id)
         {
-            return PartialView(new HeroDetailViewModel(id, db));
+            return PartialView(CurrentUser.Heroes.FirstOrDefault(h => h.ID == id));
         }
 
         // GET: Hero/Edit/5
         public ActionResult Edit(int id)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
@@ -61,7 +60,7 @@ namespace DotAPicker.Controllers
             ///test
             //if (hero.Counters.Count() == 0) hero.Counters.Add("disables");
 
-            ViewBag.LabelOptions = db.Settings.Labels;
+            ViewBag.LabelOptions = CurrentUser.LabelOptions;
             return View("Edit", hero);
         }
 
@@ -69,34 +68,25 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Hero model)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.ID == model.ID);
-            if (hero == null)
-            {
-                throw new Exception("Hero not found.");
-            }
+            //Update the edited hero
+            db.Heroes.Attach(model);
+            db.SaveChanges();
 
-            //Repace the hero with the edited hero
-            db.Heroes.Remove(hero);
-            db.Heroes.Add(model);
-            
-            db.Save();
-            db = DotADB.Load();
             return Index();
         }
 
         // GET: Hero/Delete/5
         public ActionResult Delete(int id)
         {
-            var hero = db.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
             }
 
             db.Heroes.Remove(hero);
+            db.SaveChanges();
 
-            db.Save();
-            db = DotADB.Load();
             return Index();
         }
     }

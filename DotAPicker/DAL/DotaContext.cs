@@ -12,7 +12,7 @@ namespace DotAPicker.DAL
 {
     public class DotAContext: DbContext
     {
-        public DotAContext(): base(nameof(DotaContext))
+        public DotAContext(): base(nameof(DotAContext))
         {
 
         }

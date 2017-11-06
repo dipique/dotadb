@@ -16,6 +16,7 @@ namespace DotAPicker.Models
         public Hero Hero2 { get; set; }
 
         public bool IncludesHero(int ID) => Hero1ID == ID || Hero2ID == ID;
+        public string AltNameSet => $"{Hero1?.AltNames}|{Hero2?.AltNames}";
 
         /// <summary>
         /// always 1->2, so if the type is "counter", it means "Hero1 counters Hero2"

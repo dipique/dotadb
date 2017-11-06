@@ -5,6 +5,7 @@ using System.Web;
 
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
 
@@ -46,5 +47,20 @@ namespace DotAPicker.Utilities
         }
 
         public static string GetDisplayName(this Enum enumValue) => GetAttribute<DisplayAttribute>(enumValue)?.Name ?? enumValue.ToString();
+    }
+
+    public static class DotAPatch
+    {
+        /// <summary>
+        /// Patch numbers are either a decimal value, or a decimal value followed by a letter.
+        /// Valid: 7.00, 7.07, 7.07a, 7.07A
+        /// Invalid: 7, 7.0, 7.00ff, 7f, 700
+        /// </summary>
+        /// <param name="patch"></param>
+        /// <returns></returns>
+        public static bool ValidatePatchNumber(string patch) => new Regex(PATCH_REGEX).IsMatch(patch);
+        public const string PATCH_REGEX = @"^(\d+\.\d{2}([a-zA-Z])?)$";
+
+        public const string DEFAULT_PATCH = "7.07";
     }
 }

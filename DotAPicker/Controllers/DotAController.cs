@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using IO = System.IO;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
+using DotAPicker.DAL;
 using DotAPicker.Models;
 
 namespace DotAPicker.Controllers
@@ -11,14 +12,20 @@ namespace DotAPicker.Controllers
     public class DotAController : Controller
     {
         internal const string dataInd = "data";
-        internal DotADB db
+        internal const string userInd = "user";
+        internal DotAContext db
         {
             get
             {
-                if ((DotADB)(Session[dataInd]) == null)
-                    Session[dataInd] = DotADB.Load();
+                var tmpDB = (DotAContext)Session[dataInd];
+                if (tmpDB == null)
+                    Session[dataInd] = tmpDB = new DotAContext();
 
-                return (DotADB)Session[dataInd];
+                //set default user if none is set
+                if (Session[userInd] == null)
+                    Session[userInd] = tmpDB.Users.Include(u => u.Settings);
+
+                return (DotAContext)Session[dataInd];
             }
             set
             {
@@ -26,8 +33,20 @@ namespace DotAPicker.Controllers
             }
         }
 
+        internal User CurrentUser
+        {
+            get
+            {
+                //set default user if none is set
+                if (Session[userInd] == null)
+                    Session[userInd] = db.Users.Include(u => u.Settings);
+                return (User)Session[userInd];
+            }
+            set => Session[userInd] = value;
+        }
+
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
-            db.Heroes.Select(h => new SelectListItem() {
+            CurrentUser.Heroes.Select(h => new SelectListItem() {
                 Text = h.Name,
                 Value = h.ID.ToString(),
                 Selected = selection == h.ID

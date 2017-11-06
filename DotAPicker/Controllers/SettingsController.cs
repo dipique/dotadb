@@ -16,13 +16,6 @@ namespace DotAPicker.Controllers
             return View("Edit", db.Settings);
         }
 
-        public ActionResult Save(DotASettings model)
-        {
-            //Repace the Tip with the edited Tip
-            db.Settings = model;
-            db.Save();
-            db = DotADB.Load();
-            return Index();
-        }
+        //TODO: complete revamp
     }
 }

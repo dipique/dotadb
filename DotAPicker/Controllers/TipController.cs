@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
-using DotAPicker.ViewModels;
 using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
@@ -16,18 +15,7 @@ namespace DotAPicker.Controllers
         // GET: Tip
         public ActionResult Index()
         {
-            var tipVMs = db.Tips.Select(t => Casting.DownCast<Tip, TipViewModel>(t)).ToList();
-            foreach(var tipVM in tipVMs)
-            {
-                var hero = db.Heroes.FirstOrDefault(h => h.ID == tipVM.HeroID);
-                if (hero != null)
-                {
-                    tipVM.HeroName = hero.Name;
-                    tipVM.HeroAltNames = hero.AltNames;
-                }
-            }
-
-            return View("Tips", tipVMs);
+            return View("Tips", CurrentUser.Tips);
         }
 
 
@@ -41,25 +29,23 @@ namespace DotAPicker.Controllers
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
-
-            var heroOptions = GetHeroOptions(heroID);
-            var tvm = new TipViewModel() { Patch = db.CurrentPatch, HeroOptions = heroOptions };
-            if (heroID != -1) tvm.HeroID = heroID;
-            if (db.Tips.Count() > 0) tvm.ID = db.Tips.Max(h => h.ID) + 1;
-            return View("Create", tvm);
+            ViewBag.HeroOptions = GetHeroOptions(heroID);
+            var tip = new Tip() { Patch = CurrentUser.CurrentPatch };
+            if (heroID != -1) tip.HeroID = heroID;
+            return View("Create", tip);
         }
 
         // POST: Tip/Create
         [HttpPost]
-        public ActionResult Create(TipViewModel model, bool returnToHeroList = false)
+        public ActionResult Create(Tip model, bool returnToHeroList = false)
         {
             if (db.Tips.Any(h => h.ID == model.ID))
             {
                 throw new Exception("Tip ID collision");
             }
 
-            db.Tips.Add(Casting.UpCast<Tip, TipViewModel>(model));
-            db.Save();
+            db.Tips.Attach(model);
+            db.SaveChanges();
 
             if (!returnToHeroList) return Index();
 
@@ -70,41 +56,30 @@ namespace DotAPicker.Controllers
         // GET: Tip/Edit/5
         public ActionResult Edit(int id)
         {
-            var tip = db.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
             }
+            ViewBag.HeroOptions = GetHeroOptions(tip.HeroID);
 
-            var tvm = Casting.DownCast<Tip, TipViewModel>(tip);
-            tvm.HeroOptions = GetHeroOptions(id);
-
-            return View("Edit", tvm);
+            return View("Edit", tip);
         }
 
         // POST: Tip/Edit/5
         [HttpPost]
-        public ActionResult Edit(TipViewModel model)
+        public ActionResult Edit(Tip model)
         {
-            var tip = db.Tips.FirstOrDefault(h => h.ID == model.ID);
-            if (tip == null)
-            {
-                throw new Exception("Tip not found.");
-            }
+            db.Tips.Attach(model);
 
-            //Repace the Tip with the edited Tip
-            db.Tips.Remove(tip);
-            db.Tips.Add(Casting.UpCast<Tip, TipViewModel>(model)); //the upcast prevents all the extra stuff from being saved
-
-            db.Save();
-            db = DotADB.Load();
+            db.SaveChanges();
             return Index();
         }
 
         // GET: Tip/Delete/5
         public ActionResult Delete(int id)
         {
-            var tip = db.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
@@ -112,8 +87,7 @@ namespace DotAPicker.Controllers
 
             db.Tips.Remove(tip);
 
-            db.Save();
-            db = DotADB.Load();
+            db.SaveChanges();
             return Index();
         }
     }
