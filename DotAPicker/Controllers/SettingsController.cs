@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -13,9 +15,15 @@ namespace DotAPicker.Controllers
         // GET: Settings
         public ActionResult Index()
         {
-            return View("Edit", db.Settings);
+            return View("Edit", CurrentUser.Settings);
         }
 
-        //TODO: complete revamp
+        public ActionResult Update(List<Setting> settings)
+        {
+            db.UpdateSettings(CurrentUser.ID, settings);
+            return Index();
+        }
     }
+
+
 }

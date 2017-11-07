@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 
 using DotAPicker.Models;
+using DotAPicker.Utilities;
 
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+
 
 namespace DotAPicker.DAL
 {
@@ -24,6 +25,44 @@ namespace DotAPicker.DAL
         public DbSet<HeroLabel> HeroLabels { get; set; }
         public DbSet<User> Users { get; set; }
         
+        /// <summary>
+        /// TODO: Return errors if found
+        /// </summary>
+        /// <param name="currentUserID"></param>
+        /// <param name="newSettings"></param>
+        public void UpdateSettings(int currentUserID, List<Setting> newSettings)
+        {
+            var currentSettings = Users.Find(currentUserID).Settings;
+            var saveNeeded = false;
+
+            //loop through all settings, updating as appropriate
+            foreach (Setting oldVal in currentSettings)
+            {
+                //get new value for comparison
+                var newVal = newSettings.FirstOrDefault(s => s.ID == oldVal.ID);
+                if (newVal == null) continue;
+
+                //if it's the same, move on
+                if (newVal.Value == oldVal.Value) continue;
+
+                //validate the setting
+                var validationMethod = typeof(SettingValidator).GetMethods()
+                                                               .FirstOrDefault(m => m.GetCustomAttribute<SettingValidator>()?.SettingName == oldVal.Name);
+                if (validationMethod != null)
+                {
+                    var success = (bool)validationMethod.Invoke(null, new object[] { newVal.Value });
+                    if (!success) continue; //failed validation, don't make update (TODO: send error messages to screen)
+                }
+
+                //make the update
+                oldVal.Value = newVal.Value;
+                Entry(oldVal).State = EntityState.Modified;
+                saveNeeded = true;
+            }
+
+            //save if needed
+            if (saveNeeded) SaveChanges();
+        }
 
     }
 

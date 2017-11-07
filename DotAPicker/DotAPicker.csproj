@@ -160,7 +160,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DotADB.cs" />
     <Compile Include="Models\Hero.cs" />
     <Compile Include="Models\HeroLabel.cs" />
     <Compile Include="Models\Setting.cs" />

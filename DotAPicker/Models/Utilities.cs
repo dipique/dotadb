@@ -49,7 +49,7 @@ namespace DotAPicker.Utilities
         public static string GetDisplayName(this Enum enumValue) => GetAttribute<DisplayAttribute>(enumValue)?.Name ?? enumValue.ToString();
     }
 
-    public static class DotAPatch
+    public static class SettingValidators
     {
         /// <summary>
         /// Patch numbers are either a decimal value, or a decimal value followed by a letter.
@@ -58,9 +58,22 @@ namespace DotAPicker.Utilities
         /// </summary>
         /// <param name="patch"></param>
         /// <returns></returns>
+        [SettingValidator("CurrentPatch")]
         public static bool ValidatePatchNumber(string patch) => new Regex(PATCH_REGEX).IsMatch(patch);
         public const string PATCH_REGEX = @"^(\d+\.\d{2}([a-zA-Z])?)$";
 
         public const string DEFAULT_PATCH = "7.07";
+    }
+
+    /// <summary>
+    /// This indicates a method used for validating Setting objects; must accept string and return bool
+    /// </summary>
+    public class SettingValidator : Attribute
+    {
+        public string SettingName { get; set; }
+        public SettingValidator(string settingName)
+        {
+            SettingName = settingName;
+        }
     }
 }
