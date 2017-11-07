@@ -21,10 +21,6 @@ namespace DotAPicker.Controllers
                 if (tmpDB == null)
                     Session[dataInd] = tmpDB = new DotAContext();
 
-                //set default user if none is set
-                if (Session[userInd] == null)
-                    Session[userInd] = tmpDB.Users.Include(u => u.Settings);
-
                 return (DotAContext)Session[dataInd];
             }
             set
@@ -39,7 +35,10 @@ namespace DotAPicker.Controllers
             {
                 //set default user if none is set
                 if (Session[userInd] == null)
-                    Session[userInd] = db.Users.Include(u => u.Settings);
+                {
+                    var user = db.Users.First(); //TODO: be able to change user
+                    Session[userInd] = user;
+                }
                 return (User)Session[userInd];
             }
             set => Session[userInd] = value;

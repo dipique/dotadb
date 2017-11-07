@@ -22,6 +22,8 @@ namespace DotAPicker.Models
         /// always 1->2, so if the type is "counter", it means "Hero1 counters Hero2"
         /// </summary>
         public RelationshipType Type { get; set; }
+
+        [Required]
         public string Description { get; set; }
     }
 

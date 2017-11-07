@@ -14,6 +14,8 @@ namespace DotAPicker.Models
 
 
         public TipType Type { get; set; } = TipType.Other;
+        
+        [Required]
         public string Text { get; set; }
     }
 

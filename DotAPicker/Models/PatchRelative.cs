@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace DotAPicker.Models
         public int UserID { get; set; }
         public User User { get; set; }
 
+        [Required]
         public string Patch { get; set; }
         public bool Deprecated { get; set; } = false;
 

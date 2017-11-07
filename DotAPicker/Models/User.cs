@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using DotAPicker.Utilities;
 
@@ -14,10 +15,15 @@ namespace DotAPicker.Models
         public const string DEFAULT_USER = "default";
 
         public int ID { get; set; }
+
+        [Required]
+        [StringLength(256)]
+        [Index(IsUnique = true)]
         public string Username { get; set; }
 
         //Settings
-        private string currentPatch = DotAPatch.DEFAULT_PATCH;
+        [Required]
+        private string currentPatch = SettingValidators.DEFAULT_PATCH;
 
         [DisplayName("Current Patch")]
         public string CurrentPatch
@@ -25,7 +31,7 @@ namespace DotAPicker.Models
             get => currentPatch;
             set
             {
-                if (DotAPatch.ValidatePatchNumber(value))
+                if (SettingValidators.ValidatePatchNumber(value))
                 {
                     currentPatch = value;
                 }
@@ -47,17 +53,17 @@ namespace DotAPicker.Models
             set => String.Join(LBL_SEP.ToString(), value);
         }
 
-        public List<Hero> Heroes { get; set; }
-        public List<Tip> Tips { get; set; }
-        public List<Relationship> Relationships { get; set; }
-        public List<Setting> Settings { get; set; }
+        public virtual List<Hero> Heroes { get; set; }
+        public virtual List<Tip> Tips { get; set; }
+        public virtual List<Relationship> Relationships { get; set; }
+        //public List<Setting> Settings { get; set; }
 
-        public IEnumerable<string> GetLabels() => Settings.FirstOrDefault(s => s.UserID == ID && 
-                                                                               s.Name == "Labels")
-                                                         ?.Value?.Split('|') ?? new string[] { };
-        public string GetCurrentPatch() => Settings.FirstOrDefault(s => s.UserID == ID &&
-                                                                        s.Name == "CurrentPatch")
-                                                  ?.Value;
+        //public IEnumerable<string> GetLabels() => Settings.FirstOrDefault(s => s.UserID == ID && 
+        //                                                                       s.Name == "Labels")
+        //                                                 ?.Value?.Split('|') ?? new string[] { };
+        //public string GetCurrentPatch() => Settings.FirstOrDefault(s => s.UserID == ID &&
+        //                                                                s.Name == "CurrentPatch")
+        //                                          ?.Value;
         
 
     }
