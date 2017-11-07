@@ -44,7 +44,7 @@ namespace DotAPicker.DAL
             db.SaveChanges();
 
             var settings = new List<Setting> {
-                new Setting { UserID = 0, Name = "CurrentPatch", Value = "7.07" },
+                new Setting { UserID = 0, Name = "CurrentPatch", Value = "7.07b" },
                 new Setting { UserID = 0, Name = "ShowDeprecatedTips", Value = "False" },
                 new Setting { UserID = 0, Name = "ShowDeprecatedRelationships", Value = "False" },
                 new Setting { UserID = 0, Name = "Labels", Value = "Pusher|Nuker|Support|Disabler|Pure Damage" }

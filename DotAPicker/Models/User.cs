@@ -64,5 +64,6 @@ namespace DotAPicker.Models
 
     public class LabelSet : List<string>
     {
+        
     }
 }

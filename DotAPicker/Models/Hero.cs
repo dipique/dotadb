@@ -25,6 +25,36 @@ namespace DotAPicker.Models
 
         public List<HeroLabel> Labels = new List<HeroLabel>();
 
+        #region Labels accessible as Counters and Synergies
+
+        public LabelSet Counters
+        {
+            get => GetLabelsByType(RelationshipType.Counter);
+            set => UpdateLabels(RelationshipType.Counter, value);
+        }
+        public LabelSet Synergies
+        {
+            get => GetLabelsByType(RelationshipType.Synergy);
+            set => UpdateLabels(RelationshipType.Synergy, value);
+        }
+
+        public void UpdateLabels(RelationshipType type, LabelSet labels)
+        {
+            Labels.AddRange(labels.Where(v => !Labels.Any(l => l.Type == type &&
+                                                               l.Value.Equals(v, StringComparison.CurrentCultureIgnoreCase)))
+                                 .Select(v => new HeroLabel
+                                 {
+                                     HeroID = ID,
+                                     Type = type,
+                                     Value = v
+                                 }));
+            Labels.RemoveAll(l => l.Type == type && !labels.Any(v => v.Equals(l.Value, StringComparison.CurrentCultureIgnoreCase)));
+        }
+        public LabelSet GetLabelsByType(RelationshipType type) => (LabelSet)Labels.Where(l => l.Type == type)
+                                                                                  .Select(l => l.Value).ToList();
+
+        #endregion
+
         public List<Tip> Tips { get; set; }
         public List<Relationship> Relationships { get; set; }
 
