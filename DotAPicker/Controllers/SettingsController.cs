@@ -18,7 +18,7 @@ namespace DotAPicker.Controllers
             return View("Edit", CurrentUser.Settings);
         }
 
-        public ActionResult Update(List<Setting> settings)
+        public ActionResult Save(List<Setting> settings)
         {
             db.UpdateSettings(CurrentUser.ID, settings);
             return Index();
