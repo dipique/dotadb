@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -52,15 +53,12 @@ namespace DotAPicker.Controllers
         public ActionResult Edit(int id)
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
-            if (hero == null)
-            {
-                throw new Exception("Hero not found.");
-            }
-
-            ///test
-            //if (hero.Counters.Count() == 0) hero.Counters.Add("disables");
+            if (hero == null) throw new Exception("Hero not found.");
 
             ViewBag.LabelOptions = new LabelSet(CurrentUser.LabelOptions);
+
+            //detatch entity so it doesn't cause an issue if saved
+            db.Entry(hero).State = EntityState.Detached;
             return View("Edit", hero);
         }
 
@@ -68,11 +66,13 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Hero model)
         {
-            //Update the edited hero
-            db.Heroes.Attach(model);
-            db.SaveChanges();
-
-            return Index();
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return Index();            
         }
 
         // GET: Hero/Delete/5

@@ -75,9 +75,6 @@ namespace DotAPicker.DAL
             modelBuilder.Entity<Tip>().HasRequired(t => t.User)
                                       .WithRequiredDependent()
                                       .WillCascadeOnDelete(false);
-            //modelBuilder.Entity<Setting>().HasRequired(s => s.User)
-            //                              .WithRequiredDependent()
-            //                              .WillCascadeOnDelete(false);
         }
 
     }
@@ -99,19 +96,10 @@ namespace DotAPicker.DAL
             var defaultID = db.Users.First().ID;
 
             var heroes = new List<Hero> {
-                new Hero { UserID = defaultID, Name = "Abaddon", Notes = "test notes" }
+                new Hero { UserID = defaultID, Name = "Abaddon", Notes = "test notes", Labels = "Counter:Pusher|Counter:Disabler|Synergy:Pure Damage" }
             };
             heroes.ForEach(u => db.Heroes.Add(u));
             db.SaveChanges();
-
-            //var settings = new List<Setting> {
-            //    new Setting { UserID = defaultID, Name = "CurrentPatch", Value = "7.07b" },
-            //    new Setting { UserID = defaultID, Name = "ShowDeprecatedTips", Value = "False" },
-            //    new Setting { UserID = defaultID, Name = "ShowDeprecatedRelationships", Value = "False" },
-            //    new Setting { UserID = defaultID, Name = "Labels", Value = "Pusher|Nuker|Support|Disabler|Pure Damage" }
-            //};
-            //settings.ForEach(s => db.Settings.Add(s));
-            //db.SaveChanges();
         }
     }
 }

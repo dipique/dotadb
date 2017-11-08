@@ -4,6 +4,9 @@ using System.Linq;
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Models
 {
@@ -22,40 +25,49 @@ namespace DotAPicker.Models
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
-        public List<HeroLabel> Labels = new List<HeroLabel>();
+        /// <summary>
+        /// Stored in the form: Type1:Label1|Type2:Label2|Type3:Label3
+        /// Types are the text of "RelationshipType" enums
+        /// </summary>
+        public string Labels { get; set; } = string.Empty;
 
         #region Labels accessible as Counters and Synergies
 
-        public LabelSet Counters
+        private const char LBL_SEP = '|';
+        private const char TYP_SEP = ':';
+
+        public (RelationshipType Type, string Value)[] ParseLabels => string.IsNullOrEmpty(Labels) ? new(RelationshipType Type, string Value)[0] :
+            Labels.Split(LBL_SEP)
+                  .Select(l => l.Split(TYP_SEP))
+                  .Select(l => (EnumExt.Parse<RelationshipType>(l[0]), l[1]))
+                  .ToArray();        
+
+        [NotMapped] public LabelSet Counters
         {
             get => GetLabelsByType(RelationshipType.Counter);
             set => UpdateLabels(RelationshipType.Counter, value);
         }
-        public LabelSet Synergies
+
+        [NotMapped] public LabelSet Synergies
         {
             get => GetLabelsByType(RelationshipType.Synergy);
             set => UpdateLabels(RelationshipType.Synergy, value);
         }
 
-        public void UpdateLabels(RelationshipType type, LabelSet labels)
-        {
-            Labels.AddRange(labels.Where(v => !Labels.Any(l => l.Type == type &&
-                                                               l.Value.Equals(v, StringComparison.CurrentCultureIgnoreCase)))
-                                 .Select(v => new HeroLabel
-                                 {
-                                     HeroID = ID,
-                                     Type = type,
-                                     Value = v
-                                 }));
-            Labels.RemoveAll(l => l.Type == type && !labels.Any(v => v.Equals(l.Value, StringComparison.CurrentCultureIgnoreCase)));
-        }
-        public LabelSet GetLabelsByType(RelationshipType type) => new LabelSet(Labels.Where(l => l.Type == type)
-                                                                                     .Select(l => l.Value));
+        public void UpdateLabels(RelationshipType type, LabelSet labels) =>
+            Labels = string.Join(LBL_SEP.ToString(), 
+                ParseLabels.Where(l => l.Type != type)                      //all the existing labels that aren't of this type
+                           .Concat(labels.Select(l => (type, l)))           //add the new labelset of this type
+                           .Select(l => $"{l.Item1}{TYP_SEP}{l.Item2}"));   //and convert them into the string equivalent
+
+        public LabelSet GetLabelsByType(RelationshipType type) => 
+           new LabelSet(ParseLabels.Where(l => l.Type == type)
+                                   .Select(l => l.Value));
 
         #endregion
 
-        public virtual List<Tip> Tips { get; set; }
-        public virtual List<Relationship> Relationships { get; set; }
+        public virtual List<Tip> Tips { get; set; } = new List<Tip>();
+        public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
 
         public string GetImgName(string heroName)
         {

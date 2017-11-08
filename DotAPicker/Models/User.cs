@@ -56,16 +56,6 @@ namespace DotAPicker.Models
         public virtual List<Hero> Heroes { get; set; }
         public virtual List<Tip> Tips { get; set; }
         public virtual List<Relationship> Relationships { get; set; }
-        //public List<Setting> Settings { get; set; }
-
-        //public IEnumerable<string> GetLabels() => Settings.FirstOrDefault(s => s.UserID == ID && 
-        //                                                                       s.Name == "Labels")
-        //                                                 ?.Value?.Split('|') ?? new string[] { };
-        //public string GetCurrentPatch() => Settings.FirstOrDefault(s => s.UserID == ID &&
-        //                                                                s.Name == "CurrentPatch")
-        //                                          ?.Value;
-        
-
     }
 
     public class LabelSet : List<string>
