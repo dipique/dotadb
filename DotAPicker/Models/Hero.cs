@@ -49,8 +49,8 @@ namespace DotAPicker.Models
                                  }));
             Labels.RemoveAll(l => l.Type == type && !labels.Any(v => v.Equals(l.Value, StringComparison.CurrentCultureIgnoreCase)));
         }
-        public LabelSet GetLabelsByType(RelationshipType type) => (LabelSet)Labels.Where(l => l.Type == type)
-                                                                                  .Select(l => l.Value).ToList();
+        public LabelSet GetLabelsByType(RelationshipType type) => new LabelSet(Labels.Where(l => l.Type == type)
+                                                                                     .Select(l => l.Value));
 
         #endregion
 

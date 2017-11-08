@@ -60,7 +60,7 @@ namespace DotAPicker.Controllers
             ///test
             //if (hero.Counters.Count() == 0) hero.Counters.Add("disables");
 
-            ViewBag.LabelOptions = CurrentUser.LabelOptions;
+            ViewBag.LabelOptions = new LabelSet(CurrentUser.LabelOptions);
             return View("Edit", hero);
         }
 

@@ -70,6 +70,19 @@ namespace DotAPicker.Models
 
     public class LabelSet : List<string>
     {
-        
+        public const string STD_DELIM = "|";
+
+        public LabelSet(IEnumerable<string> elements) : base(elements)
+        {
+
+        }
+
+        public LabelSet(string elements, params string[] delims): base(elements.Split(delims, StringSplitOptions.RemoveEmptyEntries))
+        {
+        }
+
+        public LabelSet(string elements) : this(elements, STD_DELIM)
+        {
+        }
     }
 }
