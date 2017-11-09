@@ -36,7 +36,7 @@ namespace DotAPicker.Models
             fs.Close();
 
             //if (retVal.Settings.Labels.Count() == 0) retVal.Settings.Labels = new List<string>() { "Support", "Nuker", "Disabler", "Pusher" };
-
+            //retVal.Export();
             return retVal;
         }
 
@@ -54,5 +54,13 @@ namespace DotAPicker.Models
             s.Serialize(fs, this);
             fs.Close();
         }
+
+        //public void Export()
+        //{
+        //    var exportDir = @"C:\tmp\export\";
+        //    File.WriteAllLines(exportDir + "heroes.txt", Heroes.Select(h => $"{h.ID}\t{h.Name}\t{h.AltNames}\t{h.Notes}\t{h.Preference}"));
+        //    File.WriteAllLines(exportDir + "tips.txt", Tips.Select(t => $"{t.HeroID}\t{t.Type}\t{t.Text}\t{t.Source}"));
+        //    File.WriteAllLines(exportDir + "relationships.txt", Relationships.Select(r => $"{r.Hero1ID}\t{r.Hero2ID}\t{r.Type}\t{r.Description}\t{r.Source}"));
+        //}
     }
 }
