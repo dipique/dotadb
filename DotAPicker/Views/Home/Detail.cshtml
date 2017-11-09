@@ -1,16 +1,16 @@
 ﻿@using DotAPicker.Models;
 @using DotAPicker.Utilities;
-@model HeroDetailViewModel
+@model Hero
 
 <div class="hor-data-row">
     <div class="hor-data-cell" style="border: none;">
         <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
-        <strong>@Model.Hero.Name</strong> 
-        <a class="detail-remove" href="javascript: void(0)" id="@Model.Hero.ID">
+        <strong>@Model.Name</strong> 
+        <a class="detail-remove" href="javascript: void(0)" id="@Model.ID">
             (remove)
         </a>
         <br />
-        @Model.Hero.Notes
+        @Model.Notes
     </div>
 </div>
 
@@ -111,7 +111,7 @@
                             var r = relationships.Skip(x).Take(1).First();
                             <div class="hor-data-cell" style="border:none">
                                 <div class="relationship-header">
-                                    @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                 </div>                            
                                 <p>@r.Description</p>
                             </div>
@@ -122,7 +122,7 @@
                                 r = relationships.Skip(x + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                     </div>
                                     <p>@r.Description</p>
                                 </div>
@@ -134,7 +134,7 @@
                                 r = relationships.Skip(x + 2).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                     </div>
                                     <p>@r.Description</p>
                                 </div>
@@ -178,7 +178,7 @@
                                 var r = relationships.Skip(x).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                     </div>
                                     <p>@r.Description</p>
                                 </div>
@@ -189,7 +189,7 @@
                                     r = relationships.Skip(x + 1).Take(1).First();
                                     <div class="hor-data-cell" style="border:none">
                                         <div class="relationship-header">
-                                            @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                         </div>
                                         <p>@r.Description</p>
                                     </div>
@@ -201,7 +201,7 @@
                                     r = relationships.Skip(x + 2).Take(1).First();
                                     <div class="hor-data-cell" style="border:none">
                                         <div class="relationship-header">
-                                            @(r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name)
+                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
                                         </div>
                                         <p>@r.Description</p>
                                     </div>

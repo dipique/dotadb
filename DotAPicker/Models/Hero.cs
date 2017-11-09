@@ -56,9 +56,9 @@ namespace DotAPicker.Models
 
         public void UpdateLabels(RelationshipType type, LabelSet labels) =>
             Labels = string.Join(LBL_SEP.ToString(), 
-                ParseLabels.Where(l => l.Type != type)                      //all the existing labels that aren't of this type
-                           .Concat(labels.Select(l => (type, l)))           //add the new labelset of this type
-                           .Select(l => $"{l.Item1}{TYP_SEP}{l.Item2}"));   //and convert them into the string equivalent
+                ParseLabels.Where(l => l.Type != type)                      //get all the existing labels that aren't of this type
+                           .Concat(labels.Select(l => (type, l)))           //add the updated labels of the current type
+                           .Select(l => $"{l.Item1}{TYP_SEP}{l.Item2}"));   //and convert them all into the string equivalent
 
         public LabelSet GetLabelsByType(RelationshipType type) => 
            new LabelSet(ParseLabels.Where(l => l.Type == type)
