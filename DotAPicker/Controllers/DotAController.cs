@@ -51,5 +51,12 @@ namespace DotAPicker.Controllers
                 Selected = selection == h.ID
             }).OrderBy(s => s.Text);
 
+        public Hero GetHeroByID(int id)
+        {
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
+            hero.Relationships = db.Relationships.Where(r => r.Hero1ID == id || r.Hero2ID == id).ToList();
+            return hero;
+        }
+
     }
 }

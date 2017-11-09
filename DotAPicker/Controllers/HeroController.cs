@@ -44,10 +44,7 @@ namespace DotAPicker.Controllers
             return Index();
         }
 
-        public ActionResult Detail(int id)
-        {
-            return PartialView(CurrentUser.Heroes.FirstOrDefault(h => h.ID == id));
-        }
+        public ActionResult Detail(int id) => PartialView(GetHeroByID(id));
 
         // GET: Hero/Edit/5
         public ActionResult Edit(int id)
