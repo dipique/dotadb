@@ -16,6 +16,7 @@ namespace DotAPicker.DAL
         public DotAContext(): base(nameof(DotAContext))
         {
             Database.Log = s => Debug.WriteLine(s);
+            Database.CommandTimeout = 180; //this is required when dropping and creating a new database, otherwise it times out
         }
 
         public DbSet<Hero> Heroes { get; set; }
@@ -83,7 +84,7 @@ namespace DotAPicker.DAL
 
     }
 
-    public class DotAInitializer : DropCreateDatabaseAlways<DotAContext> // DropCreateDatabaseIfModelChanges<DotAContext>
+    public class DotAInitializer : DropCreateDatabaseIfModelChanges<DotAContext> //DropCreateDatabaseAlways <DotAContext>
     {
         protected override void Seed(DotAContext db)
         {
