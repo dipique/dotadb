@@ -13,8 +13,6 @@ namespace DotAPicker.Controllers
 {
     public class UserController : DotAController
     {
-        private DotAContext db = new DotAContext();
-
         // GET: User
         public ActionResult Index()
         {

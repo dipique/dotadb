@@ -184,6 +184,8 @@ namespace DotAPicker.DAL
                 new Hero { UserID = defaultID, Name = "Monkey King", AltNames = "", Notes = "", Preference = HeroPreference.Indifferent },
                 new Hero { UserID = defaultID, Name = "Anti-Mage", AltNames = "Antimage AM", Notes = "", Preference = HeroPreference.Indifferent },
                 new Hero { UserID = defaultID, Name = "Ogre Magi", AltNames = "om", Notes = "", Preference = HeroPreference.Indifferent },
+                new Hero { UserID = defaultID, Name = "Pangolin", AltNames = "", Notes = "", Preference = HeroPreference.Indifferent },
+                new Hero { UserID = defaultID, Name = "Dark Willow", AltNames = "dw", Notes = "", Preference = HeroPreference.Indifferent },
                 new Hero { UserID = defaultID, Name = "Spirit Breaker", AltNames = "sb barafu", Notes = "", Preference = HeroPreference.Preferred },
                 new Hero { UserID = defaultID, Name = "Sven", AltNames = "", Notes = "", Preference = HeroPreference.Preferred },
                 new Hero { UserID = defaultID, Name = "Chen", AltNames = "", Notes = "", Preference = HeroPreference.Hated },
