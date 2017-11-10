@@ -1,20 +1,31 @@
-﻿@model DotAPicker.Models.DotASettings
+﻿@model DotAPicker.Models.User
 
 @{
-    ViewBag.Title = "Settings";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Edit</h2>
 
 
-@using (Html.BeginForm("Save", "Settings"))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
+        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.CurrentPatch, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -44,12 +55,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Labels, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LabelOptions, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Labels)
-                    @Html.ValidationMessageFor(model => model.Labels, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.LabelOptions, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LabelOptions, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -67,6 +76,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/labelset-maint.js"></script>
-    <script src="~/Scripts/labelset.js"></script>
 }

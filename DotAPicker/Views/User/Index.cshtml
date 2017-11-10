@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DotAPicker.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentPatch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowDeprecatedTips)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowDeprecatedRelationships)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabelOptions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentPatch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowDeprecatedTips)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowDeprecatedRelationships)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabelOptions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,20 +1,20 @@
 ﻿@using DotAPicker.Models;
-@model HeroDetailViewModel
+@model Hero
 
 <div class="hor-title-header-row">
     <div class="hor-title-header-cell">ID</div>
     <div class="hor-title-header-cell" style="min-width: 250px">Alt Names</div>
 </div>
 <div class="hor-data-row">
-    <div class="hor-data-cell">@Model.Hero.ID</div>
-    <div class="hor-data-cell" style="min-width: 300px">@Model.Hero.AltNames</div>
+    <div class="hor-data-cell">@Model.ID</div>
+    <div class="hor-data-cell" style="min-width: 300px">@Model.AltNames</div>
 </div>
 <div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
-    @Model.Hero.Notes
+    @Model.Notes
 </div>
 
 
-<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
+<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.ID, returnToHeroList = true }, new { })
 <div class="hor-title-header-row">
     <div class="hor-title-header-cell">Type</div>
     <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
@@ -32,7 +32,7 @@
 }
 
 
-<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Hero.ID, returnToHeroList = true }, new { })
+<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.ID, returnToHeroList = true }, new { })
 <div class="hor-title-header-row">
     <div class="hor-title-header-cell">Hero</div>
     <div class="hor-title-header-cell">Type</div>
@@ -41,7 +41,7 @@
 
 @foreach (var r in Model.Relationships)
 {
-    var heroName = r.Hero1ID == Model.Hero.ID ? r.Hero2.Name : r.Hero1.Name;
+    var heroName = r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name;
     <div class="hor-data-row">
         <div class="hor-data-cell">@heroName</div>
         <div class="hor-data-cell">@r.Type</div>
