@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
-using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -17,7 +16,6 @@ namespace DotAPicker.Controllers
         {
             return View("Tips", CurrentUser.Tips);
         }
-
 
         // GET: Tip/Create
         /// <summary>
