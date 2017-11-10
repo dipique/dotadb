@@ -67,6 +67,8 @@ namespace DotAPicker.Models
         #endregion
 
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();
+
+        [NotMapped]
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
 
         public string GetImgName(string heroName)
