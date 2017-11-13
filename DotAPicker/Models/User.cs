@@ -26,6 +26,7 @@ namespace DotAPicker.Models
         private string currentPatch = SettingValidators.DEFAULT_PATCH;
 
         [DisplayName("Current Patch")]
+        [RegularExpression(SettingValidators.PATCH_REGEX, ErrorMessage = "Invalid patch name")]
         public string CurrentPatch
         {
             get => currentPatch;
@@ -45,12 +46,15 @@ namespace DotAPicker.Models
         public bool ShowDeprecatedRelationships { get; set; } = false;
 
         private const char LBL_SEP = '|';
-        public string LabelOptions { get; set; }
+        private const string DISALLOWED_LABEL_CHARS = ":|"; //needed to support hero label storage format
+
+        public string LabelOptions { get; set; } = string.Empty;
 
         public LabelSet Labels
         {
-            get => (LabelSet)LabelOptions.Split(LBL_SEP).ToList();
-            set => String.Join(LBL_SEP.ToString(), value);
+            get => new LabelSet(LabelOptions.Split(new char[] { LBL_SEP }, StringSplitOptions.RemoveEmptyEntries));
+            set => LabelOptions =  String.Join(LBL_SEP.ToString(), value.Select(lbl => new string(lbl.Where(c => !DISALLOWED_LABEL_CHARS.Contains(c))
+                                                                                      .ToArray())));
         }
 
         public virtual List<Hero> Heroes { get; set; }
