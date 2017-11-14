@@ -131,7 +131,8 @@
                         heroAltNames = cell.innerHTML.toUpperCase();
                         break;
                     case "heroPreference":
-                        heroPreference = cell.innerHTML;
+                        var selBox = $(cell).find("select")[0];
+                        heroPreference = selBox.options[selBox.selectedIndex].text;
                         break;
                 }
             }
