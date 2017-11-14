@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\Hero.cs" />
     <Compile Include="Models\HeroLabel.cs" />
     <Compile Include="Models\User.cs" />
@@ -360,6 +361,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\labelset-assign.js" />
     <Content Include="Scripts\labelset-maint.js" />
+    <Content Include="Scripts\update-pref.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\labelset.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />

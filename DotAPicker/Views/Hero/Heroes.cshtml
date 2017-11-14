@@ -7,7 +7,8 @@
     if (ViewBag.SelectedHeroID > 0)
     {
 
-    } else
+    }
+    else
     {
         ViewBag.SelectedHeroID = Model.FirstOrDefault()?.ID ?? 0;
     }
@@ -44,7 +45,9 @@
                         <div class="@rowClass" id="@hero.ID">
                             <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
-                            <div class="data-row-cell" id="heroPreference">@hero.Preference</div>
+                            <div class="data-row-cell" id="heroPreference">
+                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref" })
+                            </div>
                             <div class="data-row-cell" id="heroActions">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
                         </div>
                     }
@@ -105,7 +108,7 @@
             } else if (row.className.indexOf("data-row") == -1) {
                 continue;
             }
-            
+
             //get the cell contents
             var heroName, heroAltNames, heroPreference;
             for (var j = 0; j < row.childNodes.length; j++)
@@ -147,3 +150,8 @@
         }
     }
 </script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/update-pref.js"></script>
+}

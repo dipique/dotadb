@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -57,6 +58,20 @@ namespace DotAPicker.Controllers
             //detatch entity so it doesn't cause an issue if saved
             db.Entry(hero).State = EntityState.Detached;
             return View("Edit", hero);
+        }
+
+        public ActionResult UpdatePreference(int heroID, string preference)
+        {
+            var pref = EnumExt.Parse<HeroPreference>(preference);
+            var hero = GetHeroByID(heroID);
+            var oldPref = hero.Preference;
+            if (oldPref != pref)
+            {
+                hero.Preference = pref;
+                db.Entry(hero).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Index();
         }
 
         // POST: Hero/Edit/5
