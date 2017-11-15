@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using DotAPicker.DAL;
 using DotAPicker.Models;
+using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -56,6 +57,20 @@ namespace DotAPicker.Controllers
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
             hero.Relationships = db.Relationships.Where(r => r.Hero1ID == id || r.Hero2ID == id).ToList();
             return hero;
+        }
+
+        public ActionResult UpdatePreference(int heroID, string preference)
+        {
+            var pref = EnumExt.Parse<HeroPreference>(preference);
+            var hero = GetHeroByID(heroID);
+            var oldPref = hero.Preference;
+            if (oldPref != pref)
+            {
+                hero.Preference = pref;
+                db.Entry(hero).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View();
         }
 
     }

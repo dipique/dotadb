@@ -60,20 +60,6 @@ namespace DotAPicker.Controllers
             return View("Edit", hero);
         }
 
-        public ActionResult UpdatePreference(int heroID, string preference)
-        {
-            var pref = EnumExt.Parse<HeroPreference>(preference);
-            var hero = GetHeroByID(heroID);
-            var oldPref = hero.Preference;
-            if (oldPref != pref)
-            {
-                hero.Preference = pref;
-                db.Entry(hero).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            return Index();
-        }
-
         // POST: Hero/Edit/5
         [HttpPost]
         public ActionResult Edit(Hero model)

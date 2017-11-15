@@ -6,11 +6,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/update-pref.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
 
 <h1>Hero Picker</h1>
 <input type="text" id="filterInput" placeholder="Search hero name..." />
-<select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by hero preference</option>
+<select multiple data-placeholder="Search by hero preference" id="filterPreference" onchange="filterFunction()">
     @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
     {
         <option value="@option">@option</option>
@@ -22,12 +25,12 @@
         <td style="padding-left: 8px">
             <div class="detail-column">
                 <h4>Allies</h4>
-            </div>            
+            </div>
         </td>
         <td style="padding-left: 8px">
             <div class="detail-column">
                 <h4>Enemies</h4>
-            </div>        
+            </div>
         </td>
     </tr>
     <tr>
@@ -42,14 +45,16 @@
                 <div class="data-scrolling-container" id="filterHeroTable">
                     @foreach (var hero in Model)
                     {
-                        <div class="data-row" id="@hero.ID">
-                            <div class="data-row-cell" style="min-width: 175px" id="heroName">@hero.Name</div>
-                            <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
-                            <div class="data-row-cell" id="heroPreference">@hero.Preference</div>
-                            <div class="data-row-cell" id="addTo" style="min-width: 140px">
-                                <a href="" class="add-ally" id="@hero.ID">(allies)</a> <a href="" class="add-enemy" id="@hero.ID">(enemies)</a>
-                            </div>
+                    <div class="data-row" id="@hero.ID">
+                        <div class="data-row-cell" style="min-width: 175px" id="heroName">@hero.Name</div>
+                        <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
+                        <div class="data-row-cell" id="heroPreference">
+                            @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref" })
                         </div>
+                        <div class="data-row-cell" id="addTo" style="min-width: 140px">
+                            <a href="" class="add-ally" id="@hero.ID">(allies)</a> <a href="" class="add-enemy" id="@hero.ID">(enemies)</a>
+                        </div>
+                    </div>
                     }
                 </div>
             </div>
@@ -114,6 +119,10 @@
             //if enter wasn't pushed, just filter the table
             filterFunction();
         }
+    });
+
+    $("#filterPreference").chosen({
+        width: "300px"
     });
 
     $(".add-ally").click(function () {
@@ -284,65 +293,7 @@
         return -1;
     }
 
-    //Derived from: https://www.w3schools.com/howto/howto_js_filter_table.asp
-    //This is what enables filtering the hero list by name and preference
-    function filterFunction() {
-        // Get search criteria
-        var input = document.getElementById("filterInput");
-        var filter = input.value.toUpperCase();
-        var table = document.getElementById("filterHeroTable");
-        var searchPreference = document.getElementById("filterPreference").value;
-
-        //loop through the table rows
-        for (var i = 0; i < table.childNodes.length; i++)
-        {
-            //skip elements other than table rows
-            var row = table.childNodes[i];
-            if (typeof (row.className) == "undefined") {
-                continue;
-            } else if (row.className.indexOf("data-row") == -1) {
-                continue;
-            }
-
-            //get the cell contents
-            var heroName, heroAltNames, heroPreference;
-            for (var j = 0; j < row.childNodes.length; j++)
-            {
-                //only process the loop for cells
-                var cell = row.childNodes[j];
-                if (typeof (cell.className) == "undefined") {
-                    continue;
-                } else if (cell.className.indexOf("data-row-cell") == -1) {
-                    continue;
-                }
-
-                //get the cell contents
-                switch (cell.id)
-                {
-                    case "heroName":
-                        heroName = cell.innerHTML.toUpperCase();
-                        break;
-                    case "heroAltNames":
-                        heroAltNames = cell.innerHTML.toUpperCase();
-                        break;
-                    case "heroPreference":
-                        heroPreference = cell.innerHTML;
-                        break;
-                }
-            }
-
-            //determine whether to hide the row
-            var searchPreferenceMatch = searchPreference == "" || heroPreference == searchPreference;
-            var nameMatch = heroName.indexOf(filter) > -1 || heroAltNames.indexOf(filter) > -1;
-            var listMatch = allyArray.indexOf(row.id) > -1 || enemyArray.indexOf(row.id) > -1;
-            var hideRow = !(searchPreferenceMatch && nameMatch) || listMatch;
-
-            //hide the row, if necessary
-            if (!hideRow) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
+    $(".hero-pref").change(function () {
+        heroPrefChange(this, "Home");
+    });
 </script>

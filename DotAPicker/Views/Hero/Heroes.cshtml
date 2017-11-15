@@ -20,6 +20,7 @@
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
 <script src="~/Scripts/update-pref.js"></script>
 <script src="~/Scripts/chosen.jquery.min.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
 
 <h1>Heroes</h1>
 
@@ -52,7 +53,7 @@
                             <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
                             <div class="data-row-cell" id="heroPreference">
-                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref" })
+                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref", controller = "hero" })
                             </div>
                             <div class="data-row-cell" id="heroActions">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
                         </div>
@@ -98,75 +99,9 @@
     //Make the first hero auto-load details
     $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);
 
+    $(".hero-pref").change(function () {
+        heroPrefChange(this, "hero");
+    });
 
-    //Derived from: https://www.w3schools.com/howto/howto_js_filter_table.asp
-    //This is what enables filtering the hero list by name and preference
-    function filterFunction() {
-        // Get search criteria
-        var input = document.getElementById("filterInput");
-        var filter = input.value.toUpperCase();
-        var table = document.getElementById("filterHeroTable");
-
-        //get search preference
-        var searchPreference = "";
-        var selBox = $("#filterPreference")[0];
-        for (var x = 0; x < selBox.options.length; x++) {
-            if (selBox.options[x].selected && selBox.options[x].value != "") {
-                searchPreference += selBox.options[x].value + "|"; //the pipe just eliminates partial matches
-            }
-        }
-
-        //loop through the table rows
-        for (var i = 0; i < table.childNodes.length; i++)
-        {
-            //skip elements other than table rows
-            var row = table.childNodes[i];
-            if (typeof (row.className) == "undefined") {
-                continue;
-            } else if (row.className.indexOf("data-row") == -1) {
-                continue;
-            }
-
-            //get the cell contents
-            var heroName, heroAltNames, heroPreference;
-            for (var j = 0; j < row.childNodes.length; j++)
-            {
-                //only process the loop for cells
-                var cell = row.childNodes[j];
-                if (typeof (cell.className) == "undefined") {
-                    continue;
-                } else if (cell.className.indexOf("data-row-cell") == -1) {
-                    continue;
-                }
-
-                //get the cell contents
-                switch (cell.id)
-                {
-                    case "heroName":
-                        heroName = cell.innerHTML.toUpperCase();
-                        break;
-                    case "heroAltNames":
-                        heroAltNames = cell.innerHTML.toUpperCase();
-                        break;
-                    case "heroPreference":
-                        var selBox = $(cell).find("select")[0];
-                        heroPreference = selBox.options[selBox.selectedIndex].text;
-                        break;
-                }
-            }
-
-            //determine whether to hide the row
-            var searchPreferenceMatch = searchPreference == "" || searchPreference.includes(heroPreference);
-            var nameMatch = heroName.indexOf(filter) > -1 || heroAltNames.indexOf(filter) > -1;
-            var hideRow = !(searchPreferenceMatch && nameMatch);
-
-            //hide the row, if necessary
-            if (!hideRow) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
 </script>
 

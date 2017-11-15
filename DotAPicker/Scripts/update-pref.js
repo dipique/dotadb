@@ -1,12 +1,12 @@
-﻿$(".hero-pref").change(function () {
-    var heroID = this.id;
-    var prefVal = this.options[this.selectedIndex].text;
+﻿function heroPrefChange(selBox, controller) {
+    var heroID = selBox.id;
+    var prefVal = selBox.options[selBox.selectedIndex].text;
     $.ajax({
-        url: "hero/UpdatePreference",
+        url: controller + "/UpdatePreference",
         data: {
             heroID: heroID,
             preference: prefVal
         }
     }).done(function () {
     });
-});
+}
