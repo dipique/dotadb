@@ -53,3 +53,21 @@ function getParentElement(className, element) {
     //this shouldn't ever actually happen
     return null;
 }
+
+function resetSelectElement(selectElement) {
+    var options = selectElement.options;
+
+    // Look for a default selected option
+    for (var i = 0, iLen = options.length; i < iLen; i++) {
+
+        if (options[i].selected) {
+            options[i].selected = false;
+        }
+    }
+
+    selectElement.selectedIndex = -1;
+}
+
+function getEl(id) {
+    return document.getElementById(id);
+}

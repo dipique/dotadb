@@ -127,16 +127,10 @@
 
     $(".add-ally").click(function () {
         addAlly(this.id);
-        $("div.detail-column").each(function () {
-            this.style.display = "block";
-        });
         return false;
     });
     $(".add-enemy").click(function () {
         addEnemy(this.id);
-        $("div.detail-column").each(function () {
-            this.style.display = "block";
-        });
         return false;
     });
 
@@ -206,6 +200,11 @@
 
         //clear search and make sure it doesn't appear on the list anymore
         resetSearch();
+
+        //make the section visible if it isn't currently
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
     }
 
     function addEnemy(id) {
@@ -216,6 +215,11 @@
 
         //clear search and make sure it doesn't appear on the list anymore
         resetSearch();
+
+        //make the section visible if it isn't currently
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
     }
 
     function resetSearch() {
@@ -224,8 +228,8 @@
         filterFunction();
 
         //if keeping the preference means there aren't any results, reset it as well
-        if (countVisibleHeroes() < 1 && $("#filterPreference").val() != "") {
-            $("#filterPreference").val("");
+        if (countVisibleHeroes() < 1 && getEl("filterPreference").selectedIndex >= 0) { //no heros, but preferences are chosen
+            $("#filterPreference option").prop('selected', false).trigger('chosen:updated');
             filterFunction();
         }
     }
@@ -244,30 +248,6 @@
         }
 
         return true;
-    }
-
-    function countVisibleHeroes() {
-        // Get search criteria
-        var table = document.getElementById("filterHeroTable");
-        var visibleCount = 0;
-
-        //loop through the table rows
-        for (var i = 0; i < table.childNodes.length; i++) {
-            //skip elements other than table rows
-            var row = table.childNodes[i];
-            if (typeof (row.className) == "undefined") {
-                continue;
-            } else if (row.className.indexOf("data-row") == -1) {
-                continue;
-            }
-
-            //record if it is visible
-            if (row.style.display == "") {
-                visibleCount++;
-            }
-        }
-
-        return visibleCount;
     }
 
     function firstVisibleHeroIndex() {

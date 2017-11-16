@@ -1,53 +1,69 @@
 ﻿@using DotAPicker.Models;
 @model Hero
 
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">ID</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Alt Names</div>
-</div>
-<div class="hor-data-row">
-    <div class="hor-data-cell">@Model.ID</div>
-    <div class="hor-data-cell" style="min-width: 300px">@Model.AltNames</div>
-</div>
-<div class="hor-data-row" style="max-width: 400px; padding-left: 6px;">
-    @Model.Notes
-</div>
-
-
-<h4>Tips</h4>@Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.ID, returnToHeroList = true }, new { })
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">Type</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
-</div>
-
-@foreach(Tip t in Model.Tips)
-{ 
-    <div class="hor-data-row">
-        <div class="hor-data-cell">@t.Type</div>
-        <div class="hor-data-cell" style="min-width: 300px">@t.Source</div>
+<div class="container" style="max-width: 600px">
+    <div class="hor-title-header-row row">
+        <div class="hor-title-header-cell col-xs-3">ID</div>
+        <div class="hor-title-header-cell col-xs-9">Alt Names</div>
     </div>
-    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
-        @t.Text
+    <div class="hor-data-row row">
+        <div class="hor-data-cell col-xs-3">@Model.ID</div>
+        <div class="hor-data-cell col-xs-9">@Model.AltNames</div>
     </div>
-}
+    <div class="hor-data-row row" style="border-bottom: inset">
+        <div class="col-xs-12">
+            @Model.Notes
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Tips</h4>@Html.ActionLink(" (new)", "Create", "Tip", new { heroID = Model.ID, returnToHeroList = true }, new { })
+        </div>
+    </div>
 
-<h4>Relationships</h4>@Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.ID, returnToHeroList = true }, new { })
-<div class="hor-title-header-row">
-    <div class="hor-title-header-cell">Hero</div>
-    <div class="hor-title-header-cell">Type</div>
-    <div class="hor-title-header-cell" style="min-width: 250px">Source</div>
+    <div class="hor-title-header-row row">
+        <div class="hor-title-header-cell col-xs-3">Type</div>
+        <div class="hor-title-header-cell col-xs-9">Source</div>
+    </div>
+
+    @for (int x = 0; x < Model.Tips.Count(); x++)
+    {
+        <div class="hor-data-row row">
+            <div class="hor-data-cell col-xs-3">@Html.DisplayFor(Model => Model.Tips[x].Type)</div>
+            <div class="hor-data-cell col-xs-9">@Html.DisplayFor(Model => Model.Tips[x].Source)</div>
+        </div>
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="col-xs-12">
+                @Html.DisplayFor(Model => Model.Tips[x].Text)
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Relationships</h4>@Html.ActionLink(" (new)", "Create", "Relationship", new { heroID = Model.ID, returnToHeroList = true }, new { })
+        </div>
+    </div>
+
+    <div class="hor-title-header-row row">
+        <div class="hor-title-header-cell col-xs-3">Hero</div>
+        <div class="hor-title-header-cell col-xs-3">Type</div>
+        <div class="hor-title-header-cell col-xs-6">Source</div>
+    </div>
+
+    @foreach (var r in Model.Relationships)
+    {
+        var heroName = r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name;
+        <div class="hor-data-row row">
+            <div class="hor-data-cell col-xs-3">@heroName</div>
+            <div class="hor-data-cell col-xs-3">@r.Type</div>
+            <div class="hor-data-cell col-xs-6">@r.Source</div>
+        </div>
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="col-xs-12">
+                @r.Description
+            </div>
+        </div>
+    }
 </div>
-
-@foreach (var r in Model.Relationships)
-{
-    var heroName = r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name;
-    <div class="hor-data-row">
-        <div class="hor-data-cell">@heroName</div>
-        <div class="hor-data-cell">@r.Type</div>
-        <div class="hor-data-cell" style="min-width: 300px">@r.Source</div>
-    </div>
-    <div class="hor-data-row" style="max-width: 400px; padding-left: 6px; border-bottom: inset">
-        @r.Description
-    </div>
-}

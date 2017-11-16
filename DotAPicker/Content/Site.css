@@ -34,18 +34,12 @@ textarea {
     background-image: url('/img/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 4px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
+    font-size: 14px; /* Increase font-size */
     padding: 4px 20px 2px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
+    border: 1px solid #AAA; /* Add a grey border */
     margin-bottom: 10px; /* Add some space below the input */
-}
-
-#filterPreference {    
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 12px 12px 12px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 10px; /* Add some space below the input */    
+    font-family: Arial, Helvetica, sans-serif;
+    height: 29px;
 }
 
 #filterTable {
@@ -166,7 +160,6 @@ textarea {
     display:flex;
 }
 .hor-title-header-cell {
-    min-width: 100px; /* Header & data cell widths need to be coordinated if larger */
     background-color: #f1f1f1;
     border: 1px solid #ddd; /* Add a grey border */
     font-size: 16px; /* Increase font-size */
@@ -175,7 +168,6 @@ textarea {
 
 .hor-data-row {
     display: flex;
-    max-width: 500px;
 }
 
 .hor-data-cell {
@@ -188,7 +180,6 @@ textarea {
 }
 
 #Hero_Notes {
-    max-width: 400px;
     min-height: 100px;
 }
 

@@ -7,13 +7,7 @@ function filterFunction() {
     var table = document.getElementById("filterHeroTable");
 
     //get search preference
-    var searchPreference = "";
-    var selBox = $("#filterPreference")[0];
-    for (var x = 0; x < selBox.options.length; x++) {
-        if (selBox.options[x].selected && selBox.options[x].value != "") {
-            searchPreference += selBox.options[x].value + "|"; //the pipe just eliminates partial matches
-        }
-    }
+    var searchPreference = getPipedPreferenceSelections();
 
     //loop through the table rows
     for (var i = 0; i < table.childNodes.length; i++) {
@@ -67,6 +61,58 @@ function filterFunction() {
         } else {
             row.style.display = "none";
         }
+    }
+
+    //if necessary, hide/show any elements that are based on whether any items are remaining
+    showNoDataElements();
+}
+
+function getPipedPreferenceSelections() {
+    var selBox = $("#filterPreference")[0];
+    var searchPreference = "";
+    for (var x = 0; x < selBox.options.length; x++) {
+        if (selBox.options[x].selected && selBox.options[x].value != "") {
+            searchPreference += selBox.options[x].value + "|"; //the pipe just eliminates partial matches
+        }
+    }
+
+    return searchPreference;
+}
+
+function countVisibleHeroes() {
+    // Get search criteria
+    var table = document.getElementById("filterHeroTable");
+    var visibleCount = 0;
+
+    //loop through the table rows
+    for (var i = 0; i < table.childNodes.length; i++) {
+        //skip elements other than table rows
+        var row = table.childNodes[i];
+        if (typeof (row.className) == "undefined") {
+            continue;
+        } else if (row.className.indexOf("data-row") == -1) {
+            continue;
+        }
+
+        //record if it is visible
+        if (row.style.display == "") {
+            visibleCount++;
+        }
+    }
+
+    return visibleCount;
+}
+
+function showNoDataElements() {
+    var noData = $(".no-data");
+    if (noData.length < 1) {
+        return;
+    }
+
+    if (countVisibleHeroes() == 0) {
+        noData[0].style.display = "";
+    } else {
+        noData[0].style.display = "none";
     }
 }
 

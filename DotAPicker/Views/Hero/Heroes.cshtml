@@ -14,30 +14,44 @@
     }
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
 <script src="~/Scripts/update-pref.js"></script>
 <script src="~/Scripts/chosen.jquery.min.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
-<h1>Heroes</h1>
 
-<input type="text" id="filterInput" placeholder="Search hero name..." />
-<select multiple data-placeholder="Search by hero preference" id="filterPreference" onchange="filterFunction()">
-    @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
-    {
-        <option value="@option">@option</option>
-    }
-</select>
-<table>
-    <tr>
-        <td><h4>Hero Options</h4></td>
-        <td style="padding-left: 8px"><h4>Hero Details</h4></td>
-    </tr>
-    <tr>
-        <td valign="top">
+
+<div class="container-fluid" style="width: 1020px; min-width: 720px; margin-left: 20px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <h1>Heroes</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" id="filterInput" placeholder="Search by hero name..." />
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3">
+                    <select multiple data-placeholder="Search by hero preference" id="filterPreference" onchange="filterFunction()">
+                        @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5"><h4>Hero Options</h4></div>
+        <div class="col-xs-7"><h4>Hero Details</h4></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5">
+            @*Hero options table*@
             <div class="scrolling-container">
                 <div class="header-scrolling-container">
                     <div class="header-cell" style="min-width: 200px">Name</div>
@@ -59,18 +73,23 @@
                         </div>
                     }
                 </div>
+                <div class="no-data" style="display: none">
+                    <div class="no-data-cell" style="min-width: 417px">No heros found</div>
+                </div>
             </div>
-        </td>
-        <td rowspan="2" style="padding-left: 8px" valign="top">
+        </div>
+        <div class="col-xs-7">
+            @*Hero detail section*@
             <div class="heroDetails"></div>
-        </td>
-    </tr>
-    <tr>
-        <td align="right" valign="top">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             <input id="newHeroBtn" type="button" value="New Hero" onclick="location.href='@Url.Action("Create")'" />
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+
+</div>
 
 <script>
     //Keyboard shortcut for adding a new hero (Ctrl-Enter)
