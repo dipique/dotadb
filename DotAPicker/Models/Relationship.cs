@@ -75,7 +75,7 @@ namespace DotAPicker.Models
                                                         HeroObjectID == ID || 
                                                         (!string.IsNullOrEmpty(lbl) && (LabelSubject == lbl || 
                                                                                         LabelObject == lbl));
-        public override string AltNameSet => $"{base.AltNameSet}|{HeroObject?.AltNames}|{LabelObject}";
+        public override string NameSet => $"{base.NameSet}|{HeroObject?.Name}|{HeroObject?.AltNames}|{LabelObject}";
 
     }
 }

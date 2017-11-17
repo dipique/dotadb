@@ -66,7 +66,7 @@ namespace DotAPicker.Models
         }
         public string SubjectName => HeroSubject?.Name ?? LabelSubject;
 
-        public virtual string AltNameSet => $"|{HeroSubject?.AltNames}|{LabelSubject}|";
+        public virtual string NameSet => $"{HeroSubject?.Name}|{HeroSubject?.AltNames}|{LabelSubject}";
 
         public TipType Type { get; set; } = TipType.Counter;
         
