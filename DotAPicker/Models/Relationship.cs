@@ -49,7 +49,7 @@ namespace DotAPicker.Models
         [Display(Name = "Object")]
         public string ObjectEntity
         {
-            get => HeroObject?.Name ?? LabelObject;
+            get => heroObjectID?.ToString() ?? LabelObject;
             set
             {
                 if (int.TryParse(value, out int heroIDVal))
@@ -68,6 +68,8 @@ namespace DotAPicker.Models
                 }
             }
         }
+
+        public string ObjectName => HeroObject?.Name ?? LabelObject;
 
         public bool IncludesHero(int ID, string lbl) => HeroSubjectID == ID ||
                                                         HeroObjectID == ID || 

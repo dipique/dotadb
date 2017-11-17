@@ -45,7 +45,7 @@ namespace DotAPicker.Models
         [Display(Name = "Subject")]
         public string SubjectEntity
         {
-            get => HeroSubject?.Name ?? LabelSubject;
+            get => heroSubjectID?.ToString() ?? LabelSubject;
             set
             {
                 if (int.TryParse(value, out int heroIDVal))
@@ -64,6 +64,7 @@ namespace DotAPicker.Models
                 }
             }
         }
+        public string SubjectName => HeroSubject?.Name ?? LabelSubject;
 
         public virtual string AltNameSet => $"|{HeroSubject?.AltNames}|{LabelSubject}|";
 
