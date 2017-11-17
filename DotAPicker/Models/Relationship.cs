@@ -7,30 +7,73 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DotAPicker.Models
 {
-    public class Relationship: PatchRelative
+    /// <summary>
+    /// A relationship is a tip that discusses how one hero or label effects another (rather than
+    /// a discussion about a single hero/label)
+    /// </summary>
+    public class Relationship: Tip
     {
-        public int Hero1ID { get; set; }      
-        public Hero Hero1 { get; set; }
+        private int? heroObjectID = null;
+        public int? HeroObjectID
+        {
+            get => heroObjectID;
+            set
+            {
+                if (value >= 0) //null returns false here
+                {
+                    LabelObject = string.Empty;
+                }
+                heroObjectID = value;
+            }
+        }
+        public Hero HeroObject { get; set; }
 
-        public int Hero2ID { get; set; }
-        public Hero Hero2 { get; set; }
-
-        public bool IncludesHero(int ID) => Hero1ID == ID || Hero2ID == ID;
-        public string AltNameSet => $"{Hero1?.AltNames}|{Hero2?.AltNames}";
+        private string labelObject = string.Empty;
+        public string LabelObject
+        {
+            get => labelObject;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    heroObjectID = null;
+                }
+                labelObject = value;
+            }
+        }
 
         /// <summary>
-        /// always 1->2, so if the type is "counter", it means "Hero1 counters Hero2"
+        /// Single access property to the second target of the relationship. Heros are represented by their integer IDs
         /// </summary>
-        public RelationshipType Type { get; set; }
-
         [Required]
-        public string Description { get; set; }
-    }
+        [Display(Name = "Object")]
+        public string ObjectEntity
+        {
+            get => HeroObject?.Name ?? LabelObject;
+            set
+            {
+                if (int.TryParse(value, out int heroIDVal))
+                {
+                    HeroObjectID = heroIDVal;
+                }
+                else
+                {
+                    LabelObject = value;
 
-    public enum RelationshipType
-    {
-        Other,
-        Counter,
-        Synergy
+                    //Make sure we can clear the value; it's not a valid state, but it needs to be possible at least in memory
+                    if (value == null)
+                    {
+                        HeroObjectID = null;
+                    }
+                }
+            }
+        }
+
+        public bool IncludesHero(int ID, string lbl) => HeroSubjectID == ID ||
+                                                        HeroObjectID == ID || 
+                                                        (!string.IsNullOrEmpty(lbl) && (LabelSubject == lbl || 
+                                                                                        LabelObject == lbl));
+        public override string AltNameSet => $"{base.AltNameSet}|{HeroObject?.AltNames}|{LabelObject}";
+
     }
 }
