@@ -13,7 +13,7 @@ function filterFunction() {
     for (var i = 0; i < table.childNodes.length; i++) {
         //skip elements other than table rows
         var row = table.childNodes[i];
-        if (typeof (row.className) == "undefined") {
+        if (typeof row.className == "undefined") {
             continue;
         } else if (row.className.indexOf("data-row") == -1) {
             continue;
@@ -24,7 +24,7 @@ function filterFunction() {
         for (var j = 0; j < row.childNodes.length; j++) {
             //only process the loop for cells
             var cell = row.childNodes[j];
-            if (typeof (cell.className) == "undefined") {
+            if (typeof cell.className == "undefined") {
                 continue;
             } else if (cell.className.indexOf("data-row-cell") == -1) {
                 continue;
@@ -88,7 +88,7 @@ function countVisibleHeroes() {
     for (var i = 0; i < table.childNodes.length; i++) {
         //skip elements other than table rows
         var row = table.childNodes[i];
-        if (typeof (row.className) == "undefined") {
+        if (typeof row.className == "undefined") {
             continue;
         } else if (row.className.indexOf("data-row") == -1) {
             continue;

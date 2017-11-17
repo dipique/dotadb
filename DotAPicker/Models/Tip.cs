@@ -79,6 +79,7 @@ namespace DotAPicker.Models
     {
         Counter,
 
+        [ObjectAffiliation(nameof(Tip))]
         Strategy,
 
         [ObjectAffiliation(nameof(Tip))]
@@ -92,6 +93,8 @@ namespace DotAPicker.Models
         [ObjectAffiliation(nameof(Tip))]
         [Display(Name = "Abilty Use")]
         AbilityUse,
+
+        Synergy,
 
         Other
     }

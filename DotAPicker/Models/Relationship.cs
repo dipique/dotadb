@@ -71,7 +71,7 @@ namespace DotAPicker.Models
 
         public string ObjectName => HeroObject?.Name ?? LabelObject;
 
-        public bool IncludesHero(int ID, string lbl) => HeroSubjectID == ID ||
+        public bool IncludesHero(int ID, string lbl = null) => HeroSubjectID == ID ||
                                                         HeroObjectID == ID || 
                                                         (!string.IsNullOrEmpty(lbl) && (LabelSubject == lbl || 
                                                                                         LabelObject == lbl));

@@ -36,9 +36,9 @@
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.Label("Hero", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SubjectEntity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("HeroID", (IEnumerable<SelectListItem>)ViewBag.HeroOptions, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.SubjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions)
             </div>
         </div>
 

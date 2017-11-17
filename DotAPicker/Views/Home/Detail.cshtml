@@ -83,7 +83,7 @@
 
 @{
     //Relationships - counters
-    var relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Counter);
+    var relationships = Model.Relationships.Where(r => r.Type == TipType.Counter);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -111,9 +111,9 @@
                             var r = relationships.Skip(x).Take(1).First();
                             <div class="hor-data-cell" style="border:none">
                                 <div class="relationship-header">
-                                    @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    @($"{r.SubjectName}->{r.ObjectName}")
                                 </div>                            
-                                <p>@r.Description</p>
+                                <p>@r.Text</p>
                             </div>
 
                             //second column
@@ -122,9 +122,9 @@
                                 r = relationships.Skip(x + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @($"{r.SubjectName}->{r.ObjectName}")
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
                             }
 
@@ -134,9 +134,9 @@
                                 r = relationships.Skip(x + 2).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @($"{r.SubjectName}->{r.ObjectName}")
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
                             }
                         }
@@ -149,7 +149,7 @@
 
 @{
     //Relationships - Synergies
-    relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Synergy);
+    relationships = Model.Relationships.Where(r => r.Type == TipType.Synergy);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -178,9 +178,9 @@
                                 var r = relationships.Skip(x).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @(Model.Synergies.Any(s => r.NameSet.Contains(s)) ? r.ObjectName : r.SubjectName)
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
 
                                 //second column
@@ -189,9 +189,9 @@
                                     r = relationships.Skip(x + 1).Take(1).First();
                                     <div class="hor-data-cell" style="border:none">
                                         <div class="relationship-header">
-                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                            @(Model.Synergies.Any(s => r.NameSet.Contains(s)) ? r.ObjectName : r.SubjectName)
                                         </div>
-                                        <p>@r.Description</p>
+                                        <p>@r.Text</p>
                                     </div>
                                 }
 
@@ -201,9 +201,9 @@
                                     r = relationships.Skip(x + 2).Take(1).First();
                                     <div class="hor-data-cell" style="border:none">
                                         <div class="relationship-header">
-                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                            @(Model.Synergies.Any(s => r.NameSet.Contains(s)) ? r.ObjectName : r.SubjectName)
                                         </div>
-                                        <p>@r.Description</p>
+                                        <p>@r.Text</p>
                                     </div>
                                 }
                             }

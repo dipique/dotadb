@@ -23,15 +23,17 @@
     </div>
 
     <div class="hor-title-header-row row">
-        <div class="hor-title-header-cell col-xs-3">Type</div>
-        <div class="hor-title-header-cell col-xs-9">Source</div>
+        <div class="hor-title-header-cell col-xs-2">Type</div>
+        <div class="hor-title-header-cell col-xs-3">Subject</div>
+        <div class="hor-title-header-cell col-xs-7">Source</div>
     </div>
 
     @for (int x = 0; x < Model.Tips.Count(); x++)
     {
         <div class="hor-data-row row">
-            <div class="hor-data-cell col-xs-3">@Html.DisplayFor(Model => Model.Tips[x].Type)</div>
-            <div class="hor-data-cell col-xs-9">@Html.DisplayFor(Model => Model.Tips[x].Source)</div>
+            <div class="hor-data-cell col-xs-2">@Html.DisplayFor(Model => Model.Tips[x].Type)</div>
+            <div class="hor-data-cell col-xs-3">@Html.DisplayFor(Model => Model.Tips[x].SubjectName)</div>
+            <div class="hor-data-cell col-xs-7">@Html.DisplayFor(Model => Model.Tips[x].Source)</div>
         </div>
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="col-xs-12">
@@ -47,22 +49,23 @@
     </div>
 
     <div class="hor-title-header-row row">
-        <div class="hor-title-header-cell col-xs-3">Hero</div>
-        <div class="hor-title-header-cell col-xs-3">Type</div>
-        <div class="hor-title-header-cell col-xs-6">Source</div>
+        <div class="hor-title-header-cell col-xs-2">Type</div>
+        <div class="hor-title-header-cell col-xs-3">Subject</div>
+        <div class="hor-title-header-cell col-xs-3">Object</div>
+        <div class="hor-title-header-cell col-xs-4">Source</div>
     </div>
 
     @foreach (var r in Model.Relationships)
     {
-        var heroName = r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name;
         <div class="hor-data-row row">
-            <div class="hor-data-cell col-xs-3">@heroName</div>
-            <div class="hor-data-cell col-xs-3">@r.Type</div>
-            <div class="hor-data-cell col-xs-6">@r.Source</div>
+            <div class="hor-data-cell col-xs-2">@r.Type</div>
+            <div class="hor-data-cell col-xs-3">@r.SubjectName</div>            
+            <div class="hor-data-cell col-xs-3">@r.ObjectName</div>   
+            <div class="hor-data-cell col-xs-4">@r.Source</div>
         </div>
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="col-xs-12">
-                @r.Description
+                @r.Text
             </div>
         </div>
     }

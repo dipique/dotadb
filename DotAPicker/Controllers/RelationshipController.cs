@@ -15,9 +15,9 @@ namespace DotAPicker.Controllers
         // GET: Relationship
         public ActionResult Index()
         {
-            var relationshipVMs = db.Relationships.Include(r => r.Hero1).Include(r => r.Hero2);
+            var relationshipVMs = db.Relationships.Include(r => r.HeroSubject).Include(r => r.HeroObject);
 
-            return View("Relationships", relationshipVMs);
+            return View("Relationships", relationshipVMs.ToList());
         }
 
 
@@ -25,10 +25,10 @@ namespace DotAPicker.Controllers
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
-            ViewBag.HeroOptions = GetHeroOptions(heroID);
+            ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
 
             var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.ID };
-            if (heroID != -1) tvm.Hero1ID = heroID;
+            if (heroID != -1) tvm.HeroSubjectID = heroID;
             return View("Create", tvm);
         }
 
@@ -41,7 +41,7 @@ namespace DotAPicker.Controllers
 
             if (!returnToHeroList) return Index();
 
-            TempData["SelectedHeroID"] = model.Hero1ID;
+            TempData["SelectedHeroID"] = model.HeroSubjectID;
             return RedirectToAction("Index", "Hero", new { });
         }
 
@@ -54,7 +54,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Relationship not found.");
             }
 
-            ViewBag.HeroOptions = GetHeroOptions(id);
+            ViewBag.SubjectOptions = GetSubjectOptions(id.ToString());
 
             return View("Edit", relationship);
         }

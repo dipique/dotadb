@@ -25,6 +25,8 @@ namespace DotAPicker.Models
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
+        public string NameSet => $"{Name}|{AltNames}|";
+
         /// <summary>
         /// Stored in the form: Type1:Label1|Type2:Label2|Type3:Label3
         /// Types are the text of "RelationshipType" enums
@@ -36,31 +38,31 @@ namespace DotAPicker.Models
         private const char LBL_SEP = '|';
         private const char TYP_SEP = ':';
 
-        public (RelationshipType Type, string Value)[] ParseLabels => string.IsNullOrEmpty(Labels) ? new(RelationshipType Type, string Value)[0] :
+        public (TipType Type, string Value)[] ParseLabels => string.IsNullOrEmpty(Labels) ? new(TipType Type, string Value)[0] :
             Labels.Split(LBL_SEP)
                   .Select(l => l.Split(TYP_SEP))
-                  .Select(l => (EnumExt.Parse<RelationshipType>(l[0]), l[1]))
+                  .Select(l => (EnumExt.Parse<TipType>(l[0]), l[1]))
                   .ToArray();        
 
         [NotMapped] public LabelSet Counters
         {
-            get => GetLabelsByType(RelationshipType.Counter);
-            set => UpdateLabels(RelationshipType.Counter, value);
+            get => GetLabelsByType(TipType.Counter);
+            set => UpdateLabels(TipType.Counter, value);
         }
 
         [NotMapped] public LabelSet Synergies
         {
-            get => GetLabelsByType(RelationshipType.Synergy);
-            set => UpdateLabels(RelationshipType.Synergy, value);
+            get => GetLabelsByType(TipType.Synergy);
+            set => UpdateLabels(TipType.Synergy, value);
         }
 
-        public void UpdateLabels(RelationshipType type, LabelSet labels) =>
+        public void UpdateLabels(TipType type, LabelSet labels) =>
             Labels = string.Join(LBL_SEP.ToString(), 
                 ParseLabels.Where(l => l.Type != type)                      //get all the existing labels that aren't of this type
                            .Concat(labels.Select(l => (type, l)))           //add the updated labels of the current type
                            .Select(l => $"{l.Item1}{TYP_SEP}{l.Item2}"));   //and convert them all into the string equivalent
 
-        public LabelSet GetLabelsByType(RelationshipType type) => 
+        public LabelSet GetLabelsByType(TipType type) => 
            new LabelSet(ParseLabels.Where(l => l.Type == type)
                                    .Select(l => l.Value));
 

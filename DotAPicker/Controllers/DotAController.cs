@@ -52,10 +52,29 @@ namespace DotAPicker.Controllers
                 Selected = selection == h.ID
             }).OrderBy(s => s.Text);
 
+        public IEnumerable<SelectListItem> GetSubjectOptions(string selection = null)
+        {
+            int intSelection = -1;
+            int.TryParse(selection, out intSelection);
+            return CurrentUser.Labels.Select(l => new SelectListItem() {
+                Text = $"Label: {l}",
+                Value = l,
+                Selected = selection == l
+            }).OrderBy(s => s.Text)
+              .Concat(GetHeroOptions(intSelection));
+        }
+
         public Hero GetHeroByID(int id)
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
-            hero.Relationships = db.Relationships.Where(r => r.Hero1ID == id || r.Hero2ID == id).ToList();
+            hero.Relationships = db.Relationships.Where(r => r.HeroObjectID == id || 
+                                                             r.HeroSubjectID == id || 
+                                                             hero.Labels.Contains(r.LabelSubject) || 
+                                                             hero.Labels.Contains(r.LabelObject))
+                                                  .ToList();
+            hero.Tips = db.Tips.Where(r => r.HeroSubjectID == id ||
+                                           hero.Labels.Contains(r.LabelSubject))
+                               .ToList();
             return hero;
         }
 

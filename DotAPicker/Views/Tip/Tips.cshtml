@@ -1,5 +1,5 @@
 ﻿@using DotAPicker.Models
-@model IEnumerable<Tip>
+@model List<Tip>
 
 @{
     ViewBag.Title = "Tip";
@@ -9,7 +9,7 @@
 
 <h1>Tips</h1>
 
-<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
+<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
 <select id="filterPreference" onchange="filterFunction()">
     <option value="">Search by tip type</option>
     @foreach (string option in Enum.GetNames(typeof(TipType)))
@@ -19,27 +19,29 @@
 </select>
 <table>
     <tr><td>
-    <table id="filterTable">
-        <tr class="header">
-            <td>Hero Name</td>
-            <td style="display:none">Alternative Names</td>
-            <td>Type</td>
-            <td>Text</td>
-            <td>Actions</td>
-        </tr>
-        @{
-            foreach (var tip in Model)
-            {
-                <tr>
-                    <td>@tip.Hero.Name</td>
-                    <td style="display:none">@tip.Hero.AltNames</td>
-                    <td>@Html.DisplayFor(m => m.First(t => t.ID == tip.ID).Type)</td>
-                    <td>@tip.Text</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = tip.ID }) @Html.ActionLink("(delete)", "Delete", new { id = tip.ID })</td>
+            <table id="filterTable">
+                <tr class="header">
+                    <td>Subject Name</td>
+                    <td style="display:none">Name Set</td>
+                    <td>Type</td>
+                    <td>Text</td>
+                    <td>Actions</td>
                 </tr>
-            }
-        }
-    </table>
+                @{
+                    for (int x = 0; x <= Model.Count(); x++)
+                    {
+                <tr>
+                    <td>@Model[x].SubjectName</td>
+                    <td style="display:none">@Model[x].NameSet</td>
+                    <td>@Html.DisplayFor(m => m.First(t => t.ID == Model[x].ID).Type)</td>
+                    <td>@Model[x].Text</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = Model[x].ID }) @Html.ActionLink("(delete)", "Delete", new { id = Model[x].ID })</td>
+                </tr>
+                    }
+
+
+                 }
+            </table>
     </td></tr>
     <tr>
         <td align="right">
