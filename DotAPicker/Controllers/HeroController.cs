@@ -22,7 +22,7 @@ namespace DotAPicker.Controllers
         // GET: Hero/Create
         public ActionResult Create()
         {
-            var hero = new Hero() { UserID = CurrentUser.Id };
+            var hero = new Hero() { UserId = CurrentUser.Id };
             return View("Create", hero);
         }
 

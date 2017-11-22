@@ -62,14 +62,14 @@
                 <div class="data-scrolling-container" id="filterHeroTable">
                     @foreach (var hero in Model)
                     {
-                        var rowClass = ViewBag.SelectedHeroID == hero.ID ? "data-row selected" : "data-row";
-                        <div class="@rowClass" id="@hero.ID">
+                        var rowClass = ViewBag.SelectedHeroID == hero.Id ? "data-row selected" : "data-row";
+                        <div class="@rowClass" id="@hero.Id">
                             <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
                             <div class="data-row-cell" id="heroPreference">
-                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref", controller = "hero" })
+                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref", controller = "hero" })
                             </div>
-                            <div class="data-row-cell" id="heroActions">@Html.ActionLink("(edit)", "Edit", new { id = hero.ID })</div>
+                            <div class="data-row-cell" id="heroActions">@Html.ActionLink("(edit)", "Edit", new { id = hero.Id })</div>
                         </div>
                     }
                 </div>

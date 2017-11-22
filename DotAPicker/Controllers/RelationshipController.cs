@@ -27,7 +27,7 @@ namespace DotAPicker.Controllers
             ViewBag.ReturnToHeroList = returnToHeroList;
             ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
 
-            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.Id };
+            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserId = CurrentUser.Id };
             if (heroID != -1) tvm.HeroSubjectID = heroID;
             return View("Create", tvm);
         }
