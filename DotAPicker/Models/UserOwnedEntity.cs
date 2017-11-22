@@ -9,6 +9,7 @@ namespace DotAPicker.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int UserId { get; set; }
 
         [Required]

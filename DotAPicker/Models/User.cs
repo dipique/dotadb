@@ -57,9 +57,9 @@ namespace DotAPicker.Models
                                                                                       .ToArray())));
         }
 
-        public virtual List<Hero> Heroes { get; set; }
-        public virtual List<Tip> Tips { get; set; }
-        public virtual List<Relationship> Relationships { get; set; }
+        public virtual List<Hero> Heroes { get; set; } = new List<Hero>();
+        public virtual List<Tip> Tips { get; set; } = new List<Tip>();
+        public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
     }
 
     public class LabelSet : List<string>

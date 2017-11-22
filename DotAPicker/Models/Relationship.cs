@@ -13,8 +13,9 @@ namespace DotAPicker.Models
     /// a discussion about a single hero/label)
     /// </summary>
     [Table(nameof(Relationship))]
-    public class Relationship: Tip
+    public class Relationship: DotANote
     {
+
         private int? heroObjectId = null;
         public int? HeroObjectId
         {
@@ -79,6 +80,5 @@ namespace DotAPicker.Models
                                                         (!string.IsNullOrEmpty(lbl) && (LabelSubject == lbl || 
                                                                                         LabelObject == lbl));
         public override string NameSet => $"{base.NameSet}|{HeroObject?.Name}|{HeroObject?.AltNames}|{LabelObject}";
-
     }
 }

@@ -64,6 +64,7 @@ namespace DotAPicker.Models
 
         #endregion
 
+        [NotMapped]
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();
 
         [NotMapped]
