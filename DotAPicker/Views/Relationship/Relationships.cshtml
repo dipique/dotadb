@@ -9,14 +9,21 @@
 
 <h1>Relationships</h1>
 
-<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
-<select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by relationship type</option>
-    @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), typeof(Relationship)))
-    {
-        <option value="@option">@option</option>
-    }
-</select>
+<div class="row">
+    <div class="col-xs-2">
+        <input type="text" id="filterInput" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+    </div>
+    <div class="col-xs-3">
+        <select id="filterPreference" class="form-control" onchange="filterFunction()">
+            <option value="">Search by tip type</option>
+            @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), typeof(Relationship)))
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+</div>
+
 <table>
     <tr><td>
     <table id="filterTable">

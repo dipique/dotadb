@@ -8,17 +8,24 @@
 
 
 <h1>Tips</h1>
+<div class="row">
+    <div class="col-xs-2">
+        <input type="text" id="filterInput" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+    </div>
+    <div class="col-xs-3">
+        <select id="filterPreference" class="form-control" onchange="filterFunction()">
+            <option value="">Search by tip type</option>
+            @foreach (string option in Enum.GetNames(typeof(TipType)))
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+</div>
 
-<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
-<select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by tip type</option>
-    @foreach (string option in Enum.GetNames(typeof(TipType)))
-    {
-        <option value="@option">@option</option>
-    }
-</select>
 <table>
-    <tr><td>
+    <tr>
+        <td>
             <table id="filterTable">
                 <tr class="header">
                     <td>Subject Name</td>
@@ -30,19 +37,20 @@
                 @{
                     for (int x = 0; x < Model.Count(); x++)
                     {
-                <tr>
-                    <td>@Model[x].SubjectName</td>
-                    <td style="display:none">@Model[x].NameSet</td>
-                    <td>@Html.DisplayFor(m => m.First(t => t.Id == Model[x].Id).Type)</td>
-                    <td>@Model[x].Text</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }) @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id })</td>
-                </tr>
+                        <tr>
+                            <td width="150px">@Model[x].SubjectName</td>
+                            <td style="display:none">@Model[x].NameSet</td>
+                            <td width="150px">@Html.DisplayFor(m => m.First(t => t.Id == Model[x].Id).Type)</td>
+                            <td width="800px">@Model[x].Text</td>
+                            <td width="175px">@Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }) @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id })</td>
+                        </tr>
                     }
 
 
-                 }
+                }
             </table>
-    </td></tr>
+        </td>
+    </tr>
     <tr>
         <td align="right">
             <input type="button" value="New Tip" onclick="location.href='@Url.Action("Create")'" />
@@ -66,7 +74,7 @@
             td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase();
             td_altNames = tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
             td_preference = tr[i].getElementsByTagName("td")[2].innerHTML;
-            
+
             if (td_heroName) {
                 if ((td_heroName.indexOf(filter) > -1 ||
                     td_altNames.indexOf(filter) > -1) &&

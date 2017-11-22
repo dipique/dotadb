@@ -38,16 +38,16 @@
     @Html.HiddenFor(model => model.Id)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.SubjectEntity, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.SubjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.SubjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions)
+            @Html.DropDownListFor(m => m.SubjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ObjectEntity, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.ObjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.ObjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions)
+            @Html.DropDownListFor(m => m.ObjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
         </div>
     </div>
 
