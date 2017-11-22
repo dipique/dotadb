@@ -28,7 +28,8 @@ namespace DotAPicker.Models
                 heroObjectId = value;
             }
         }
-        public Hero HeroObject { get; set; }
+
+        public virtual Hero HeroObject { get; set; }
 
         private string labelObject = string.Empty;
         public string LabelObject
@@ -47,7 +48,7 @@ namespace DotAPicker.Models
         /// <summary>
         /// Single access property to the second target of the relationship. Heros are represented by their integer IDs
         /// </summary>
-        [Required]
+        [NotMapped]
         [Display(Name = "Object")]
         public string ObjectEntity
         {

@@ -11,6 +11,10 @@ namespace DotAPicker.Models
     [Table(nameof(Tip))]
     public class Tip: UserOwnedEntity
     {
+        /// <summary>
+        /// The "HeroSubject" of a tip is the hero this tip applies to.
+        /// </summary>
+        public virtual Hero HeroSubject { get; set; }
         private int? heroSubjectId = null;
         public int? HeroSubjectId
         {
@@ -24,7 +28,6 @@ namespace DotAPicker.Models
                 heroSubjectId = value;
             }
         }
-        public Hero HeroSubject { get; set; }
 
         private string labelSubject = string.Empty;
         public string LabelSubject
@@ -43,8 +46,8 @@ namespace DotAPicker.Models
         /// <summary>
         /// Single access property to the first target of the tip. Heros are represented by their integer IDs
         /// </summary>
-        [Required]
         [Display(Name = "Subject")]
+        [NotMapped]
         public string SubjectEntity
         {
             get => heroSubjectId?.ToString() ?? LabelSubject;
@@ -76,11 +79,20 @@ namespace DotAPicker.Models
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 
+        /// <summary>
+        /// As the game changes, tips may go out of date; tracking the
+        /// applicable patch assists with this, and users can flag a
+        /// specific tip as out of date ("deprecated").
+        /// </summary>
         [Required]
         public string Patch { get; set; }
         public bool Deprecated { get; set; } = false;
 
-        public string Source { get; set; } //where you found the tip
+        /// <summary>
+        /// Where the tip was found, possibly a URL. Can give context to
+        /// a tip that isn't very intuitive.
+        /// </summary>
+        public string Source { get; set; }
     }
 
     public enum TipType
