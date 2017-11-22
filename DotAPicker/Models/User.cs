@@ -14,7 +14,7 @@ namespace DotAPicker.Models
     {
         public const string DEFAULT_USER = "default";
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(256)]

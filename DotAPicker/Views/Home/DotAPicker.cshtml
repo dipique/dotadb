@@ -45,14 +45,14 @@
                 <div class="data-scrolling-container" id="filterHeroTable">
                     @foreach (var hero in Model)
                     {
-                    <div class="data-row" id="@hero.ID">
+                    <div class="data-row" id="@hero.Id">
                         <div class="data-row-cell" style="min-width: 175px" id="heroName">@hero.Name</div>
                         <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.NameSet</div>
                         <div class="data-row-cell" id="heroPreference">
-                            @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.ID, @class = "hero-pref" })
+                            @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref" })
                         </div>
                         <div class="data-row-cell" id="addTo" style="min-width: 140px">
-                            <a href="" class="add-ally" id="@hero.ID">(allies)</a> <a href="" class="add-enemy" id="@hero.ID">(enemies)</a>
+                            <a href="" class="add-ally" id="@hero.Id">(allies)</a> <a href="" class="add-enemy" id="@hero.Id">(enemies)</a>
                         </div>
                     </div>
                     }

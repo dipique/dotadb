@@ -48,8 +48,8 @@ namespace DotAPicker.Controllers
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
             CurrentUser.Heroes.Select(h => new SelectListItem() {
                 Text = h.Name,
-                Value = h.ID.ToString(),
-                Selected = selection == h.ID
+                Value = h.Id.ToString(),
+                Selected = selection == h.Id
             }).OrderBy(s => s.Text);
 
         public IEnumerable<SelectListItem> GetSubjectOptions(string selection = null)
@@ -66,7 +66,7 @@ namespace DotAPicker.Controllers
 
         public Hero GetHeroByID(int id)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
             hero.Relationships = db.Relationships.Where(r => r.HeroObjectID == id || 
                                                              r.HeroSubjectID == id || 
                                                              hero.Labels.Contains(r.LabelSubject) || 

@@ -80,7 +80,7 @@ namespace DotAPicker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
         {
-            if (CurrentUser.ID == user.ID) db.Entry(CurrentUser).State = EntityState.Detached;
+            if (CurrentUser.Id == user.Id) db.Entry(CurrentUser).State = EntityState.Detached;
 
             //TODO validate that username is still unique
             if (ModelState.IsValid)

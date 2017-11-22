@@ -14,7 +14,7 @@ namespace DotAPicker.DAL
         public DotAContext(): base(nameof(DotAContext))
         {
             Database.Log = s => Debug.WriteLine(s);
-            Database.CommandTimeout = 180; //this is required when dropping and creating a new database, otherwise it times out
+            Database.CommandTimeout = 1000; //this is required when dropping and creating a new database, otherwise it times out
         }
 
         public DbSet<Hero> Heroes { get; set; }
@@ -94,7 +94,7 @@ namespace DotAPicker.DAL
             };
             users.ForEach(u => db.Users.Add(u));
             db.SaveChanges();
-            var defaultID = db.Users.First().ID;
+            var defaultID = db.Users.First().Id;
 
             var heroes = new List<Hero> {
                 new Hero { UserID = defaultID, Name = "Dazzle", AltNames = "", Notes = "", Preference = HeroPreference.Indifferent },

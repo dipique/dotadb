@@ -37,7 +37,7 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Create(Tip model, bool returnToHeroList = false)
         {
-            if (db.Tips.Any(h => h.ID == model.ID))
+            if (db.Tips.Any(h => h.Id == model.Id))
             {
                 throw new Exception("Tip ID collision");
             }
@@ -54,7 +54,7 @@ namespace DotAPicker.Controllers
         // GET: Tip/Edit/5
         public ActionResult Edit(int id)
         {
-            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
@@ -77,7 +77,7 @@ namespace DotAPicker.Controllers
         // GET: Tip/Delete/5
         public ActionResult Delete(int id)
         {
-            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DotAPicker.Models
 {
-    public class Tip: PatchRelative
+    public class Tip: UserOwnedEntity
     {
         private int? heroSubjectID = null;
         public int? HeroSubjectID
@@ -73,6 +73,12 @@ namespace DotAPicker.Models
         [Required]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
+
+        [Required]
+        public string Patch { get; set; }
+        public bool Deprecated { get; set; } = false;
+
+        public string Source { get; set; } //where you found the tip
     }
 
     public enum TipType

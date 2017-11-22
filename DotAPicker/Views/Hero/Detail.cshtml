@@ -7,7 +7,7 @@
         <div class="hor-title-header-cell col-xs-9">Alt Names</div>
     </div>
     <div class="hor-data-row row">
-        <div class="hor-data-cell col-xs-3">@Model.ID</div>
+        <div class="hor-data-cell col-xs-3">@Model.Id</div>
         <div class="hor-data-cell col-xs-9">@Model.AltNames</div>
     </div>
     <div class="hor-data-row row" style="border-bottom: inset">
@@ -18,7 +18,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h4 style="display: inline-block">Tips</h4>@Html.ActionLink(" (new)", "Create", "Tip", new { heroID = Model.ID, returnToHeroList = true }, new { })
+            <h4 style="display: inline-block">Tips</h4>@Html.ActionLink(" (new)", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { })
         </div>
     </div>
 
@@ -44,7 +44,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h4 style="display: inline-block">Relationships</h4>@Html.ActionLink(" (new)", "Create", "Relationship", new { heroID = Model.ID, returnToHeroList = true }, new { })
+            <h4 style="display: inline-block">Relationships</h4>@Html.ActionLink(" (new)", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { })
         </div>
     </div>
 

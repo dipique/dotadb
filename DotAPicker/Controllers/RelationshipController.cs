@@ -27,7 +27,7 @@ namespace DotAPicker.Controllers
             ViewBag.ReturnToHeroList = returnToHeroList;
             ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
 
-            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.ID };
+            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.Id };
             if (heroID != -1) tvm.HeroSubjectID = heroID;
             return View("Create", tvm);
         }
@@ -48,7 +48,7 @@ namespace DotAPicker.Controllers
         // GET: Relationship/Edit/5
         public ActionResult Edit(int id)
         {
-            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");
@@ -73,7 +73,7 @@ namespace DotAPicker.Controllers
         // GET: Relationship/Delete/5
         public ActionResult Delete(int id)
         {
-            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");

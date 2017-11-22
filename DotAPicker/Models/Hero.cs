@@ -10,13 +10,9 @@ using DotAPicker.Utilities;
 
 namespace DotAPicker.Models
 {
-    public class Hero
+    public class Hero: UserOwnedEntity
     {
-        public int ID { get; set; }
         public string Name { get; set; }
-
-        public int UserID { get; set; }
-        public User User { get; set; }
 
         [DisplayName("Alt. Names")]
         public string AltNames { get; set; } //can be searched as well so that, for example, BS can find Bloodseeker
