@@ -36,8 +36,10 @@ namespace DotAPicker.Models
             }
 
             string sAfType = affiliationType.Name;
-            return enumType.GetMembers().Where(m => (m.GetCustomAttribute<ObjectAffiliation>()?.TypeName ?? sAfType) == sAfType)
-                                        .Select(m => m.Name);
+            return enumType.GetMembers(BindingFlags.Public|BindingFlags.Static)
+                           .Where(m => m.MemberType == MemberTypes.Field)
+                           .Where(m => (m.GetCustomAttribute<ObjectAffiliation>()?.TypeName ?? sAfType) == sAfType)
+                           .Select(m => m.Name);
         }
     }
 }
