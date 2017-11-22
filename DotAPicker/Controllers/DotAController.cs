@@ -67,12 +67,12 @@ namespace DotAPicker.Controllers
         public Hero GetHeroByID(int id)
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
-            hero.Relationships = db.Relationships.Where(r => r.HeroObjectID == id || 
-                                                             r.HeroSubjectID == id || 
+            hero.Relationships = db.Relationships.Where(r => r.HeroObjectId == id || 
+                                                             r.HeroSubjectId == id || 
                                                              hero.Labels.Contains(r.LabelSubject) || 
                                                              hero.Labels.Contains(r.LabelObject))
                                                   .ToList();
-            hero.Tips = db.Tips.Where(r => r.HeroSubjectID == id ||
+            hero.Tips = db.Tips.Where(r => r.HeroSubjectId == id ||
                                            hero.Labels.Contains(r.LabelSubject))
                                .ToList();
             return hero;

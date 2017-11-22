@@ -29,7 +29,7 @@ namespace DotAPicker.Controllers
             ViewBag.ReturnToHeroList = returnToHeroList;
             ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
             var tip = new Tip() { Patch = CurrentUser.CurrentPatch };
-            if (heroID != -1) tip.HeroSubjectID = heroID;
+            if (heroID != -1) tip.HeroSubjectId = heroID;
             return View("Create", tip);
         }
 
@@ -47,7 +47,7 @@ namespace DotAPicker.Controllers
 
             if (!returnToHeroList) return Index();
 
-            TempData["SelectedHeroID"] = model.HeroSubjectID;
+            TempData["SelectedHeroID"] = model.HeroSubjectId;
             return RedirectToAction("Index", "Hero", new { });
         }
 
@@ -59,7 +59,7 @@ namespace DotAPicker.Controllers
             {
                 throw new Exception("Tip not found.");
             }
-            ViewBag.SubjectOptions = GetSubjectOptions(tip.HeroSubjectID.ToString());
+            ViewBag.SubjectOptions = GetSubjectOptions(tip.HeroSubjectId.ToString());
 
             return View("Edit", tip);
         }

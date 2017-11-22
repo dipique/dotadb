@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotAPicker.Models
 {
@@ -11,19 +12,20 @@ namespace DotAPicker.Models
     /// A relationship is a tip that discusses how one hero or label effects another (rather than
     /// a discussion about a single hero/label)
     /// </summary>
+    [Table(nameof(Relationship))]
     public class Relationship: Tip
     {
-        private int? heroObjectID = null;
-        public int? HeroObjectID
+        private int? heroObjectId = null;
+        public int? HeroObjectId
         {
-            get => heroObjectID;
+            get => heroObjectId;
             set
             {
                 if (value >= 0) //null returns false here
                 {
                     LabelObject = string.Empty;
                 }
-                heroObjectID = value;
+                heroObjectId = value;
             }
         }
         public Hero HeroObject { get; set; }
@@ -36,7 +38,7 @@ namespace DotAPicker.Models
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    heroObjectID = null;
+                    heroObjectId = null;
                 }
                 labelObject = value;
             }
@@ -49,12 +51,12 @@ namespace DotAPicker.Models
         [Display(Name = "Object")]
         public string ObjectEntity
         {
-            get => heroObjectID?.ToString() ?? LabelObject;
+            get => heroObjectId?.ToString() ?? LabelObject;
             set
             {
                 if (int.TryParse(value, out int heroIDVal))
                 {
-                    HeroObjectID = heroIDVal;
+                    HeroObjectId = heroIDVal;
                 }
                 else
                 {
@@ -63,7 +65,7 @@ namespace DotAPicker.Models
                     //Make sure we can clear the value; it's not a valid state, but it needs to be possible at least in memory
                     if (value == null)
                     {
-                        HeroObjectID = null;
+                        HeroObjectId = null;
                     }
                 }
             }
@@ -71,8 +73,8 @@ namespace DotAPicker.Models
 
         public string ObjectName => HeroObject?.Name ?? LabelObject;
 
-        public bool IncludesHero(int ID, string lbl = null) => HeroSubjectID == ID ||
-                                                        HeroObjectID == ID || 
+        public bool IncludesHero(int ID, string lbl = null) => HeroSubjectId == ID ||
+                                                        HeroObjectId == ID || 
                                                         (!string.IsNullOrEmpty(lbl) && (LabelSubject == lbl || 
                                                                                         LabelObject == lbl));
         public override string NameSet => $"{base.NameSet}|{HeroObject?.Name}|{HeroObject?.AltNames}|{LabelObject}";

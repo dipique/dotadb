@@ -4,22 +4,24 @@ using System.Linq;
 using System.Web;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotAPicker.Models
 {
+    [Table(nameof(Tip))]
     public class Tip: UserOwnedEntity
     {
-        private int? heroSubjectID = null;
-        public int? HeroSubjectID
+        private int? heroSubjectId = null;
+        public int? HeroSubjectId
         {
-            get => heroSubjectID;
+            get => heroSubjectId;
             set
             {
                 if (value >= 0) //null returns false here
                 {
                     LabelSubject = string.Empty;
                 }
-                heroSubjectID = value;
+                heroSubjectId = value;
             }
         }
         public Hero HeroSubject { get; set; }
@@ -32,7 +34,7 @@ namespace DotAPicker.Models
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    heroSubjectID = null;
+                    heroSubjectId = null;
                 }
                 labelSubject = value;
             }
@@ -45,12 +47,12 @@ namespace DotAPicker.Models
         [Display(Name = "Subject")]
         public string SubjectEntity
         {
-            get => heroSubjectID?.ToString() ?? LabelSubject;
+            get => heroSubjectId?.ToString() ?? LabelSubject;
             set
             {
                 if (int.TryParse(value, out int heroIDVal))
                 {
-                    HeroSubjectID = heroIDVal;
+                    HeroSubjectId = heroIDVal;
                 }
                 else
                 {
@@ -59,7 +61,7 @@ namespace DotAPicker.Models
                     //Make sure we can clear the value; it's not a valid state, but it needs to be possible at least in memory
                     if (value == null)
                     {
-                        HeroSubjectID = null;
+                        HeroSubjectId = null;
                     }
                 }
             }
