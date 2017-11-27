@@ -7,7 +7,7 @@
     }
 });
 
-$("input.add-label-button").click(function () {
+$(document).on("click", "input.add-label-button", function () {
     var labelSet = $("div.label-set#Labels")[0];
     var textBox = $("#txtAdd")[0];
     addLabel(labelSet, textBox.value, false);

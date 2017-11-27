@@ -48,6 +48,7 @@ namespace DotAPicker.Models
         private const char LBL_SEP = '|';
         private const string DISALLOWED_LABEL_CHARS = ":|"; //needed to support hero label storage format
 
+        [DisplayName("Label Options")]
         public string LabelOptions { get; set; } = string.Empty;
 
         public LabelSet Labels

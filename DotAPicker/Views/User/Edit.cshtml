@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="@Url.Content("~/Content/sliders.css")" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/labelset-maint.js"></script>
+<script src="~/Scripts/labelset.js"></script>
+
 <h2>Edit</h2>
 
 
@@ -73,9 +77,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/labelset-maint.js"></script>
-    <script src="~/Scripts/labelset.js"></script>
-}
