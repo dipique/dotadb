@@ -2,7 +2,7 @@
     removeLabel(this);
 });
 
-$("input.add-label-button").click(function () {
+$(document).on("click", "input.add-label-button", function () {
     var selectBox = $(this.parentElement).children("select")[0];
     var selectedOption = selectBox.options[selectBox.selectedIndex].text;
     if (selectedOption == "Add a label...") {

@@ -25,7 +25,7 @@ namespace DotAPicker.Models
 
         /// <summary>
         /// Stored in the form: Type1:Label1|Type2:Label2|Type3:Label3
-        /// Types are the text of "RelationshipType" enums
+        /// Types are the text of "TipType" enums
         /// </summary>
         public string Labels { get; set; } = string.Empty;
 
@@ -50,6 +50,13 @@ namespace DotAPicker.Models
         {
             get => GetLabelsByType(TipType.Synergy);
             set => UpdateLabels(TipType.Synergy, value);
+        }
+
+        [NotMapped, Display(Name = "Description Labels")]
+        public LabelSet DescriptionLabels
+        {
+            get => GetLabelsByType(TipType.Other);
+            set => UpdateLabels(TipType.Other, value);
         }
 
         public void UpdateLabels(TipType type, LabelSet labels) =>
