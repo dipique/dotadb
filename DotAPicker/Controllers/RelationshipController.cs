@@ -57,7 +57,7 @@ namespace DotAPicker.Controllers
             }
 
             ViewBag.SubjectOptions = GetSubjectOptions(id.ToString());
-
+            db.Entry(relationship).State = EntityState.Detached;
             return View("Edit", relationship);
         }
 

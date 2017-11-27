@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -60,6 +61,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("Tip not found.");
             }
             ViewBag.SubjectOptions = GetSubjectOptions(tip.HeroSubjectId.ToString());
+            db.Entry(tip).State = EntityState.Detached;
 
             return View("Edit", tip);
         }
