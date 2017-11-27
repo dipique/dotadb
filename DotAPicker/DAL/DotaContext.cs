@@ -86,7 +86,7 @@ namespace DotAPicker.DAL
         {
             var users = new List<User> {
                 new User { Username = User.DEFAULT_USER,
-                           CurrentPatch = "7.07b",
+                           CurrentPatch = "7.07c",
                            ShowDeprecatedRelationships = false,
                            ShowDeprecatedTips = false,
                            LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage"
@@ -288,6 +288,7 @@ namespace DotAPicker.DAL
                 new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Lifestealer").Id, HeroObjectId = heroes.First(h => h.Name == "Phoenix").Id, Type = TipType.Counter, Text = "Has escapes from damage (ult and spell immunity), plus massive % based physical damage", Patch = "7.07b" },
                 new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Ursa").Id, HeroObjectId = heroes.First(h => h.Name == "Phoenix").Id, Type = TipType.Counter, Text = "Rapid egg kills, lots of burst physical damage, ult can tank your burst magical damage", Patch = "7.07b" },
                 new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Bloodseeker").Id, HeroObjectId = heroes.First(h => h.Name == "Spirit Breaker").Id, Type = TipType.Counter, Text = "Rupture prevents SB from charging away", Patch = "7.07b" },
+                new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Dark Willow").Id, HeroObjectId = heroes.First(h => h.Name == "Chaos Knight").Id, Type = TipType.Counter, Text = "Terrorize can make all illusions run away from their burst target, and brambles can entrap them.", Patch = "7.07c" },
                 new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Lion").Id, HeroObjectId = heroes.First(h => h.Name == "Chaos Knight").Id, Type = TipType.Counter, Text = "Mana drain destroys illusions and talent places it on multiple targets. Q deals with illusions as well as Aghs for AOE ult.", Patch = "7.07b" }
             };
             relationships.ForEach(r => db.Relationships.Add(r));

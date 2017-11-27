@@ -51,26 +51,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Synergies, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="col-md-10" id="@nameof(Model.Synergies)">
-                @Html.EditorFor(model => model.Synergies)
-                @Html.ValidationMessageFor(model => model.Synergies, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Counters, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="col-md-10" id="@nameof(Model.Counters)">
-                @Html.EditorFor(model => model.Counters)
-                @Html.ValidationMessageFor(model => model.Counters, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.DescriptionLabels, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="col-md-10" id="@nameof(Model.DescriptionLabels)">
