@@ -408,8 +408,8 @@
     <Content Include="Views\Home\DotAPicker.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\User\EditorTemplates\LabelSet.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\LabelSet.cshtml" />
-    <Content Include="Views\Hero\EditorTemplates\LabelSet.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
