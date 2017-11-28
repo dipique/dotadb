@@ -1,5 +1,5 @@
 ﻿@using DotAPicker.Models
-@model IEnumerable<Relationship>
+@model List<Relationship>
 
 @{
     ViewBag.Title = "Relationships";
@@ -9,45 +9,47 @@
 
 <h1>Relationships</h1>
 
-<input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Search hero name..." />
-<select id="filterPreference" onchange="filterFunction()">
-    <option value="">Search by relationship type</option>
-    @foreach (string option in Enum.GetNames(typeof(RelationshipType)))
-    {
-        <option value="@option">@option</option>
-    }
-</select>
+<div class="row">
+    <div class="col-xs-2">
+        <input type="text" id="filterInput" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+    </div>
+    <div class="col-xs-3">
+        <select id="filterPreference" class="form-control" onchange="filterFunction()">
+            <option value="">Search by tip type</option>
+            @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), typeof(Relationship)))
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+</div>
+
 <table>
     <tr><td>
     <table id="filterTable">
         <tr class="header">
-            <td>Hero 1</td>
-            <td>Hero 2</td>
+            <td>Subject</td>
+            <td>Object</td>
             <td style="display:none">Alternative Names</td>
             <td>Type</td>
             <td>Text</td>
             <td>Actions</td>
         </tr>
         @{
-            foreach (var relationship in Model)
+            for (int x = 0; x < Model.Count(); x++)
             {
-                <tr>
-                    <td>@relationship.Hero1.Name</td>
-                    <td>@relationship.Hero2.Name</td>
-                    <td style="display:none">@relationship.AltNameSet</td>
-                    <td>@relationship.Type</td>
-                    <td>@relationship.Description</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = relationship.ID }) @Html.ActionLink("(delete)", "Delete", new { id = relationship.ID })</td>
+                                <tr>
+                    <td>@Model[x].SubjectName</td>
+                    <td>@Model[x].ObjectName</td>
+                    <td style="display:none">@Model[x].NameSet</td>
+                    <td>@Model[x].Type</td>
+                    <td>@Model[x].Text</td>
+                    <td>@Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }) @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id })</td>
                 </tr>
             }
         }
     </table>
     </td></tr>
-    <tr>
-        <td align="right">
-            <input type="button" value="New Relationship" onclick="location.href='@Url.Action("Create")'" />
-        </td>
-    </tr>
 </table>
 
 <script>

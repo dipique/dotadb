@@ -183,11 +183,11 @@ textarea {
     min-height: 100px;
 }
 
-div.add-ally, div.add-enemy {
+.add-ally, .add-enemy {
     display: inline;
 }
 
-.hor-more p.more {
+.hor-more .more {
     display: none;
 }
 
@@ -196,22 +196,52 @@ span.hor-more {
     cursor: pointer;
 }
 
-div.allyDetail, div.enemyDetail {
+.allyDetail, .enemyDetail {
     padding: 5px;
     border: 1px solid #ccc;
     margin-bottom: 6px;
 }
 
-div.counter-row, div.synergy-row, div.tip-row {
+.counter-row, .synergy-row, .tip-row {
     border: none;
     box-shadow: 0 2px 4px rgba(51, 51, 51, .25);
     margin: 2px 2px;
 }
 
-div.tip-header, div.relationship-header {
+.tip-header, .relationship-header {
     text-decoration: underline;
 }
 
-div.detail-column {
+.detail-column {
     display: none; /* hidden initially */
+}
+
+a.create-link {
+    background: url(../img/create.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+a.delete-link {
+    background: url(../img/delete.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+a.edit-link {
+    background: url(../img/edit.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+.link-padding {
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
 }

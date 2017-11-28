@@ -14,7 +14,7 @@ namespace DotAPicker.Models
     {
         public const string DEFAULT_USER = "default";
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(256)]
@@ -45,26 +45,25 @@ namespace DotAPicker.Models
         [DisplayName("Show Deprecated Relationships")]
         public bool ShowDeprecatedRelationships { get; set; } = false;
 
-        private const char LBL_SEP = '|';
-        private const string DISALLOWED_LABEL_CHARS = ":|"; //needed to support hero label storage format
-
+        [DisplayName("Label Options")]
         public string LabelOptions { get; set; } = string.Empty;
 
         public LabelSet Labels
         {
-            get => new LabelSet(LabelOptions.Split(new char[] { LBL_SEP }, StringSplitOptions.RemoveEmptyEntries));
-            set => LabelOptions =  String.Join(LBL_SEP.ToString(), value.Select(lbl => new string(lbl.Where(c => !DISALLOWED_LABEL_CHARS.Contains(c))
+            get => new LabelSet(LabelOptions.Split(new char[] { LabelSet.STD_DELIM[0] }, StringSplitOptions.RemoveEmptyEntries));
+            set => LabelOptions =  String.Join(LabelSet.STD_DELIM, value.Select(lbl => new string(lbl.Where(c => !LabelSet.DISALLOWED_LABEL_CHARS.Contains(c))
                                                                                       .ToArray())));
         }
 
-        public virtual List<Hero> Heroes { get; set; }
-        public virtual List<Tip> Tips { get; set; }
-        public virtual List<Relationship> Relationships { get; set; }
+        public virtual List<Hero> Heroes { get; set; } = new List<Hero>();
+        public virtual List<Tip> Tips { get; set; } = new List<Tip>();
+        public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
     }
 
     public class LabelSet : List<string>
     {
         public const string STD_DELIM = "|";
+        public const string DISALLOWED_LABEL_CHARS = ":|";
 
         public LabelSet(IEnumerable<string> elements) : base(elements)
         {

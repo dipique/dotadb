@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Patch, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.UserId)
                 @Html.EditorFor(model => model.Patch, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Patch, "", new { @class = "text-danger" })
             </div>
@@ -35,27 +35,27 @@
             </div>
         </div>
 
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.Label("Hero 1", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.SubjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Hero1ID", (IEnumerable<SelectListItem>)ViewBag.HeroOptions, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.SubjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Hero 2", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.ObjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Hero2ID", (IEnumerable<SelectListItem>)ViewBag.HeroOptions, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.ObjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -15,9 +15,11 @@ namespace DotAPicker.Controllers
         // GET: Relationship
         public ActionResult Index()
         {
-            var relationshipVMs = db.Relationships.Include(r => r.Hero1).Include(r => r.Hero2);
-
-            return View("Relationships", relationshipVMs);
+            var relationshipVMs = db.Relationships.Include(r => r.HeroSubject)
+                                                  .Include(r => r.HeroObject)
+                                                  .Where(r => r.UserId == CurrentUser.Id);
+            var test = CurrentUser.Id;
+            return View("Relationships", relationshipVMs.ToList());
         }
 
 
@@ -25,10 +27,10 @@ namespace DotAPicker.Controllers
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
-            ViewBag.HeroOptions = GetHeroOptions(heroID);
+            ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
 
-            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserID = CurrentUser.ID };
-            if (heroID != -1) tvm.Hero1ID = heroID;
+            var tvm = new Relationship() { Patch = CurrentUser.CurrentPatch, UserId = CurrentUser.Id };
+            if (heroID != -1) tvm.HeroSubjectId = heroID;
             return View("Create", tvm);
         }
 
@@ -38,51 +40,60 @@ namespace DotAPicker.Controllers
         {
             db.Relationships.Add(model);
             db.SaveChanges();
+            var heroID = model.HeroSubjectId ?? model.HeroObjectId;
 
-            if (!returnToHeroList) return Index();
+            if (!returnToHeroList || heroID == null) return Index();
 
-            TempData["SelectedHeroID"] = model.Hero1ID;
+            TempData["SelectedHeroID"] = heroID;
             return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Relationship/Edit/5
         public ActionResult Edit(int id)
         {
-            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");
             }
 
-            ViewBag.HeroOptions = GetHeroOptions(id);
-
+            ViewBag.SubjectOptions = GetSubjectOptions(id.ToString());
+            db.Entry(relationship).State = EntityState.Detached;
             return View("Edit", relationship);
         }
 
         // POST: Relationship/Edit/5
         [HttpPost]
-        public ActionResult Edit(Relationship model)
+        public ActionResult Edit(Relationship model, bool returnToHeroList = false)
         {
-            //Update the edited Relationship
-            db.Relationships.Attach(model);
-            db.SaveChanges();
+            if (model != null && ModelState.IsValid)
+            {
+                db.Relationships.Attach(model);
+                db.SaveChanges();
+            }
+            var heroID = model.HeroSubjectId ?? model.HeroObjectId;
+            if (!returnToHeroList || heroID == null) return Index();
 
-            return Index();
+            TempData["SelectedHeroID"] = heroID;
+            return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Relationship/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, bool returnToHeroList = false)
         {
-            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.ID == id);
+            var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
             if (relationship == null)
             {
                 throw new Exception("Relationship not found.");
             }
-
+            var heroID = relationship.HeroSubjectId ?? relationship.HeroObjectId;
             db.Relationships.Remove(relationship);
 
             db.SaveChanges();
-            return Index();
+            if (!returnToHeroList || heroID == null) return Index();
+
+            TempData["SelectedHeroID"] = heroID;
+            return RedirectToAction("Index", "Hero", new { });
         }
     }
 }

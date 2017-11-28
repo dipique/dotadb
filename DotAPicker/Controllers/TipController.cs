@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -27,9 +28,9 @@ namespace DotAPicker.Controllers
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
-            ViewBag.HeroOptions = GetHeroOptions(heroID);
-            var tip = new Tip() { Patch = CurrentUser.CurrentPatch };
-            if (heroID != -1) tip.HeroID = heroID;
+            ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
+            var tip = new Tip() { Patch = CurrentUser.CurrentPatch, UserId = CurrentUser.Id };
+            if (heroID != -1) tip.HeroSubjectId = heroID;
             return View("Create", tip);
         }
 
@@ -37,56 +38,63 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Create(Tip model, bool returnToHeroList = false)
         {
-            if (db.Tips.Any(h => h.ID == model.ID))
-            {
-                throw new Exception("Tip ID collision");
-            }
-
-            db.Tips.Attach(model);
+            db.Tips.Add(model);
             db.SaveChanges();
 
-            if (!returnToHeroList) return Index();
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
 
-            TempData["SelectedHeroID"] = model.HeroID;
+            TempData["SelectedHeroID"] = model.HeroSubjectId;
             return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Tip/Edit/5
         public ActionResult Edit(int id)
         {
-            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
             }
-            ViewBag.HeroOptions = GetHeroOptions(tip.HeroID);
+            ViewBag.SubjectOptions = GetSubjectOptions(tip.HeroSubjectId.ToString());
+            db.Entry(tip).State = EntityState.Detached;
 
             return View("Edit", tip);
         }
 
         // POST: Tip/Edit/5
         [HttpPost]
-        public ActionResult Edit(Tip model)
+        public ActionResult Edit(Tip model, bool returnToHeroList = false)
         {
-            db.Tips.Attach(model);
+            if (model != null && ModelState.IsValid)
+            {
+                db.Tips.Attach(model);
+                db.SaveChanges();
+            }
 
-            db.SaveChanges();
-            return Index();
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
+
+            TempData["SelectedHeroID"] = model.HeroSubjectId;
+            return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Tip/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, bool returnToHeroList = false)
         {
-            var tip = CurrentUser.Tips.FirstOrDefault(h => h.ID == id);
+            var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
             }
+            var heroID = tip.HeroSubjectId;
 
             db.Tips.Remove(tip);
 
             db.SaveChanges();
-            return Index();
+
+            if (!returnToHeroList || heroID == null) return Index();
+
+            TempData["SelectedHeroID"] = heroID;
+            return RedirectToAction("Index", "Hero", new { });
         }
     }
 }

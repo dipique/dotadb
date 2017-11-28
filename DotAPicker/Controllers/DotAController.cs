@@ -48,14 +48,34 @@ namespace DotAPicker.Controllers
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
             CurrentUser.Heroes.Select(h => new SelectListItem() {
                 Text = h.Name,
-                Value = h.ID.ToString(),
-                Selected = selection == h.ID
+                Value = h.Id.ToString(),
+                Selected = selection == h.Id
             }).OrderBy(s => s.Text);
+
+        public IEnumerable<SelectListItem> GetSubjectOptions(string selection = null)
+        {
+            int intSelection = -1;
+            int.TryParse(selection, out intSelection);
+            return CurrentUser.Labels.Select(l => new SelectListItem() {
+                Text = $"Label: {l}",
+                Value = l,
+                Selected = selection == l
+            }).OrderBy(s => s.Text)
+              .Concat(GetHeroOptions(intSelection));
+        }
 
         public Hero GetHeroByID(int id)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
-            hero.Relationships = db.Relationships.Where(r => r.Hero1ID == id || r.Hero2ID == id).ToList();
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.First();
+            if (hero == null) return hero;
+            hero.Relationships = db.Relationships.Where(r => r.HeroObjectId == id || 
+                                                             r.HeroSubjectId == id || 
+                                                             hero.Labels.Contains(r.LabelSubject) || 
+                                                             hero.Labels.Contains(r.LabelObject))
+                                                 .ToList();
+            hero.Tips = db.Tips.Where(r => r.HeroSubjectId == id ||
+                                           hero.Labels.Contains(r.LabelSubject))
+                               .ToList();
             return hero;
         }
 

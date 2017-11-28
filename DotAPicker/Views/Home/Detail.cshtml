@@ -6,7 +6,7 @@
     <div class="hor-data-cell" style="border: none;">
         <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
         <strong>@Model.Name</strong> 
-        <a class="detail-remove" href="javascript: void(0)" id="@Model.ID">
+        <a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Id" title="Remove from Selection">
             (remove)
         </a>
         <br />
@@ -42,7 +42,7 @@
                         @{
                             //first column
                             bool partialRow = fullRows <= x;
-                            var tip = @Model.Tips.Skip(x).Take(1).First();
+                            var tip = @Model.Tips.Skip(x * COL_COUNT).Take(1).First();
                             <div class="hor-data-cell" style="border:none">
                                 <div class="tip-header">
                                     @tip.Type.GetDisplayName()
@@ -53,7 +53,7 @@
                             //second column
                             if (!partialRow || remainder == 2)
                             {
-                                tip = @Model.Tips.Skip(x + 1).Take(1).First();
+                                tip = @Model.Tips.Skip(x * COL_COUNT + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="tip-header">
                                         @tip.Type.GetDisplayName()
@@ -65,7 +65,7 @@
                             //third column
                             if (!partialRow)
                             {
-                                tip = @Model.Tips.Skip(x + 2).Take(1).First();
+                                tip = @Model.Tips.Skip(x * COL_COUNT + 2).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="tip-header">
                                         @tip.Type.GetDisplayName()
@@ -83,7 +83,7 @@
 
 @{
     //Relationships - counters
-    var relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Counter);
+    var relationships = Model.Relationships.Where(r => r.Type == TipType.Counter);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -108,35 +108,35 @@
                         @{
                             //first column
                             bool partialRow = fullRows <= x;
-                            var r = relationships.Skip(x).Take(1).First();
+                            var r = relationships.Skip(x * COL_COUNT).Take(1).First();
                             <div class="hor-data-cell" style="border:none">
                                 <div class="relationship-header">
-                                    @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                    @($"{r.SubjectName}->{r.ObjectName}")
                                 </div>                            
-                                <p>@r.Description</p>
+                                <p>@r.Text</p>
                             </div>
 
                             //second column
                             if (!partialRow || remainder == 2)
                             {
-                                r = relationships.Skip(x + 1).Take(1).First();
+                                r = relationships.Skip(x * COL_COUNT + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @($"{r.SubjectName}->{r.ObjectName}")
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
                             }
 
                             //third column
                             if (!partialRow)
                             {
-                                r = relationships.Skip(x + 2).Take(1).First();
+                                r = relationships.Skip(x * COL_COUNT + 2).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @($"{r.SubjectName}->{r.ObjectName}")
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
                             }
                         }
@@ -149,7 +149,7 @@
 
 @{
     //Relationships - Synergies
-    relationships = Model.Relationships.Where(r => r.Type == RelationshipType.Synergy);
+    relationships = Model.Relationships.Where(r => r.Type == TipType.Synergy);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -172,42 +172,42 @@
                     {
                         //opening div
                         <div class="type hor-data-row">
-                            @{
-                                //first column
-                                bool partialRow = fullRows <= x;
-                                var r = relationships.Skip(x).Take(1).First();
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var r = relationships.Skip(x * COL_COUNT).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="relationship-header">
+                                    @($"{r.SubjectName}->{r.ObjectName}")
+                                </div>                            
+                                <p>@r.Text</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="relationship-header">
-                                        @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
+                                        @($"{r.SubjectName}->{r.ObjectName}")
                                     </div>
-                                    <p>@r.Description</p>
+                                    <p>@r.Text</p>
                                 </div>
-
-                                //second column
-                                if (!partialRow || remainder == 2)
-                                {
-                                    r = relationships.Skip(x + 1).Take(1).First();
-                                    <div class="hor-data-cell" style="border:none">
-                                        <div class="relationship-header">
-                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
-                                        </div>
-                                        <p>@r.Description</p>
-                                    </div>
-                                }
-
-                                //third column
-                                if (!partialRow)
-                                {
-                                    r = relationships.Skip(x + 2).Take(1).First();
-                                    <div class="hor-data-cell" style="border:none">
-                                        <div class="relationship-header">
-                                            @(r.Hero1ID == Model.ID ? r.Hero2.Name : r.Hero1.Name)
-                                        </div>
-                                        <p>@r.Description</p>
-                                    </div>
-                                }
                             }
-                        </div>
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @($"{r.SubjectName}->{r.ObjectName}")
+                                    </div>
+                                    <p>@r.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
                     }
                 }
             </div>

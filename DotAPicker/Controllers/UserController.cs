@@ -44,7 +44,7 @@ namespace DotAPicker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
+        public ActionResult Create([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
         {
             //TODO validate that username is still unique
             if (ModelState.IsValid)
@@ -78,9 +78,9 @@ namespace DotAPicker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
         {
-            if (CurrentUser.ID == user.ID) db.Entry(CurrentUser).State = EntityState.Detached;
+            if (CurrentUser.Id == user.Id) db.Entry(CurrentUser).State = EntityState.Detached;
 
             //TODO validate that username is still unique
             if (ModelState.IsValid)

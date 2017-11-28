@@ -22,7 +22,7 @@ namespace DotAPicker.Controllers
         // GET: Hero/Create
         public ActionResult Create()
         {
-            var hero = new Hero() { UserID = CurrentUser.ID };
+            var hero = new Hero() { UserId = CurrentUser.Id };
             return View("Create", hero);
         }
 
@@ -35,7 +35,7 @@ namespace DotAPicker.Controllers
                 throw new Exception("This name is already in use");
             }
 
-            if (db.Heroes.Any(h => h.ID == model.ID))
+            if (db.Heroes.Any(h => h.Id == model.Id))
             {
                 throw new Exception("Hero ID collision");
             }
@@ -50,7 +50,7 @@ namespace DotAPicker.Controllers
         // GET: Hero/Edit/5
         public ActionResult Edit(int id)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
             if (hero == null) throw new Exception("Hero not found.");
 
             ViewBag.LabelOptions = new LabelSet(CurrentUser.LabelOptions);
@@ -76,7 +76,7 @@ namespace DotAPicker.Controllers
         // GET: Hero/Delete/5
         public ActionResult Delete(int id)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.ID == id);
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
             if (hero == null)
             {
                 throw new Exception("Hero not found.");
