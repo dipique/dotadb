@@ -96,15 +96,26 @@
     });
 
     //Register keyboard events
-    $('#filterInput').keyup(function () {
-        filterFunction();
+    $('#filterInput').keyup(function (e) {
+        if (e.keyCode == 13) { //enter
+            if (countVisibleHeroes() == 1) {
+                var heroRow = $("div.data-row#" + firstVisibleHeroIndex())[0];
+                selectRow(heroRow);
+            }
+        } else {
+            filterFunction();
+        }
     });
 
     //Causes clicking a row to load the detail partial view
     $('.data-row').click(function () {
-        $(this).addClass('selected').siblings().removeClass('selected');
-        $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + this.id);
+        selectRow(this);
     });
+
+    function selectRow(heroRow) {
+        $(heroRow).addClass('selected').siblings().removeClass('selected');
+        $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + heroRow.id);
+    }
 
     //Make the first hero auto-load details
     $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);

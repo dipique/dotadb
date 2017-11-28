@@ -116,3 +116,25 @@ function showNoDataElements() {
     }
 }
 
+function firstVisibleHeroIndex() {
+    // Get search criteria
+    var table = document.getElementById("filterHeroTable");
+
+    //loop through the table rows
+    for (var i = 0; i < table.childNodes.length; i++) {
+        //skip elements other than table rows
+        var row = table.childNodes[i];
+        if (typeof (row.className) == "undefined") {
+            continue;
+        } else if (row.className.indexOf("data-row") == -1) {
+            continue;
+        }
+
+        //return the row ID if it is visible
+        if (row.style.display == "") {
+            return row.id;
+        }
+    }
+
+    return -1;
+}
