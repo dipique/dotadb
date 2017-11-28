@@ -215,3 +215,33 @@ span.hor-more {
 .detail-column {
     display: none; /* hidden initially */
 }
+
+a.create-link {
+    background: url(../img/create.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+a.delete-link {
+    background: url(../img/delete.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+a.edit-link {
+    background: url(../img/edit.svg) no-repeat center center;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+.link-padding {
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+}
