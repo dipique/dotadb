@@ -29,7 +29,7 @@ namespace DotAPicker.Controllers
         {
             ViewBag.ReturnToHeroList = returnToHeroList;
             ViewBag.SubjectOptions = GetSubjectOptions(heroID.ToString());
-            var tip = new Tip() { Patch = CurrentUser.CurrentPatch };
+            var tip = new Tip() { Patch = CurrentUser.CurrentPatch, UserId = CurrentUser.Id };
             if (heroID != -1) tip.HeroSubjectId = heroID;
             return View("Create", tip);
         }
@@ -38,15 +38,10 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Create(Tip model, bool returnToHeroList = false)
         {
-            if (db.Tips.Any(h => h.Id == model.Id))
-            {
-                throw new Exception("Tip ID collision");
-            }
-
-            db.Tips.Attach(model);
+            db.Tips.Add(model);
             db.SaveChanges();
 
-            if (!returnToHeroList) return Index();
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
 
             TempData["SelectedHeroID"] = model.HeroSubjectId;
             return RedirectToAction("Index", "Hero", new { });
@@ -68,27 +63,38 @@ namespace DotAPicker.Controllers
 
         // POST: Tip/Edit/5
         [HttpPost]
-        public ActionResult Edit(Tip model)
+        public ActionResult Edit(Tip model, bool returnToHeroList = false)
         {
-            db.Tips.Attach(model);
+            if (model != null && ModelState.IsValid)
+            {
+                db.Tips.Attach(model);
+                db.SaveChanges();
+            }
 
-            db.SaveChanges();
-            return Index();
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
+
+            TempData["SelectedHeroID"] = model.HeroSubjectId;
+            return RedirectToAction("Index", "Hero", new { });
         }
 
         // GET: Tip/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, bool returnToHeroList = false)
         {
             var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
             if (tip == null)
             {
                 throw new Exception("Tip not found.");
             }
+            var heroID = tip.HeroSubjectId;
 
             db.Tips.Remove(tip);
 
             db.SaveChanges();
-            return Index();
+
+            if (!returnToHeroList || heroID == null) return Index();
+
+            TempData["SelectedHeroID"] = heroID;
+            return RedirectToAction("Index", "Hero", new { });
         }
     }
 }
