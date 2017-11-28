@@ -220,6 +220,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\bet-one.svg" />
+    <Content Include="img\create.svg" />
+    <Content Include="img\delete.svg" />
+    <Content Include="img\edit.svg" />
     <Content Include="img\hero\120px-Abaddon_icon.png" />
     <Content Include="img\hero\120px-Alchemist_icon.png" />
     <Content Include="img\hero\120px-Ancient_Apparition_icon.png" />
