@@ -33,12 +33,36 @@
                 </ul>
             </div>
         </div>
-    </div>    
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Daniel Kaschel</p>
-        </footer>
-    
+    </div>
+
+    @{
+        var alertFlags = new string[] { "warning", "success", "info", "danger" };
+        var foundCookie = alertFlags.Select(f => Request.Cookies[f])
+                                    .Where(c => c != null)
+                                    .FirstOrDefault();
+        if (foundCookie != null)
+        {
+            var alertClass = $"alert alert-{foundCookie.Name}"; //warning/yellow | success/green | info/blue | danger/red
+
+            <div id="pop-down-alert" class="@alertClass">
+                @Request.Cookies[2].Value <a id="close">[close]</a>
+            </div>
+        }
+    }
+
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Daniel Kaschel</p>
+    </footer>
+
+    <script>
+        close = document.getElementById("close");
+        close.addEventListener('click', function () {
+            note = document.getElementById("note");
+            note.style.display = 'none';
+        }, false);
+    </script>
+
 </body>
 </html>

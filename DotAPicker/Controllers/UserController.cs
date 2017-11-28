@@ -21,15 +21,10 @@ namespace DotAPicker.Controllers
         // GET: User/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return Index().Error("Invalid User ID");
             User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
+            if (user == null) Index().Error("Invalid User Id");
+
             return View(user);
         }
 

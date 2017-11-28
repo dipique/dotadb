@@ -20,7 +20,6 @@
 <script src="~/Scripts/filter-table.js"></script>
 
 
-
 <div class="container-fluid" style="width: 1020px; min-width: 720px; margin-left: 20px;">
     <div class="row">
         <div class="col-xs-4">
@@ -49,7 +48,7 @@
         <div class="col-xs-4">
             <h4 style="display:inline-block">Hero List</h4>
             <div class="link-padding">
-                @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Hero"})
+                @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Hero" })
             </div>
         </div>
         <div class="col-xs-7"><h4>Hero Details</h4></div>
@@ -61,7 +60,7 @@
                 <div class="header-scrolling-container">
                     <div class="header-cell" style="min-width: 200px">Name</div>
                     <div class="header-cell" style="display:none">Alt Names</div>
-                    <div class="header-cell">Preference</div>
+                    <div class="header-cell" style="min-width: 110px">Preference</div>
                     <div class="header-cell" style="display:none">Actions</div>
                 </div>
                 <div class="data-scrolling-container" id="filterHeroTable">
@@ -71,7 +70,7 @@
                         <div class="@rowClass" id="@hero.Id">
                             <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="heroAltNames">@hero.AltNames</div>
-                            <div class="data-row-cell" id="heroPreference">
+                            <div class="data-row-cell" id="heroPreference" style="min-width: 110px">
                                 @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref", controller = "hero" })
                             </div>
                             <div class="data-row-cell" id="heroActions" style="display:none"></div>

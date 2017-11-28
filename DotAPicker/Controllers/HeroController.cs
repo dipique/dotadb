@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
-using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -32,17 +31,17 @@ namespace DotAPicker.Controllers
         {
             if (CurrentUser.Heroes.Any(h => h.Name == model.Name))
             {
-                throw new Exception("This name is already in use");
+                return RedirectToAction(nameof(Index)).Error("This name is already in use");
             }
 
             if (db.Heroes.Any(h => h.Id == model.Id))
             {
-                throw new Exception("Hero ID collision");
+                return RedirectToAction(nameof(Index)).Error("Hero ID collision");
             }
 
             db.Heroes.Add(model);
             db.SaveChanges();
-            return Index();
+            return RedirectToAction(nameof(Index)).Success("Hero created.");
         }
 
         public ActionResult Detail(int id) => PartialView(GetHeroByID(id));
@@ -51,7 +50,7 @@ namespace DotAPicker.Controllers
         public ActionResult Edit(int id)
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
-            if (hero == null) throw new Exception("Hero not found.");
+            if (hero == null) return Index().Error("Hero not found.");
 
             ViewBag.LabelOptions = new LabelSet(CurrentUser.LabelOptions);
 
@@ -64,13 +63,11 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Hero model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return Index();            
+            if (!ModelState.IsValid) return Index().Error($"Error: {ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage}");
+
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index)).Success("Edit complete");
         }
 
         // GET: Hero/Delete/5
@@ -79,13 +76,13 @@ namespace DotAPicker.Controllers
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
             if (hero == null)
             {
-                throw new Exception("Hero not found.");
+                return Index().Error("Hero not found.");
             }
 
             db.Heroes.Remove(hero);
             db.SaveChanges();
 
-            return Index();
+            return Index().Success("Hero deleted.");
         }
     }
 }

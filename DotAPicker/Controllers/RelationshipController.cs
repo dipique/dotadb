@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
-using DotAPicker.Utilities;
 
 namespace DotAPicker.Controllers
 {
@@ -42,20 +41,17 @@ namespace DotAPicker.Controllers
             db.SaveChanges();
             var heroID = model.HeroSubjectId ?? model.HeroObjectId;
 
-            if (!returnToHeroList || heroID == null) return Index();
+            if (!returnToHeroList || heroID == null) return Index().Success("Relationship created.");
 
             TempData["SelectedHeroID"] = heroID;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Relationship created.");
         }
 
         // GET: Relationship/Edit/5
         public ActionResult Edit(int id)
         {
             var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
-            if (relationship == null)
-            {
-                throw new Exception("Relationship not found.");
-            }
+            if (relationship == null) return Index().Error("Relationship not found.");
 
             ViewBag.SubjectOptions = GetSubjectOptions(id.ToString());
             db.Entry(relationship).State = EntityState.Detached;
@@ -66,16 +62,16 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Relationship model, bool returnToHeroList = false)
         {
-            if (model != null && ModelState.IsValid)
-            {
-                db.Relationships.Attach(model);
-                db.SaveChanges();
-            }
+            if (!ModelState.IsValid) return Index().Error($"Error: {ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage}");
+            if (model == null) return Index().Error("Some'n goofy happened, try again. Or, you know, don't.");
+
+            db.Relationships.Attach(model);
+            db.SaveChanges();
             var heroID = model.HeroSubjectId ?? model.HeroObjectId;
-            if (!returnToHeroList || heroID == null) return Index();
+            if (!returnToHeroList || heroID == null) return Index().Success("Changes saved.");
 
             TempData["SelectedHeroID"] = heroID;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Changes saved.");
         }
 
         // GET: Relationship/Delete/5
@@ -84,16 +80,16 @@ namespace DotAPicker.Controllers
             var relationship = CurrentUser.Relationships.FirstOrDefault(h => h.Id == id);
             if (relationship == null)
             {
-                throw new Exception("Relationship not found.");
+                return Index().Error("Relationship not found.");
             }
-            var heroID = relationship.HeroSubjectId ?? relationship.HeroObjectId;
+            var heroID = relationship.HeroSubjectId ?? relationship.HeroObjectId; //save it before it's deleted
             db.Relationships.Remove(relationship);
 
-            db.SaveChanges();
-            if (!returnToHeroList || heroID == null) return Index();
+            db.SaveChanges(); 
+            if (!returnToHeroList || heroID == null) return Index().Success("Relationship deleted.");
 
             TempData["SelectedHeroID"] = heroID;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Relationship deleted.");
         }
     }
 }

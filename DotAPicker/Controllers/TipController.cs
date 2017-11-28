@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -41,20 +40,18 @@ namespace DotAPicker.Controllers
             db.Tips.Add(model);
             db.SaveChanges();
 
-            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index().Success("Tip created.");
 
             TempData["SelectedHeroID"] = model.HeroSubjectId;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Tip created.");
         }
 
         // GET: Tip/Edit/5
         public ActionResult Edit(int id)
         {
             var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
-            if (tip == null)
-            {
-                throw new Exception("Tip not found.");
-            }
+            if (tip == null) return Index().Error("Tip not found.");
+
             ViewBag.SubjectOptions = GetSubjectOptions(tip.HeroSubjectId.ToString());
             db.Entry(tip).State = EntityState.Detached;
 
@@ -65,36 +62,33 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Tip model, bool returnToHeroList = false)
         {
-            if (model != null && ModelState.IsValid)
-            {
-                db.Tips.Attach(model);
-                db.SaveChanges();
-            }
+            if (!ModelState.IsValid) return Index().Error($"Error: {ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage}");
+            if (model == null) return Index().Error("Some'n goofy happened, try again. Or, you know, don't.");
 
-            if (!returnToHeroList || model.HeroSubjectId == null) return Index();
+            db.Tips.Attach(model);
+            db.SaveChanges();
+
+            if (!returnToHeroList || model.HeroSubjectId == null) return Index().Success("Changes saved.");
 
             TempData["SelectedHeroID"] = model.HeroSubjectId;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Changes saved.");
         }
 
         // GET: Tip/Delete/5
         public ActionResult Delete(int id, bool returnToHeroList = false)
         {
             var tip = CurrentUser.Tips.FirstOrDefault(h => h.Id == id);
-            if (tip == null)
-            {
-                throw new Exception("Tip not found.");
-            }
-            var heroID = tip.HeroSubjectId;
+            if (tip == null) return Index().Error("Tip not found.");
+
+            var heroID = tip.HeroSubjectId; //save it before it's deleted
 
             db.Tips.Remove(tip);
-
             db.SaveChanges();
 
-            if (!returnToHeroList || heroID == null) return Index();
+            if (!returnToHeroList || heroID == null) return Index().Success("Tip deleted.");
 
             TempData["SelectedHeroID"] = heroID;
-            return RedirectToAction("Index", "Hero", new { });
+            return RedirectToAction("Index", "Hero", new { }).Success("Tip deleted.");
         }
     }
 }

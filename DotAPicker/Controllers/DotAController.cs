@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.DAL;
@@ -46,7 +47,8 @@ namespace DotAPicker.Controllers
         }
 
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
-            CurrentUser.Heroes.Select(h => new SelectListItem() {
+            CurrentUser.Heroes.Select(h => new SelectListItem()
+            {
                 Text = h.Name,
                 Value = h.Id.ToString(),
                 Selected = selection == h.Id
@@ -56,7 +58,8 @@ namespace DotAPicker.Controllers
         {
             int intSelection = -1;
             int.TryParse(selection, out intSelection);
-            return CurrentUser.Labels.Select(l => new SelectListItem() {
+            return CurrentUser.Labels.Select(l => new SelectListItem()
+            {
                 Text = $"Label: {l}",
                 Value = l,
                 Selected = selection == l
@@ -68,9 +71,9 @@ namespace DotAPicker.Controllers
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.First();
             if (hero == null) return hero;
-            hero.Relationships = db.Relationships.Where(r => r.HeroObjectId == id || 
-                                                             r.HeroSubjectId == id || 
-                                                             hero.Labels.Contains(r.LabelSubject) || 
+            hero.Relationships = db.Relationships.Where(r => r.HeroObjectId == id ||
+                                                             r.HeroSubjectId == id ||
+                                                             hero.Labels.Contains(r.LabelSubject) ||
                                                              hero.Labels.Contains(r.LabelObject))
                                                  .ToList();
             hero.Tips = db.Tips.Where(r => r.HeroSubjectId == id ||
@@ -93,5 +96,54 @@ namespace DotAPicker.Controllers
             return View();
         }
 
+        #region Popdown Extensions
+
+
+
+
+
+        #endregion
+    }
+
+    internal static class PopdownExtensions
+    {
+        public static ActionResult Error(this ActionResult result, string message)
+        {
+            PopDownCookieMessage(Notification.Danger, message);
+            return result;
+        }
+
+        public static ActionResult Warning(this ActionResult result, string message)
+        {
+            PopDownCookieMessage(Notification.Warning, message);
+            return result;
+        }
+
+        public static ActionResult Success(this ActionResult result, string message)
+        {
+            PopDownCookieMessage(Notification.Success, message);
+            return result;
+        }
+
+        public static ActionResult Information(this ActionResult result, string message)
+        {
+            PopDownCookieMessage(Notification.Info, message);
+            return result;
+        }
+
+        private static void PopDownCookieMessage(Notification notification, string message) =>
+            HttpContext.Current.Response.Cookies.Add(
+                new HttpCookie($"{notification.ToString().ToLower()}", message) {
+                    Path = "/",
+                    Expires = DateTime.Now.AddSeconds(5) //I'm not really sure how long this should be--just long enough for the value to be there 
+            });                                          //on page load. But if it's too long, it'll be there when the next action takes place.
+    }
+
+    public enum Notification
+    {
+        Danger,
+        Warning,
+        Success,
+        Info
     }
 }
