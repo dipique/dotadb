@@ -33,6 +33,14 @@ namespace DotAPicker.Models
                                   .ToArray())));
         }
 
+        [NotMapped, Display(Name = "Description Labels")]
+        public List<string> DescriptionLabelsList
+        {
+            get => new List<string>(Labels.Split(new char[] { LabelSet.STD_DELIM[0] }, StringSplitOptions.RemoveEmptyEntries));
+            set => Labels = String.Join(LabelSet.STD_DELIM, value.Select(lbl => new string(lbl.Where(c => !LabelSet.DISALLOWED_LABEL_CHARS.Contains(c))
+                                  .ToArray())));
+        }
+
         [NotMapped]
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();
 
