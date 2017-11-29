@@ -1,0 +1,60 @@
+﻿#filterInput {
+    background-image: url('/img/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 4px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    font-size: 14px; /* Increase font-size */
+    padding: 4px 20px 2px 40px; /* Add some padding */
+    border: 1px solid #AAA; /* Add a grey border */
+    margin-bottom: 10px; /* Add some space below the input */
+    font-family: Arial, Helvetica, sans-serif;
+    height: 29px;
+}
+
+#filterTable {
+    border-collapse: collapse; /* Collapse borders */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+}
+
+    #filterTable th, #filterTable td {
+        text-align: left; /* Left-align text */
+        padding: 6px; /* Add padding */
+    }
+
+    #filterTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+        #filterTable .header, #filterTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+        }
+
+.data-scrolling-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline-block;
+    height: 560px;
+    margin-top: 40px; /* This is what prevents the first row from disappearing */
+}
+
+.data-row {
+    display: flex;
+}
+
+    .data-row:hover .data-row-cell {
+        background-color: #f1f1f1;
+    }
+
+.selected .data-row-cell {
+    background-color: lightpink;
+}
+
+.data-row-cell {
+    min-width: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px; /* Increase font-size */
+    padding: 3px 5px 3px 5px; /* Add some padding (TRBL) */
+}

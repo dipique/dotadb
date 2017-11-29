@@ -214,6 +214,8 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\filter-table.css" />
+    <Content Include="Content\popdown.css" />
     <Content Include="Content\sliders.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
