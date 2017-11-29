@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Objects;
 using System.Diagnostics;
 using System.Linq;
 
@@ -66,18 +69,40 @@ namespace DotAPicker.DAL
         {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-            //modelBuilder.Entity<Relationship>().HasRequired(f => f.Hero1)
-            //                                   .WithOptional()
-            //                                   .WillCascadeOnDelete(false);
-            //modelBuilder.Entity<Relationship>().HasRequired(f => f.Hero2)
-            //                                   .WithOptional()
-            //                                   .WillCascadeOnDelete(false);
-            //modelBuilder.Entity<Tip>().HasRequired(t => t.User)
-            //                          .WithRequiredDependent()
-            //                          .WillCascadeOnDelete(false);
         }
+    }
 
+    public static class DBContextExtensions
+    {
+        //check if an entity is attacedh
+        public static bool IsAttached<T>(this DbContext context, T entity) where T : class
+        {
+            if (entity == null) return false;
+
+            var oc = ((IObjectContextAdapter)context).ObjectContext;
+
+            var type = ObjectContext.GetObjectType(entity.GetType());
+
+            // Get key PropertyInfos
+            var propertyInfos = oc.MetadataWorkspace
+                  .GetItems(DataSpace.CSpace).OfType<EntityType>()
+                  .Where(i => i.Name == type.Name)
+                  .SelectMany(i => i.KeyProperties)
+                  .Join(type.GetProperties(), ep => ep.Name, pi => pi.Name, (ep, pi) => pi);
+
+            // Get key values
+            var keyValues = propertyInfos.Select(pi => pi.GetValue(entity)).ToArray();
+
+            // States to look for    
+            var states = EntityState.Added | EntityState.Modified |
+                         EntityState.Unchanged | EntityState.Deleted;
+
+            // Check if there is an entity having these key values
+            return oc.ObjectStateManager.GetObjectStateEntries(states)
+                     .Select(ose => ose.Entity).OfType<T>()
+                     .Any(t => propertyInfos.Select(i => i.GetValue(t))
+                                            .SequenceEqual(keyValues));
+        }
     }
 
     public class DotAInitializer : DropCreateDatabaseIfModelChanges<DotAContext> //DropCreateDatabaseAlways <DotAContext>
