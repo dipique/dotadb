@@ -7,7 +7,6 @@
 }
 
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
-<script src="~/Scripts/update-pref.js"></script>
 <script src="~/Scripts/chosen.jquery.min.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
@@ -251,6 +250,6 @@
     }
 
     $(".hero-pref").change(function () {
-        heroPrefChange(this, "Home");
+        $('.popdown-view').load('home/UpdatePreference?heroID=' + this.id + '&preference=' + this.options[this.selectedIndex].text);
     });
 </script>

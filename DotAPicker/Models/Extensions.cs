@@ -27,7 +27,7 @@ namespace DotAPicker.Models
                        });
         }
 
-        public static IEnumerable<string> GetEnumOptions(Type enumType, Type affiliationType)
+        public static IEnumerable<string> GetEnumOptions(Type enumType, Type affiliationType = null)
         {
             //since we cant do a generic type constraint
             if (!enumType.IsEnum)
@@ -35,11 +35,16 @@ namespace DotAPicker.Models
                 throw new ArgumentException("Generic Type 'T' must be an Enum");
             }
 
-            string sAfType = affiliationType.Name;
-            return enumType.GetMembers(BindingFlags.Public|BindingFlags.Static)
-                           .Where(m => m.MemberType == MemberTypes.Field)
-                           .Where(m => (m.GetCustomAttribute<ObjectAffiliation>()?.TypeName ?? sAfType) == sAfType)
-                           .Select(m => m.Name);
+            var members = enumType.GetMembers(BindingFlags.Public | BindingFlags.Static)
+                                  .Where(m => m.MemberType == MemberTypes.Field);
+
+            //only filter by affiliation if an affiliation type was provided.
+            if (affiliationType != null)
+            {
+                members = members.Where(m => (m.GetCustomAttribute<ObjectAffiliation>()?.TypeName ?? affiliationType.Name) == affiliationType.Name);
+            }
+
+            return members.Select(m => m.Name);
         }
     }
 }

@@ -15,7 +15,6 @@
 }
 
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
-<script src="~/Scripts/update-pref.js"></script>
 <script src="~/Scripts/chosen.jquery.min.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
@@ -120,7 +119,8 @@
     $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);
 
     $(".hero-pref").change(function () {
-        heroPrefChange(this, "hero");
+        //Make the popdown appear on preference change, if applicable
+        $('.popdown-view').load('hero/UpdatePreference?heroID=' + this.id + '&preference=' + this.options[this.selectedIndex].text);
     });
 
 </script>

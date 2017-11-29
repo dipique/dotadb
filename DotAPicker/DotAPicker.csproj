@@ -375,7 +375,6 @@
     <Content Include="Scripts\labelset-assign.js" />
     <Content Include="Scripts\labelset-maint.js" />
     <Content Include="Scripts\prototype.js" />
-    <Content Include="Scripts\update-pref.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\labelset.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -422,6 +421,7 @@
     <Content Include="connections.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Shared\Popdown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -92,17 +93,10 @@ namespace DotAPicker.Controllers
                 hero.Preference = pref;
                 db.Entry(hero).State = EntityState.Modified;
                 db.SaveChanges();
+                return PartialView("Popdown").Success("Preference updated.");
             }
             return View();
         }
-
-        #region Popdown Extensions
-
-
-
-
-
-        #endregion
     }
 
     internal static class PopdownExtensions
@@ -131,12 +125,15 @@ namespace DotAPicker.Controllers
             return result;
         }
 
-        private static void PopDownCookieMessage(Notification notification, string message) =>
+        private static void PopDownCookieMessage(Notification notification, string message)
+        {
+            //Add the new message
             HttpContext.Current.Response.Cookies.Add(
                 new HttpCookie($"{notification.ToString().ToLower()}", message) {
                     Path = "/",
                     Expires = DateTime.Now.AddSeconds(5) //I'm not really sure how long this should be--just long enough for the value to be there 
-            });                                          //on page load. But if it's too long, it'll be there when the next action takes place.
+                });                                      //on page load. But if it's too long, it'll be there when the next action takes place.
+        }
     }
 
     public enum Notification
