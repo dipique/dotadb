@@ -15,9 +15,9 @@
     <div class="col-xs-3">
         <select id="filterPreference" class="form-control" onchange="filterFunction()">
             <option value="">Search by tip type</option>
-            @foreach (string option in Enum.GetNames(typeof(TipType)))
+            @foreach (var option in TipType.Other.AsSelectList()) //a clumsy way of getting a list of values and display names
             {
-                <option value="@option">@option</option>
+                <option value="@option.Text">@option.Text</option>
             }
         </select>
     </div>

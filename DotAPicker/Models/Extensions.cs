@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,13 +20,16 @@ namespace DotAPicker.Models
             }
 
             var strEnum = enumVal.ToString();
-            return Enum.GetNames(typeof(T))
-                       .Select(val => new SelectListItem() {
-                           Text = val,
-                           Value = val,
-                           Selected = (strEnum == val)
-                       });
+            var members = typeof(T).GetMembers(BindingFlags.Public | BindingFlags.Static)
+                                   .Where(m => m.MemberType == MemberTypes.Field);
+            return members.Select(val => new SelectListItem() {
+                Text = val.DisplayName(),
+                Value = val.Name,
+                Selected = (strEnum == val.Name)
+            });
         }
+
+        public static string DisplayName(this MemberInfo member) => member.GetCustomAttribute<DisplayAttribute>()?.Name ?? member.Name;
 
         public static IEnumerable<string> GetEnumOptions(Type enumType, Type affiliationType = null)
         {
