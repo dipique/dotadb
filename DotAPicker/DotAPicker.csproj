@@ -373,7 +373,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\prototype.js" />
     <Content Include="Scripts\util.js" />
-    <Content Include="Scripts\labelset.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -408,8 +407,6 @@
     <Content Include="Views\Home\DotAPicker.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
-    <Content Include="Views\User\EditorTemplates\LabelSet.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\LabelSet.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
@@ -423,6 +420,7 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\DotA\" />
+    <Folder Include="Views\User\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

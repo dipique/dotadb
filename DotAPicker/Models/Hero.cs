@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-using DotAPicker.Utilities;
 
 namespace DotAPicker.Models
 {
@@ -23,23 +20,14 @@ namespace DotAPicker.Models
 
         public string NameSet => $"{Name}|{AltNames}|";
 
-        public string Labels { get; set; } = string.Empty;
-
-        [NotMapped, Display(Name = "Description Labels")]
-        public LabelSet DescriptionLabels
+        public string Labels
         {
-            get => new LabelSet(Labels.Split(new char[] { LabelSet.STD_DELIM[0] }, StringSplitOptions.RemoveEmptyEntries));
-            set => Labels = String.Join(LabelSet.STD_DELIM, value.Select(lbl => new string(lbl.Where(c => !LabelSet.DISALLOWED_LABEL_CHARS.Contains(c))
-                                  .ToArray())));
+            get => string.Join(User.STD_DELIM, DescriptionLabels);
+            set => DescriptionLabels = value.Split(User.STD_DELIM[0]).ToList();
         }
 
         [NotMapped, Display(Name = "Description Labels")]
-        public List<string> DescriptionLabelsList
-        {
-            get => new List<string>(Labels.Split(new char[] { LabelSet.STD_DELIM[0] }, StringSplitOptions.RemoveEmptyEntries));
-            set => Labels = String.Join(LabelSet.STD_DELIM, value.Select(lbl => new string(lbl.Where(c => !LabelSet.DISALLOWED_LABEL_CHARS.Contains(c))
-                                  .ToArray())));
-        }
+        public List<string> DescriptionLabels { get; set; } = new List<string>();
 
         [NotMapped]
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();

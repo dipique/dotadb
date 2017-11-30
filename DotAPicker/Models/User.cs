@@ -13,6 +13,8 @@ namespace DotAPicker.Models
     public class User
     {
         public const string DEFAULT_USER = "default";
+        public const string STD_DELIM = "|";
+        public const string DISALLOWED_LABEL_CHARS = ":|";
 
         public int Id { get; set; }
 
@@ -46,36 +48,17 @@ namespace DotAPicker.Models
         public bool ShowDeprecatedRelationships { get; set; } = false;
 
         [DisplayName("Label Options")]
-        public string LabelOptions { get; set; } = string.Empty;
-
-        public LabelSet Labels
+        public string LabelOptions
         {
-            get => new LabelSet(LabelOptions.Split(new char[] { LabelSet.STD_DELIM[0] }, StringSplitOptions.RemoveEmptyEntries));
-            set => LabelOptions =  String.Join(LabelSet.STD_DELIM, value.Select(lbl => new string(lbl.Where(c => !LabelSet.DISALLOWED_LABEL_CHARS.Contains(c))
-                                                                                      .ToArray())));
+            get => string.Join(STD_DELIM, Labels);
+            set => Labels = value.Split(STD_DELIM[0]).ToList();
         }
+
+        [NotMapped, Display(Name = "Description Labels")]
+        public List<string> Labels { get; set; } = new List<string>();
 
         public virtual List<Hero> Heroes { get; set; } = new List<Hero>();
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
-    }
-
-    public class LabelSet : List<string>
-    {
-        public const string STD_DELIM = "|";
-        public const string DISALLOWED_LABEL_CHARS = ":|";
-
-        public LabelSet(IEnumerable<string> elements) : base(elements)
-        {
-
-        }
-
-        public LabelSet(string elements, params string[] delims): base(elements.Split(delims, StringSplitOptions.RemoveEmptyEntries))
-        {
-        }
-
-        public LabelSet(string elements) : this(elements, STD_DELIM)
-        {
-        }
     }
 }

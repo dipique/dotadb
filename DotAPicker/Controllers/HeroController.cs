@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
@@ -52,7 +51,7 @@ namespace DotAPicker.Controllers
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id);
             if (hero == null) return Index().Error("Hero not found.");
 
-            ViewBag.LabelOptions = new LabelSet(CurrentUser.LabelOptions);
+            ViewBag.LabelOptions = CurrentUser.Labels;
 
             //detatch entity so it doesn't cause an issue if saved
             db.Entry(hero).State = EntityState.Detached;
@@ -67,6 +66,16 @@ namespace DotAPicker.Controllers
 
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
+
+            //If there are new labels, save them as well.
+            var newLabels = model.DescriptionLabels.Where(l => !CurrentUser.Labels.Contains(l));
+            if (newLabels.Count() > 0)
+            {
+                CurrentUser.Labels.AddRange(newLabels);
+
+                db.SaveChanges();
+            }
+
             return RedirectToAction(nameof(Index)).Success("Edit complete");
         }
 
