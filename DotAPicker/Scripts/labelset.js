@@ -1,4 +1,27 @@
-﻿//This javascript prevents pressing enter to add a label from saving all the settings
+﻿//Combined from labelset-maint now that this component is only used to create labels
+$(".add-label").keyup(function (e) {
+    if (e.keyCode == 13) { //enter
+        var labelSetName = this.parentElement.id;
+        var labelSet = $("div.label-set#" + labelSetName)[0];
+        addLabel(labelSet, this.options[txtBox.selectedIndex].text);
+        this.removeChild(this.options[this.selectedIndex]);
+    }
+});
+
+$(document).on("click", "input.add-label-button", function () {
+    var labelSet = $("div.label-set#Labels")[0];
+    var textBox = $("#txtAdd")[0];
+    addLabel(labelSet, textBox.value, false);
+    textBox.value = "";
+});
+
+$(document).on("click", ".remove-label", function () {
+    removeLabel(this);
+});
+
+//------------------------------------------------------------------------------------
+
+//This javascript prevents pressing enter to add a label from saving all the settings
 $("form").submit(function (e) {
     if ($(".add-label")[0] === document.activeElement) {
         e.preventDefault();
