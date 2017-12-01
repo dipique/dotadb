@@ -6,79 +6,86 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/chosen.css" rel="stylesheet" />
 <link href="~/Content/filter-table.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
 
-<h1>Relationships</h1>
+<h1>Tips</h1>
 
-<div class="row">
+@Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Relationship" })
+
+<div class="col-xs-12">
     <div class="col-xs-2">
-        <input type="text" id="filterInput" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+        <input class="text-search" type="text" id="nameFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
     </div>
     <div class="col-xs-3">
-        <select id="filterPreference" class="form-control" onchange="filterFunction()">
-            <option value="">Search by tip type</option>
+        <select multiple id="typeFilter" class="form-control" onchange="filterFunction()">
+            <option value="">Search by relationship type</option>
             @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), typeof(Relationship)))
             {
                 <option value="@option">@option</option>
             }
         </select>
     </div>
+    <div class="col-xs-7">
+        <input class="text-search" type="text" id="textFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search relationship text..." />
+    </div>
 </div>
 
-<table>
-    <tr><td>
-    <table id="filterTable">
-        <tr class="header">
-            <td>Subject</td>
-            <td>Object</td>
-            <td style="display:none">Alternative Names</td>
-            <td>Type</td>
-            <td>Text</td>
-            <td>Actions</td>
-        </tr>
-        @{
-            for (int x = 0; x < Model.Count(); x++)
-            {
-                                <tr>
-                    <td>@Model[x].SubjectName</td>
-                    <td>@Model[x].ObjectName</td>
-                    <td style="display:none">@Model[x].NameSet</td>
-                    <td>@Model[x].Type</td>
-                    <td>@Model[x].Text</td>
-                    <td>@Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }) @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id })</td>
-                </tr>
-            }
+<div class="col-xs-12">
+    <div class="data-row">
+        <div class="header-cell col-xs-2" style="min-width: 175px">Subject Name</div>
+        <div class="header-cell col-xs-2" style="min-width: 175px">Object Name</div>
+        <div class="header-cell" style="display:none">Name Set</div>
+        <div class="header-cell col-xs-2">Type</div>
+        <div class="header-cell col-xs-6">Text</div>
+    </div>
+    <div id="filterTable">
+        @for (int x = 0; x < Model.Count(); x++)
+        {
+            <div class="data-row">
+                <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
+                    @Model[x].SubjectName
+                    <div class="link-padding">
+                        @Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }, new { @class = "edit-link", title = "Edit Tip" })
+                        @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id }, new { @class = "delete-link", title = "Delete Tip" })
+                    </div>
+                </div>
+                <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
+                    @Model[x].ObjectName
+                </div>
+                <div class="data-row-cell" style="display:none" id="nameValue">@Model[x].NameSet</div>
+                <div class="data-row-cell col-xs-2" id="typeValue">
+                    @Html.DisplayFor(m => m.First(t => t.Id == Model[x].Id).Type)
+                </div>
+                <div class="data-row-cell col-xs-6" id="textValue">@Model[x].Text</div>
+            </div>
         }
-    </table>
-    </td></tr>
-</table>
+    </div>
+</div>
 
 <script>
-    //https://www.w3schools.com/howto/howto_js_filter_table.asp
-    function filterFunction() {
-        // Declare variables
-        var input, filter, table, tr, i, searchPreference, td_preference, td_altNames, td_hero_Name;
-        input = document.getElementById("filterInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("filterTable");
-        tr = table.getElementsByTagName("tr");
-        searchPreference = document.getElementById("filterPreference").value;
+    $("#typeFilter").chosen({
+        width: "300px"
+    });
 
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 1; i < tr.length; i++) {
-            td_heroName = tr[i].getElementsByTagName("td")[0].innerHTML.toUpperCase() + tr[i].getElementsByTagName("td")[1].innerHTML.toUpperCase();
-            td_altNames = tr[i].getElementsByTagName("td")[2].innerHTML.toUpperCase();
-            td_preference = tr[i].getElementsByTagName("td")[3].innerHTML;
-            
-            if (td_heroName) {
-                if ((td_heroName.indexOf(filter) > -1 ||
-                    td_altNames.indexOf(filter) > -1) &&
-                    (searchPreference == "" || td_preference == searchPreference)) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
+    //filterSet object that configures the filterTable
+    var filterSet = [[
+        "nameFilter",
+        "text",
+        "nameValue",
+        "inner"   
+    ], [
+        "typeFilter",
+        "multi",
+        "typeValue",
+        "inner"
+    ], [
+        "textFilter",
+        "text",
+        "textValue",
+        "inner"
+    ]
+    ];
 </script>
