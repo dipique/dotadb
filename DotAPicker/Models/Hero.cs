@@ -18,7 +18,7 @@ namespace DotAPicker.Models
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
-        public string NameSet => $"{Name}|{AltNames}|";
+        public string NameSet => $"{Name}|{AltNames}|{Labels}";
 
         public string Labels
         {
