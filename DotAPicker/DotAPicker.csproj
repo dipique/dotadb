@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
+    <Compile Include="Controllers\DotANoteController.cs" />
     <Compile Include="Controllers\TipController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\DotaContext.cs" />
@@ -395,10 +396,10 @@
     <Content Include="Views\Hero\Create.cshtml" />
     <Content Include="Views\Hero\Edit.cshtml" />
     <Content Include="Views\Hero\Detail.cshtml" />
-    <Content Include="Views\Tip\Tips.cshtml" />
+    <Content Include="Views\Tip\Index.cshtml" />
     <Content Include="Views\Tip\Edit.cshtml" />
     <Content Include="Views\Tip\Create.cshtml" />
-    <Content Include="Views\Relationship\Relationships.cshtml" />
+    <Content Include="Views\Relationship\Index.cshtml" />
     <Content Include="Views\Relationship\Edit.cshtml" />
     <Content Include="Views\Relationship\Create.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
