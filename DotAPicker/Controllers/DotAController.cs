@@ -19,9 +19,8 @@ namespace DotAPicker.Controllers
         {
             get
             {
-                var tmpDB = (DotAContext)Session[dataInd];
-                if (tmpDB == null)
-                    Session[dataInd] = tmpDB = new DotAContext();
+                if (Session[dataInd] == null)
+                    Session[dataInd] = new DotAContext();
 
                 return (DotAContext)Session[dataInd];
             }
@@ -33,16 +32,7 @@ namespace DotAPicker.Controllers
 
         internal User CurrentUser
         {
-            get
-            {
-                //set default user if none is set
-                if (Session[userInd] == null)
-                {
-                    var user = db.Users.First(); //TODO: be able to change user
-                    Session[userInd] = user;
-                }
-                return (User)Session[userInd];
-            }
+            get => (User)Session[userInd];
             set => Session[userInd] = value;
         }
 
@@ -58,8 +48,7 @@ namespace DotAPicker.Controllers
         {
             int intSelection = -1;
             int.TryParse(selection, out intSelection);
-            return CurrentUser.Labels.Select(l => new SelectListItem()
-            {
+            return CurrentUser.Labels.Select(l => new SelectListItem() {
                 Text = $"Label: {l}",
                 Value = l,
                 Selected = selection == l
@@ -71,12 +60,14 @@ namespace DotAPicker.Controllers
         {
             var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.First();
             if (hero == null) return hero;
-            hero.Relationships = db.Relationships.Where(r => r.HeroObjectId == id ||
+            hero.Relationships = db.Relationships.Where(r => r.UserId == CurrentUser.Id)
+                                                 .Where(r => r.HeroObjectId == id ||
                                                              r.HeroSubjectId == id ||
                                                              hero.Labels.Contains(r.LabelSubject) ||
                                                              hero.Labels.Contains(r.LabelObject))
                                                  .ToList();
-            hero.Tips = db.Tips.Where(r => r.HeroSubjectId == id ||
+            hero.Tips = db.Tips.Where(t => t.UserId == CurrentUser.Id)
+                               .Where(r => r.HeroSubjectId == id ||
                                            hero.Labels.Contains(r.LabelSubject))
                                .ToList();
             return hero;
@@ -86,6 +77,9 @@ namespace DotAPicker.Controllers
         {
             var pref = EnumExt.Parse<HeroPreference>(preference);
             var hero = GetHeroByID(heroID);
+
+            if (hero == null) return PartialView("Popdown").Error("You do not have permission to modify this data.");
+
             var oldPref = hero.Preference;
             if (oldPref != pref)
             {

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using DotAPicker.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,6 +16,11 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
+    @{
+        var user = (User)Session["user"];
+        var signedIn = user != null;
+     }
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -22,17 +29,43 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Personal DotA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Personal DotA DB", "Index", (signedIn ? "Home" : "Login"), new { area = "" }, new { @class = "navbar-brand" })                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Hero Picker", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
-                    <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
-                    <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
-                    @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
+                    @if (signedIn)
+                    {
+                        <li>@Html.ActionLink("Hero Picker", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
+                        <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
+                        <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
+                        @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
+                    } else
+                    {
+                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                    }
                 </ul>
             </div>
+            @if (signedIn)
+            {
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @user.Username!</a>
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                        </li>
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+                </ul>
+            }
         </div>
     </div>
 

@@ -183,6 +183,7 @@
     <Compile Include="Controllers\DotAController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\DotANoteController.cs" />
     <Compile Include="Controllers\TipController.cs" />
@@ -417,6 +418,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\Popdown.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
