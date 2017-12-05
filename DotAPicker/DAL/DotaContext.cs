@@ -111,10 +111,11 @@ namespace DotAPicker.DAL
         {
             var users = new List<User> {
                 new User { Username = User.DEFAULT_USER,
+                           Password = "password",
                            CurrentPatch = "7.07c",
                            ShowDeprecatedRelationships = false,
                            ShowDeprecatedTips = false,
-                           LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage"
+                           LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged"
                 },
             };
             users.ForEach(u => db.Users.Add(u));

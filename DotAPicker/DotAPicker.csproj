@@ -206,6 +206,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -418,10 +419,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\Popdown.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\DotA\" />
     <Folder Include="Views\User\EditorTemplates\" />
   </ItemGroup>
