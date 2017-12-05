@@ -12,7 +12,11 @@ namespace DotAPicker.Controllers
     public abstract class DotANoteContoller<T> : DotAController where T:DotANote, new()
     {
         // GET: Tip
-        public ActionResult Index() => View("Index", GetDbSet.Where(n => n.UserId == CurrentUser.Id).ToList());
+        public ActionResult Index()
+        {
+            if (CurrentUser == null) return DependencyResolver.Current.GetService<LoginController>().Index();
+            return View("Index", GetDbSet.Where(n => n.UserId == CurrentUser.Id).ToList());
+        }
 
         public DbSet<T> GetDbSet => (DbSet<T>)typeof(DotAContext).GetProperties()
                                                                  .Single(p => p.PropertyType.IsGenericType &&

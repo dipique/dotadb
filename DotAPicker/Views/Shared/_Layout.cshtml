@@ -31,41 +31,37 @@
                 </button>
                 @Html.ActionLink("Personal DotA DB", "Index", (signedIn ? "Home" : "Login"), new { area = "" }, new { @class = "navbar-brand" })                
             </div>
+
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (signedIn)
-                    {
-                        <li>@Html.ActionLink("Hero Picker", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
-                        <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
-                        <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
-                        @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
-                    } else
-                    {
-                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
-                    }
-                </ul>
-            </div>
             @if (signedIn)
             {
-                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Hero Picker", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
+                    <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
+                    <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
+                    @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
+                </ul>
+
+                <form asp-area="" asp-controller="Login" asp-action="LogOut" method="post" id="logoutForm" class="navbar-right">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @user.Username!</a>
+                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @user.Name!</a>
                         </li>
                         <li>
                             <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
                         </li>
                     </ul>
                 </form>
-            }
-            else
+            } else
             {
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a asp-area="" asp-controller="Login" asp-action="Register">Register</a></li>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Login">Log in</a></li>
                 </ul>
             }
+            </div>
         </div>
     </div>
 

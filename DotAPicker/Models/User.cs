@@ -6,13 +6,13 @@ using System.Linq;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
-using System.Text;
+using System.Security.Principal;
 
 using DotAPicker.Utilities;
 
 namespace DotAPicker.Models
 {
-    public class User
+    public class User: IIdentity
     {
         public const string DEFAULT_USER = "default";
         public const string STD_DELIM = "|";
@@ -24,13 +24,21 @@ namespace DotAPicker.Models
 
         public int Id { get; set; }
 
+        #region IIdentify Requirements
+
         [Required]
         [StringLength(256)]
         [Index(IsUnique = true)]
-        public string Username { get; set; }
+        public string Name { get; set; }
+
+        public string AuthenticationType => ProfileType.ToString();
+
+        [NotMapped]
+        public bool IsAuthenticated { get; set; } = false;
+
+        #endregion
 
         [Required]
-        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         //This is actually a hash of the password. Use the "SetNewPassword" and "MatchingPassword" methods instead
@@ -89,7 +97,8 @@ namespace DotAPicker.Models
             }
         }
 
-        public UserTypes UserType { get; set; } = UserTypes.Private;
+        [DisplayName("Profile Type")]
+        public ProfileTypes ProfileType { get; set; } = ProfileTypes.Private;
 
         [DisplayName("Show Deprecated Tips")]
         public bool ShowDeprecatedTips { get; set; } = false;
@@ -112,10 +121,38 @@ namespace DotAPicker.Models
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
     }
 
-    public enum UserTypes
+    public class Principal: IPrincipal
+    {
+        public Principal(User user)
+        {
+            Identity = user;
+        }
+
+        public Principal() { }
+
+        public IIdentity Identity { get; set; }
+        public bool IsInRole(string roleString)
+        {
+            if (Enum.TryParse(roleString, true, out Roles role))
+            {
+                if (role == Roles.Authenticated) return true;
+                return Identity.AuthenticationType == ProfileTypes.Public.ToString();
+            }
+            else return false;
+            
+        }
+    }
+
+    public enum ProfileTypes
     {
         Public,
-        ReadOnly,
+        //ReadOnly, //TODO: Implement
         Private
+    }
+
+    public enum Roles
+    {
+        Anonymous,
+        Authenticated
     }
 }

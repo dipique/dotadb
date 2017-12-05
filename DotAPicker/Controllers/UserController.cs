@@ -14,6 +14,7 @@ namespace DotAPicker.Controllers
         // GET: User
         public ActionResult Index()
         {
+            if (CurrentUser == null) return DependencyResolver.Current.GetService<LoginController>().Index();
             return View(db.Users.ToList());
         }
 
@@ -54,7 +55,7 @@ namespace DotAPicker.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int? id)
         {
-            CurrentUser = null; //otherwise you won't be able to edit it
+            //CurrentUser = null; //otherwise you won't be able to edit it
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

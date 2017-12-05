@@ -107,17 +107,21 @@ namespace DotAPicker.DAL
 
     public class DotAInitializer : DropCreateDatabaseIfModelChanges<DotAContext> //DropCreateDatabaseAlways <DotAContext>
     {
+        public void ReSeed(DotAContext db) => Seed(db);
+
         protected override void Seed(DotAContext db)
         {
             var users = new List<User> {
-                new User { Username = User.DEFAULT_USER,
-                           Password = "password",
+                new User { Name = User.DEFAULT_USER,
+                           Email = "default@user.com",
                            CurrentPatch = "7.07c",
                            ShowDeprecatedRelationships = false,
                            ShowDeprecatedTips = false,
-                           LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged"
+                           LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged",
                 },
             };
+            users.First().SetNewPassword("password");
+
             users.ForEach(u => db.Users.Add(u));
             db.SaveChanges();
             var defaultID = db.Users.First().Id;

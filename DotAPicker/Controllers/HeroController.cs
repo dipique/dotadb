@@ -13,6 +13,8 @@ namespace DotAPicker.Controllers
         // GET: Hero
         public ActionResult Index()
         {
+            if (CurrentUser == null) return DependencyResolver.Current.GetService<LoginController>().Index();
+
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
             return View("Heroes", CurrentUser.Heroes.OrderBy(h => h.Name));
         }
