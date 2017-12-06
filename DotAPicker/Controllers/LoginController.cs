@@ -37,11 +37,11 @@ namespace DotAPicker.Controllers
 
             var user = users.Single();
 
-            //temp
-            user.SetNewPassword("password");
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            //----
+            ////temp
+            //user.SetNewPassword("password");
+            //db.Entry(user).State = EntityState.Modified;
+            //db.SaveChanges();
+            ////----
 
             if (!user.MatchingPassword(viewModel.Password)) return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
 
@@ -56,7 +56,7 @@ namespace DotAPicker.Controllers
         {
             CurrentUser = null;
             HttpContext.User = null;
-            return Index();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

@@ -10,7 +10,7 @@ using DotAPicker;
 
 namespace DotAPicker.Controllers
 {
-    [CustomAuthorize(Roles = "Authenticated")]
+    [RequiresAuth(Roles = "Authenticated")]
     public class HomeController : DotAController
     {
         // GET: Hero

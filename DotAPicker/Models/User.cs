@@ -131,15 +131,11 @@ namespace DotAPicker.Models
         public Principal() { }
 
         public IIdentity Identity { get; set; }
-        public bool IsInRole(string roleString)
+        public bool IsInRole(string roleString = null)
         {
-            if (Enum.TryParse(roleString, true, out Roles role))
-            {
-                if (role == Roles.Authenticated) return true;
-                return Identity.AuthenticationType == ProfileTypes.Public.ToString();
-            }
-            else return false;
-            
+            if (Identity.IsAuthenticated) return true;
+            if (Identity.AuthenticationType == ProfileTypes.Public.ToString()) return true;
+            return false;           
         }
     }
 
@@ -148,11 +144,5 @@ namespace DotAPicker.Models
         Public,
         //ReadOnly, //TODO: Implement
         Private
-    }
-
-    public enum Roles
-    {
-        Anonymous,
-        Authenticated
     }
 }

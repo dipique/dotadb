@@ -13,27 +13,27 @@ namespace DotAPicker.Controllers
 {
     public class DotAController : Controller
     {
-        internal const string dataInd = "data";
-        internal const string userInd = "user";
+        public const string SESSION_IND_DATA = "data";
+        public const string SESSION_IND_USR = "user";
         internal DotAContext db
         {
             get
             {
-                if (Session[dataInd] == null)
-                    Session[dataInd] = new DotAContext();
+                if (Session[SESSION_IND_DATA] == null)
+                    Session[SESSION_IND_DATA] = new DotAContext();
 
-                return (DotAContext)Session[dataInd];
+                return (DotAContext)Session[SESSION_IND_DATA];
             }
             set
             {
-                Session[dataInd] = value;
+                Session[SESSION_IND_DATA] = value;
             }
         }
 
         internal User CurrentUser
         {
-            get => (User)Session[userInd];
-            set => Session[userInd] = value;
+            get => (User)Session[SESSION_IND_USR];
+            set => Session[SESSION_IND_USR] = value;
         }
 
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
