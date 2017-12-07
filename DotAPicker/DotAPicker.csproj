@@ -183,6 +183,7 @@
     <Compile Include="Controllers\DotAController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\DotANoteController.cs" />
@@ -207,6 +208,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\UserActionsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
@@ -423,6 +425,10 @@
     <Content Include="Views\Shared\Popdown.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Settings\PasswordReset.cshtml" />
+    <Content Include="Views\Settings\DeleteProfile.cshtml" />
+    <Content Include="Views\Settings\ReplaceProfile.cshtml" />
+    <Content Include="Views\Settings\UserSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />
