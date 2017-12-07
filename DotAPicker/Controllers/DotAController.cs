@@ -36,6 +36,13 @@ namespace DotAPicker.Controllers
             set => Session[SESSION_IND_USR] = value;
         }
 
+        public void SetCurrentUser(User user)
+        {
+            user.IsAuthenticated = true;
+            HttpContext.User = new Principal(user);
+            CurrentUser = user;
+        }
+
         public IEnumerable<SelectListItem> GetHeroOptions(int selection = -1) =>
             CurrentUser.Heroes.Select(h => new SelectListItem()
             {
@@ -58,7 +65,7 @@ namespace DotAPicker.Controllers
 
         public Hero GetHeroByID(int id)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.First();
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.FirstOrDefault();
             if (hero == null) return hero;
             hero.Relationships = db.Relationships.Where(r => r.UserId == CurrentUser.Id)
                                                  .Where(r => r.HeroObjectId == id ||

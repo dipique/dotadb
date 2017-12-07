@@ -118,6 +118,7 @@ namespace DotAPicker.DAL
                            ShowDeprecatedRelationships = false,
                            ShowDeprecatedTips = false,
                            LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged",
+                           ProfileType = ProfileTypes.Public
                 },
             };
             users.First().SetNewPassword("password");
@@ -323,6 +324,54 @@ namespace DotAPicker.DAL
             };
             relationships.ForEach(r => db.Relationships.Add(r));
             db.SaveChanges();
+        }
+    }
+
+    public static class DotADBTools
+    {
+        public static bool CopyUser(this DotAContext db, User src, User dest)
+        {
+            //validate empty destination profile
+            if (dest.Heroes.Any() ||
+                dest.Tips.Any() ||
+                dest.Relationships.Any()) return false;
+
+            //create a data-only copy of the user profile (not EF associations)
+            var userCopy = new ProfileCopy(src);
+
+            //update user (header-level) data
+            userCopy.CopyTo(dest);
+            db.SaveChanges();
+
+            //Add heroes
+            var destUserId = dest.Id;
+            userCopy.Heroes.ForEach(hCopy => {
+                var hero = new Hero { UserId = destUserId };
+                hCopy.CopyTo(hero);
+                db.Heroes.Add(hero);
+            });
+            db.SaveChanges();
+
+            //create hero/ID cross-reference
+            var heroList = db.Heroes.Where(h => h.UserId == destUserId).ToDictionary(h => h.Name, h => h.Id);
+
+            //add tips
+            userCopy.Tips.ForEach(tCopy => {
+                var tip = new Tip { UserId = destUserId };
+                tCopy.CopyTo(tip, heroList);
+                db.Tips.Add(tip);
+            });
+            db.SaveChanges();
+
+            //add relationships
+            userCopy.Relationships.ForEach(rCopy => {
+                var relationship = new Relationship { UserId = destUserId };
+                rCopy.CopyTo(heroList, relationship);
+                db.Relationships.Add(relationship);
+            });
+            db.SaveChanges();
+
+            return true;
         }
     }
 }

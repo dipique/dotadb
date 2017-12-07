@@ -37,17 +37,9 @@ namespace DotAPicker.Controllers
 
             var user = users.Single();
 
-            ////temp
-            //user.SetNewPassword("password");
-            //db.Entry(user).State = EntityState.Modified;
-            //db.SaveChanges();
-            ////----
-
             if (!user.MatchingPassword(viewModel.Password)) return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
 
-            user.IsAuthenticated = true;
-            HttpContext.User = new Principal(user);
-            CurrentUser = user;
+            SetCurrentUser(user);
 
             return RedirectToAction("Index", "Home");
         }
@@ -57,6 +49,48 @@ namespace DotAPicker.Controllers
             CurrentUser = null;
             HttpContext.User = null;
             return RedirectToAction(nameof(Login));
+        }
+
+        public ActionResult Register() => View();
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel viewModel)
+        {
+            //logout first
+            LogOut();
+
+            //make sure not duplicate username/e-mail
+            var user = viewModel.ToUser();
+            if (db.Users.Any(u => u.Email == user.Email || u.Name == user.Name))
+                return View().Error("This name or e-mail address has already been taken.");
+
+            //make sure the profile to copy exists
+            User profileToCopy = null;
+            if (!string.IsNullOrWhiteSpace(viewModel.ProfileToCopy))
+            {
+                profileToCopy = db.Users.Where(u => u.ProfileType == ProfileTypes.Public)
+                                        .FirstOrDefault(u => u.Name == viewModel.ProfileToCopy || u.Email == viewModel.ProfileToCopy);
+                if (profileToCopy == null) return View().Error("Profile to copy doesn't exist or is private.");
+            }
+
+            //add user
+            db.Users.Add(user);
+            db.SaveChanges();
+
+            //copy profile if applicable
+            var copyProfile = profileToCopy != null;
+            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, db.Users.Single(u => u.Name == user.Name)) : false;
+            SetCurrentUser(user);
+
+            if (copyProfile)
+            {
+                return copySuccess ? RedirectToAction("Index", "Home").Success("User profile created and copied from template.")
+                                   : RedirectToAction("Index", "Home").Information("User profile created but template copy failed.");
+            } else
+            {
+                return RedirectToAction("Index", "Home").Success("User profile successfully created!");
+            }
+
         }
     }
 }
