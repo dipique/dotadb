@@ -373,5 +373,24 @@ namespace DotAPicker.DAL
 
             return true;
         }
+
+        public static void ClearUserData(this DotAContext db, User user)
+        {
+            user.Tips.ForEach(t => db.Tips.Remove(t));
+            db.SaveChanges();
+
+            user.Relationships.ForEach(r => db.Relationships.Remove(r));
+            db.SaveChanges();
+
+            user.Heroes.ForEach(h => db.Heroes.Remove(h));
+            db.SaveChanges();
+        }
+
+        public static void DeleteUser(this DotAContext db, User user)
+        {
+            db.ClearUserData(user);
+            db.Users.Remove(user);
+            db.SaveChanges();
+        }
     }
 }
