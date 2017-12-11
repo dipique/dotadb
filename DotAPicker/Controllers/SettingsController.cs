@@ -21,6 +21,8 @@ namespace DotAPicker.Controllers
             if (!CurrentUser.MatchingPassword(viewModel.Password)) return View().Error("Wrong password.");
 
             db.DeleteUser(CurrentUser);
+            CurrentUser = null;
+            HttpContext.User = null;
 
             return RedirectToAction("Login", "Login", null).Success("User profile deleted");
         }
@@ -59,7 +61,7 @@ namespace DotAPicker.Controllers
             ModelState.Clear();
 
             //copy new data
-            return db.CopyUser(profileToCopy, CurrentUser) ? View(new ReplaceProfileViewModel()).Success("Profile successfully copied.")
+            return db.CopyUser(profileToCopy, CurrentUser) ? RedirectToAction("Index", "Hero", null).Success("Profile successfully copied.")
                                                            : View().Error("Profile copy failed.");            
             
         }

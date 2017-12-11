@@ -41,7 +41,7 @@ namespace DotAPicker.Controllers
 
             SetCurrentUser(user);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home").Success("Look at you, logging in like a pro.");
         }
 
         public ActionResult LogOut()

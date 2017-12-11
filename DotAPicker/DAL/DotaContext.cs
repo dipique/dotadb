@@ -376,20 +376,29 @@ namespace DotAPicker.DAL
 
         public static void ClearUserData(this DotAContext db, User user)
         {
-            user.Tips.ForEach(t => db.Tips.Remove(t));
+            foreach(var item in db.Tips.Where(i => i.UserId == user.Id))
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
             db.SaveChanges();
 
-            user.Relationships.ForEach(r => db.Relationships.Remove(r));
+            foreach (var item in db.Relationships.Where(i => i.UserId == user.Id))
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
             db.SaveChanges();
 
-            user.Heroes.ForEach(h => db.Heroes.Remove(h));
+            foreach (var item in db.Heroes.Where(i => i.UserId == user.Id))
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
             db.SaveChanges();
         }
 
         public static void DeleteUser(this DotAContext db, User user)
         {
             db.ClearUserData(user);
-            db.Users.Remove(user);
+            db.Entry(user).State = EntityState.Deleted;
             db.SaveChanges();
         }
     }
