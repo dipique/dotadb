@@ -428,7 +428,6 @@
     <Content Include="Views\Settings\PasswordReset.cshtml" />
     <Content Include="Views\Settings\DeleteProfile.cshtml" />
     <Content Include="Views\Settings\ReplaceProfile.cshtml" />
-    <Content Include="Views\Settings\UserSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />

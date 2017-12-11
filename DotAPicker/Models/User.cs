@@ -72,7 +72,7 @@ namespace DotAPicker.Models
             Array.Copy(hashBytes, 0, salt, 0, PWD_SALT_BYTES);
             
             //compute the hash on the provided password
-            var pbkdf2 = new Rfc2898DeriveBytes(plainText, salt, PWD_ITERATIONS);
+            var pbkdf2 = new Rfc2898DeriveBytes(plainText ?? string.Empty, salt, PWD_ITERATIONS);
             byte[] hash = pbkdf2.GetBytes(PWD_HASH_BYTES);
 
             //return whether the passwords are equal

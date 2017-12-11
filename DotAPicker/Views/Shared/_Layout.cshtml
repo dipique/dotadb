@@ -43,8 +43,20 @@
                     <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
                     @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
                 </ul>                
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Settings", "UserSettings", "Settings")</li>
+                <ul class="navbar-nav navbar-right lo-navbar">
+                    <li>
+                        <div class="lo-dropdown">
+                            <button class="lo-dropbtn">
+                                Settings
+                                <i class="lo-fa lo-fa-caret-down"></i>
+                            </button>
+                            <div class="lo-dropdown-content">
+                                @Html.ActionLink("Password Reset", "PasswordReset", "Settings")
+                                @Html.ActionLink("Delete Profile", "DeleteProfile", "Settings")
+                                @Html.ActionLink("Replace Profile", "ReplaceProfile", "Settings")
+                            </div>
+                        </div>                        
+                    </li>
                     <li>@Html.ActionLink("Log out", "LogOut", "Login", null, null)</li>
                 </ul>
             } else
