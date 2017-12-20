@@ -97,7 +97,7 @@ namespace DotAPicker.Controllers
             try
             {
                 db.ClearUserData(CurrentUser);
-                db.ImportProfile(profile, CurrentUser);
+                db.ImportProfile(profile, CurrentUser, viewModel.IncludeNotes);
                 return View(new ImportProfileViewModel()).Success("Successfully imported profile!");
             }
             catch (Exception)

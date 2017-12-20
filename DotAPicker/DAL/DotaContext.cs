@@ -329,15 +329,15 @@ namespace DotAPicker.DAL
 
     public static class DotADBTools
     {
-        public static bool CopyUser(this DotAContext db, User src, User dest)
+        public static bool CopyUser(this DotAContext db, User src, User dest, bool includeNotes = true)
         {
             //create a data-only copy of the user profile (not EF associations)
             var userCopy = new ProfileCopy(src);
 
-            return ImportProfile(db, userCopy, dest);
+            return ImportProfile(db, userCopy, dest, includeNotes);
         }
 
-        public static bool ImportProfile(this DotAContext db, ProfileCopy src, User dest)
+        public static bool ImportProfile(this DotAContext db, ProfileCopy src, User dest, bool includeNotes = true)
         {
             //validate empty destination profile
             if (dest.Heroes.Any() ||
@@ -357,24 +357,29 @@ namespace DotAPicker.DAL
             });
             db.SaveChanges();
 
-            //create hero/ID cross-reference
-            var heroList = db.Heroes.Where(h => h.UserId == destUserId).ToDictionary(h => h.Name, h => h.Id);
+            if (includeNotes)
+            {
+                //create hero/ID cross-reference
+                var heroList = db.Heroes.Where(h => h.UserId == destUserId).ToDictionary(h => h.Name, h => h.Id);
 
-            //add tips
-            src.Tips.ForEach(tCopy => {
-                var tip = new Tip { UserId = destUserId };
-                tCopy.CopyTo(tip, heroList);
-                db.Tips.Add(tip);
-            });
-            db.SaveChanges();
+                //add tips
+                src.Tips.ForEach(tCopy =>
+                {
+                    var tip = new Tip { UserId = destUserId };
+                    tCopy.CopyTo(tip, heroList);
+                    db.Tips.Add(tip);
+                });
+                db.SaveChanges();
 
-            //add relationships
-            src.Relationships.ForEach(rCopy => {
-                var relationship = new Relationship { UserId = destUserId };
-                rCopy.CopyTo(heroList, relationship);
-                db.Relationships.Add(relationship);
-            });
-            db.SaveChanges();
+                //add relationships
+                src.Relationships.ForEach(rCopy =>
+                {
+                    var relationship = new Relationship { UserId = destUserId };
+                    rCopy.CopyTo(heroList, relationship);
+                    db.Relationships.Add(relationship);
+                });
+                db.SaveChanges();
+            }
 
             return true;
         }
