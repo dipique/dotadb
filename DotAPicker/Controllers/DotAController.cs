@@ -131,7 +131,7 @@ namespace DotAPicker.Controllers
             HttpContext.Current.Response.Cookies.Add(
                 new HttpCookie($"{notification.ToString().ToLower()}", message) {
                     Path = "/",
-                    Expires = DateTime.Now.AddSeconds(5) //I'm not really sure how long this should be--just long enough for the value to be there 
+                    Expires = DateTime.Now.AddSeconds(2) //I'm not really sure how long this should be--just long enough for the value to be there 
                 });                                      //on page load. But if it's too long, it'll be there when the next action takes place.
         }
     }

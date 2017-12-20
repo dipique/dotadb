@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web;
+using System.Xml.Serialization;
 
 namespace DotAPicker.Models
 {
@@ -15,16 +16,29 @@ namespace DotAPicker.Models
         public string CurrentPatch { get; set; }
         public bool ShowDeprecatedTips { get; set; }
         public bool ShowDeprecatedRelationships { get; set; }
-        public ProfileCopy(User user): base(user)
+        public ProfileCopy(User user, bool includeNotes = true): base(user)
         {
             Heroes.AddRange(user.Heroes.Select(h => new _Hero(h)));
-            Tips.AddRange(user.Tips.Select(t => new _Tip(t)));
-            Relationships.AddRange(user.Relationships.Select(r => new _Relationship(r)));
+            if (includeNotes)
+            {
+                Tips.AddRange(user.Tips.Select(t => new _Tip(t)));
+                Relationships.AddRange(user.Relationships.Select(r => new _Relationship(r)));
+            }
         }
+
+        public ProfileCopy() { } //needed so it can be serializable
 
         [NotFromCopy] public List<_Hero> Heroes { get; set; } = new List<_Hero>();
         [NotFromCopy] public List<_Tip> Tips { get; set; } = new List<_Tip>();
         [NotFromCopy] public List<_Relationship> Relationships { get; set; } = new List<_Relationship>();
+
+        public string ToXML()
+        {
+            var serializer = new XmlSerializer(typeof(ProfileCopy));
+            var textWriter = new StringWriter();
+            serializer.Serialize(textWriter, this);
+            return textWriter.ToString();            
+        }
     }
 
     public class _Hero: CopyObject<Hero>
@@ -36,6 +50,7 @@ namespace DotAPicker.Models
         public List<string> DescriptionLabels { get; set; } = new List<string>();
 
         public _Hero(Hero hero): base(hero) { }
+        public _Hero() { }
     }
 
     public abstract class _DotANote: CopyObject<DotANote>
@@ -52,6 +67,8 @@ namespace DotAPicker.Models
         {
             Subject = obj.HeroSubjectId == null ? obj.LabelSubject : obj.HeroSubject.Name;
         }
+
+        public _DotANote() { }
 
         public virtual void CopyTo(DotANote obj, Dictionary<string, int> heroList)
         {
@@ -71,6 +88,7 @@ namespace DotAPicker.Models
     public class _Tip: _DotANote
     {
         public _Tip(Tip obj): base(obj) { }
+        public _Tip() { }
     }
 
     public class _Relationship: _DotANote
@@ -81,6 +99,8 @@ namespace DotAPicker.Models
         {
             Object = obj.HeroObjectId == null ? obj.LabelObject : obj.HeroObject.Name;
         }
+
+        public _Relationship() { }
 
         public void CopyTo(Dictionary<string, int> heroList, Relationship obj) //parameters in reverse order to eliminate ambiguity with dotanote method
         {
@@ -119,6 +139,8 @@ namespace DotAPicker.Models
         {
             CopyFrom(obj);
         }
+
+        public CopyObject() { } // needed so it can be serializable
 
         public virtual void CopyTo(T obj)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -65,5 +66,14 @@ namespace DotAPicker.Controllers
                                                            : View().Error("Profile copy failed.");            
             
         }
+
+        [HttpGet]
+        public ActionResult ExportProfile() => View(new ExportProfileViewModel());
+        public ActionResult ExportProfile(ExportProfileViewModel viewModel)
+        {
+            var profileString = new ProfileCopy(CurrentUser, viewModel.IncludeNotes).ToXML();
+            return File(Encoding.UTF8.GetBytes(profileString), "text/plain", $"{CurrentUser.Name}-dotaprofile-{DateTime.Now.ToString("yyMMddhhmmss")}.xml").Success("Export successfully completed!");
+        }
+
     }
 }

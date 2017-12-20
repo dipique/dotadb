@@ -208,6 +208,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ExportProfileViewModel.cs" />
     <Compile Include="ViewModels\UserActionsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Settings\PasswordReset.cshtml" />
     <Content Include="Views\Settings\DeleteProfile.cshtml" />
     <Content Include="Views\Settings\ReplaceProfile.cshtml" />
+    <Content Include="Views\Settings\ExportProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />
