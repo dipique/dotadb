@@ -11,4 +11,12 @@ namespace DotAPicker.ViewModels
         [Display(Name = "Include Notes")]
         public bool IncludeNotes { get; set; } = true;
     }
+
+    public class ImportProfileViewModel: ExportProfileViewModel
+    {
+        [DataType(DataType.Upload)]
+        [Display(Name = "File to Upload")]
+        public HttpPostedFileBase PostedFile { get; set; }
+    }
+
 }

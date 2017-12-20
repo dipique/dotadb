@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
+using System.Xml.Serialization;
 
 using DotAPicker.DAL;
 using DotAPicker.Models;
@@ -72,7 +72,40 @@ namespace DotAPicker.Controllers
         public ActionResult ExportProfile(ExportProfileViewModel viewModel)
         {
             var profileString = new ProfileCopy(CurrentUser, viewModel.IncludeNotes).ToXML();
-            return File(Encoding.UTF8.GetBytes(profileString), "text/plain", $"{CurrentUser.Name}-dotaprofile-{DateTime.Now.ToString("yyMMddhhmmss")}.xml").Success("Export successfully completed!");
+            return File(Encoding.Unicode.GetBytes(profileString),
+                        "text/plain",
+                        $"{CurrentUser.Name}-dpexport-{DateTime.Now.ToString("yyMMddhhmmss")}.xml");
+                       //.Success("Export successfully completed!"); //this doesn't work, not sure why. TODO: figure out.
+        }
+
+        [HttpGet]
+        public ActionResult ImportProfile() => View(new ImportProfileViewModel());
+        public ActionResult ImportProfile(ImportProfileViewModel viewModel)
+        {
+            var serializer = new XmlSerializer(typeof(ProfileCopy));
+
+            //Parse the input file
+            ProfileCopy profile = null;
+            try { profile = (ProfileCopy)serializer.Deserialize(viewModel.PostedFile.InputStream); }
+            catch (Exception)
+            {
+                throw;
+                //return View(new ImportProfileViewModel()).Error("Couldn't parse upload file.");
+            }
+
+            //Import the data
+            try
+            {
+                db.ClearUserData(CurrentUser);
+                db.ImportProfile(profile, CurrentUser);
+                return View(new ImportProfileViewModel()).Success("Successfully imported profile!");
+            }
+            catch (Exception)
+            {
+                throw;
+                //return View(new ImportProfileViewModel()).Error("Failed while trying to import profile data.");
+            }
+
         }
 
     }

@@ -331,21 +331,26 @@ namespace DotAPicker.DAL
     {
         public static bool CopyUser(this DotAContext db, User src, User dest)
         {
+            //create a data-only copy of the user profile (not EF associations)
+            var userCopy = new ProfileCopy(src);
+
+            return ImportProfile(db, userCopy, dest);
+        }
+
+        public static bool ImportProfile(this DotAContext db, ProfileCopy src, User dest)
+        {
             //validate empty destination profile
             if (dest.Heroes.Any() ||
                 dest.Tips.Any() ||
                 dest.Relationships.Any()) return false;
 
-            //create a data-only copy of the user profile (not EF associations)
-            var userCopy = new ProfileCopy(src);
-
             //update user (header-level) data
-            userCopy.CopyTo(dest);
+            src.CopyTo(dest);
             db.SaveChanges();
 
             //Add heroes
             var destUserId = dest.Id;
-            userCopy.Heroes.ForEach(hCopy => {
+            src.Heroes.ForEach(hCopy => {
                 var hero = new Hero { UserId = destUserId };
                 hCopy.CopyTo(hero);
                 db.Heroes.Add(hero);
@@ -356,7 +361,7 @@ namespace DotAPicker.DAL
             var heroList = db.Heroes.Where(h => h.UserId == destUserId).ToDictionary(h => h.Name, h => h.Id);
 
             //add tips
-            userCopy.Tips.ForEach(tCopy => {
+            src.Tips.ForEach(tCopy => {
                 var tip = new Tip { UserId = destUserId };
                 tCopy.CopyTo(tip, heroList);
                 db.Tips.Add(tip);
@@ -364,7 +369,7 @@ namespace DotAPicker.DAL
             db.SaveChanges();
 
             //add relationships
-            userCopy.Relationships.ForEach(rCopy => {
+            src.Relationships.ForEach(rCopy => {
                 var relationship = new Relationship { UserId = destUserId };
                 rCopy.CopyTo(heroList, relationship);
                 db.Relationships.Add(relationship);
