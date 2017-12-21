@@ -210,6 +210,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ImportExportProfileViewModel.cs" />
+    <Compile Include="ViewModels\ProfileSettingsViewModel.cs" />
     <Compile Include="ViewModels\UserActionsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -432,6 +433,7 @@
     <Content Include="Views\Settings\ReplaceProfile.cshtml" />
     <Content Include="Views\Settings\ImportProfile.cshtml" />
     <Content Include="Views\Settings\ExportProfile.cshtml" />
+    <Content Include="Views\Settings\ProfileSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />

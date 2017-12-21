@@ -39,7 +39,10 @@ namespace DotAPicker.Controllers
             }
 
             db.Heroes.Add(model);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return RedirectToAction(nameof(Index)).Error("You're not allowed to that.");
+            }
             return RedirectToAction(nameof(Index)).Success("Hero created.");
         }
 
@@ -65,7 +68,10 @@ namespace DotAPicker.Controllers
             if (!ModelState.IsValid) return Index().Error($"Error: {ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage}");
 
             db.Entry(model).State = EntityState.Modified;
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
 
             //If there are new labels, save them as well.
             var newLabels = model.DescriptionLabels.Where(l => !CurrentUser.Labels.Contains(l));
@@ -73,7 +79,10 @@ namespace DotAPicker.Controllers
             {
                 CurrentUser.Labels.AddRange(newLabels);
 
-                db.SaveChanges();
+                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                {
+                    return Index().Error("You're not allowed to that.");
+                }
             }
 
             return RedirectToAction(nameof(Index)).Success("Edit complete");
@@ -89,7 +98,10 @@ namespace DotAPicker.Controllers
             }
 
             db.Heroes.Remove(hero);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
 
             return Index().Success("Hero deleted.");
         }

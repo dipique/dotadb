@@ -32,7 +32,17 @@ namespace DotAPicker.Controllers
 
         internal User CurrentUser
         {
-            get => (User)Session[SESSION_IND_USR];
+            get
+            {
+                var user = (User)Session[SESSION_IND_USR];
+                if (user.Unloaded)
+                {
+                    user = db.Users.FirstOrDefault(u => u.Name == user.Name);
+                    user.IsAuthenticated = false;
+                    Session[SESSION_IND_USR] = user;
+                }
+                return (User)Session[SESSION_IND_USR];
+            }
             set => Session[SESSION_IND_USR] = value;
         }
 
@@ -92,7 +102,10 @@ namespace DotAPicker.Controllers
             {
                 hero.Preference = pref;
                 db.Entry(hero).State = EntityState.Modified;
-                db.SaveChanges();
+                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                {
+                    return PartialView("Popdown").Success("You're not allowed to update that.");
+                }
                 return PartialView("Popdown").Success("Preference updated.");
             }
             return View();
@@ -131,7 +144,7 @@ namespace DotAPicker.Controllers
             HttpContext.Current.Response.Cookies.Add(
                 new HttpCookie($"{notification.ToString().ToLower()}", message) {
                     Path = "/",
-                    Expires = DateTime.Now.AddSeconds(2) //I'm not really sure how long this should be--just long enough for the value to be there 
+                    Expires = DateTime.Now.AddSeconds(1) //I'm not really sure how long this should be--just long enough for the value to be there 
                 });                                      //on page load. But if it's too long, it'll be there when the next action takes place.
         }
     }

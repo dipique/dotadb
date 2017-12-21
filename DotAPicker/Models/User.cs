@@ -36,6 +36,14 @@ namespace DotAPicker.Models
         [NotMapped]
         public bool IsAuthenticated { get; set; } = false;
 
+        /// <summary>
+        /// Contains whether the User object is still unloaded and will need
+        /// to be loaded by the controller. This happens when a new user comes
+        /// to the site and is automatically assigned the "default" user.
+        /// </summary>
+        [NotMapped]
+        public bool Unloaded { get; set; } = false;
+
         #endregion
 
         [Required]
@@ -119,6 +127,12 @@ namespace DotAPicker.Models
         public virtual List<Hero> Heroes { get; set; } = new List<Hero>();
         public virtual List<Tip> Tips { get; set; } = new List<Tip>();
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
+
+        public static User DefaultUser => new User() {
+            Name = "default",
+            IsAuthenticated = false,
+            Unloaded = true
+        };
     }
 
     public class Principal: IPrincipal
@@ -142,7 +156,10 @@ namespace DotAPicker.Models
     public enum ProfileTypes
     {
         Private,
+
+        [Display(Name = "Public (Read-only)")]
         ReadOnly,
+
         Public
     }
 }

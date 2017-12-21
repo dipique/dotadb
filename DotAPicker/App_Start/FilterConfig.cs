@@ -32,8 +32,15 @@ namespace DotAPicker
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var user = (User)httpContext.Session["user"];
-            if (user == null) return false;
-            if (user.ProfileType == ProfileTypes.Public) return true;
+            if (user == null)
+            {
+                user = User.DefaultUser;
+                httpContext.Session["user"] = user;
+                return true; //anyone can access the default user
+            }
+
+            if (user.ProfileType == ProfileTypes.Public ||
+                user.ProfileType == ProfileTypes.ReadOnly) return true;
             if (user.ProfileType == ProfileTypes.Private &&
                 user.IsAuthenticated) return true;
 

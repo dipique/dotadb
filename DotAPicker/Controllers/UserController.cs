@@ -41,7 +41,10 @@ namespace DotAPicker.Controllers
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
-                db.SaveChanges();
+                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                {
+                    return Index().Error("You're not allowed to that.");
+                }
                 return RedirectToAction("Index");
             }
 
@@ -77,7 +80,10 @@ namespace DotAPicker.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                {
+                    return Index().Error("You're not allowed to that.");
+                }
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -105,7 +111,10 @@ namespace DotAPicker.Controllers
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
             return RedirectToAction("Index");
         }
     }

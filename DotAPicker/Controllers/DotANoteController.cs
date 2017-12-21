@@ -39,7 +39,10 @@ namespace DotAPicker.Controllers
         public ActionResult Create(T model, bool returnToHeroList = false)
         {
             GetDbSet.Add(model);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Create(model.HeroSubjectId ?? -1, returnToHeroList).Error("You're not allowed to do that.");
+            }                
 
             if (!returnToHeroList || model.HeroSubjectId == null) return Index().Success($"{TypeString} created.");
 
@@ -65,7 +68,10 @@ namespace DotAPicker.Controllers
             if (model == null) return Index().Error("Some'n goofy happened, try again. Or, you know, don't.");
 
             GetDbSet.Attach(model);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
 
             if (!returnToHeroList || model.HeroSubjectId == null) return Index().Success("Changes saved.");
 
@@ -82,7 +88,10 @@ namespace DotAPicker.Controllers
             var heroID = note.HeroSubjectId; //save it before it's deleted
 
             GetDbSet.Remove(note);
-            db.SaveChanges();
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
 
             if (!returnToHeroList || heroID == null) return Index().Success($"{TypeString} deleted.");
 

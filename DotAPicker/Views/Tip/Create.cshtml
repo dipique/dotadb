@@ -12,7 +12,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    @Html.Hidden("returnToHeroList", (bool)ViewBag.ReturnToHeroList)    
+    @Html.Hidden("returnToHeroList", ViewBag.ReturnToHeroList == null ? false : (bool)ViewBag.ReturnToHeroList)    
 <div class="form-horizontal">
     <h4>Tip</h4>
     <hr />

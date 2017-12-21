@@ -37,18 +37,50 @@ namespace DotAPicker.Controllers
 
             var user = users.Single();
 
-            if (!user.MatchingPassword(viewModel.Password)) return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
-
-            SetCurrentUser(user);
-
-            return RedirectToAction("Index", "Home").Success("Look at you, logging in like a pro.");
+            var noPasswordEntered = string.IsNullOrEmpty(viewModel.Password);
+            if (noPasswordEntered)
+            {
+                if (user.ProfileType == ProfileTypes.Private)
+                {
+                    return LoginError(viewModel, "Noice try bustah! Tryna sign in to a public profile widout no passamawhoozit!");
+                }
+                else
+                {
+                    if (user.ProfileType == ProfileTypes.ReadOnly)
+                    {
+                        user.IsAuthenticated = false;
+                        SetCurrentUser(user);
+                        return RedirectToAction("Index", "Home").Success("Aight, yer logged in ano... anoby... ah, just don't make no changes iffen ya please.");
+                    }
+                    else
+                    {
+                        //ProfileTypes.Public
+                        user.IsAuthenticated = true;
+                        SetCurrentUser(user);
+                        return RedirectToAction("Index", "Home").Success("Dude straight up left his front door open and now you're in. Take care of the place!");
+                    }
+                }
+            } 
+            else
+            {
+                if (user.MatchingPassword(viewModel.Password))
+                {
+                    SetCurrentUser(user);
+                    return RedirectToAction("Index", "Home").Success("Look at you, logging in like a pro.");
+                }
+                else
+                {
+                    return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
+                }
+            }    
         }
 
         public ActionResult LogOut()
         {
-            CurrentUser = null;
+            var user = Models.User.DefaultUser;
+            CurrentUser = user;
             HttpContext.User = null;
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction("Index", "Home").Success("Logged out successfully.");
         }
 
         public ActionResult Register() => View();
@@ -68,18 +100,18 @@ namespace DotAPicker.Controllers
             User profileToCopy = null;
             if (!string.IsNullOrWhiteSpace(viewModel.ProfileToCopy))
             {
-                profileToCopy = db.Users.Where(u => u.ProfileType == ProfileTypes.Public)
+                profileToCopy = db.Users.Where(u => u.ProfileType == ProfileTypes.Public || u.ProfileType == ProfileTypes.ReadOnly)
                                         .FirstOrDefault(u => u.Name == viewModel.ProfileToCopy || u.Email == viewModel.ProfileToCopy);
                 if (profileToCopy == null) return View().Error("Profile to copy doesn't exist or is private.");
             }
 
             //add user
             db.Users.Add(user);
-            db.SaveChanges();
+            db.SaveChanges(true);
 
             //copy profile if applicable
             var copyProfile = profileToCopy != null;
-            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, db.Users.Single(u => u.Name == user.Name)) : false;
+            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, db.Users.Single(u => u.Name == user.Name), CurrentUser.IsAuthenticated) : false;
             SetCurrentUser(user);
 
             if (copyProfile)

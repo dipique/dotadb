@@ -7,6 +7,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Objects;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 
 using DotAPicker.Models;
 
@@ -30,6 +31,23 @@ namespace DotAPicker.DAL
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
+
+        /// <summary>
+        /// This override makes it so you can't save unless you're authorized on the current account
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges() => throw new Exception("Don't use the SaveChanges method, it doesn't authenticate.");
+
+        public int SaveChanges(bool authenticated) => authenticated ? base.SaveChanges() : UndoChanges();
+
+        public int UndoChanges()
+        {
+            this.DiscardChanges();
+            return -1;
+        }
+
+        //just so I can work with a boolean instead of an integer when I want to
+        public bool SaveChangesB(bool authenticated) => SaveChanges(authenticated) > -1;
     }
 
     public static class DBContextExtensions
@@ -63,6 +81,26 @@ namespace DotAPicker.DAL
                      .Any(t => propertyInfos.Select(i => i.GetValue(t))
                                             .SequenceEqual(keyValues));
         }
+
+        public static void DiscardChanges(this DbContext context)
+        {
+            foreach (DbEntityEntry entry in context.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                        entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
+                    case EntityState.Deleted:
+                        entry.Reload();
+                        break;
+                    default: break;
+                }
+            }
+        }
     }
 
     public class DotAInitializer : DropCreateDatabaseIfModelChanges<DotAContext> //DropCreateDatabaseAlways <DotAContext>
@@ -84,7 +122,7 @@ namespace DotAPicker.DAL
             users.First().SetNewPassword("password");
 
             users.ForEach(u => db.Users.Add(u));
-            db.SaveChanges();
+            db.SaveChanges(true);
             var defaultID = db.Users.First().Id;
 
             var heroes = new List<Hero> {
@@ -205,7 +243,7 @@ namespace DotAPicker.DAL
                 new Hero { UserId = defaultID, Name = "Abaddon", AltNames = "", Notes = "Abaddon is versatile and can be played as core or support. I prefer playing him as a support, maxing aphotic shield so my carry is unkillable.", Preference = HeroPreference.Preferred }
             };
             heroes.ForEach(u => db.Heroes.Add(u));
-            db.SaveChanges();
+            db.SaveChanges(true);
             //heroes.ForEach(t => db.Entry(t).State = EntityState.Detached);
 
             var tips = new List<Tip>{
@@ -243,7 +281,7 @@ namespace DotAPicker.DAL
                 new Tip { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Phoenix").Id, Type = TipType.AbilityUse, Text = "For escapes, you can sunray, toggle movement on, and TP while you're actually off the map", Patch = "7.07b" }
             };
             tips.ForEach(u => db.Tips.Add(u));
-            db.SaveChanges();
+            db.SaveChanges(true);
             //tips.ForEach(t => db.Entry(t).State = EntityState.Detached);
 
             var relationships = new List<Relationship>{
@@ -283,22 +321,25 @@ namespace DotAPicker.DAL
                 new Relationship { UserId = defaultID, HeroSubjectId = heroes.First(h => h.Name == "Lion").Id, HeroObjectId = heroes.First(h => h.Name == "Chaos Knight").Id, Type = TipType.Counter, Text = "Mana drain destroys illusions and talent places it on multiple targets. Q deals with illusions as well as Aghs for AOE ult.", Patch = "7.07b" }
             };
             relationships.ForEach(r => db.Relationships.Add(r));
-            db.SaveChanges();
+            db.SaveChanges(true);
         }
     }
 
     public static class DotADBTools
     {
-        public static bool CopyUser(this DotAContext db, User src, User dest, bool includeNotes = true)
+        public static bool CopyUser(this DotAContext db, User src, User dest, bool authenticated, bool includeNotes = true)
         {
+            if (!authenticated) return false;
             //create a data-only copy of the user profile (not EF associations)
             var userCopy = new ProfileCopy(src);
 
-            return ImportProfile(db, userCopy, dest, includeNotes);
+            return ImportProfile(db, userCopy, dest, authenticated, includeNotes);
         }
 
-        public static bool ImportProfile(this DotAContext db, ProfileCopy src, User dest, bool includeNotes = true)
+        public static bool ImportProfile(this DotAContext db, ProfileCopy src, User dest, bool authenticated, bool includeNotes = true)
         {
+            if (!authenticated) return false;
+
             //validate empty destination profile
             if (dest.Heroes.Any() ||
                 dest.Tips.Any() ||
@@ -306,7 +347,7 @@ namespace DotAPicker.DAL
 
             //update user (header-level) data
             src.CopyTo(dest);
-            db.SaveChanges();
+            db.SaveChanges(true);
 
             //Add heroes
             var destUserId = dest.Id;
@@ -315,7 +356,7 @@ namespace DotAPicker.DAL
                 hCopy.CopyTo(hero);
                 db.Heroes.Add(hero);
             });
-            db.SaveChanges();
+            db.SaveChanges(true);
 
             if (includeNotes)
             {
@@ -328,7 +369,7 @@ namespace DotAPicker.DAL
                     tCopy.CopyTo(tip, heroList);
                     db.Tips.Add(tip);
                 });
-                db.SaveChanges();
+                db.SaveChanges(true);
 
                 //add relationships
                 src.Relationships.ForEach(rCopy => {
@@ -336,38 +377,46 @@ namespace DotAPicker.DAL
                     rCopy.CopyTo(heroList, relationship);
                     db.Relationships.Add(relationship);
                 });
-                db.SaveChanges();
+                db.SaveChanges(true);
             }
 
             return true;
         }
 
-        public static void ClearUserData(this DotAContext db, User user)
+        public static bool ClearUserData(this DotAContext db, User user)
         {
+            if (!user.IsAuthenticated) return false;
+
             foreach(var item in db.Tips.Where(i => i.UserId == user.Id))
             {
                 db.Entry(item).State = EntityState.Deleted;
             }
-            db.SaveChanges();
+            db.SaveChanges(true);
 
             foreach (var item in db.Relationships.Where(i => i.UserId == user.Id))
             {
                 db.Entry(item).State = EntityState.Deleted;
             }
-            db.SaveChanges();
+            db.SaveChanges(true);
 
             foreach (var item in db.Heroes.Where(i => i.UserId == user.Id))
             {
                 db.Entry(item).State = EntityState.Deleted;
             }
-            db.SaveChanges();
+            db.SaveChanges(true);
+
+            return true;
         }
 
-        public static void DeleteUser(this DotAContext db, User user)
+        public static bool DeleteUser(this DotAContext db, User user)
         {
+            if (!user.IsAuthenticated) return false;
+
             db.ClearUserData(user);
             db.Entry(user).State = EntityState.Deleted;
-            db.SaveChanges();
+            db.SaveChanges(true);
+
+            return true;
         }
     }
 }
