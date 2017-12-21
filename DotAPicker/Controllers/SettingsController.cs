@@ -68,7 +68,7 @@ namespace DotAPicker.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExportProfile() => View(new ExportProfileViewModel());
+        public ActionResult ExportProfile() => View(new ExportProfileViewModel() { IncludeNotes = true });
         public ActionResult ExportProfile(ExportProfileViewModel viewModel)
         {
             var profileString = new ProfileCopy(CurrentUser, viewModel.IncludeNotes).ToXML();
@@ -79,7 +79,7 @@ namespace DotAPicker.Controllers
         }
 
         [HttpGet]
-        public ActionResult ImportProfile() => View(new ImportProfileViewModel());
+        public ActionResult ImportProfile() => View(new ImportProfileViewModel() { IncludeNotes = true });
         public ActionResult ImportProfile(ImportProfileViewModel viewModel)
         {
             var serializer = new XmlSerializer(typeof(ProfileCopy));
@@ -98,7 +98,7 @@ namespace DotAPicker.Controllers
             {
                 db.ClearUserData(CurrentUser);
                 db.ImportProfile(profile, CurrentUser, viewModel.IncludeNotes);
-                return View(new ImportProfileViewModel()).Success("Successfully imported profile!");
+                return View(new ImportProfileViewModel() { IncludeNotes = true }).Success("Successfully imported profile!");
             }
             catch (Exception)
             {

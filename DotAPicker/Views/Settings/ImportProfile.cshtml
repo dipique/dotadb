@@ -6,7 +6,7 @@
 
 <link href="@Url.Content("~/Content/sliders.css")" rel="stylesheet" type="text/css" />
 
-<h2>Export Profile</h2>
+<h2>Import Profile</h2>
 
 <p>
     <strong>
@@ -14,7 +14,8 @@
     </strong>
 </p>
 
-<form action="" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -23,12 +24,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IncludeNotes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IncludeNotes)
-                    @Html.ValidationMessageFor(model => model.IncludeNotes, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.IncludeNotes)
+                @Html.ValidationMessageFor(model => model.IncludeNotes, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.IncludeNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.IncludeNotes)
+                @Html.ValidationMessageFor(model => model.IncludeNotes, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
         <div class="form-group">
             @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -41,14 +47,9 @@
                 <br />
                 <i>(this might take a minute)</i>
             </div>
-
-        </div>
-
-        <div>
-
         </div>
     </div>
-</form>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

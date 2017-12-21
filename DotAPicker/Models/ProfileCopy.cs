@@ -107,11 +107,11 @@ namespace DotAPicker.Models
             base.CopyTo(obj, heroList);
             if (heroList.TryGetValue(Object, out int heroObjectID))
             {
-                obj.HeroSubjectId = heroObjectID;
+                obj.HeroObjectId = heroObjectID;
             }
             else
             {
-                (obj).LabelObject = Object;
+                obj.LabelObject = Object;
             }
         }
     }

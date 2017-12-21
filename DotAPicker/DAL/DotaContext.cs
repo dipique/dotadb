@@ -363,8 +363,7 @@ namespace DotAPicker.DAL
                 var heroList = db.Heroes.Where(h => h.UserId == destUserId).ToDictionary(h => h.Name, h => h.Id);
 
                 //add tips
-                src.Tips.ForEach(tCopy =>
-                {
+                src.Tips.ForEach(tCopy => {
                     var tip = new Tip { UserId = destUserId };
                     tCopy.CopyTo(tip, heroList);
                     db.Tips.Add(tip);
@@ -372,8 +371,7 @@ namespace DotAPicker.DAL
                 db.SaveChanges();
 
                 //add relationships
-                src.Relationships.ForEach(rCopy =>
-                {
+                src.Relationships.ForEach(rCopy => {
                     var relationship = new Relationship { UserId = destUserId };
                     rCopy.CopyTo(heroList, relationship);
                     db.Relationships.Add(relationship);
