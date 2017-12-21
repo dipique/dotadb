@@ -78,7 +78,7 @@ namespace DotAPicker.DAL
                            ShowDeprecatedRelationships = false,
                            ShowDeprecatedTips = false,
                            LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged",
-                           ProfileType = ProfileTypes.Public
+                           ProfileType = ProfileTypes.ReadOnly
                 },
             };
             users.First().SetNewPassword("password");
