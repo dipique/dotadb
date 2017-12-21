@@ -97,6 +97,13 @@ namespace DotAPicker.Controllers
                 return Index().Error("Hero not found.");
             }
 
+            //check if there are any tips or relationships that depend on this hero
+            if (CurrentUser.Tips.Any(t => t.HeroSubjectId == id) ||
+                CurrentUser.Relationships.Any(r => r.HeroSubjectId == id || r.HeroObjectId == id))
+            {
+                return Index().Error("You can't delete a hero that has associated tips or relationships.");
+            }
+
             db.Heroes.Remove(hero);
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
