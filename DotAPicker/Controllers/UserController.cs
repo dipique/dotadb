@@ -12,11 +12,7 @@ namespace DotAPicker.Controllers
     public class UserController : DotAController
     {
         // GET: User
-        public ActionResult Index()
-        {
-            if (CurrentUser == null) return DependencyResolver.Current.GetService<LoginController>().Index();
-            return View(db.Users.ToList());
-        }
+        public ActionResult Index() => View(db.Users.ToList());
 
         // GET: User/Details/5
         public ActionResult Details(int? id)

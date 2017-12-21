@@ -14,11 +14,7 @@ namespace DotAPicker.Controllers
     public class HomeController : DotAController
     {
         // GET: Hero
-        public ActionResult Index()
-        {
-            if (CurrentUser == null) return DependencyResolver.Current.GetService<LoginController>().Index();
-            return View("DotAPicker", CurrentUser.Heroes.OrderBy(h => h.Name));
-        }            
+        public ActionResult Index() => View("DotAPicker", CurrentUser.Heroes.OrderBy(h => h.Name));
 
         public ActionResult Detail(int id) => PartialView(GetHeroByID(id));
     }
