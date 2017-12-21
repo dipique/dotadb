@@ -11,6 +11,10 @@ namespace DotAPicker.ViewModels
     public class ProfileSettingsViewModel
     {
         [Required]
+        [RegularExpression(@"^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{3,}$")]
+        public string Password { get; set; }
+
+        [Required]
         public ProfileTypes ProfileType { get; set; } = ProfileTypes.Private;
     }
 }

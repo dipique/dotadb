@@ -12,6 +12,8 @@
     {
         ViewBag.SelectedHeroID = Model.FirstOrDefault()?.Id ?? 0;
     }
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
@@ -47,9 +49,12 @@
     <div class="row">
         <div class="col-xs-4">
             <h4 style="display:inline-block">Hero List</h4>
-            <div class="link-padding">
-                @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Hero" })
-            </div>
+            @if (signedIn)
+            {
+                <div class="link-padding">
+                    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Hero" })
+                </div>
+            }
         </div>
         <div class="col-xs-7"><h4>Hero Details</h4></div>
     </div>
@@ -71,7 +76,14 @@
                             <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="nameValue">@hero.NameSet</div>
                             <div class="data-row-cell" id="typeValue" style="min-width: 110px">
-                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref", controller = "hero" })
+                                @if (signedIn)
+                                {
+                                    @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref", controller = "hero" })
+                                }
+                                else
+                                {
+                                    @hero.Preference
+                                }
                             </div>
                             <div class="data-row-cell" id="heroActions" style="display:none"></div>
                         </div>

@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "Heros";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
@@ -58,7 +60,14 @@
                             <div class="data-row-cell" style="min-width: 175px" id="heroName">@hero.Name</div>
                             <div class="data-row-cell" style="display:none" id="nameValue">@hero.NameSet</div>
                             <div class="data-row-cell" id="typeValue">
-                                @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref" })
+                                @if (signedIn)
+                                {
+                                    @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref" })
+                                }
+                                else
+                                {
+                                    @hero.Preference
+                                }
                             </div>
                             <div class="data-row-cell" id="addTo" style="min-width: 140px">
                                 <a href="" class="add-ally" id="@hero.Id">(allies)</a> <a href="" class="add-enemy" id="@hero.Id">(enemies)</a>

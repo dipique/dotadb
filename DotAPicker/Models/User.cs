@@ -131,7 +131,8 @@ namespace DotAPicker.Models
         public static User DefaultUser => new User() {
             Name = "default",
             IsAuthenticated = false,
-            Unloaded = true
+            Unloaded = true,
+            ProfileType = ProfileTypes.ReadOnly
         };
     }
 

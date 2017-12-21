@@ -1,6 +1,10 @@
 ﻿@using DotAPicker.Models;
 @model Hero
 
+@{ 
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+}
+
 <div class="container" style="max-width: 600px">
     <div class="hor-title-header-row row">
         <div class="hor-title-header-cell col-xs-4">Name</div>
@@ -10,10 +14,13 @@
     <div class="hor-data-row row">
         <div class="hor-data-cell col-xs-4">
             @Model.Name
-            <div class="link-padding">
-                @Html.ActionLink("(edit)", "Edit", new { id = Model.Id }, new { @class = "edit-link", title = "Edit Hero" })
-                @Html.ActionLink("(delete)", "Delete", new { id = Model.Id }, new { @class = "delete-link", title = "Delete Hero" })
-            </div>
+            @if (signedIn)
+            {
+                <div class="link-padding">
+                    @Html.ActionLink("(edit)", "Edit", new { id = Model.Id }, new { @class = "edit-link", title = "Edit Hero" })
+                    @Html.ActionLink("(delete)", "Delete", new { id = Model.Id }, new { @class = "delete-link", title = "Delete Hero" })
+                </div>
+            }
         </div>
         <div class="hor-data-cell col-xs-6">@Model.AltNames</div>
         <div class="hor-data-cell col-xs-2">@Model.Id</div>
@@ -27,9 +34,12 @@
     <div class="row">
         <div class="col-xs-12">
             <h4 style="display: inline-block">Tips</h4>
-            <div class="link-padding">
-                @Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Tip" })
-            </div>
+            @if (signedIn)
+            {
+                <div class="link-padding">
+                    @Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Tip" })
+                </div>
+            }
         </div>
     </div>
 
@@ -50,10 +60,13 @@
             <div class="col-xs-11">
                 @Html.DisplayFor(Model => Model.Tips[x].Text)
             </div>
-            <div class="link-padding col-xs-1">
-                @Html.ActionLink("(edit)", "Edit", "Tip", new { id = Model.Tips[x].Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Tip" })
-                @Html.ActionLink("(delete)", "Delete", "Tip", new { id = Model.Tips[x].Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Tip" })
-            </div>
+            @if (signedIn)
+            {
+                <div class="link-padding col-xs-1">
+                    @Html.ActionLink("(edit)", "Edit", "Tip", new { id = Model.Tips[x].Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Tip" })
+                    @Html.ActionLink("(delete)", "Delete", "Tip", new { id = Model.Tips[x].Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Tip" })
+                </div>
+            }
         </div>
     }
     @if (Model.Tips.Count() == 0)
@@ -61,7 +74,10 @@
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="hor-data-cell col-xs-12" style="border-bottom: inset">
                 This hero doesn't have any tips yet.
-                @Html.ActionLink("Click here to add one!", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { title = "New Tip" })
+                @if (signedIn)
+                {
+                    @Html.ActionLink("Click here to add one!", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { title = "New Tip" })
+                }                
             </div>
         </div>
     }
@@ -70,7 +86,10 @@
         <div class="col-xs-12">
             <h4 style="display: inline-block">Relationships</h4>
             <div class="link-padding">
-                @Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Relationship" })
+                @if (signedIn)
+                {
+                    @Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Relationship" })
+                }                
             </div>
         </div>
     </div>
@@ -94,10 +113,13 @@
             <div class="col-xs-11">
                 @r.Text
             </div>
-            <div class="link-padding col-xs-1">
-                @Html.ActionLink("(edit)", "Edit", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Relationship" })
-                @Html.ActionLink("(delete)", "Delete", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Relationship" })
-            </div>
+            @if (signedIn)
+            {
+                <div class="link-padding col-xs-1">
+                    @Html.ActionLink("(edit)", "Edit", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Relationship" })
+                    @Html.ActionLink("(delete)", "Delete", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Relationship" })
+                </div>
+            }
         </div>
     }
 
@@ -106,7 +128,10 @@
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="hor-data-cell col-xs-12" style="border-bottom: inset">
                 This hero doesn't have any relationships yet.
-                @Html.ActionLink("Click here to add one!", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { title = "New Relationship" })
+                @if (signedIn)
+                {
+                    @Html.ActionLink("Click here to add one!", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { title = "New Relationship" })
+                }
             </div>
         </div>
     }

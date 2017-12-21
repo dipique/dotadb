@@ -104,7 +104,7 @@ namespace DotAPicker.Controllers
                 db.Entry(hero).State = EntityState.Modified;
                 if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
                 {
-                    return PartialView("Popdown").Success("You're not allowed to update that.");
+                    return PartialView("Popdown").Error("You're not allowed to update that.");
                 }
                 return PartialView("Popdown").Success("Preference updated.");
             }

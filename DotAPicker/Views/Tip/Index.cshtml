@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "Tip";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
@@ -13,7 +15,10 @@
 
 <h1>Tips</h1>
 
-@Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Tip" })
+@if (signedIn)
+{
+    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Tip" })
+}
 
 <div class="col-xs-12">
     <div class="col-xs-2">
@@ -45,10 +50,13 @@
             <div class="data-row">
                 <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
                     @Model[x].SubjectName
-                    <div class="link-padding">
-                        @Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }, new { @class = "edit-link", title = "Edit Tip" })
-                        @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id }, new { @class = "delete-link", title = "Delete Tip" })
-                    </div>
+                    @if (signedIn)
+                    {
+                        <div class="link-padding">
+                            @Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }, new { @class = "edit-link", title = "Edit Tip" })
+                            @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id }, new { @class = "delete-link", title = "Delete Tip" })
+                        </div>
+                    }
                 </div>
                 <div class="data-row-cell" style="display:none" id="nameValue">@Model[x].NameSet</div>
                 <div class="data-row-cell col-xs-2" id="typeValue">

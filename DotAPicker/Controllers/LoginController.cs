@@ -79,7 +79,7 @@ namespace DotAPicker.Controllers
         {
             var user = Models.User.DefaultUser;
             CurrentUser = user;
-            HttpContext.User = null;
+            HttpContext.User = new Principal(user);
             return RedirectToAction("Index", "Home").Success("Logged out successfully.");
         }
 

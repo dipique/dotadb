@@ -125,6 +125,9 @@ namespace DotAPicker.Controllers
         public ActionResult ProfileSettings() => View(new ProfileSettingsViewModel() { ProfileType = CurrentUser.ProfileType });
         public ActionResult ProfileSettings(ProfileSettingsViewModel viewModel)
         {
+            //validate password
+            if (!CurrentUser.MatchingPassword(viewModel.Password)) return View().Error("Wrong password.");
+
             //make sure this user is allowed to make this change
             if (!CurrentUser.IsAuthenticated) return View(new ProfileSettingsViewModel() { ProfileType = CurrentUser.ProfileType }).Information("You're a dumbass. Seriously.");
 
