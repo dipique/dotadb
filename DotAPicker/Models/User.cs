@@ -142,7 +142,7 @@ namespace DotAPicker.Models
     public enum ProfileTypes
     {
         Private,
-        //ReadOnly, //TODO: Implement
+        ReadOnly,
         Public
     }
 }

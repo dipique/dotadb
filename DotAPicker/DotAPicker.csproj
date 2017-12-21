@@ -198,7 +198,8 @@
     <Compile Include="Models\Hero.cs" />
     <Compile Include="Models\ProfileCopy.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Utilities.cs" />
+    <Compile Include="Models\Utilities\SettingValidators.cs" />
+    <Compile Include="Models\Utilities\Utilities.cs" />
     <Compile Include="Models\UserOwnedEntity.cs" />
     <Compile Include="Models\Relationship.cs" />
     <Compile Include="Models\Tip.cs" />

@@ -24,46 +24,6 @@ namespace DotAPicker.DAL
         public DbSet<Tip> Tips { get; set; }
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<User> Users { get; set; }
-        
-        ///// <summary>
-        ///// Updates the settings objects from a list of settings. These are updates as lists and not as individual objects.
-        ///// TODO: Return errors if found
-        ///// </summary>
-        ///// <param name="currentUserID"></param>
-        ///// <param name="newSettings"></param>
-        //public void UpdateSettings(int currentUserID, List<Setting> newSettings)
-        //{
-        //    var currentSettings = Users.Find(currentUserID).Settings;
-        //    var saveNeeded = false;
-
-        //    //loop through all settings, updating as appropriate
-        //    foreach (Setting oldVal in currentSettings)
-        //    {
-        //        //get new value for comparison
-        //        var newVal = newSettings.FirstOrDefault(s => s.ID == oldVal.ID);
-        //        if (newVal == null) continue;
-
-        //        //if it's the same, move on
-        //        if (newVal.Value == oldVal.Value) continue;
-
-        //        //validate the setting
-        //        var validationMethod = typeof(SettingValidator).GetMethods()
-        //                                                       .FirstOrDefault(m => m.GetCustomAttribute<SettingValidator>()?.SettingName == oldVal.Name);
-        //        if (validationMethod != null)
-        //        {
-        //            var success = (bool)validationMethod.Invoke(null, new object[] { newVal.Value });
-        //            if (!success) continue; //failed validation, don't make update (TODO: send error messages to screen)
-        //        }
-
-        //        //make the update
-        //        oldVal.Value = newVal.Value;
-        //        Entry(oldVal).State = EntityState.Modified;
-        //        saveNeeded = true;
-        //    }
-
-        //    //save if needed
-        //    if (saveNeeded) SaveChanges();
-        //}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
