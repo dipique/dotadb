@@ -198,6 +198,7 @@
     <Compile Include="Models\Hero.cs" />
     <Compile Include="Models\ProfileCopy.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utilities\ISortable.cs" />
     <Compile Include="Models\Utilities\SettingValidators.cs" />
     <Compile Include="Models\Utilities\Utilities.cs" />
     <Compile Include="Models\UserOwnedEntity.cs" />
@@ -210,6 +211,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ImportExportProfileViewModel.cs" />
+    <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\ProfileSettingsViewModel.cs" />
     <Compile Include="ViewModels\UserActionsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
@@ -434,6 +436,7 @@
     <Content Include="Views\Settings\ImportProfile.cshtml" />
     <Content Include="Views\Settings\ExportProfile.cshtml" />
     <Content Include="Views\Settings\ProfileSettings.cshtml" />
+    <Content Include="Views\Hero\HeroTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />

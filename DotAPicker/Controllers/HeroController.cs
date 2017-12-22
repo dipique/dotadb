@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 
 using DotAPicker.Models;
+using DotAPicker.ViewModels;
 
 namespace DotAPicker.Controllers
 {
@@ -14,7 +15,11 @@ namespace DotAPicker.Controllers
         public ActionResult Index()
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
-            return View("Heroes", CurrentUser.Heroes.OrderBy(h => h.Name));
+            return View("Heroes", new TableViewModel<Hero>() {
+                Items = CurrentUser.Heroes,
+                SortDirection = SortDirections.Ascending,
+                SortField = nameof(Hero.Name)
+            } );
         }
 
         // GET: Hero/Create

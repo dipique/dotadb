@@ -1,5 +1,7 @@
 ﻿@using DotAPicker.Models
-@model IEnumerable<Hero>
+@using DotAPicker.ViewModels
+@using System.Reflection
+@model TableViewModel<Hero>
 
 @{
     ViewBag.Title = "Heros";
@@ -10,7 +12,7 @@
     }
     else
     {
-        ViewBag.SelectedHeroID = Model.FirstOrDefault()?.Id ?? 0;
+        ViewBag.SelectedHeroID = Model.Items.FirstOrDefault()?.Id ?? 0;
     }
 
     var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
@@ -60,8 +62,23 @@
     </div>
     <div class="row">
         <div class="col-xs-4">
+            @{ 
+                TableConstructorViewModel<Hero> heroTable = new TableConstructorViewModel<Hero>() {
+                    SignedIn = signedIn,
+                    Items = Model.Items,
+                    Columns = new List<TableColumn<Hero>>() {
+                        new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200),
+                        new TableColumn<Hero>(nameof(Hero.NameSet), display: false),
+                        new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, dropDownSettings: new DropDownSettings() {
+                            DropdownClass = "hero-pref",
+                            RequiresSignIn = true
+                        })
+                    }
+                };
+                Html.RenderPartial("HeroTable", heroTable);
+            }
             @*Hero options table*@
-            <div class="scrolling-container">
+            @*<div class="scrolling-container">
                 <div class="header-scrolling-container">
                     <div class="header-cell" style="min-width: 200px">Name</div>
                     <div class="header-cell" style="display:none">Alt Names</div>
@@ -69,7 +86,7 @@
                     <div class="header-cell" style="display:none">Actions</div>
                 </div>
                 <div class="data-scrolling-container" id="filterTable">
-                    @foreach (var hero in Model)
+                    @foreach (var hero in Model.Items)
                     {
                         var rowClass = ViewBag.SelectedHeroID == hero.Id ? "data-row selected" : "data-row";
                         <div class="@rowClass" id="@hero.Id">
@@ -85,14 +102,13 @@
                                     @hero.Preference
                                 }
                             </div>
-                            <div class="data-row-cell" id="heroActions" style="display:none"></div>
                         </div>
                     }
                 </div>
                 <div class="no-data" style="display: none">
                     <div class="no-data-cell" style="min-width: 417px">No heros found</div>
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="col-xs-7">
             @*Hero detail section*@

@@ -29,6 +29,18 @@ namespace DotAPicker.Models
             });
         }
 
+        public static IEnumerable<SelectListItem> GetSelectList(Enum enumVal)
+        {
+            var strEnum = enumVal.ToString();
+            var members = enumVal.GetType().GetMembers(BindingFlags.Public | BindingFlags.Static)
+                                           .Where(m => m.MemberType == MemberTypes.Field);
+            return members.Select(val => new SelectListItem() {
+                Text = val.DisplayName(),
+                Value = val.Name,
+                Selected = (strEnum == val.Name)
+            });
+        }
+
         public static string DisplayName(this MemberInfo member) => member.GetCustomAttribute<DisplayAttribute>()?.Name ?? member.Name;
 
         public static IEnumerable<string> GetEnumOptions(Type enumType, Type affiliationType = null)

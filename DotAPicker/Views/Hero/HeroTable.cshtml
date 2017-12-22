@@ -1,0 +1,40 @@
+﻿@using DotAPicker.Models
+@using DotAPicker.ViewModels
+@model TableConstructorViewModel<Hero>
+
+
+
+@*Hero options table*@
+<div class="scrolling-container">
+    <div class="header-scrolling-container">
+        @foreach(var column in Model.Columns)
+        {
+            <div class="header-cell"@Html.Raw(column.StyleAttributes)>@column.Name</div>
+        }
+    </div>
+    <div class="data-scrolling-container" id="filterTable">
+        @foreach (var hero in Model.Items)
+        {
+            var rowClass = ViewBag.SelectedHeroID == hero.Id ? "data-row selected" : "data-row";
+            <div class="@rowClass" id="@hero.Id">
+                @foreach(var column in Model.Columns)
+                {
+                    <div class="data-row-cell"@Html.Raw(column.StyleAttributes + column.IDString)>
+                        @if (column.IsDropDown && (Model.SignedIn || !column.DropDownSettings.RequiresSignIn))
+                        {
+                            @Html.DropDownList(column.Property.Name, Extensions.GetSelectList((Enum)column.ObjectValue(hero)), new { id = hero.Id, @class = column.DropDownSettings.DropdownClass})
+                        }
+                        else
+                        {
+                            @column.GetValue(hero)
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="no-data" style="display: none">
+        <div class="no-data-cell" style="min-width: 417px">No heros found</div>
+    </div>
+</div>
+
