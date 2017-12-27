@@ -15,11 +15,34 @@ namespace DotAPicker.Controllers
         public ActionResult Index()
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
+            return GetItems(nameof(Hero.Name), SortDirections.Ascending, null);
+        }
+
+        public ActionResult GetItems(string sortField, SortDirections sortDirection, int? selectedHeroID = null)
+        {
+            if (selectedHeroID != null)
+            {
+                ViewBag.SelectedHeroID = selectedHeroID;
+            }
             return View("Heroes", new TableViewModel<Hero>() {
                 Items = CurrentUser.Heroes,
-                SortDirection = SortDirections.Ascending,
-                SortField = nameof(Hero.Name)
-            } );
+                SortDirection = sortDirection,
+                SortField = sortField
+            });
+        }
+
+        public ActionResult HeroSort(string propertyName, string currentSortString)
+        {
+            if (!Enum.TryParse(currentSortString, out SortDirections currentSortDirection))
+            {
+                return Index();
+            }
+
+            SortDirections newSortDirection = SortDirections.Ascending;
+            if (currentSortDirection == SortDirections.Ascending)
+                newSortDirection = SortDirections.Descending;
+
+            return GetItems(propertyName, newSortDirection, null);
         }
 
         // GET: Hero/Create

@@ -436,7 +436,7 @@
     <Content Include="Views\Settings\ImportProfile.cshtml" />
     <Content Include="Views\Settings\ExportProfile.cshtml" />
     <Content Include="Views\Settings\ProfileSettings.cshtml" />
-    <Content Include="Views\Hero\HeroTable.cshtml" />
+    <Content Include="Views\Shared\HeroTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />

@@ -1,6 +1,5 @@
 ﻿@using DotAPicker.Models
 @using DotAPicker.ViewModels
-@using System.Reflection
 @model TableViewModel<Hero>
 
 @{
@@ -38,7 +37,7 @@
                 </div>
                 <div class="col-xs-1"></div>
                 <div class="col-xs-3">
-                    <select multiple data-placeholder="Search by hero preference" id="typeFilter" onchange="filterFunction()">
+                    <select multiple data-placeholder="Search by hero preference" id="typeFilter" onchange="typeFilterChange()">
                         @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
                         {
                             <option value="@option">@option</option>
@@ -63,52 +62,28 @@
     <div class="row">
         <div class="col-xs-4">
             @{ 
-                TableConstructorViewModel<Hero> heroTable = new TableConstructorViewModel<Hero>() {
+                var viewModel = new TableConstructorViewModel<Hero>() {
                     SignedIn = signedIn,
                     Items = Model.Items,
                     Columns = new List<TableColumn<Hero>>() {
-                        new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200),
+                        new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200, valueID: "nameValue"),
                         new TableColumn<Hero>(nameof(Hero.NameSet), display: false),
-                        new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, dropDownSettings: new DropDownSettings() {
+                        new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", dropDownSettings: new DropDownSettings() {
                             DropdownClass = "hero-pref",
                             RequiresSignIn = true
                         })
                     }
                 };
-                Html.RenderPartial("HeroTable", heroTable);
+
+                //Set the sort field, if applicable
+                var sortColumn = viewModel.Columns.FirstOrDefault(c => c.Property.Name == Model.SortField);
+                if (sortColumn != null)
+                {
+                    sortColumn.SortDirection = Model.SortDirection;
+                }
+
+                Html.RenderPartial("HeroTable", viewModel);
             }
-            @*Hero options table*@
-            @*<div class="scrolling-container">
-                <div class="header-scrolling-container">
-                    <div class="header-cell" style="min-width: 200px">Name</div>
-                    <div class="header-cell" style="display:none">Alt Names</div>
-                    <div class="header-cell" style="min-width: 110px">Preference</div>
-                    <div class="header-cell" style="display:none">Actions</div>
-                </div>
-                <div class="data-scrolling-container" id="filterTable">
-                    @foreach (var hero in Model.Items)
-                    {
-                        var rowClass = ViewBag.SelectedHeroID == hero.Id ? "data-row selected" : "data-row";
-                        <div class="@rowClass" id="@hero.Id">
-                            <div class="data-row-cell" style="min-width: 200px" id="heroName">@hero.Name</div>
-                            <div class="data-row-cell" style="display:none" id="nameValue">@hero.NameSet</div>
-                            <div class="data-row-cell" id="typeValue" style="min-width: 110px">
-                                @if (signedIn)
-                                {
-                                    @Html.DropDownList("heroPref", @hero.Preference.AsSelectList(), new { id = hero.Id, @class = "hero-pref", controller = "hero" })
-                                }
-                                else
-                                {
-                                    @hero.Preference
-                                }
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="no-data" style="display: none">
-                    <div class="no-data-cell" style="min-width: 417px">No heros found</div>
-                </div>
-            </div>*@
         </div>
         <div class="col-xs-7">
             @*Hero detail section*@
@@ -122,6 +97,11 @@
         width: "300px"
     });
 
+    function typeFilterChange() {
+        filterFunction();
+    }
+
+    var auth = @signedIn.ToString().ToLower();
     var filterSet = [[
         "nameFilter",
         "text",
@@ -131,7 +111,7 @@
         "typeFilter",
         "multi",
         "typeValue",
-        "select"
+        auth == "true" ? "select" : "inner"
     ]
     ];
 

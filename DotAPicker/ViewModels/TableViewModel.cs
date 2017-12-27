@@ -38,9 +38,18 @@ namespace DotAPicker.ViewModels
 
         public LambdaExpression BuildSelector()
         {
-            ParameterExpression param = Expression.Parameter(typeof(T));
-            MemberExpression access = Expression.MakeMemberAccess(param, SortProperty);
-            LambdaExpression lambda = Expression.Lambda<Func<T, object>>(access, param);
+            var param = Expression.Parameter(typeof(T));
+            var access = Expression.MakeMemberAccess(param, SortProperty);
+
+            //usually, this access expression would be enough to create the lambda expression. HOWEVER,
+            //for some stupid reason member access expressions DO NOT like enums, so we skirt around that limitation
+            //by converting all the values to string
+            var toStringMethod = typeof(object).GetMethods().Where(m => m.GetParameters().Count() == 0)
+                                                            .Single(m => m.Name == "ToString");
+            var toString = Expression.Call(access, toStringMethod);
+
+            //that done, we can assemble the lambda expression
+            LambdaExpression lambda = Expression.Lambda<Func<T, object>>(toString, param);
             return lambda;   
         }
 
@@ -76,6 +85,12 @@ namespace DotAPicker.ViewModels
 
     public class TableColumn<T>
     {
+        private string headerText = null;
+        public string HeaderText
+        {
+            get => headerText ?? Name;
+            set => headerText = value;
+        }
         public string Name => Property?.DisplayName() ?? Property?.Name;
         public SortDirections SortDirection { get; set; } = SortDirections.None;
         public bool Display { get; set; } = true;
@@ -83,6 +98,9 @@ namespace DotAPicker.ViewModels
         public PropertyInfo Property { get; set; }
         public DropDownSettings DropDownSettings { get; set; }
         public string ValueID { get; set; }
+        public string HeaderID { get; set; }
+        public bool Sortable { get; set; } = true;
+        public string RawHTML { get; set; } //sometimes, instead of values, you might just want raw HTML inserted there
 
         public bool IsDropDown => DropDownSettings != null;
 
@@ -99,7 +117,7 @@ namespace DotAPicker.ViewModels
             return Property.GetValue(item);
         }
 
-        public TableColumn(string propertyName, string valueID = null, bool display = true, int minWidth = -1, DropDownSettings dropDownSettings = null)
+        public TableColumn(string propertyName, string valueID = null, bool display = true, int minWidth = -1, DropDownSettings dropDownSettings = null, bool sortable = true, string headerID = null, string rawHTML = null, string header = null)
         {
             if (!string.IsNullOrEmpty(propertyName))
             {
@@ -109,8 +127,12 @@ namespace DotAPicker.ViewModels
 
             ValueID = valueID;
             Display = display;
+            Sortable = sortable && display && rawHTML == null; //invisible fields can't be sortable, and rawHTML can't be sorted
             MinWidth = minWidth;
             DropDownSettings = dropDownSettings;
+            HeaderID = headerID ?? propertyName;
+            RawHTML = rawHTML;
+            HeaderText = header;
         }
 
         private string styleAttributes = null;

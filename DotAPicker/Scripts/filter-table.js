@@ -122,8 +122,8 @@ function filterFunction() {
 function getSearchCriteriaFromFilterSet() {
     var returnSet = new Map();
     filterSet.forEach(function (filter) {
-        var element = document.getElementById(filter[0]);
-        var filterType = filter[1];
+        var element = document.getElementById(filter[0]); //contains the component that contains the search value
+        var filterType = filter[1];                       //single, multi, text, etc.
         if (!element && filterType != "row-index-exclusion") { //if filter doesn't exist, exit
             return;                                            //except row exclusions, which 
         }                                                      //aren't mapped to elements
@@ -146,7 +146,7 @@ function getSearchCriteriaFromFilterSet() {
                 matchType = "row-exclusion";    //row index (|ind|) contained in search term
                 break;
         }
-        var valueCellID = filter[2];
+        var valueCellID = filter[2];  //contains the ID of the header column to be filtered
         if (searchValue.length < 1) { //if there's no search filter here, don't add it to the map
             return;
         }
@@ -178,6 +178,8 @@ function arrayToPipedOptions(array) {
     for (var x = 0; x < array.length; x++) {
         retVal += array[x] + "|";                //the pipe eliminates all partial matches
     }
+    if (retVal == "|") return "";
+
     return retVal.toUpperCase();
 }
 

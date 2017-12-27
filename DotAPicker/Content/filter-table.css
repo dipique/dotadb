@@ -58,3 +58,7 @@
     font-size: 14px; /* Increase font-size */
     padding: 3px 5px 3px 5px; /* Add some padding (TRBL) */
 }
+
+a.sort-link {
+    color: #1f4e77;
+}
