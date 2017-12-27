@@ -17,9 +17,17 @@
 <div class="container-fluid" style="min-width: 1366px; margin-left: 20px;">
     <div class="row">
         @*Title*@
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <h1>DotA Hero Picker</h1>
         </div>
+    </div>
+    <div class="col-xs-3">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Info</a>
+    </div>
+    <div class="info" style="display: none">
+        <p>
+            This is how you use this.
+        </p>
     </div>
     <div class="row">
         @*Filter section*@
@@ -57,18 +65,19 @@
     <div class="row">
         <div class="col-xs-4" style="min-width: 440px; max-width: 440px">
             @{
-                var viewModel = new TableConstructorViewModel<Hero>() {
+                var viewModel = new TableConstructorViewModel<Hero>()
+                {
                     SignedIn = signedIn,
                     Items = Model.Items,
                     Columns = new List<TableColumn<Hero>>() {
-                            new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, valueID: "nameValue", sortable: false), //no sortable fields since it clears pick values atm
-                            new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
-                            new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", sortable: false, dropDownSettings: new DropDownSettings() {
-                                DropdownClass = "hero-pref",
-                                RequiresSignIn = true
-                            }),
-                            new TableColumn<Hero>(null, header: "Add to...", minWidth: 140, valueID: "addTo", rawHTML: "<a href=\"\" class=\"add-ally\">(allies)</a> <a href=\"\" class=\"add-enemy\">(enemies)</a>")
-                        }
+                                new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, valueID: "nameValue", sortable: false), //no sortable fields since it clears pick values atm
+                                new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
+                                new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", sortable: false, dropDownSettings: new DropDownSettings() {
+                                    DropdownClass = "hero-pref",
+                                    RequiresSignIn = true
+                                }),
+                                new TableColumn<Hero>(null, header: "Add to...", minWidth: 140, valueID: "addTo", rawHTML: "<a href=\"\" class=\"add-ally\">(allies)</a> <a href=\"\" class=\"add-enemy\">(enemies)</a>")
+                            }
                 };
 
                 //Set the sort field, if applicable
@@ -106,6 +115,16 @@
 </div>
 
 <script>
+    var infoShown = false;
+    function toggleInfo() {
+        if (infoShown) {
+            $(".info").hide();
+        } else {
+            $(".info").show();
+        }
+        infoShown = !infoShown;
+    }
+
     var auth = @signedIn.ToString().ToLower();
     var filterSet = [[
         "nameFilter",
