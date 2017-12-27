@@ -28,7 +28,7 @@ namespace DotAPicker.ViewModels
                     return items.OrderBy(selector);
                 }
 
-                //if it's not ascending, it's descening
+                //if it's not ascending, it's descending
                 return items.OrderByDescending(selector);
             }
             set => items = value;

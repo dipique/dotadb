@@ -98,6 +98,9 @@ function filterFunction() {
                     case "full":
                         hideRow = !cellContents == filter.searchValue;
                         break;
+                    case "full-multi":
+                        hideRow = !allOfPipedResultSetContained(filter.searchValue, cellContents);
+                        break;
                 }
 
                 if (hideRow) { //don't keep looking if we've found exclusion criteria
@@ -135,7 +138,11 @@ function getSearchCriteriaFromFilterSet() {
                 break;
             case "multi":
                 searchValue = getPipedMultiSelectOptions(element);
-                matchType = "partial-reverse";  //entire cell contents is contains in search term
+                matchType = "partial-reverse";  //entire cell contents contained in search term
+                break;
+            case "multi-value":
+                searchValue = getPipedMultiSelectOptions(element);
+                matchType = "full-multi";       //all search terms contained within cell contents
                 break;
             case "text":
                 searchValue = element.value.toUpperCase();
@@ -159,6 +166,17 @@ function getSearchCriteriaFromFilterSet() {
     });
 
     return returnSet;
+}
+
+function allOfPipedResultSetContained(pipedResultSet, valueText) {
+    var results = pipedResultSet.split("|");
+    for (var x = 0; x < results.length; x++) {
+        if (results[x].trim().length < 1) continue;
+        if (!valueText.includes(results[x])) return false;
+    }
+
+    //all of the search terms are contained
+    return true;
 }
 
 //gets all the options selected in a multi-select box and returns them as a pipe-delimited string

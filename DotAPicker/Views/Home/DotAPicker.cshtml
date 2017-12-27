@@ -23,15 +23,24 @@
     </div>
     <div class="row">
         @*Filter section*@
-        <div class="col-xs-5">
+        <div class="col-xs-11">
             <div class="row">
-                <div class="col-xs-6" style="min-width: 200px; max-width: 200px">
+                <div class="col-xs-3" style="min-width: 200px; max-width: 200px">
                     <input class="text-search" type="text" id="nameFilter" placeholder="Search by hero name..." />
                 </div>
                 <div class="col-xs-1" style="min-width: 50px; max-width: 50px"></div>
-                <div class="col-xs-3" style="min-width: 200px; max-width: 200px">
+                <div class="col-xs-3" style="min-width: 250px; max-width: 250px">
                     <select multiple data-placeholder="Search by hero preference" id="typeFilter" onchange="filterFunctionAfterArrayUpdate()">
                         @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-xs-1" style="min-width: 25px; max-width: 25px"></div>
+                <div class="col-xs-3" style="min-width: 250px; max-width: 250px">
+                    <select multiple data-placeholder="Search by label" id="labelFilter" onchange="filterChange()">
+                        @foreach (string option in Model.Items.SelectMany(i => i.DescriptionLabels).Distinct())
                         {
                             <option value="@option">@option</option>
                         }
@@ -52,8 +61,8 @@
                     SignedIn = signedIn,
                     Items = Model.Items,
                     Columns = new List<TableColumn<Hero>>() {
-                            new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, valueID: "heroName", sortable: false), //no sortable fields since it clears pick values atm
-                            new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "nameValue"),
+                            new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, valueID: "nameValue", sortable: false), //no sortable fields since it clears pick values atm
+                            new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
                             new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", sortable: false, dropDownSettings: new DropDownSettings() {
                                 DropdownClass = "hero-pref",
                                 RequiresSignIn = true
@@ -104,6 +113,11 @@
         "nameValue",
         "inner"
     ], [
+        "labelFilter",
+        "multi-value",
+        "labelValue",
+        "inner"
+    ], [
         "typeFilter",
         "multi",
         "typeValue",
@@ -116,13 +130,9 @@
     ]
     ];
 
-    $("#filterPreference").chosen({
-        width: "300px"
+    $("#labelFilter").chosen({
+        width: "250px"
     });
-
-    //$("#filterPreference").chosen().change(new function () {
-    //    filterFunction();
-    //});
 
     var allyArray = [-1, -1, -1, -1, -1];
     var enemyArray = [-1, -1, -1, -1, -1];
@@ -145,6 +155,10 @@
 
     function filterFunctionAfterArrayUpdate() {
         updateChosenArray();
+        filterFunction();
+    }
+
+    function filterChange() {
         filterFunction();
     }
 
@@ -187,7 +201,7 @@
     });
 
     $("#typeFilter").chosen({
-        width: "300px"
+        width: "250px"
     });
 
     $(".add-ally").click(function () {
