@@ -1,0 +1,82 @@
+Intelligence	Strength	Agility	Pusher	Ranged	Melee	Carry	Support	Nuker	Initiator	Disabler	Jungler	Escape	Long CD Dependant	Durable
+Ancient Apparition	Abaddon	A	Broodmother	Ancient Apparition	Abaddon	Abaddon	Abaddon	Alchemist	Alchemist	Alchemist	Axe	Anti-Mage	Enigma	Abaddon
+B	Alchemist	Anti-Mage	C	Arc Warden	Alchemist	Alchemist	Alchemist	Ancient Apparition	Axe	Ancient Apparition	B	Arc Warden	Death Prophet	Alchemist
+Bane	Axe	Arc Warden	Pushing	B	Anti-Mage	Anti-Mage	Ancient Apparition	Anti-Mage	B	Axe	Batrider	B	Faceless Void	Axe
+Batrider	B	B	Role	Bane	Axe	Arc Warden	B	Arc Warden	Batrider	B	Bloodseeker	Batrider	Wraith King	B
+C	Beastmaster	Bloodseeker	Chaos Knight	Batrider	B	B	Bane	B	Beastmaster	Bane	C	Bounty Hunter		Bane
+Chen	Brewmaster	Bounty Hunter	Chen	C	Beastmaster	Bloodseeker	C	Bane	Bloodseeker	Batrider	Role	Broodmother		Beastmaster
+Crystal Maiden	Bristleback	Broodmother	Clinkz	Chen	Bloodseeker	Brewmaster	Role	Beastmaster	Brewmaster	Beastmaster	Chen	C		Brewmaster
+D	C	C	D	Clinkz	Bounty Hunter	Bristleback	Chen	Bloodseeker	Bristleback	Bloodseeker	Crystal Maiden	Role		Bristleback
+Dark Seer	Centaur Warrunner	Clinkz	Death Prophet	Crystal Maiden	Brewmaster	Broodmother	Crystal Maiden	Bounty Hunter	C	Brewmaster	D	Centaur Warrunner		C
+Dark Willow	Chaos Knight	D	Dragon Knight	D	Bristleback	C	D	Brewmaster	Initiating	C	Dark Seer	Clinkz		Role
+Dazzle	Clockwerk	Drow Ranger	Drow Ranger	Dark Willow	Broodmother	Role	Dark Willow	Bristleback	Role	Role	E	D		Centaur Warrunner
+Death Prophet	D	E	E	Dazzle	C	Chaos Knight	Dazzle	Broodmother	Centaur Warrunner	Centaur Warrunner	Enchantress	Dark Seer		Chaos Knight
+Disruptor	Doom	Ember Spirit	Enchantress	Death Prophet	Centaur Warrunner	Clinkz	Disruptor	C	Chaos Knight	Chaos Knight	Enigma	Dark Willow		Clockwerk
+E	Dragon Knight	F	Enigma	Disruptor	Chaos Knight	D	E	Role	Clockwerk	Clockwerk	S	E		D
+Enchantress	E	Faceless Void	P	Drow Ranger	Clockwerk	Death Prophet	Earthshaker	Centaur Warrunner	D	Crystal Maiden	Sand King	Earth Spirit		Doom
+Enigma	Earth Spirit	G	Pugna	E	D	Doom	Enchantress	Clockwerk	Dark Seer	D	U	Ember Spirit		Dragon Knight
+I	Earthshaker	Gyrocopter	R	Enchantress	Dark Seer	Dragon Knight	L	Crystal Maiden	Disruptor	Dark Seer	Ursa	F		E
+Invoker	Elder Titan	J	Razor	Enigma	Doom	Drow Ranger	Lich	D	Doom	Dark Willow		Faceless Void		Earth Spirit
+J	H	Juggernaut	S	G	Dragon Knight	E	Lina	Dark Willow	Dragon Knight	Dazzle		P		Elder Titan
+Jakiro	Huskar	L	Shadow Shaman	Gyrocopter	E	Ember Spirit	R	Dazzle	E	Death Prophet		Pangolier		Enchantress
+K	I	Lone Druid	T	H	Earth Spirit	F	Rubick	Death Prophet	Earth Spirit	Disruptor		Q		F
+Keeper of the Light	Io	Luna	Terrorblade	Huskar	Earthshaker	Faceless Void	S	Disruptor	Earthshaker	Doom		Queen of Pain		Faceless Void
+L	K	M	Tinker	I	Elder Titan	L	Shadow Demon	Doom	Elder Titan	Dragon Knight		R		P
+Leshrac	Kunkka	Medusa	Tiny	Invoker	Ember Spirit	Lina	Shadow Shaman	Dragon Knight	Ember Spirit	Drow Ranger		Riki		Pangolier
+Lich	L	Meepo	Troll Warlord	Io	F	P	Silencer	E	Enigma	E		S		R
+Lina	Legion Commander	Mirana	V	J	Faceless Void	Pangolier	Skywrath Mage	Earth Spirit	F	Earth Spirit		Sand King		Razor
+Lion	Lifestealer	Monkey King	Venomancer	Jakiro	J	Q	T	Earthshaker	Faceless Void	Earthshaker		Slardar		S
+N	Lycan	Morphling	Visage	K	Juggernaut	Queen of Pain	Treant Protector	Elder Titan	P	Elder Titan		Slark		Skeleton King
+Nature's Prophet	M	N		Keeper of the Light	K	R	U	Ember Spirit	Pangolier	Ember Spirit		Spectre		Slardar
+Necrophos	Magnus	Naga Siren		L	Kunkka	Razor	Underlord	L	S	Enchantress		Spirit Breaker		Spectre
+O	N	Nyx Assassin		Leshrac	L	Riki	Undying	Lich	Sand King	Enigma		Storm Spirit		Spirit Breaker
+Ogre Magi	Night Stalker	P		Lich	Legion Commander	S	V	Lina	Shadow Demon	F		T		Sven
+Oracle	O	Pangolier		Lina	Lifestealer	Shadow Fiend	Vengeful Spirit	P	Shadow Shaman	Faceless Void		Templar Assassin		T
+Outworld Devourer	Omniknight	Phantom Assassin		Lion	Lycan	Silencer	Venomancer	Pangolier	Silencer	L		Timbersaw		Tidehunter
+P	P	Phantom Lancer		Lone Druid	M	Skeleton King	Visage	Pugna	Slardar	Lina		Treant Protector		Timbersaw
+Puck	Phoenix	R		Luna	Magnus	Slardar	W	Q	Spirit Breaker	P		U		Tiny
+Pugna	Pudge	Razor		M	Meepo	Slark	Warlock	Queen of Pain	Storm Spirit	Pangolier		Underlord		Treant Protector
+Q	S	Riki		Medusa	Monkey King	Sniper	Windranger	R	Sven	R		V		Troll Warlord
+Queen of Pain	Sand King	S		Mirana	N	Spectre	Winter Wyvern	Razor	T	Riki		Vengeful Spirit		U
+R	Slardar	Shadow Fiend		Morphling	Naga Siren	Spirit Breaker	Witch Doctor	Rubick	Tidehunter	Rubick		W		Underlord
+Rubick	Spirit Breaker	Slark		N	Night Stalker	Storm Spirit	Wraith King	S	Tiny	S		Weaver		Undying
+S	Sven	Sniper		Nature's Prophet	Nyx Assassin	Sven		Sand King	Treant Protector	Sand King		Windranger		Ursa
+Shadow Demon	T	Spectre		Necrophos	O	T		Shadow Demon	Tusk	Shadow Demon				V
+Shadow Shaman	Tidehunter	T		O	Ogre Magi	Templar Assassin		Shadow Fiend	V	Shadow Shaman				Viper
+Silencer	Timbersaw	Templar Assassin		Oracle	Omniknight	Terrorblade		Shadow Shaman	Vengeful Spirit	Silencer				Visage
+Skywrath Mage	Tiny	Terrorblade		Outworld Devourer	P	Tinker		Silencer	Venomancer	Skeleton King				W
+Storm Spirit	Treant Protector	Troll Warlord		P	Pangolier	Tiny		Skywrath Mage	Viper	Skywrath Mage				Wraith King
+T	Tusk	U		Phoenix	Phantom Assassin	Troll Warlord		Slark	W	Slardar				
+Techies	U	Ursa		Puck	Phantom Lancer	U		Sniper	Warlock	Slark				
+Tinker	Underlord	V		Pugna	Pudge	Ursa		Storm Spirit	Wraith King	Spirit Breaker				
+V	Undying	Vengeful Spirit		Q	R	V		Sven		Storm Spirit				
+Visage	W	Venomancer		Queen of Pain	Riki	Viper		T		Sven				
+W	Wraith King	Viper		R	S	W		Techies		T				
+Warlock		W		Razor	Sand King	Weaver		Terrorblade		Techies				
+Windranger		Weaver		Rubick	Slardar	Windranger		Tidehunter		Tidehunter				
+Winter Wyvern				S	Slark	Wraith King		Timbersaw		Tiny				
+Witch Doctor				Shadow Demon	Spectre			Tinker		Treant Protector				
+Z				Shadow Fiend	Spirit Breaker			Tiny		Troll Warlord				
+Zeus				Shadow Shaman	Sven			Tusk		Tusk				
+				Silencer	T			U		U				
+				Skywrath Mage	Terrorblade			Underlord		Underlord				
+				Sniper	Tidehunter			Undying		Undying				
+				Storm Spirit	Timbersaw			V		Ursa				
+				T	Tiny			Vengeful Spirit		V				
+				Techies	Treant Protector			Venomancer		Vengeful Spirit				
+				Templar Assassin	Tusk			Visage		Venomancer				
+				Tinker	U			W		Viper				
+				Troll Warlord	Underlord			Windranger		Visage				
+				V	Undying			Winter Wyvern		W				
+				Vengeful Spirit	Ursa			Witch Doctor		Warlock				
+				Venomancer	W			Z		Windranger				
+				Viper	Wraith King			Zeus		Winter Wyvern				
+				Visage						Witch Doctor				
+				W						Wraith King				
+				Warlock										
+				Weaver										
+				Windranger										
+				Winter Wyvern										
+				Witch Doctor										
+				Z										
+				Zeus										
