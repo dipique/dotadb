@@ -77,7 +77,7 @@
                 @if (signedIn)
                 {
                     @Html.ActionLink("Click here to add one!", "Create", "Tip", new { heroID = Model.Id, returnToHeroList = true }, new { title = "New Tip" })
-                }                
+                }
             </div>
         </div>
     }
@@ -89,7 +89,7 @@
                 @if (signedIn)
                 {
                     @Html.ActionLink("(new)", "Create", "Relationship", new { heroID = Model.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Relationship" })
-                }                
+                }
             </div>
         </div>
     </div>
@@ -135,6 +135,18 @@
             </div>
         </div>
     }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Labels</h4>
+            <ul>
+                @foreach (var label in Model.DescriptionLabels)
+                {
+                    <li>@label</li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>
 
 <script>
