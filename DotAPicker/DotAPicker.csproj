@@ -210,6 +210,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ImportLabelsViewModel.cs" />
     <Compile Include="ViewModels\ImportExportProfileViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\ProfileSettingsViewModel.cs" />
@@ -437,6 +438,7 @@
     <Content Include="Views\Settings\ExportProfile.cshtml" />
     <Content Include="Views\Settings\ProfileSettings.cshtml" />
     <Content Include="Views\Shared\HeroTable.cshtml" />
+    <Content Include="Views\Settings\ImportLabels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DotA\" />
