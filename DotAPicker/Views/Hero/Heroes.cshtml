@@ -29,6 +29,43 @@
             <h1>Heroes</h1>
         </div>
     </div>
+    <div class="col-xs-12">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Instructions</a>
+    </div>
+    <div class="info col-xs-8" style="display: none">
+        <div>
+            <p>
+                Use this screen to do most of your note taking. Make sure you're logged in or you won't be able to change anything!
+            </p>
+            <p>
+                <strong>Tip:</strong> From the hero name search box, you can add the top hero to enemies by pressing Enter, or to allies by pressing Shift-Enter.
+            </p>
+            <p>
+                There are three types of information you can keep for each hero:
+                <ol>
+                    <li><strong>Hero notes</strong> - General notes on the hero, labels to help categorize, and preference rank. You can also keep alternative names that you'll be able to search by.</li>
+                    <li><strong>Tips</strong> - A tip is a categorized piece of advice for how to play a hero (or type of hero), like how to itemize or how to use a certain skill.</li>
+                    <li><strong>Relationships</strong> - Relationships contain ways that different heroes (or groups of heroes) synergize or counter each other.</li>
+                </ol>
+            </p>
+            <p>
+                You can quickly change the preference using the dropdown boxes in the hero list.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var infoShown = false;
+        function toggleInfo() {
+            if (infoShown) {
+                $(".info").hide();
+            } else {
+                $(".info").show();
+            }
+            infoShown = !infoShown;
+        }
+    </script>
+
     <div class="row">
         <div class="col-xs-10">
             <div class="row">
@@ -71,18 +108,19 @@
     </div>
     <div class="row">
         <div class="col-xs-4">
-            @{ 
-                var viewModel = new TableConstructorViewModel<Hero>() {
+            @{
+                var viewModel = new TableConstructorViewModel<Hero>()
+                {
                     SignedIn = signedIn,
                     Items = Model.Items,
                     Columns = new List<TableColumn<Hero>>() {
-                        new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200, valueID: "nameValue"),
-                        new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
-                        new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", dropDownSettings: new DropDownSettings() {
-                            DropdownClass = "hero-pref",
-                            RequiresSignIn = true
-                        })
-                    }
+                            new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200, valueID: "nameValue"),
+                            new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
+                            new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", dropDownSettings: new DropDownSettings() {
+                                DropdownClass = "hero-pref",
+                                RequiresSignIn = true
+                            })
+                        }
                 };
 
                 //Set the sort field, if applicable

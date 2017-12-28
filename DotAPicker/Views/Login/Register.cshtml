@@ -7,11 +7,75 @@
 
 <h2>Register</h2>
 
+<div>
+    <div class="col-xs-12">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Instructions</a>
+    </div>
+    <div class="info col-xs-5" style="display: none">
+        <p><strong>Instructions</strong></p>
+        <p>
+            Y'all aren't idiots (right? right?) so I'll keep this short. Here are the registration fields and why they're there:
+            <ul>
+                <li>Email - for password resets and shit</li>
+                <li>Password - so you can log in</li>
+                <li>Re-Enter Password - because you type like a drunk chimp</li>
+                <li>Profile Type - controls whether other people can import your data into their profile. "Public" means they can straight up log into your account without a password; "Public (Read-Only)" means they can import data or log in to a read-only copy of your profile.</li>
+                <li>Profile to Copy - unless you want to manually add all your own heroes and icons, use this to seed your profile</li>
+            </ul>
+        </p>
+        <p>
+            Remember, you can always delete your account or replace the data with the data from a public profile, so don't be afraid to play around.
+        </p>
+        <p>
+            <strong>That being said, this app IS IN BETA.</strong> So exporting your profile from time to time might not be the worst idea.
+        </p>
+    </div>
+    <div class="info col-xs-7" style="display: none">
+        <div>
+            <p><strong>Welcome!</strong></p>
+            <p>
+                First of all, hi. I'm super glad you're here. I know it isn't much but it represents kind of a LOT of time so it'd be cool if someone used it.
+            </p>
+            <p>
+                The purpose of this app is to have a structured place to keep track of all the random shit you know about DotA. (Actually, not even necessarily DotA, I think it applied just as well to, say, LoL, but DotA is what I had in mind when I made it.)
+            </p>
+            <p>
+                My inspiration was watching streams from my favorite players--Miracle-, CCnC, BSJ--and I kept thinking, <i>damn, THAT'S how I can counter that hero, but only if I prioritize buying a certain item and play a certain way.</i> And it all crystallized in my head... only to disappear completely by the time I actually was in a position to use that information.
+            </p>
+            <p>
+                I wanted a place where you could keep track of that information and pull it up in a way that was fast and made sense. And that's what this app tries to be. Notes:
+            </p>
+            <p>
+                <ul>
+                    <li>Sharing is caring. Stick with Public (Read-Only) profiles so you can share what you've learned.</li>
+                    <li><a href="http://dotapicker.com/">DotAPicker</a> exists, and I want to avoid duplicating its functionality in my app. That app does its thing really well. Their API doesn't really have the features I'd need to make them work together, but maybe in the future.</li>
+                    <li>If you have a recommendation, feel free to e-mail me at dipique@gmail.com.</li>
+                </ul>
+            </p>
+            <p>
 
-@using (Html.BeginForm()) 
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var infoShown = false;
+    function toggleInfo() {
+        if (infoShown) {
+            $(".info").hide();
+        } else {
+            $(".info").show();
+        }
+        infoShown = !infoShown;
+    }
+</script>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -59,7 +123,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProfileToCopy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProfileToCopy, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional but recommended" } })
+                @Html.EditorFor(model => model.ProfileToCopy, new { htmlAttributes = new { @class = "form-control", placeholder = "Username - Optional but recommended" } })
                 @Html.ValidationMessageFor(model => model.ProfileToCopy, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,9 +136,11 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<p>
+    @Html.ActionLink("If you already have an account, click here to log in.", "Login")
+</p>
+
+<strong>Privacy policy:</strong> I only want your e-mail for password resets and stuff like that. No spam, no selling information, etc.
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

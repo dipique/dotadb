@@ -8,7 +8,6 @@
 <h2>Login</h2>
 <p style="font-size: xx-small">pls</p>
 
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -40,9 +39,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <p>
+        @Html.ActionLink("If you don't have an account yet, click here to register.", "Register")
+    </p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -21,14 +21,41 @@
             <h1>DotA Hero Picker</h1>
         </div>
     </div>
-    <div class="col-xs-3">
-        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Info</a>
+    <div class="col-xs-12">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Instructions</a>
     </div>
-    <div class="info" style="display: none">
-        <p>
-            This is how you use this.
-        </p>
+    <div class="info col-xs-5" style="display: none">
+        <div>
+            <p>
+                This is the picking screen where you can choose 5 allies and 5 enemies so you can see all the notes you spent all that time writing.
+            </p>
+            <p>
+                You can search by name, preference, and any labels you assigned. When you find the hero you were looking for, click the "allies" or "enemies" link to add them. 
+            </p>
+            <p>
+                <strong>Tip:</strong> From the hero name search box, you can add the top hero to enemies by pressing Enter, or to allies by pressing Shift-Enter.
+            </p>
+            <p>
+                Once added, you can remove a hero by clicking the red X next to the hero name. But... do it gently. Heroes have feelings, too.
+            </p>
+            <p>
+                Lastly, if you're wondering why this app is so ugly, it's because I suck at this front end shit. Sorry about that. Believe it or not even this took me a pretty long time.
+            </p>
+        </div>
     </div>
+
+    <script>
+        var infoShown = false;
+        function toggleInfo() {
+            if (infoShown) {
+                $(".info").hide();
+            } else {
+                $(".info").show();
+            }
+            infoShown = !infoShown;
+        }
+    </script>
+
     <div class="row">
         @*Filter section*@
         <div class="col-xs-11">
