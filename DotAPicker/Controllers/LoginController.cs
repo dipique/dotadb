@@ -83,7 +83,7 @@ namespace DotAPicker.Controllers
             return RedirectToAction("Index", "Home").Success("Logged out successfully.");
         }
 
-        public ActionResult Register() => View();
+        public ActionResult Register() => View(new RegisterViewModel());
 
         [HttpPost]
         public ActionResult Register(RegisterViewModel viewModel)

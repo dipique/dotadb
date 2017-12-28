@@ -19,7 +19,7 @@ namespace DotAPicker.ViewModels
         public string Email { get; set; }
 
         [Display(Name = "Profile Type")]
-        public ProfileTypes ProfileType { get; set; } = ProfileTypes.Private;
+        public ProfileTypes ProfileType { get; set; } = ProfileTypes.ReadOnly;
 
         [Required]
         [RegularExpression(@"^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{3,}$")]
@@ -32,7 +32,7 @@ namespace DotAPicker.ViewModels
         public string ComparePassword { get; set; }
 
         [Display(Name = "Profile To Copy")]
-        public string ProfileToCopy { get; set; }
+        public string ProfileToCopy { get; set; } = User.DEFAULT_USER;
 
         public User ToUser()
         {
