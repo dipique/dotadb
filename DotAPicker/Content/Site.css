@@ -210,3 +210,8 @@ a.edit-link {
 .lo-dropdown:hover .lo-dropdown-content {
     display: block;
 }
+
+/* Show the dropdown menu on hover */
+.fallback {
+    background-image: url("/img/hero/120px-Missing_icon.png");
+}

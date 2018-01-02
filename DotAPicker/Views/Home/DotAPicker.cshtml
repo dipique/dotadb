@@ -353,8 +353,8 @@
         filterFunctionAfterArrayUpdate();
 
         //if keeping the preference means there aren't any results, reset it as well
-        if (countVisibleItems() < 1 && getEl("filterPreference").selectedIndex >= 0) { //no heros, but preferences are chosen
-            $("#filterPreference option").prop('selected', false).trigger('chosen:updated');
+        if (countVisibleItems() < 1 && getEl("typeFilter").selectedIndex >= 0) { //no heros, but preferences are chosen
+            $("#typeFilter option").prop('selected', false).trigger('chosen:updated');
             filterFunctionAfterArrayUpdate();
         }
     }

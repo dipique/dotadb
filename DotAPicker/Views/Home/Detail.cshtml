@@ -4,7 +4,7 @@
 
 <div class="hor-data-row">
     <div class="hor-data-cell" style="border: none;">
-        <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+        <img alt="Image" src="@Model.GetImgName()" onerror="this.src='@Hero.MissingImgName'" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
         <strong>@Model.Name</strong> 
         <a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Id" title="Remove from Selection">
             (remove)
