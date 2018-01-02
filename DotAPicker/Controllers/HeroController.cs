@@ -74,7 +74,7 @@ namespace DotAPicker.Controllers
             return RedirectToAction(nameof(Index)).Success("Hero created.");
         }
 
-        public ActionResult Detail(int id) => PartialView(GetHeroByID(id));
+        public ActionResult Detail(int id) => PartialView(new HeroViewModel(GetHeroByID(id), CurrentUser.IsAuthenticated));
 
         // GET: Hero/Edit/5
         public ActionResult Edit(int id)

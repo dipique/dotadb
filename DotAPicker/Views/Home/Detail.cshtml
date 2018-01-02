@@ -9,14 +9,7 @@
             var missingImage = Model.MissingImage;
             if (missingImage)
             {
-                if (Model.SignedIn)
-                {
-                    @Html.ActionLink("Update image", "UploadHeroImage", "Settings", new { heroID = Model.Hero.Id }, new { @class="missing-hero-img" })
-                }
-                else
-                {
-                    <img alt="Image" src="@HeroViewModel.MissingImgName" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
-                }
+                <img alt="Image" src="@HeroViewModel.MissingImgName" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
             }
             else
             {
