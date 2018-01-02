@@ -90,6 +90,8 @@ namespace DotAPicker.Controllers
             return hero;
         }
 
+        public ActionResult UpdateHeroImage(int heroID) => RedirectToAction("UpdateHeroImage", "Settings", new { heroID });
+
         public ActionResult UpdatePreference(int heroID, string preference)
         {
             var pref = EnumExt.Parse<HeroPreference>(preference);

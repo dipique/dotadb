@@ -1,16 +1,34 @@
 ﻿@using DotAPicker.Models;
+@using DotAPicker.ViewModels;
 @using DotAPicker.Utilities;
-@model Hero
+@model HeroViewModel
 
 <div class="hor-data-row">
     <div class="hor-data-cell" style="border: none;">
-        <img alt="Image" src="@Model.GetImgName()" onerror="this.src='@Hero.MissingImgName'" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
-        <strong>@Model.Name</strong> 
-        <a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Id" title="Remove from Selection">
+        @{ 
+            var missingImage = Model.MissingImage;
+            if (missingImage)
+            {
+                if (Model.SignedIn)
+                {
+                    @Html.ActionLink("Update image", "UploadHeroImage", "Settings", new { heroID = Model.Hero.Id }, new { @class="missing-hero-img" })
+                }
+                else
+                {
+                    <img alt="Image" src="@HeroViewModel.MissingImgName" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+                }
+            }
+            else
+            {
+                <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+            }
+        }
+        <strong>@Model.Hero.Name</strong> 
+        <a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Hero.Id" title="Remove from Selection">
             (remove)
         </a>
         <br />
-        @Model.Notes
+        @Model.Hero.Notes
     </div>
 </div>
 
@@ -19,8 +37,8 @@
 
     //Tips are in 3-column sets, so we start by figuring out how many columns/rows we'll have
     const int COL_COUNT = 3;
-    int remainder = Model.Tips.Count() % COL_COUNT; //if this isn't 0, we'll need to deal with the missing column
-    int fullRows = (Model.Tips.Count() - remainder) / COL_COUNT;
+    int remainder = Model.Hero.Tips.Count() % COL_COUNT; //if this isn't 0, we'll need to deal with the missing column
+    int fullRows = (Model.Hero.Tips.Count() - remainder) / COL_COUNT;
 
     //The loop unit is rows, and we need an extra row for remainders
     int loopCount = fullRows;
@@ -42,7 +60,7 @@
                         @{
                             //first column
                             bool partialRow = fullRows <= x;
-                            var tip = @Model.Tips.Skip(x * COL_COUNT).Take(1).First();
+                            var tip = @Model.Hero.Tips.Skip(x * COL_COUNT).Take(1).First();
                             <div class="hor-data-cell" style="border:none">
                                 <div class="tip-header">
                                     @tip.Type.GetDisplayName()
@@ -53,7 +71,7 @@
                             //second column
                             if (!partialRow || remainder == 2)
                             {
-                                tip = @Model.Tips.Skip(x * COL_COUNT + 1).Take(1).First();
+                                tip = @Model.Hero.Tips.Skip(x * COL_COUNT + 1).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="tip-header">
                                         @tip.Type.GetDisplayName()
@@ -65,7 +83,7 @@
                             //third column
                             if (!partialRow)
                             {
-                                tip = @Model.Tips.Skip(x * COL_COUNT + 2).Take(1).First();
+                                tip = @Model.Hero.Tips.Skip(x * COL_COUNT + 2).Take(1).First();
                                 <div class="hor-data-cell" style="border:none">
                                     <div class="tip-header">
                                         @tip.Type.GetDisplayName()
@@ -83,7 +101,7 @@
 
 @{
     //Relationships - counters
-    var relationships = Model.Relationships.Where(r => r.Type == TipType.Counter);
+    var relationships = Model.Hero.Relationships.Where(r => r.Type == TipType.Counter);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -149,7 +167,7 @@
 
 @{
     //Relationships - Synergies
-    relationships = Model.Relationships.Where(r => r.Type == TipType.Synergy);
+    relationships = Model.Hero.Relationships.Where(r => r.Type == TipType.Synergy);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 

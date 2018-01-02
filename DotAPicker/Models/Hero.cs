@@ -34,17 +34,6 @@ namespace DotAPicker.Models
 
         [NotMapped]
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
-
-        public static string GetImgName(string heroName)
-        {
-            string working = heroName.Replace(' ', '_');
-            return $"img/hero/120px-{working}_icon.png";
-        }
-
-        public string GetImgName() => GetImgName(Name);
-
-        private const string MISSING_IMG_STRING = "Missing";
-        public static string MissingImgName => GetImgName(MISSING_IMG_STRING);
     }
 
     public enum HeroPreference

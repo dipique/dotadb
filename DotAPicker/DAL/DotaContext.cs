@@ -33,10 +33,10 @@ namespace DotAPicker.DAL
         }
 
         /// <summary>
-        /// This override makes it so you can't save unless you're authorized on the current account
+        /// This override makes it so you can't save unless you're authorized on the current account. However for rebuilds it needs to be allowed.
         /// </summary>
         /// <returns></returns>
-        public override int SaveChanges() => throw new Exception("Don't use the SaveChanges method, it doesn't authenticate.");
+        public override int SaveChanges() => base.SaveChanges(); //throw new Exception("Don't use the SaveChanges method, it doesn't authenticate.");
 
         public int SaveChanges(bool authenticated) => authenticated ? base.SaveChanges() : UndoChanges();
 

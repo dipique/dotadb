@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -209,5 +210,52 @@ namespace DotAPicker.Controllers
             return View().Success("Labels imported successfully! Frankly I'm a little surprised.");
         }
 
+        [HttpGet]
+        public ActionResult UploadHeroImage(int heroID) => View(new UploadHeroImageViewModel(heroID));
+        public ActionResult UploadHeroImage(UploadHeroImageViewModel viewModel)
+        {
+            //make sure the hero ID belongs to someone signed in
+            if (!CurrentUser.IsAuthenticated) return View(viewModel).Error("You must be authenticated to upload images.");
+
+            //Make sure it's a PNG
+            var filename = viewModel?.PostedFile?.FileName ?? string.Empty;
+            if (filename.Length < 5 || filename.Substring(filename.Length - 2).ToUpper() == "PNG") return View(viewModel).Error("What don't you flippin understand about P, N flippin G?");
+
+            //make sure it's a hero the user has access to, and get the hero name
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == viewModel.HeroID);
+            if (hero == null) return View(viewModel).Error("Sorry kiddo, you can't touch that there hero. Nice try though. Really.");
+            var heroName = hero.Name;
+
+            //make sure the file is less than 1Mb
+            const int MAX_FILE_SIZE = 1048576; //bytes
+            if (viewModel.PostedFile.ContentLength > MAX_FILE_SIZE) return View(viewModel).Error("Too big. I ain't even gonna tell you how big it can be. You just have to GUESS.");
+
+            //copy the file to a temp directory on the server
+            var tmpPath = HttpContext.Server.MapPath("~/tmp");
+            var tmpTargetPath = Path.Combine(tmpPath, filename);
+
+            //make sure it's the right dimensions
+            const int IMG_WIDTH = 120;
+            const int IMG_HEIGHT = 68;
+            viewModel.PostedFile.SaveAs(tmpTargetPath);
+            using (var img = Image.FromFile(tmpTargetPath))
+                if (img.Height != IMG_HEIGHT || img.Width != IMG_WIDTH) return View(viewModel).Error("It's just gotta be those dimensions. Listen, I don't make the rules. Well, I do. But they ain't changin'.");
+
+            //cool! Bring the file in!
+            var targetPath = HeroViewModel.GetImgFilename(heroName);
+            var file = new FileInfo(tmpTargetPath);
+            try
+            {
+                file.MoveTo(targetPath);
+            }
+            catch (Exception)
+            {
+                return View(viewModel).Error("You know, I actually tried. But those obstructionist librals done did me in.");
+            }
+
+            //after all that hopefully it worked
+            TempData["SelectedHeroID"] = viewModel.HeroID;
+            return RedirectToAction("Index", "Hero").Success("File successfully uploaded");
+        }
     }
 }

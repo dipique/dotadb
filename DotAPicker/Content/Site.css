@@ -211,7 +211,12 @@ a.edit-link {
     display: block;
 }
 
-/* Show the dropdown menu on hover */
-.fallback {
-    background-image: url("/img/hero/120px-Missing_icon.png");
+/* Display the missing hero image on links to change it */
+.missing-hero-img {
+    background: url("/img/hero/120px-Missing_icon.png") no-repeat top left;
+    float: left;
+    margin: 0 3px 3px 2px;
+    width: 90px;
+    height: 51px;
+    text-indent: -9999px; /* hides link text */
 }

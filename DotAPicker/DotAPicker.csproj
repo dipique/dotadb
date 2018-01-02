@@ -210,6 +210,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\HeroViewModel.cs" />
+    <Compile Include="ViewModels\UploadHeroImageViewModel.cs" />
     <Compile Include="ViewModels\ImportLabelsViewModel.cs" />
     <Compile Include="ViewModels\ImportExportProfileViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
@@ -261,6 +263,7 @@
     <Content Include="img\hero\120px-Clockwerk_icon.png" />
     <Content Include="img\hero\120px-Crystal_Maiden_icon.png" />
     <Content Include="img\hero\120px-Dark_Seer_icon.png" />
+    <Content Include="img\hero\120px-Dark_Willow_icon.png" />
     <Content Include="img\hero\120px-Dazzle_icon.png" />
     <Content Include="img\hero\120px-Death_Prophet_icon.png" />
     <Content Include="img\hero\120px-Disruptor_icon.png" />
@@ -309,6 +312,7 @@
     <Content Include="img\hero\120px-Omniknight_icon.png" />
     <Content Include="img\hero\120px-Oracle_icon.png" />
     <Content Include="img\hero\120px-Outworld_Devourer_icon.png" />
+    <Content Include="img\hero\120px-Pangolier_icon.png" />
     <Content Include="img\hero\120px-Phantom_Assassin_icon.png" />
     <Content Include="img\hero\120px-Phantom_Lancer_icon.png" />
     <Content Include="img\hero\120px-Phoenix_icon.png" />
@@ -444,8 +448,10 @@
     <Content Include="Views\Settings\ProfileSettings.cshtml" />
     <Content Include="Views\Shared\HeroTable.cshtml" />
     <Content Include="Views\Settings\ImportLabels.cshtml" />
+    <Content Include="Views\Settings\UploadHeroImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="tmp\" />
     <Folder Include="Views\DotA\" />
     <Folder Include="Views\User\EditorTemplates\" />
   </ItemGroup>

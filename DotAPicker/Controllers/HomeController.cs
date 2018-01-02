@@ -41,6 +41,6 @@ namespace DotAPicker.Controllers
             return GetItems(propertyName, newSortDirection);
         }
 
-        public ActionResult Detail(int id) => PartialView(GetHeroByID(id));
+        public ActionResult Detail(int id) => PartialView(new HeroViewModel(GetHeroByID(id), CurrentUser.IsAuthenticated));
     }
 }
