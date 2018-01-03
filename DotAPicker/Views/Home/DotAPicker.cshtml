@@ -97,8 +97,9 @@
                     SignedIn = signedIn,
                     Items = Model.Items,
                     Columns = new List<TableColumn<Hero>>() {
-                                new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, valueID: "nameValue", sortable: false), //no sortable fields since it clears pick values atm
-                                new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "labelValue"),
+                                new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, sortable: false), //no sortable fields since it clears pick values atm                                
+                                new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "nameValue"),
+                                new TableColumn<Hero>(nameof(Hero.Labels), display: false, valueID: "labelValue"),
                                 new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", sortable: false, dropDownSettings: new DropDownSettings() {
                                     DropdownClass = "hero-pref",
                                     RequiresSignIn = true
@@ -152,7 +153,6 @@
         infoShown = !infoShown;
     }
 
-    var auth = @signedIn.ToString().ToLower();
     var filterSet = [[
         "nameFilter",
         "text",
@@ -167,7 +167,7 @@
         "typeFilter",
         "multi",
         "typeValue",
-        auth == "true" ? "select" : "inner"
+        @(signedIn ? Html.Raw("\"select\"") : Html.Raw("\"inner\""))
     ], [
         "chosenArray",
         "row-index-exclusion",
