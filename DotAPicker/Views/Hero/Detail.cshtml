@@ -19,16 +19,20 @@
     {
         <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51">
     }
+
+        <strong>@Model.Hero.Name</strong>
+
+    if (Model.SignedIn)
+    {
+        <div class="link-padding">
+            @Html.ActionLink("(edit)", "Edit", new { id = Model.Hero.Id }, new { @class = "edit-link", title = "Edit Hero" })
+            @Html.ActionLink("(delete)", "Delete", new { id = Model.Hero.Id }, new { @class = "delete-link", title = "Delete Hero" })
+        </div>
+    }
 }
-<strong>@Model.Hero.Name</strong>
-@*<a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Hero.Id" title="Remove from Selection">
-    (remove)
-</a>*@
-    <div class="link-padding">
-        @Html.ActionLink("(edit)", "Edit", new { id = Model.Hero.Id }, new { @class = "edit-link", title = "Edit Hero" })
-        @Html.ActionLink("(delete)", "Delete", new { id = Model.Hero.Id }, new { @class = "delete-link", title = "Delete Hero" })
-    </div>
+
 <br />
+
 @Model.Hero.Notes
 
 <div class="container" style="max-width: 600px">
