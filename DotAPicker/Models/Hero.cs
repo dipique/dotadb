@@ -18,7 +18,21 @@ namespace DotAPicker.Models
         public string Notes { get; set; }
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
-        public string NameSet => $"{Name}{User.STD_DELIM}{AltNames}";
+        public string NameSet => $"{Name}{User.STD_DELIM}{AltNames}{User.STD_DELIM}{Initials}";
+
+        //For example, Ancient Apparition would be aa. Makes it so you don't need to type in every single one as an alternate name.
+        public string Initials
+        {
+            get
+            {
+                //split name into words
+                var words = Name.Split(' ');
+                if (words.Count() <= 1) return string.Empty;
+
+                //return the first letter of each word
+                return string.Join(string.Empty, words.Select(w => w.Substring(0, 1))).ToLower();
+            }
+        }
 
         public string Labels
         {
