@@ -15,6 +15,7 @@ namespace DotAPicker.Controllers
         public ActionResult Index()
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
+            TempData["SelectedHeroID"] = null;
             return GetItems(nameof(Hero.Name), SortDirections.Ascending, null);
         }
 
@@ -114,7 +115,7 @@ namespace DotAPicker.Controllers
                 }
             }
 
-            TempData["SelectedHeroId"] = model.Id;
+            TempData["SelectedHeroID"] = model.Id;
             return RedirectToAction(nameof(Index)).Success("Edit complete");
         }
 
