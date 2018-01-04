@@ -214,31 +214,28 @@
         //alert(e.keyCode);
         //if enter is pressed
         if (e.keyCode == 13) {
-            //and there is only one visible hero
-            if (countVisibleItems() == 1) {
-                //if shift key is pressed (meaning ally add)
-                if (e.shiftKey) {
-                    //if there's at least one open slot for an ally
-                    if (nextAllyIndex() != -1) {
-                        //if there's a valid hero ID selected
-                        var i = firstVisibleItemIndex();
-                        if (i != -1) {
-                            //Add to the list of allies
-                            addAlly(i);
-                        }
+            //if shift key is pressed (meaning ally add)
+            if (e.shiftKey) {
+                //if there's at least one open slot for an ally
+                if (nextAllyIndex() != -1) {
+                    //if there's a valid hero ID selected
+                    var i = firstVisibleItemIndex();
+                    if (i != -1) {
+                        //Add to the list of allies
+                        addAlly(i);
                     }
-                } else {  //Add to enemies
-                    //if there's at least one open slot for an enemy
-                    if (nextEnemyIndex() != -1) {
-                        //if there's a valid hero ID selected
-                        var i = firstVisibleItemIndex();
-                        if (i != -1) {
-                            //Add to the list of enemies
-                            addEnemy(i);
-                        }
-                    }
-
                 }
+            } else {  //Add to enemies
+                //if there's at least one open slot for an enemy
+                if (nextEnemyIndex() != -1) {
+                    //if there's a valid hero ID selected
+                    var i = firstVisibleItemIndex();
+                    if (i != -1) {
+                        //Add to the list of enemies
+                        addEnemy(i);
+                    }
+                }
+
             }
         } else {
             //if enter wasn't pushed, just filter the table
