@@ -11,6 +11,10 @@
     }
     else
     {
+        if (TempData["SelectedHeroId"] != null)
+        {
+            ViewBag.SelectedHeroID = TempData["SelectedHeroId"];
+        }
         ViewBag.SelectedHeroID = Model.Items.FirstOrDefault()?.Id ?? 0;
     }
 

@@ -93,6 +93,7 @@ namespace DotAPicker.Controllers
         [HttpPost]
         public ActionResult Edit(Hero model)
         {
+            ViewBag.SelectedHeroID = model.Id;
             if (!ModelState.IsValid) return Index().Error($"Error: {ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage}");
 
             db.Entry(model).State = EntityState.Modified;
@@ -113,6 +114,7 @@ namespace DotAPicker.Controllers
                 }
             }
 
+            TempData["SelectedHeroId"] = model.Id;
             return RedirectToAction(nameof(Index)).Success("Edit complete");
         }
 
