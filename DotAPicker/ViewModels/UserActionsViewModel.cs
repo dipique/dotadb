@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DotAPicker.ViewModels
 {
-    public class PasswordResetViewModel
+    public class PasswordChangeViewModel
     {
         [Required]
         [RegularExpression(@"^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{3,}$")]

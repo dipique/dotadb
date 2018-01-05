@@ -35,7 +35,7 @@ namespace DotAPicker.Controllers
 
         [HttpGet]
         public ActionResult PasswordReset() => View();
-        public ActionResult PasswordReset(PasswordResetViewModel viewModel)
+        public ActionResult PasswordReset(PasswordChangeViewModel viewModel)
         {
             //validate password
             if (!CurrentUser.MatchingPassword(viewModel.CurrentPassword)) return View().Error("Wrong password.");

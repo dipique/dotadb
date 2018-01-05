@@ -8,10 +8,10 @@
 <h2>Login</h2>
 <p style="font-size: xx-small">pls</p>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -38,10 +38,14 @@
         </div>
     </div>
 }
+<p>
+    @Html.ActionLink("I'm an idiot and forgot my password", "ForgotPassword")
+</p>
 
-    <p>
-        @Html.ActionLink("If you don't have an account yet, click here to register.", "Register")
-    </p>
+
+<p>
+    @Html.ActionLink("If you don't have an account yet, click here to register.", "Register")
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

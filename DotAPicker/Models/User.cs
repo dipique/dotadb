@@ -53,6 +53,8 @@ namespace DotAPicker.Models
         //of directly setting this property.
         public string Password { get; set; }
 
+        public string PasswordResetToken { get; set; }
+
         public void SetNewPassword(string plainText)
         {
             //generate long random salt
@@ -70,6 +72,9 @@ namespace DotAPicker.Models
 
             //store as string
             Password = Convert.ToBase64String(hashBytes);
+
+            //remove password reset token
+            PasswordResetToken = string.Empty;
         }
 
         public bool MatchingPassword(string plainText)
