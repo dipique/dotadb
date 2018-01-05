@@ -198,6 +198,7 @@
     <Compile Include="Models\Hero.cs" />
     <Compile Include="Models\ProfileCopy.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utilities\Email.cs" />
     <Compile Include="Models\Utilities\ISortable.cs" />
     <Compile Include="Models\Utilities\SettingValidators.cs" />
     <Compile Include="Models\Utilities\Utilities.cs" />
