@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 
-namespace DotAPicker.Models.Utilities
+namespace DotAPicker.Utilities
 {
-    public class Email
+    public static class Email
     {
+        private const string SENDER_EMAIL = "daniel@dotapad.com";
+        private const string SECRET = "sF2xpEYTrgJ1"; //this only works for this app and won't work for sign-in
+        public const string SMTP_HOST = "smtp.zoho.com";
+        public const int SMTP_SERVER_PORT = 587;
+
         public static bool SendEmail(string to, string subject, string body)
         {
-            MailMessage msg = new MailMessage("daniel@dotapad.com", to);
-            msg.Subject = subject;
-            msg.Body = body;
-            msg.IsBodyHtml = false;
+            MailMessage msg = new MailMessage(SENDER_EMAIL, to) {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = false
+            };
 
-            var client = new SmtpClient("smtp.zoho.com", 465);
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("daniel@dotapad.com", "Dizz0ap4d^^");
-            client.EnableSsl = true;
+            var client = new SmtpClient(SMTP_HOST, SMTP_SERVER_PORT) {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(SENDER_EMAIL, SECRET),
+                EnableSsl = true
+            };
 
             try
             {

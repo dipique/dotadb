@@ -124,5 +124,40 @@ namespace DotAPicker.Controllers
             }
 
         }
+
+        public ActionResult ForgotPassword() => View();
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email);
+            if (user != null)
+            {
+                var token = Guid.NewGuid().ToString();
+                user.PasswordResetToken = token;
+                db.SaveChanges();
+
+                var body = $"This yo password reset telegraph. Reset token-y skidoobadaddle be: {token}. Yuccan click d's'ere lunkmuffin and use it thur.\n\nwww.dotapad.com/Login/ResetPassword\n\nHere t'is agin:\n\n{token}";
+                Email.SendEmail(user.Email, "Poissenvaken Rusitt", body);                
+            }
+
+            return RedirectToAction(nameof(PasswordReset)).Success("If that e-mail is on file you'll get a password reset token. If it ain't that token will not know da way.");
+        }
+
+        public ActionResult PasswordReset() => View();
+        [HttpPost]
+        public ActionResult PasswordReset(PasswordResetViewModel model)
+        {
+            var name = model.UsernameOrEmail?.ToLower() ?? string.Empty;
+            var user = db.Users.Where(u => u.Name.ToLower() == name || u.Email.ToLower() == name)
+                                .FirstOrDefault(u => u.PasswordResetToken == model.PasswordResetToken);
+            if (user == null) return View(model).Warning("Nice try buster. You won't get one on me that easily!");
+
+            //actually reset the password
+            user.SetNewPassword(model.NewPassword); //this also clears the token
+            db.SaveChanges();
+
+            SetCurrentUser(user);
+            return RedirectToAction("Index", "Home").Success("Password has been reset! Nice job buddy, I'm proud of you. <3");
+        }
     }
 }

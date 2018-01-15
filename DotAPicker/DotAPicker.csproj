@@ -212,6 +212,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HeroViewModel.cs" />
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\PasswordResetViewModel.cs" />
     <Compile Include="ViewModels\UploadHeroImageViewModel.cs" />
     <Compile Include="ViewModels\ImportLabelsViewModel.cs" />
@@ -451,6 +452,8 @@
     <Content Include="Views\Shared\HeroTable.cshtml" />
     <Content Include="Views\Settings\ImportLabels.cshtml" />
     <Content Include="Views\Settings\UploadHeroImage.cshtml" />
+    <Content Include="Views\Login\PasswordReset.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp\" />

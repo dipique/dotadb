@@ -19,6 +19,7 @@ namespace DotAPicker.DAL
         {
             Database.Log = s => Debug.WriteLine(s);
             Database.CommandTimeout = 1000; //this is required when dropping and creating a new database, otherwise it times out
+            Configuration.UseDatabaseNullSemantics = false;
         }
 
         public DbSet<Hero> Heroes { get; set; }
