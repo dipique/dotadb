@@ -77,10 +77,15 @@ namespace DotAPicker.Controllers
 
         public ActionResult LogOut()
         {
+            LogOutUser();
+            return RedirectToAction("Index", "Home").Success("Logged out successfully.");
+        }
+
+        public void LogOutUser()
+        {
             var user = Models.User.DefaultUser;
             CurrentUser = user;
             HttpContext.User = new Principal(user);
-            return RedirectToAction("Index", "Home").Success("Logged out successfully.");
         }
 
         public ActionResult Register() => View(new RegisterViewModel());
@@ -89,12 +94,12 @@ namespace DotAPicker.Controllers
         public ActionResult Register(RegisterViewModel viewModel)
         {
             //logout first
-            LogOut();
+            LogOutUser();
 
             //make sure not duplicate username/e-mail
             var user = viewModel.ToUser();
             if (db.Users.Any(u => u.Email == user.Email || u.Name == user.Name))
-                return View().Error("This name or e-mail address has already been taken.");
+                return View(viewModel).Error("This name or e-mail address has already been taken.");
 
             //make sure the profile to copy exists
             User profileToCopy = null;
@@ -111,7 +116,7 @@ namespace DotAPicker.Controllers
 
             //copy profile if applicable
             var copyProfile = profileToCopy != null;
-            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, db.Users.Single(u => u.Name == user.Name), CurrentUser.IsAuthenticated) : false;
+            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, user, true) : false;
             SetCurrentUser(user);
 
             if (copyProfile)
