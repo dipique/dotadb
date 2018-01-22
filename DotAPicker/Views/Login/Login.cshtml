@@ -28,6 +28,8 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <br />
+                <i>BEWARE: Your password isn't stored in cleartext, but it IS sent to the server in cleartext over HTTP, so don't use your banking password or whatever.</i>
             </div>
         </div>
 
