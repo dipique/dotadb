@@ -130,6 +130,8 @@ namespace DotAPicker.Controllers
 
         }
 
+        private const string PWD_RESET_URL = "dotapad.com/Login/PasswordReset";
+
         public ActionResult ForgotPassword() => View();
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
@@ -140,15 +142,17 @@ namespace DotAPicker.Controllers
                 var token = Guid.NewGuid().ToString();
                 user.PasswordResetToken = token;
                 db.SaveChanges();
+                var resetURL = $"{PWD_RESET_URL}?token={token}";
 
-                var body = $"This yo password reset telegraph. Reset token-y skidoobadaddle be: {token}. Yuccan click d's'ere lunkmuffin and use it thur.\n\nwww.dotapad.com/Login/ResetPassword\n\nHere t'is agin:\n\n{token}";
+                var body = $"This yo password reset telegraph. Reset token-y skidoobadaddle be: {token}. Yuccan click d's'ere lunkmuffin and use it thur.\n\n{resetURL}\n\nHere t'is agin:\n\n{token}";
                 Email.SendEmail(user.Email, "Poissenvaken Rusitt", body);                
             }
 
             return RedirectToAction(nameof(PasswordReset)).Success("If that e-mail is on file you'll get a password reset token. If it ain't that token will not know da way.");
         }
 
-        public ActionResult PasswordReset() => View();
+        public ActionResult PasswordReset(string token = null) => string.IsNullOrEmpty(token) ? View() : View(new PasswordResetViewModel() { PasswordResetToken = token });
+
         [HttpPost]
         public ActionResult PasswordReset(PasswordResetViewModel model)
         {
