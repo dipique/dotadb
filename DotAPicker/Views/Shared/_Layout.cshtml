@@ -44,8 +44,8 @@
             </ul>   
             @if (signedIn)
             {
-            
-             
+
+
                 <ul class="navbar-nav navbar-right lo-navbar">
                     <li>
                         <div class="lo-dropdown">
@@ -59,7 +59,7 @@
                                 @Html.ActionLink("Replace Profile", "ReplaceProfile", "Settings")
                                 @Html.ActionLink("Export Profile", "ExportProfile", "Settings")
                                 @Html.ActionLink("Import Profile", "ImportProfile", "Settings")
-                                @Html.ActionLink("Change Profile Type", "ProfileSettings", "Settings")
+                                @*@Html.ActionLink("Change Profile Type", "ProfileSettings", "Settings")*@
                                 @Html.ActionLink("Import Labels", "ImportLabels", "Settings")
                             </div>
                         </div>                        
@@ -75,7 +75,7 @@
             }
                 <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
                     <li style="color: azure; padding-right: 5px;">user:</li>
-                    <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id })</li>
+                    <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline;" })</li>
                 </ul>
             </div>
         </div>

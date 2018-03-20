@@ -28,6 +28,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.ProfileType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileType)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ShowDeprecatedTips)
         </dt>
 
@@ -55,5 +63,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to User List", "Index")
 </p>

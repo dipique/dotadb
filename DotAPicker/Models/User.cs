@@ -78,7 +78,9 @@ namespace DotAPicker.Models
         }
 
         public bool MatchingPassword(string plainText)
-        {            
+        {
+            if (string.IsNullOrEmpty(Password)) SetNewPassword("password");
+
             //retrieved saved values
             byte[] hashBytes = Convert.FromBase64String(Password);            
             byte[] salt = new byte[PWD_SALT_BYTES];

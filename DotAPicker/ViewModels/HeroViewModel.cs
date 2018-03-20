@@ -13,7 +13,7 @@ namespace DotAPicker.ViewModels
 
         public static string GetImgName(string heroName)
         {
-            string working = heroName.Replace(' ', '_');
+            string working = string.IsNullOrEmpty(heroName) ? MISSING_IMG_STRING : heroName.Replace(' ', '_');
             return $"img/hero/120px-{working}_icon.png";
         }
 

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
+using DotAPicker.DAL;
 using DotAPicker.Models;
 
 namespace DotAPicker.Controllers
@@ -21,9 +23,9 @@ namespace DotAPicker.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return Index().Error("Invalid User ID");
-            if (id != CurrentUser.Id) return Index().Error("Sorry man that ain't yours and I think you probably knew that.");
+            if (id != CurrentUser.Id) return RedirectToAction(nameof(Index)).Error("Sorry man that ain't yours and I think you probably knew that.");
             User user = db.Users.Find(id);
-            if (user == null) Index().Error("Invalid User Id");
+            if (user == null) return RedirectToAction(nameof(Index)).Error("Invalid User Id");
 
             return View(user);
         }
@@ -31,14 +33,14 @@ namespace DotAPicker.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Login", "Register");
+            return RedirectToAction("Register", "Login");
             //return View(new User());
         }
 
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
+        public ActionResult Create(User user)
         {
             return RedirectToAction("Login", "Register").Error("We don't create users that way anymore buster.");
             //if (!IsUniqueUserName(user, db.Users)) return View(user).Error("Username must be unique.");
@@ -61,12 +63,12 @@ namespace DotAPicker.Controllers
         {
             if (id == null && CurrentUser != null) id = CurrentUser.Id;
             if (id == null) return Index().Error("You'll need to log in first, sry.");
-            if (!CurrentUser.IsAuthenticated) return Index().Error("You'll need to log in first, sry.");
+            if (!CurrentUser.IsAuthenticated) return RedirectToAction(nameof(Index)).Error("You'll need to log in first, sry.");
 
             User user = db.Users.Find(id);
             if (user == null)
             {
-                if (id == null) return Index().Error("That user ID wasn't found.");
+                if (id == null) return RedirectToAction(nameof(Index)).Error("That user ID wasn't found.");
             }
             return View(user);
         }
@@ -74,16 +76,26 @@ namespace DotAPicker.Controllers
         // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
+        public ActionResult Edit(User user)
         {
-            if (CurrentUser.Id == user.Id) db.Entry(CurrentUser).State = EntityState.Detached;
-
             //check for errors
             if (!ModelState.IsValid) return View(user).Error("Invalid entries.");
             if (!IsUniqueUserName(user, db.Users)) return View(user).Error("Username must be unique.");
+            if (user.Id != CurrentUser.Id) return View(user).Error("How did you even get here?");
 
-            //make the update
-            db.Entry(user).State = EntityState.Modified;
+            //set the parameters
+            CurrentUser.Name = user.Name;
+            CurrentUser.ShowDeprecatedRelationships = user.ShowDeprecatedRelationships;
+            CurrentUser.ShowDeprecatedTips = user.ShowDeprecatedTips;
+            CurrentUser.CurrentPatch = user.CurrentPatch;
+            CurrentUser.ProfileType = user.ProfileType;
+            db.Entry(CurrentUser).State = EntityState.Modified;
+
+            //foreach(var localEntry in db.Set<User>().Local.Where(l => l.Id == user.Id))
+            //{
+            //    if (localEntry != null) db.Entry(localEntry).State = EntityState.Detached;
+            //}
+            //db.Entry(user).State = EntityState.Modified;
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
                 return Index().Error("You're not allowed to that.");
@@ -92,17 +104,17 @@ namespace DotAPicker.Controllers
             return RedirectToAction("Index").Success("Updated!");
         }
 
-        public static bool IsUniqueUserName(User user, IEnumerable<User> users) => users.Any(u => (user.Id <= 0 || user.Id != u.Id) 
-                                                                                               && (u.Email == user.Name || u.Name == user.Email));
+        public static bool IsUniqueUserName(User user, IEnumerable<User> users) => !users.Any(u => (user.Id <= 0 || user.Id != u.Id) 
+                                                                                                && (u.Email == user.Name || u.Name == user.Email));
 
         // GET: User/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null) return Index().Error("You'll need to log in first, sry.");
-            if (!CurrentUser.IsAuthenticated) return Index().Error("You'll need to log in first, sry.");
+            if (id == null) return RedirectToAction(nameof(Index)).Error("You'll need to log in first, sry.");
+            if (!CurrentUser.IsAuthenticated) return RedirectToAction(nameof(Index)).Error("You'll need to log in first, sry.");
 
             User user = db.Users.Find(id);
-            if (user == null) return Index().Error("User not found.");
+            if (user == null) return RedirectToAction(nameof(Index)).Error("User not found.");
 
             return View(user);
         }
@@ -112,13 +124,21 @@ namespace DotAPicker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (CurrentUser.Id != id) return RedirectToAction(nameof(Index)).Error("You're not allowed to that.");
+
             User user = db.Users.Find(id);
+            if (!db.ClearUserData(user)) return RedirectToAction(nameof(Index)).Error("Error while clearing profile.");
+
             db.Users.Remove(user);
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
-                return Index().Error("You're not allowed to that.");
+                return RedirectToAction(nameof(Index)).Error("You're not allowed to that.");
             }
-            return RedirectToAction("Index");
+
+            //Success, go back to default profile
+            return RedirectToAction("Index", "Login", new { viewModel = new ViewModels.LoginViewModel() {
+                UsernameOrEmail = DotAPicker.Models.User.DEFAULT_USER
+            } }).Success("User profile deleted.");
         }
     }
 }

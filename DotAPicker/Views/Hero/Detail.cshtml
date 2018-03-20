@@ -1,5 +1,4 @@
-﻿@using DotAPicker.Models
-@using DotAPicker.ViewModels
+﻿@using DotAPicker.ViewModels
 @model HeroViewModel
 
 @{
@@ -20,9 +19,9 @@
         <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51">
     }
 
-        <strong>@Model.Hero.Name</strong>
+        <strong>@Model.Hero?.Name</strong>
 
-    if (Model.SignedIn)
+    if (Model.SignedIn && Model.Hero != null)
     {
         <div class="link-padding">
             @Html.ActionLink("(edit)", "Edit", new { id = Model.Hero.Id }, new { @class = "edit-link", title = "Edit Hero" })
@@ -40,11 +39,11 @@
     <div class="row">
         <div class="col-xs-12">
             <h4 style="display: inline-block">Tips</h4>
-            @if (Model.SignedIn)
+            if (Model.SignedIn && Model.Hero != null)
             {
-                <div class="link-padding">
-                    @Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Tip" })
-                </div>
+            <div class="link-padding">
+                @Html.ActionLink("(new)", "Create", "Tip", new { heroID = Model.Hero.Id, returnToHeroList = true }, new { @class = "create-link", title = "New Tip" })
+            </div>
             }
         </div>
     </div>
