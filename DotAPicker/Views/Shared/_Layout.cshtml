@@ -21,6 +21,7 @@
         var signedIn = user != null && user.IsAuthenticated;
         var signInText = user == null ? string.Empty
                                       : $"{user.Name}{(user.IsAuthenticated ? string.Empty : " (anonymous)")}";
+        var userAction = signedIn ? "Edit" : "Details";
      }
 
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,7 +41,6 @@
                 <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
                 <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
                 <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
-                @*<li>@Html.ActionLink("Users", "Index", "User")</li>*@
             </ul>   
             @if (signedIn)
             {
@@ -75,7 +75,7 @@
             }
                 <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
                     <li style="color: azure; padding-right: 5px;">user:</li>
-                    <li style="color: pink">@signInText</li>
+                    <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id })</li>
                 </ul>
             </div>
         </div>

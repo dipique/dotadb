@@ -17,7 +17,7 @@ namespace DotAPicker.Utilities
         public static bool ValidatePatchNumber(string patch) => new Regex(PATCH_REGEX).IsMatch(patch);
         public const string PATCH_REGEX = @"^(\d+\.\d{2}([a-zA-Z])?)$";
 
-        public const string DEFAULT_PATCH = "7.07d";
+        public const string DEFAULT_PATCH = "7.10";
     }
 
     /// <summary>

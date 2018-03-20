@@ -12,12 +12,16 @@ namespace DotAPicker.Controllers
     public class UserController : DotAController
     {
         // GET: User
-        public ActionResult Index() => View(db.Users.ToList());
+        public ActionResult Index() //=> View(db.Users.ToList()); //prevent people from seeing the full list
+        {
+            return View(db.Users.Where(u => u.Id == CurrentUser.Id).ToList());
+        }
 
         // GET: User/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return Index().Error("Invalid User ID");
+            if (id != CurrentUser.Id) return Index().Error("Sorry man that ain't yours and I think you probably knew that.");
             User user = db.Users.Find(id);
             if (user == null) Index().Error("Invalid User Id");
 
@@ -27,80 +31,79 @@ namespace DotAPicker.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View(new User());
+            return RedirectToAction("Login", "Register");
+            //return View(new User());
         }
 
         // POST: User/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
         {
-            //TODO validate that username is still unique
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
-                {
-                    return Index().Error("You're not allowed to that.");
-                }
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Login", "Register").Error("We don't create users that way anymore buster.");
+            //if (!IsUniqueUserName(user, db.Users)) return View(user).Error("Username must be unique.");
 
-            return View(user);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Users.Add(user);
+            //    if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            //    {
+            //        return Index().Error("You're not allowed to that.");
+            //    }
+            //    return RedirectToAction("Index");
+            //}
+
+            //return View(user);
         }
 
         // GET: User/Edit/5
         public ActionResult Edit(int? id)
         {
-            //CurrentUser = null; //otherwise you won't be able to edit it
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null && CurrentUser != null) id = CurrentUser.Id;
+            if (id == null) return Index().Error("You'll need to log in first, sry.");
+            if (!CurrentUser.IsAuthenticated) return Index().Error("You'll need to log in first, sry.");
+
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                if (id == null) return Index().Error("That user ID wasn't found.");
             }
             return View(user);
         }
 
         // POST: User/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Username,CurrentPatch,ShowDeprecatedTips,ShowDeprecatedRelationships,Labels")] User user)
         {
             if (CurrentUser.Id == user.Id) db.Entry(CurrentUser).State = EntityState.Detached;
 
-            //TODO validate that username is still unique
-            if (ModelState.IsValid)
+            //check for errors
+            if (!ModelState.IsValid) return View(user).Error("Invalid entries.");
+            if (!IsUniqueUserName(user, db.Users)) return View(user).Error("Username must be unique.");
+
+            //make the update
+            db.Entry(user).State = EntityState.Modified;
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
-                db.Entry(user).State = EntityState.Modified;
-                if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
-                {
-                    return Index().Error("You're not allowed to that.");
-                }
-                return RedirectToAction("Index");
+                return Index().Error("You're not allowed to that.");
             }
-            return View(user);
+
+            return RedirectToAction("Index").Success("Updated!");
         }
+
+        public static bool IsUniqueUserName(User user, IEnumerable<User> users) => users.Any(u => (user.Id <= 0 || user.Id != u.Id) 
+                                                                                               && (u.Email == user.Name || u.Name == user.Email));
 
         // GET: User/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return Index().Error("You'll need to log in first, sry.");
+            if (!CurrentUser.IsAuthenticated) return Index().Error("You'll need to log in first, sry.");
+
             User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
+            if (user == null) return Index().Error("User not found.");
+
             return View(user);
         }
 

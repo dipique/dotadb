@@ -250,7 +250,7 @@ namespace DotAPicker.Controllers
             }
             catch (Exception)
             {
-                return View(viewModel).Error("You know, I actually tried. But those obstructionist librals done did me in.");
+                return View(viewModel).Error("You know, I actually tried. But those obstructionist libruls done did me in.");
             }
 
             //after all that hopefully it worked
