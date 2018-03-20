@@ -381,8 +381,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Sample Data\default-dpexport-180320051612.xml" />
     <Content Include="Sample Data\dota.db" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Sample Data\labels.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
