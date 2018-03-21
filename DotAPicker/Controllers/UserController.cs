@@ -91,11 +91,6 @@ namespace DotAPicker.Controllers
             CurrentUser.ProfileType = user.ProfileType;
             db.Entry(CurrentUser).State = EntityState.Modified;
 
-            //foreach(var localEntry in db.Set<User>().Local.Where(l => l.Id == user.Id))
-            //{
-            //    if (localEntry != null) db.Entry(localEntry).State = EntityState.Detached;
-            //}
-            //db.Entry(user).State = EntityState.Modified;
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
                 return Index().Error("You're not allowed to that.");
@@ -136,9 +131,8 @@ namespace DotAPicker.Controllers
             }
 
             //Success, go back to default profile
-            return RedirectToAction("Index", "Login", new { viewModel = new ViewModels.LoginViewModel() {
-                UsernameOrEmail = DotAPicker.Models.User.DEFAULT_USER
-            } }).Success("User profile deleted.");
+            CurrentUser = null;
+            return RedirectToAction(nameof(Index)).Success("User profile deleted.");
         }
     }
 }
