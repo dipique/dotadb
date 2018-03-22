@@ -33,6 +33,10 @@
             @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
         </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <i id="typeNote"></i>
+        </div>
     </div>
 
     @Html.HiddenFor(model => model.Id)
@@ -48,6 +52,10 @@
         @Html.LabelFor(m => m.ObjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.ObjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <i id="objectNote"></i>
         </div>
     </div>
 
@@ -92,3 +100,34 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    updateCounterNote(); //on page load
+
+    $('#Type').change(function () {
+        updateCounterNote();
+    });
+
+    $('#ObjectEntity').change(function () {
+        updateCounterNote();
+    });
+
+    $('#SubjectEntity').change(function () {
+        updateCounterNote();
+    });
+
+    function updateCounterNote() {
+        //deal with non-counters first
+        if ($('#Type').find(":selected").text() != 'Counter') {
+            $('#typeNote')[0].innerText = '';
+            $('#objectNote')[0].innerText = '';
+            return;
+        }
+
+        //set the counter type note
+        $('#typeNote')[0].innerText = 'Note: When choosing Counter, make sure the Subject counters the Object.';
+
+        //set the object type note
+        $('#objectNote')[0].innerText = 'This relationship says: ' + $('#SubjectEntity').find(":selected").text() + ' counters ' + $('#ObjectEntity').find(":selected").text();
+    }
+</script>
