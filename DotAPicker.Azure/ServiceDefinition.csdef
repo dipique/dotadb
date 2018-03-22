@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="DotAPicker.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
   <WebRole name="DotAPicker" vmsize="Small">
+    <Certificates>
+      <Certificate name="zeroCert"
+                  storeLocation="LocalMachine"
+                  storeName="My"
+                  permissionLevel="limitedOrElevated" />
+    </Certificates>
     <Sites>
       <Site name="Web">
         <Bindings>
           <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="HttpsIn" endpointName="HttpsIn" />
         </Bindings>
       </Site>
     </Sites>
@@ -14,6 +21,7 @@
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="HttpsIn" protocol="https" port="443" certificate="zeroCert" />
     </Endpoints>
   </WebRole>
 </ServiceDefinition>
