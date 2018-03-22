@@ -48,7 +48,6 @@ namespace DotAPicker.Controllers
 
         public void SetCurrentUser(User user)
         {
-            user.IsAuthenticated = true;
             HttpContext.User = new Principal(user);
             CurrentUser = user;
         }

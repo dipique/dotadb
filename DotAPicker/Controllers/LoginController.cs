@@ -41,38 +41,31 @@ namespace DotAPicker.Controllers
             if (noPasswordEntered)
             {
                 if (user.ProfileType == ProfileTypes.Private)
-                {
                     return LoginError(viewModel, "Noice try bustah! Tryna sign in to a public profile widout no passamawhoozit!");
-                }
-                else
+
+                if (user.ProfileType == ProfileTypes.ReadOnly)
                 {
-                    if (user.ProfileType == ProfileTypes.ReadOnly)
-                    {
-                        user.IsAuthenticated = false;
-                        SetCurrentUser(user);
-                        return RedirectToAction("Index", "Home").Success("Aight, yer logged in ano... anoby... ah, just don't make no changes iffen ya please.");
-                    }
-                    else
-                    {
-                        //ProfileTypes.Public
-                        user.IsAuthenticated = true;
-                        SetCurrentUser(user);
-                        return RedirectToAction("Index", "Home").Success("Dude straight up left his front door open and now you're in. Take care of the place!");
-                    }
-                }
-            } 
-            else
-            {
-                if (user.MatchingPassword(viewModel.Password))
-                {
+                    user.IsAuthenticated = false;
                     SetCurrentUser(user);
-                    return RedirectToAction("Index", "Home").Success("Look at you, logging in like a pro.");
+                    return RedirectToAction("Index", "Home").Success("Aight, yer logged in ano... anoby... ah, just don't make no changes iffen ya please.");
                 }
-                else
-                {
-                    return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
-                }
-            }    
+
+                //ProfileTypes.Public
+                user.IsAuthenticated = true;
+                SetCurrentUser(user);
+                return RedirectToAction("Index", "Home").Success("Dude straight up left his front door open and now you're in. Take care of the place!");
+            } 
+
+            //password was entered
+            if (user.MatchingPassword(viewModel.Password))
+            {
+                user.IsAuthenticated = true;
+                SetCurrentUser(user);
+                return RedirectToAction("Index", "Home").Success("Look at you, logging in like a pro.");
+            }
+
+            //password mismatch
+            return LoginError(viewModel, "T'ain't t'right pass code ya wacko");
         }
 
         public ActionResult LogOut()
