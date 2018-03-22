@@ -3,7 +3,7 @@
 @model TableViewModel<Hero>
 
 @{
-    ViewBag.Title = "Heros";
+    ViewBag.Title = "Hero Picker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var signedIn = ((User)Session["user"])?.IsAuthenticated == true;

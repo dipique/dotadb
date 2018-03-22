@@ -47,7 +47,7 @@ namespace DotAPicker.Models
         }
 
         /// <summary>
-        /// Single access property to the second target of the relationship. Heros are represented by their integer IDs
+        /// Single access property to the second target of the relationship. Heroes are represented by their integer IDs
         /// </summary>
         [NotMapped]
         [Display(Name = "Object")]

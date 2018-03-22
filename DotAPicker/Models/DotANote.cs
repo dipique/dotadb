@@ -43,7 +43,7 @@ namespace DotAPicker.Models
         }
 
         /// <summary>
-        /// Single access property to the first target of the tip. Heros are represented by their integer IDs
+        /// Single access property to the first target of the tip. Heroes are represented by their integer IDs
         /// </summary>
         [Display(Name = "Subject")]
         [NotMapped]
