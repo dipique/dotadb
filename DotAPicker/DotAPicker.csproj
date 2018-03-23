@@ -456,6 +456,8 @@
     <Content Include="Views\Settings\UploadHeroImage.cshtml" />
     <Content Include="Views\Login\PasswordReset.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Hero\TipDialog.cshtml" />
+    <Content Include="Views\Hero\RelationshipDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp\" />

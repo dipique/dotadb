@@ -1,0 +1,118 @@
+﻿@using DotAPicker.Models
+@model Relationship
+
+
+
+    @{ 
+        //determine if we're adding or editing
+        var newTip = Model == null;
+        if (!newTip && Model.Id < 1) { newTip = true; }
+
+        //set variable based on form type
+        var title = $"{(newTip ? "New" : "Edit")} Relationship";
+    }
+
+    <h3>@title</h3>
+
+    <link href="@Url.Content("~/Content/sliders.css")" rel="stylesheet" type="text/css" />
+    @using (Html.BeginForm("UpdateRelationship", "Hero", FormMethod.Post, new { id = "RelationshipForm" }))
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Patch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.UserId)
+                    @Html.EditorFor(model => model.Patch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Patch, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.UserId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <i id="typeNote"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SubjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.SubjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ObjectEntity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.ObjectEntity, (IEnumerable<SelectListItem>)ViewBag.SubjectOptions, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <i id="objectNote"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control", autofocus = "autoFocus" } })
+                    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Source, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Source, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Source, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+<script>
+    updateCounterNote(); //on page load
+
+    $('#Type').change(function () {
+        updateCounterNote();
+    });
+
+    $('#ObjectEntity').change(function () {
+        updateCounterNote();
+    });
+
+    $('#SubjectEntity').change(function () {
+        updateCounterNote();
+    });
+
+    function updateCounterNote() {
+        //deal with non-counters first
+        if ($('#Type').find(":selected").text() != 'Counter') {
+            $('#typeNote')[0].innerText = '';
+            $('#objectNote')[0].innerText = '';
+            return;
+        }
+
+        //set the counter type note
+        $('#typeNote')[0].innerText = 'Note: When choosing Counter, make sure the Subject counters the Object.';
+
+        //set the object type note
+        $('#objectNote')[0].innerText = 'This relationship says: ' + $('#SubjectEntity').find(":selected").text() + ' counters ' + $('#ObjectEntity').find(":selected").text();
+    }
+</script>

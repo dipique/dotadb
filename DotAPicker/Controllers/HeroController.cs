@@ -143,5 +143,92 @@ namespace DotAPicker.Controllers
 
             return Index().Success("Hero deleted.");
         }
+
+        [HttpGet]
+        public ActionResult CreateTip(int heroID) => UpdateTip(heroID, 0);
+
+        [HttpGet]
+        public ActionResult UpdateTip(int heroID, int id)
+        {
+            var heroOption = heroID < 1 ? null : heroID.ToString();
+            ViewBag.SubjectOptions = GetSubjectOptions(heroOption);
+
+            //if it's a new tip, return the partial view
+            if (id < 1)
+            {
+                var newTip = new Tip() {
+                    Patch = CurrentUser.CurrentPatch,
+                    UserId = CurrentUser.Id
+                };
+                if (heroID > 0 && db.Heroes.Any(h => h.Id == heroID)) newTip.HeroSubjectId = heroID;
+                return PartialView("TipDialog", newTip);
+            }
+
+            //if it's getting update, get the tip
+            Tip tip = db.Tips.FirstOrDefault(t => t.Id == id);
+            if (tip == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that tip... and I'm not sure how that's possible.");
+            return PartialView("TipDialog", tip);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTip(Tip model)
+        {
+            if (model == null) return Index();
+            var addTip = model.Id < 1;
+
+            if (addTip)
+                db.Tips.Add(model);
+            else
+                db.Tips.Attach(model);
+
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");
+
+            return RedirectToAction(nameof(Index)).Success($"Tip {(addTip ? "added" : "updated")}.");
+        }
+
+        [HttpGet]
+        public ActionResult CreateRelationship(int heroID) => UpdateRelationship(heroID, 0);
+
+        [HttpGet]
+        public ActionResult UpdateRelationship(int heroID, int id)
+        {
+            var heroOption = heroID < 1 ? null : heroID.ToString();
+            ViewBag.SubjectOptions = GetSubjectOptions(heroOption);
+
+            //if it's a new tip, return the partial view
+            if (id < 1)
+            {
+                var newRelationship = new Relationship()
+                {
+                    Patch = CurrentUser.CurrentPatch,
+                    UserId = CurrentUser.Id
+                };
+                if (heroID > 0 && db.Heroes.Any(h => h.Id == heroID)) newRelationship.HeroSubjectId = heroID;
+                return PartialView("RelationshipDialog", newRelationship);
+            }
+
+            //if it's getting updated, get the relationship
+            Relationship tip = db.Relationships.FirstOrDefault(t => t.Id == id);
+            if (tip == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that relationship... and I'm not sure how that's possible.");
+            return PartialView("RelationshipDialog", tip);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRelationship(Relationship model)
+        {
+            if (model == null) return Index();
+            var addRelationship = model.Id < 1;
+
+            if (addRelationship)
+                db.Relationships.Add(model);
+            else
+                db.Relationships.Attach(model);
+
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+                return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");
+
+            return RedirectToAction(nameof(Index)).Success($"Relationship {(addRelationship ? "added" : "updated")}.");
+        }
     }
 }
