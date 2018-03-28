@@ -458,10 +458,10 @@
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Hero\TipDialog.cshtml" />
     <Content Include="Views\Hero\RelationshipDialog.cshtml" />
+    <Content Include="Views\DevLog\DevLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp\" />
-    <Folder Include="Views\DotA\" />
     <Folder Include="Views\User\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
