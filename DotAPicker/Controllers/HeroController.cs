@@ -148,6 +148,9 @@ namespace DotAPicker.Controllers
         public ActionResult CreateTip(int heroID) => UpdateTip(heroID, 0);
 
         [HttpGet]
+        public ActionResult EditTip(int id) => UpdateTip(0, id);
+
+        [HttpGet]
         public ActionResult UpdateTip(int heroID, int id)
         {
             var heroOption = heroID < 1 ? null : heroID.ToString();
@@ -179,7 +182,16 @@ namespace DotAPicker.Controllers
             if (addTip)
                 db.Tips.Add(model);
             else
-                db.Tips.Attach(model);
+            {
+                var item = db.Tips.FirstOrDefault(r => r.Id == model.Id);
+                if (item == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that tip... and I'm not sure how that's possible.");
+
+                //update the fields
+                item.Patch = model.Patch;
+                item.HeroSubjectId = model.HeroSubjectId;
+                item.Text = model.Text;
+                item.Source = model.Source;
+            }
 
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
                 return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");
@@ -189,6 +201,9 @@ namespace DotAPicker.Controllers
 
         [HttpGet]
         public ActionResult CreateRelationship(int heroID) => UpdateRelationship(heroID, 0);
+
+        [HttpGet]
+        public ActionResult EditRelationship(int id) => UpdateRelationship(0, id);
 
         [HttpGet]
         public ActionResult UpdateRelationship(int heroID, int id)
@@ -223,7 +238,17 @@ namespace DotAPicker.Controllers
             if (addRelationship)
                 db.Relationships.Add(model);
             else
-                db.Relationships.Attach(model);
+            {
+                var item = db.Relationships.FirstOrDefault(r => r.Id == model.Id);
+                if (item == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that relationship... and I'm not sure how that's possible.");
+
+                //update the fields
+                item.Patch = model.Patch;
+                item.HeroSubjectId = model.HeroSubjectId;
+                item.HeroObjectId = model.HeroObjectId;
+                item.Text = model.Text;
+                item.Source = model.Source;
+            }                
 
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
                 return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");

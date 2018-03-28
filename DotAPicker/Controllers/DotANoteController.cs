@@ -20,12 +20,6 @@ namespace DotAPicker.Controllers
                                                                  .GetValue(db);
         public string TypeString => typeof(T).Name;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="heroID"></param>
-        /// <param name="requestOrigin"></param>
-        /// <returns></returns>
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
         {
             ViewBag.ReturnToHeroList = returnToHeroList;

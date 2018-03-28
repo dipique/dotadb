@@ -42,7 +42,7 @@
             @if (Model.SignedIn && Model.Hero != null)
             {
             <div class="link-padding">
-                <a href="javascript:void(0)" class="create-link" title="New Tip" id="create-tip" />
+                <a href="javascript:void(0)" class="create-link create-tip" title="New Tip" />
             </div>
             }
         </div>
@@ -68,7 +68,7 @@
             @if (Model.SignedIn)
             {
                 <div class="link-padding col-xs-1">
-                    @Html.ActionLink("(edit)", "Edit", "Tip", new { id = Model.Hero.Tips[x].Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Tip" })
+                    <a class="edit-link edit-tip" href="javascript:void(0)" id="@Model.Hero.Tips[x].Id" title="Edit Tip" />
                     @Html.ActionLink("(delete)", "Delete", "Tip", new { id = Model.Hero.Tips[x].Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Tip" })
                 </div>
             }
@@ -93,7 +93,7 @@
             <div class="link-padding">
                 @if (Model.SignedIn)
                 {
-                    <a href="javascript:void(0)" class="create-link" title="New Relationship" id="create-relationship" />
+                    <a href="javascript:void(0)" class="create-link create-relationship" title="New Relationship" />
                 }
             </div>
         </div>
@@ -121,7 +121,7 @@
             @if (Model.SignedIn)
             {
                 <div class="link-padding col-xs-1">
-                    @Html.ActionLink("(edit)", "Edit", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "edit-link", title = "Edit Relationship" })
+                    <a class="edit-link edit-relationship" href="javascript:void(0)" id="@r.Id" title="Edit Relationship" />
                     @Html.ActionLink("(delete)", "Delete", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Relationship" })
                 </div>
             }
@@ -166,23 +166,38 @@
             width: 550
         });
 
-        $('#create-tip').click(function () {
-            $('#tip-dialog').load("@($"{Url.Action("CreateTip", "Hero")}?heroID={Model.Hero.Id}")", function (response, status, xhr) {
-                $('#tip-dialog').dialog('open');
-            });
-        });
-
         $("#relationship-dialog").dialog({
             autoOpen: false,
             modal: true,
             width: 650
         });
 
-        $('#create-relationship').click(function () {
+        $('.create-tip').click(function () {
+            $('#tip-dialog').load("@($"{Url.Action("CreateTip", "Hero")}?heroID={Model.Hero.Id}")", function (response, status, xhr) {
+                $('#tip-dialog').dialog('open');
+            });
+        });
+
+        $('.create-relationship').click(function () {
             $('#relationship-dialog').load("@($"{Url.Action("CreateRelationship", "Hero")}?heroID={Model.Hero.Id}")", function (response, status, xhr) {
                 $('#relationship-dialog').dialog('open');
             });
         });
+
+        $('.edit-tip').click(function () {
+            var noteID = this.id;
+            $('#tip-dialog').load("@($"{Url.Action("EditTip", "Hero")}?id=")" + noteID, function (response, status, xhr) {
+                $('#tip-dialog').dialog('open');
+            });
+        });
+
+        $('.edit-relationship').click(function () {
+            var noteID = this.id;
+            $('#relationship-dialog').load("@($"{Url.Action("EditRelationship", "Hero")}?id=")" + noteID, function (response, status, xhr) {
+                $('#relationship-dialog').dialog('open');
+            });
+        });
+
     });
 </script>
 
