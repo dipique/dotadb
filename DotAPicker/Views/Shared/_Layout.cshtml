@@ -16,13 +16,14 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    @{
-        var user = (User)Session["user"];
-        var signedIn = user != null && user.IsAuthenticated;
-        var signInText = user == null ? string.Empty
-                                      : $"{user.Name}{(user.IsAuthenticated ? string.Empty : " (anonymous)")}";
-        var userAction = signedIn ? "Edit" : "Details";
-     }
+
+@{
+    var user = (User)Session["user"];
+    var signedIn = user != null && user.IsAuthenticated;
+    var signInText = user == null ? string.Empty
+                                    : $"{user.Name}{(user.IsAuthenticated ? string.Empty : " (anonymous)")}";
+    var userAction = signedIn ? "Edit" : "Details";
+}
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -41,40 +42,44 @@
                 <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
                 <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
                 <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
+                <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
             </ul>   
-            @if (signedIn)
-            {
-                <ul class="navbar-nav navbar-right lo-navbar">
-                    <li>
-                        <div class="lo-dropdown">
-                            <button class="lo-dropbtn">
-                                Settings
-                                <i class="lo-fa lo-fa-caret-down"></i>
-                            </button>
-                            <div class="lo-dropdown-content">
-                                @Html.ActionLink("Password Reset", "PasswordReset", "Settings")
-                                @Html.ActionLink("Delete Profile", "DeleteProfile", "Settings")
-                                @Html.ActionLink("Replace Profile", "ReplaceProfile", "Settings")
-                                @Html.ActionLink("Export Profile", "ExportProfile", "Settings")
-                                @Html.ActionLink("Import Profile", "ImportProfile", "Settings")
-                                @*@Html.ActionLink("Change Profile Type", "ProfileSettings", "Settings")*@
-                                @Html.ActionLink("Import Labels", "ImportLabels", "Settings")
-                            </div>
-                        </div>                        
-                    </li>
-                    <li>@Html.ActionLink("Log out", "LogOut", "Login", null, null)</li>
-                </ul>
-            } else
-            {
-                <ul class="nav navbar-nav pull-right">
-                    <li>@Html.ActionLink("Register", "Register", "Login")</li>
-                    <li>@Html.ActionLink("Log In", "Login", "Login")</li>
-                </ul>
-            }
-                <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
-                    <li style="color: azure; padding-right: 5px;">user:</li>
-                    <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline;" })</li>
-                </ul>
+                @if (signedIn)
+                {
+                    <ul class="navbar-nav navbar-right lo-navbar">
+                        <li>
+                            <div class="lo-dropdown">
+                                <button class="lo-dropbtn">
+                                    Settings
+                                    <i class="lo-fa lo-fa-caret-down"></i>
+                                </button>
+                                <div class="lo-dropdown-content">
+                                    @Html.ActionLink("Password Reset", "PasswordReset", "Settings")
+                                    @Html.ActionLink("Delete Profile", "DeleteProfile", "Settings")
+                                    @Html.ActionLink("Replace Profile", "ReplaceProfile", "Settings")
+                                    @Html.ActionLink("Export Profile", "ExportProfile", "Settings")
+                                    @Html.ActionLink("Import Profile", "ImportProfile", "Settings")
+                                    @Html.ActionLink("Import Labels", "ImportLabels", "Settings")
+                                </div>
+                            </div>                        
+                        </li>
+                        <li>@Html.ActionLink("Log out", "LogOut", "Login", null, null)</li>
+                    </ul>
+                } else
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li>@Html.ActionLink("Register", "Register", "Login")</li>
+                        <li>@Html.ActionLink("Log In", "Login", "Login")</li>
+                    </ul>
+                }
+
+                @if (user != null)
+                {
+                    <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
+                        <li style="color: azure; padding-right: 5px;">user:</li>
+                        <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline;" })</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
