@@ -193,6 +193,8 @@ namespace DotAPicker.Controllers
                 item.Source = model.Source;
             }
 
+            if (model.HeroSubjectId > 0) TempData["SelectedHeroID"] = model.HeroSubjectId;
+
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
                 return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");
 
@@ -248,7 +250,12 @@ namespace DotAPicker.Controllers
                 item.HeroObjectId = model.HeroObjectId;
                 item.Text = model.Text;
                 item.Source = model.Source;
-            }                
+            }
+
+            if (model.HeroSubjectId > 0)
+                TempData["SelectedHeroID"] = model.HeroSubjectId;
+            else if (model.HeroObjectId > 0)
+                TempData["SelectedHeroID"] = model.HeroObjectId;
 
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
                 return RedirectToAction(nameof(Index)).Error("You're not allowed to do that.");
