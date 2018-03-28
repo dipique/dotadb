@@ -180,6 +180,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DevLogController.cs" />
     <Compile Include="Controllers\DotAController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -458,7 +459,7 @@
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Hero\TipDialog.cshtml" />
     <Content Include="Views\Hero\RelationshipDialog.cshtml" />
-    <Content Include="Views\DevLog\DevLog.cshtml" />
+    <Content Include="Views\DevLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp\" />
