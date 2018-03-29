@@ -132,7 +132,7 @@ namespace DotAPicker.Models
         }
 
         [NotMapped, Display(Name = "Synced Profiles")]
-        public List<string> SyncedProfiles { get; set; } = new List<string>();
+        public List<string> SyncedProfiles { get; set; } = new List<string>() { DEFAULT_USER };
 
         [DisplayName("Label Options")]
         public string LabelOptions

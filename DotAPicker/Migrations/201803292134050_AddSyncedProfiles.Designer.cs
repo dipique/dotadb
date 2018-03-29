@@ -13,7 +13,7 @@ namespace DotAPicker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803291451369_AddSyncedProfiles"; }
+            get { return "201803292134050_AddSyncedProfiles"; }
         }
         
         string IMigrationMetadata.Source

@@ -195,13 +195,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801151725418_InitialCreate.cs" />
-    <Compile Include="Migrations\201801151725418_InitialCreate.Designer.cs">
-      <DependentUpon>201801151725418_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201803291712249_InitialCreate.cs" />
+    <Compile Include="Migrations\201803291712249_InitialCreate.Designer.cs">
+      <DependentUpon>201803291712249_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803291451369_AddSyncedProfiles.cs" />
-    <Compile Include="Migrations\201803291451369_AddSyncedProfiles.Designer.cs">
-      <DependentUpon>201803291451369_AddSyncedProfiles.cs</DependentUpon>
+    <Compile Include="Migrations\201803292134050_AddSyncedProfiles.cs" />
+    <Compile Include="Migrations\201803292134050_AddSyncedProfiles.Designer.cs">
+      <DependentUpon>201803292134050_AddSyncedProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotANote.cs" />
@@ -479,11 +479,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801151725418_InitialCreate.resx">
-      <DependentUpon>201801151725418_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803291712249_InitialCreate.resx">
+      <DependentUpon>201803291712249_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803291451369_AddSyncedProfiles.resx">
-      <DependentUpon>201803291451369_AddSyncedProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803292134050_AddSyncedProfiles.resx">
+      <DependentUpon>201803292134050_AddSyncedProfiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

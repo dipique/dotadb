@@ -109,18 +109,12 @@ namespace DotAPicker.Controllers
 
             //copy profile if applicable
             var copyProfile = profileToCopy != null;
-            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, user, true) : false;
+            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, user, false) : false;
             SetCurrentUser(user);
 
-            if (copyProfile)
-            {
-                return copySuccess ? RedirectToAction("Index", "Home").Success("User profile created and copied from template.")
-                                   : RedirectToAction("Index", "Home").Information("User profile created but template copy failed.");
-            } else
-            {
-                return RedirectToAction("Index", "Home").Success("User profile successfully created!");
-            }
-
+            return copyProfile ? copySuccess ? RedirectToAction("Index", "Home").Success("User profile created and copied from template.")
+                                             : RedirectToAction("Index", "Home").Information("User profile created but template copy failed.")
+                               : RedirectToAction("Index", "Home").Success("User profile successfully created!");
         }
 
         private const string PWD_RESET_URL = "dotapad.com/Login/PasswordReset";
