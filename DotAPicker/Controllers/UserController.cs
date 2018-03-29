@@ -139,6 +139,6 @@ namespace DotAPicker.Controllers
             return RedirectToAction("Index", "Hero").Success("User profile deleted.");
         }
 
-        public IQueryable<string> GetShareableProfileEmails() => db.Users.Where(u => u.ProfileType != ProfileTypes.Private).Select(u => u.Name);
+        public IQueryable<string> GetShareableProfileEmails() => db.Users.Where(u => u.ProfileType != ProfileTypes.Private && u.Id != CurrentUser.Id).Select(u => u.Name);
     }
 }
