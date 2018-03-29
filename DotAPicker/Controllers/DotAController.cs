@@ -89,14 +89,22 @@ namespace DotAPicker.Controllers
                                                              r.HeroSubject.Name == heroName ||
                                                              hero.Labels.Contains(r.LabelSubject) ||
                                                              hero.Labels.Contains(r.LabelObject)).ToList()   //bring into memory
-                                                 .Select(r => { r.Editable = profiles[r.UserId]; return r; })
-                                                 .ToList();
+                                                 .Select(r => { r.Editable = profiles[r.UserId];
+                                                                if (r.UserId != CurrentUser.Id) {
+                                                                    r.ProfileName = db.Users.Find(r.UserId).Name;
+                                                                }                                                     
+                                                                return r;
+                                                 }).ToList();
 
             hero.Tips = db.Tips.Where(t => keys.Contains(t.UserId))
                                .Where(t => t.HeroSubject.Name == heroName ||
                                            hero.Labels.Contains(t.LabelSubject)).ToList()
-                               .Select(t => { t.Editable = profiles[t.UserId]; return t; })
-                               .ToList();
+                               .Select(t => { t.Editable = profiles[t.UserId];
+                                              if (t.UserId != CurrentUser.Id) {
+                                                  t.ProfileName = db.Users.Find(t.UserId).Name;
+                                              }
+                                              return t;
+                               }).ToList();
             return hero;
         }
 

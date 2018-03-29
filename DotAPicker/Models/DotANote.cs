@@ -98,6 +98,12 @@ namespace DotAPicker.Models
         /// </summary>
         [NotMapped]
         public bool Editable { get; set; } = false;
+
+        /// <summary>
+        /// This contains the profile this note was shared from
+        /// </summary>
+        [NotMapped]
+        public string ProfileName { get; set; }
     }
 
     public enum TipType
