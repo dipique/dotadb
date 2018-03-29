@@ -109,7 +109,7 @@ namespace DotAPicker.Controllers
 
             //copy profile if applicable
             var copyProfile = profileToCopy != null;
-            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, user, false) : false;
+            var copySuccess = copyProfile ? db.CopyUser(profileToCopy, user, true, false) : false;
             SetCurrentUser(user);
 
             return copyProfile ? copySuccess ? RedirectToAction("Index", "Home").Success("User profile created and copied from template.")

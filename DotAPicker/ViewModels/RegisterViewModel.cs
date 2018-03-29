@@ -43,7 +43,8 @@ namespace DotAPicker.ViewModels
             var user = new User {
                 Name = Username,
                 Email = Email,
-                ProfileType = ProfileType
+                ProfileType = ProfileType,
+                IsAuthenticated = true
             };
             user.SetNewPassword(Password);
             return user;
