@@ -103,6 +103,9 @@ namespace DotAPicker.Controllers
                 if (profileToCopy == null) return View().Error("Profile to copy doesn't exist or is private.");
             }
 
+            //set up user to see default tips & relationships
+            user.SyncedProfiles.Add(Models.User.DEFAULT_USER);
+
             //add user
             db.Users.Add(user);
             db.SaveChanges(true);
