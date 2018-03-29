@@ -194,6 +194,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803291654134_new.cs" />
+    <Compile Include="Migrations\201803291654134_new.Designer.cs">
+      <DependentUpon>201803291654134_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotANote.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\Hero.cs" />
@@ -467,6 +472,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803291654134_new.resx">
+      <DependentUpon>201803291654134_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
