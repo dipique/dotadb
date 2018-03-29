@@ -121,6 +121,19 @@ namespace DotAPicker.Models
         [DisplayName("Show Deprecated Relationships")]
         public bool ShowDeprecatedRelationships { get; set; } = false;
 
+        /// <summary>
+        /// A  list of e-mail addresses referring to public tips and relationships that are also displayed on your profile
+        /// </summary>
+        [DisplayName("Synced Profiles")]
+        public string SyncedProfilesSelected
+        {
+            get => string.Join(STD_DELIM, SyncedProfiles);
+            set => SyncedProfiles = value.Split(STD_DELIM[0]).ToList();
+        }
+
+        [NotMapped, Display(Name = "Synced Profiles")]
+        public List<string> SyncedProfiles { get; set; } = new List<string>();
+
         [DisplayName("Label Options")]
         public string LabelOptions
         {

@@ -194,6 +194,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801151725418_InitialCreate.cs" />
+    <Compile Include="Migrations\201801151725418_InitialCreate.Designer.cs">
+      <DependentUpon>201801151725418_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803291451369_AddSyncedProfiles.cs" />
+    <Compile Include="Migrations\201803291451369_AddSyncedProfiles.Designer.cs">
+      <DependentUpon>201803291451369_AddSyncedProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotANote.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\Hero.cs" />
@@ -467,6 +476,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801151725418_InitialCreate.resx">
+      <DependentUpon>201801151725418_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803291451369_AddSyncedProfiles.resx">
+      <DependentUpon>201803291451369_AddSyncedProfiles.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
