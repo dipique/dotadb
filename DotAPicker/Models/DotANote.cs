@@ -92,6 +92,12 @@ namespace DotAPicker.Models
         /// a tip that isn't very intuitive.
         /// </summary>
         public string Source { get; set; }
+
+        /// <summary>
+        /// This is so controller methods can mark tips & relationships as uneditable from the user interface
+        /// </summary>
+        [NotMapped]
+        public bool Editable { get; set; } = false;
     }
 
     public enum TipType
