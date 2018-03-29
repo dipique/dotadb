@@ -72,19 +72,28 @@ namespace DotAPicker.Controllers
               .Concat(GetHeroOptions(intSelection));
         }
 
-        public Hero GetHeroByID(int id)
+        public Hero GetHeroByID(int heroID)
         {
-            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == id) ?? CurrentUser.Heroes.FirstOrDefault();
-            if (hero == null) return hero;
-            hero.Relationships = db.Relationships.Where(r => r.UserId == CurrentUser.Id)
-                                                 .Where(r => r.HeroObjectId == id ||
-                                                             r.HeroSubjectId == id ||
+            var hero = CurrentUser.Heroes.FirstOrDefault(h => h.Id == heroID);
+            if (hero == null) return new Hero();
+
+            //get synced profile IDs and whether they will allow editing
+            var profiles = db.Users.Where(u => CurrentUser.SyncedProfiles.Contains(u.Name) || u.Name == CurrentUser.Name)
+                                   .ToDictionary(u => u.Id, u => u.ProfileType == ProfileTypes.Public 
+                                                              || (CurrentUser.IsAuthenticated && u.Id == CurrentUser.Id));
+
+            hero.Relationships = db.Relationships.Where(r => profiles.ContainsKey(r.UserId))
+                                                 .Where(r => r.HeroObjectId == heroID ||
+                                                             r.HeroSubjectId == heroID ||
                                                              hero.Labels.Contains(r.LabelSubject) ||
-                                                             hero.Labels.Contains(r.LabelObject))
+                                                             hero.Labels.Contains(r.LabelObject)).ToList()   //bring into memory
+                                                 .Select(r => { r.Editable = profiles[r.UserId]; return r; })
                                                  .ToList();
-            hero.Tips = db.Tips.Where(t => t.UserId == CurrentUser.Id)
-                               .Where(r => r.HeroSubjectId == id ||
-                                           hero.Labels.Contains(r.LabelSubject))
+
+            hero.Tips = db.Tips.Where(t => profiles.ContainsKey(t.UserId))
+                               .Where(t => t.HeroSubjectId == heroID ||
+                                           hero.Labels.Contains(t.LabelSubject)).ToList()
+                               .Select(t => { t.Editable = profiles[t.UserId]; return t; })
                                .ToList();
             return hero;
         }
