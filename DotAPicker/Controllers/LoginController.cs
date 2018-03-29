@@ -91,7 +91,7 @@ namespace DotAPicker.Controllers
 
             //make sure not duplicate username/e-mail
             var user = viewModel.ToUser();
-            if (db.Users.Any(u => u.Email == user.Email || u.Name == user.Name))
+            if (db.Users.Any(u => u.Email == user.Email || u.Name == user.Name || u.Name == user.Email))
                 return View(viewModel).Error("This name or e-mail address has already been taken.");
 
             //make sure the profile to copy exists

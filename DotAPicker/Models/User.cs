@@ -122,13 +122,13 @@ namespace DotAPicker.Models
         public bool ShowDeprecatedRelationships { get; set; } = false;
 
         /// <summary>
-        /// A  list of e-mail addresses referring to public tips and relationships that are also displayed on your profile
+        /// A  list of usernames addresses referring to public tips and relationships that are also displayed on your profile
         /// </summary>
         [DisplayName("Synced Profiles")]
         public string SyncedProfilesSelected
         {
             get => string.Join(STD_DELIM, SyncedProfiles);
-            set => SyncedProfiles = value.Split(STD_DELIM[0]).ToList();
+            set => SyncedProfiles = (value ?? string.Empty).Split(STD_DELIM[0]).ToList();
         }
 
         [NotMapped, Display(Name = "Synced Profiles")]
@@ -138,7 +138,7 @@ namespace DotAPicker.Models
         public string LabelOptions
         {
             get => string.Join(STD_DELIM, Labels);
-            set => Labels = value.Split(STD_DELIM[0]).ToList();
+            set => Labels = (value ?? string.Empty).Split(STD_DELIM[0]).ToList();
         }
 
         [NotMapped, Display(Name = "Description Labels")]
@@ -149,7 +149,7 @@ namespace DotAPicker.Models
         public virtual List<Relationship> Relationships { get; set; } = new List<Relationship>();
 
         public static User DefaultUser => new User() {
-            Name = "default",
+            Name = DEFAULT_USER,
             IsAuthenticated = false,
             Unloaded = true,
             ProfileType = ProfileTypes.ReadOnly

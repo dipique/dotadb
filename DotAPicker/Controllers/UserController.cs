@@ -33,6 +33,7 @@ namespace DotAPicker.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
+            ViewBag.ProfileOptions = GetShareableProfileEmails().ToList();
             return RedirectToAction("Register", "Login");
             //return View(new User());
         }
@@ -70,6 +71,8 @@ namespace DotAPicker.Controllers
             {
                 if (id == null) return RedirectToAction(nameof(Index)).Error("That user ID wasn't found.");
             }
+
+            ViewBag.ProfileOptions = GetShareableProfileEmails().ToList();
             return View(user);
         }
 
@@ -89,6 +92,7 @@ namespace DotAPicker.Controllers
             CurrentUser.ShowDeprecatedTips = user.ShowDeprecatedTips;
             CurrentUser.CurrentPatch = user.CurrentPatch;
             CurrentUser.ProfileType = user.ProfileType;
+            CurrentUser.SyncedProfilesSelected = user.SyncedProfilesSelected;
             db.Entry(CurrentUser).State = EntityState.Modified;
 
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
@@ -132,7 +136,9 @@ namespace DotAPicker.Controllers
 
             //Success, go back to default profile
             CurrentUser = null;
-            return RedirectToAction(nameof(Index)).Success("User profile deleted.");
+            return RedirectToAction("Index", "Hero").Success("User profile deleted.");
         }
+
+        public IQueryable<string> GetShareableProfileEmails() => db.Users.Where(u => u.ProfileType != ProfileTypes.Private).Select(u => u.Name);
     }
 }
