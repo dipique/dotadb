@@ -16,6 +16,11 @@ namespace DotAPicker.Controllers
         {
             ViewBag.SelectedHeroID = TempData["SelectedHeroID"];
             TempData["SelectedHeroID"] = null;
+
+            //Write out some data for debugging purposes
+            Console.WriteLine($"User: {CurrentUser.Name} - Auth: {CurrentUser.IsAuthenticated}");
+            Console.WriteLine($"Objects: Users: {db.Users.Count()} - Heroes: {db.Heroes.Count()} - Tips: {db.Tips.Count()}");
+
             return GetItems(nameof(Hero.Name), SortDirections.Ascending, null);
         }
 
