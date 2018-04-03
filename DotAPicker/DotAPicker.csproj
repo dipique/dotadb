@@ -195,13 +195,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803291712249_InitialCreate.cs" />
-    <Compile Include="Migrations\201803291712249_InitialCreate.Designer.cs">
-      <DependentUpon>201803291712249_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803292134050_AddSyncedProfiles.cs" />
-    <Compile Include="Migrations\201803292134050_AddSyncedProfiles.Designer.cs">
-      <DependentUpon>201803292134050_AddSyncedProfiles.cs</DependentUpon>
+    <Compile Include="Migrations\201804022158371_initial.cs" />
+    <Compile Include="Migrations\201804022158371_initial.Designer.cs">
+      <DependentUpon>201804022158371_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotANote.cs" />
@@ -388,6 +384,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="App_Data\chosen-all-files.zip" />
+    <Content Include="connections.Debug.config" />
+    <Content Include="connections.Release.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -450,9 +448,6 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="connections.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Shared\Popdown.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
@@ -479,11 +474,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803291712249_InitialCreate.resx">
-      <DependentUpon>201803291712249_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803292134050_AddSyncedProfiles.resx">
-      <DependentUpon>201803292134050_AddSyncedProfiles.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804022158371_initial.resx">
+      <DependentUpon>201804022158371_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

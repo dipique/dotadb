@@ -60,7 +60,13 @@
         <div class="hor-data-row row">
             <div class="hor-data-cell col-xs-2">@Html.DisplayFor(Model => Model.Hero.Tips[x].Type)</div>
             <div class="hor-data-cell col-xs-3">@Html.DisplayFor(Model => Model.Hero.Tips[x].SubjectName)</div>
-            <div class="hor-data-cell col-xs-7">@(thisTip.UserId == Model.Hero.UserId ? thisTip.Source : $"Shared Profile: {thisTip.ProfileName}")</div>
+            <div class="hor-data-cell col-xs-7">
+                @(thisTip.UserId == Model.Hero.UserId ? string.Empty : $"Shared Profile: {thisTip.ProfileName} ")
+                @if (thisTip.SourceIsLink)
+                {
+                    <a target='_blank' href='@thisTip.Source'>source</a>
+                }
+            </div>
         </div>
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="col-xs-11">
@@ -113,7 +119,13 @@
             <div class="hor-data-cell col-xs-2">@r.Type</div>
             <div class="hor-data-cell col-xs-3">@r.SubjectName</div>
             <div class="hor-data-cell col-xs-3">@r.ObjectName</div>
-            <div class="hor-data-cell col-xs-4">@(r.UserId == Model.Hero.UserId ? r.Source : $"Shared Profile: {r.ProfileName}")</div>
+            <div class="hor-data-cell col-xs-4">
+                @(r.UserId == Model.Hero.UserId ? string.Empty : $"Shared Profile: {r.ProfileName} ")
+                @if (r.SourceIsLink)
+                {
+                    <a target='_blank' href='@r.Source'>source</a>
+                }
+            </div>
         </div>
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="col-xs-11">

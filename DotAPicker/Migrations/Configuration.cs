@@ -9,8 +9,7 @@ namespace DotAPicker.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "DotAPicker.DAL.DotAContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(DotAPicker.DAL.DotAContext context)

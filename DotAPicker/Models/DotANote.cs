@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -92,6 +93,10 @@ namespace DotAPicker.Models
         /// a tip that isn't very intuitive.
         /// </summary>
         public string Source { get; set; }
+
+        [NotMapped]
+        public bool SourceIsLink => !string.IsNullOrEmpty(Source)
+                                 && new Regex(@"^((http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?)$").IsMatch(Source);
 
         /// <summary>
         /// This is so controller methods can mark tips & relationships as uneditable from the user interface

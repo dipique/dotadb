@@ -7,13 +7,13 @@ namespace DotAPicker.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddSyncedProfiles : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddSyncedProfiles));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803292134050_AddSyncedProfiles"; }
+            get { return "201804022158371_initial"; }
         }
         
         string IMigrationMetadata.Source
