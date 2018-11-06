@@ -192,6 +192,7 @@ namespace DotAPicker.Controllers
                 if (item == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that tip... and I'm not sure how that's possible.");
 
                 //update the fields
+                item.Type = model.Type;
                 item.Patch = model.Patch;
                 item.HeroSubjectId = model.HeroSubjectId;
                 item.Text = model.Text;
@@ -250,6 +251,7 @@ namespace DotAPicker.Controllers
                 if (item == null) return RedirectToAction(nameof(Index)).Error("Umm. I couldn't find that relationship... and I'm not sure how that's possible.");
 
                 //update the fields
+                item.Type = model.Type;
                 item.Patch = model.Patch;
                 item.HeroSubjectId = model.HeroSubjectId;
                 item.HeroObjectId = model.HeroObjectId;
