@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="DotAPicker.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="5" osVersion="*" schemaVersion="2015-04.2.6">
   <Role name="DotAPicker">
-    <Certificates>
-      <Certificate name="zeroCert"
-          thumbprint="8EE464548CF13594FBB361BD4CD5CD7C76DEA667"
-          thumbprintAlgorithm="sha1" />
-    </Certificates>
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=dotapad;AccountKey=$(_dotapad.key_)" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=http;AccountName=dotapad;AccountKey=$(_dotapad.key_)" />
       <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" value="e7280897-3711-4a08-a19d-d738ae999c1e" />
     </ConfigurationSettings>
   </Role>
