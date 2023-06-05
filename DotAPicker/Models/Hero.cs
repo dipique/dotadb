@@ -12,10 +12,10 @@ namespace DotAPicker.Models
         public string Name { get; set; }
 
         [DisplayName("Alt. Names")]
-        public string AltNames { get; set; } //can be searched as well so that, for example, BS can find Bloodseeker
+        public string AltNames { get; set; } = string.Empty; //can be searched as well so that, for example, BS can find Bloodseeker
 
         [DataType(DataType.MultilineText)]
-        public string Notes { get; set; }
+        public string Notes { get; set; } = string.Empty;
         public HeroPreference Preference { get; set; } = HeroPreference.Indifferent;
 
         public string NameSet => $"{Name}{User.STD_DELIM}{AltNames}{User.STD_DELIM}{Initials}";

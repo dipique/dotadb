@@ -106,24 +106,7 @@ namespace DotAPicker.DAL
     public class DotAInitializer : CreateDatabaseIfNotExists<DotAContext> //DropCreateDatabaseIfModelChanges<DotAContext> //DropCreateDatabaseAlways <DotAContext>
     {
         public void ReSeed(DotAContext db) => Seed(db);
-
-        protected override void Seed(DotAContext db)
-        {
-            var users = new List<User> {
-                new User { Name = User.DEFAULT_USER,
-                           Email = "default@user.com",
-                           CurrentPatch = "7.11",
-                           ShowDeprecatedRelationships = false,
-                           ShowDeprecatedTips = false,
-                           LabelOptions = "Pusher|Nuker|Support|Disabler|Pure Damage|Agility|DoT|Strength|Intelligence|Carry|Melee|Ranged",
-                           ProfileType = ProfileTypes.ReadOnly
-                },
-            };
-            users.First().SetNewPassword("password");
-
-            users.ForEach(u => db.Users.Add(u));
-            db.SaveChanges(true);
-        }
+        protected override void Seed(DotAContext db) => SeedData.Seed(db);
     }
 
     public static class DotADBTools
