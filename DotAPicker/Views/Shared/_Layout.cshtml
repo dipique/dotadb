@@ -76,8 +76,8 @@
                 @if (user != null)
                 {
                     <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
-                        <li style="color: azure; padding-right: 5px;">user:</li>
-                        <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline;" })</li>
+                        <li style="color: azure; padding-right: 5px; line-height: 20px;">user:</li>
+                        <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline; padding-left: 0" })</li>
                     </ul>
                 }
             </div>
