@@ -16,9 +16,9 @@ namespace DotAPicker.Models
         public string CurrentPatch { get; set; }
         public bool ShowDeprecatedTips { get; set; }
         public bool ShowDeprecatedRelationships { get; set; }
-        public ProfileCopy(User user, bool includeNotes = true): base(user)
+        public ProfileCopy(User user, bool includeNotes = true, bool includeHeroPreference = false): base(user)
         {
-            Heroes.AddRange(user.Heroes.Select(h => new _Hero(h)));
+            Heroes.AddRange(user.Heroes.Select(h => new _Hero(h, includeHeroPreference)));
             if (includeNotes)
             {
                 Tips.AddRange(user.Tips.Select(t => new _Tip(t)));
@@ -49,7 +49,7 @@ namespace DotAPicker.Models
         public HeroPreference Preference { get; set; }
         public List<string> DescriptionLabels { get; set; } = new List<string>();
 
-        public _Hero(Hero hero): base(hero) { }
+        public _Hero(Hero hero, bool includeHeroPreference = false) : base(hero) { if (!includeHeroPreference) Preference = HeroPreference.Indifferent; }
         public _Hero() { }
     }
 
@@ -57,7 +57,7 @@ namespace DotAPicker.Models
     {
         [NotFromCopy]
         public string Subject { get; set; }
-        public TipType Type { get; set; }
+        public NoteType Type { get; set; }
         public string Text { get; set; }
         public string Patch { get; set; }
         public bool Deprecated { get; set; }
