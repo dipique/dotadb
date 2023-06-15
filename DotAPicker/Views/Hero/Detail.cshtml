@@ -42,7 +42,7 @@
             @if (Model.SignedIn && Model.Hero != null)
             {
             <div class="link-padding">
-                <a href="javascript:void(0)" class="create-link create-tip" title="New Tip" />
+                <a href="javascript:void(0)" class="create-link create-tip" title="New Tip"></a>
             </div>
             }
         </div>
@@ -68,7 +68,7 @@
             @if (Model.SignedIn)
             {
                 <div class="link-padding col-xs-1">
-                    <a class="edit-link edit-tip" href="javascript:void(0)" id="@Model.Hero.Tips[x].Id" title="Edit Tip" />
+                    <a class="edit-link edit-tip" href="javascript:void(0)" id="@Model.Hero.Tips[x].Id" title="Edit Tip"></a>
                     @Html.ActionLink("(delete)", "Delete", "Tip", new { id = Model.Hero.Tips[x].Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Tip" })
                 </div>
             }
@@ -78,7 +78,7 @@
     {
         <div class="hor-data-row row" style="border-bottom: inset">
             <div class="hor-data-cell col-xs-12" style="border-bottom: inset">
-                This hero doesn't have any tips yet.
+                <span>This hero doesn't have any tips yet.</span>
                 @if (Model.SignedIn)
                 {
                     @Html.ActionLink("Click here to add one!", "Create", "Tip", new { heroID = Model.Hero.Id, returnToHeroList = true }, new { title = "New Tip" })
@@ -93,7 +93,7 @@
             <div class="link-padding">
                 @if (Model.SignedIn)
                 {
-                    <a href="javascript:void(0)" class="create-link create-relationship" title="New Relationship" />
+                    <a href="javascript:void(0)" class="create-link create-relationship" title="New Relationship"></a>
                 }
             </div>
         </div>
@@ -121,7 +121,7 @@
             @if (Model.SignedIn)
             {
                 <div class="link-padding col-xs-1">
-                    <a class="edit-link edit-relationship" href="javascript:void(0)" id="@r.Id" title="Edit Relationship" />
+                    <a class="edit-link edit-relationship" href="javascript:void(0)" id="@r.Id" title="Edit Relationship"></a>
                     @Html.ActionLink("(delete)", "Delete", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Relationship" })
                 </div>
             }
