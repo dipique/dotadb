@@ -3,10 +3,11 @@
 @model DotANoteViewModel<Tip>
 
 @{
-    ViewBag.Title = "Tip";
+    ViewBag.Title = Model.TypeName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+    var anyOutdated = Model.Notes.Any(n => n.Patch != Model.CurrentPatch);
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
@@ -14,11 +15,11 @@
 <script src="~/Scripts/chosen.jquery.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
-<h1>Tips</h1>
+<h1>@(Model.TypeName)s</h1>
 
 @if (signedIn)
 {
-    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Tip" })
+    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = $"New {Model.TypeName}" })
 }
 
 <div class="col-xs-12">
@@ -26,15 +27,15 @@
         <input type="text" class="text-search" id="nameFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
     </div>
     <div class="col-xs-3">
-        <select multiple data-placeholder="Search by tip type" id="typeFilter" class="form-control" onchange="filterFunction()">
-            @foreach (var option in TipType.Other.AsSelectList()) //a clumsy way of getting a list of values and display names
+        <select multiple data-placeholder="Search by @Model.GetName(lowerCase: true) type" id="typeFilter" class="form-control" onchange="filterFunction()">
+            @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), Model.Type))
             {
-                <option value="@option.Text">@option.Text</option>
+                <option value="@option">@option</option>
             }
         </select>
     </div>
     <div class="col-xs-7">
-        <input type="text" class="text-search" id="textFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search tip text..." />
+        <input type="text" class="text-search" id="textFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search @Model.GetName(lowerCase: true) text..." />
     </div>
 </div>
 
@@ -47,34 +48,38 @@
         <div class="header-cell col-xs-8">Text</div>
     </div>
     <div id="filterTable">
-        @foreach (var tip in Model.Notes)
+        @foreach (var note in Model.Notes)
         {
             <div class="data-row">
                 <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
-                    @tip.SubjectName
+                    @note.SubjectName
                     @if (signedIn)
                     {
-                        <div class="link-padding">
-                            @Html.ActionLink("(edit)", "Edit", new { id = tip.Id }, new { @class = "edit-link", title = "Edit Tip" })
-                            @Html.ActionLink("(delete)", "Delete", new { id = tip.Id }, new { @class = "delete-link", title = "Delete Tip" })
-                            @if (tip.Patch != Model.CurrentPatch)
+                        <div class="link-padding" style="float:right">
+                            @Html.ActionLink("(edit)", "Edit", new { id = note.Id }, new { @class = "edit-link", title = $"Edit {Model.TypeName}" })
+                            @Html.ActionLink("(delete)", "Delete", new { id = note.Id }, new { @class = "delete-link", title = $"Delete {Model.TypeName}" })
+                            @if (note.Patch != Model.CurrentPatch)
                             {
-                                <a class="upgrade-patch-link" href="/Tip/Upgrade/@tip.Id" title="Upgrade Tip (to latest patch)">
+                                <a class="upgrade-patch-link" href="/@Model.TypeName/Upgrade/@note.Id" title="Upgrade {Model.TypeName} (to latest patch)">
                                     <svg width="15px" height="15px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                                         <path fill="#000000" d="M256 29.816l-231 154v106.368l231-154 231 154V183.816zm0 128.043L105 259.783v90.283l151-101.925 151 101.925v-90.283zm0 112l-87 58.725v67.6l87-58 87 58v-67.6zm0 89.957l-87 58v64.368l87-58 87 58v-64.368z" />
                                     </svg>
                                 </a>
-                                
+
+                            }
+                            else if (anyOutdated)
+                            {
+                                <div style="height: 15px; width: 15px; display: inline-block"></div>
                             }
                         </div>
                     }
                 </div>
-                <div class="data-row-cell" style="display:none" id="nameValue">@tip.NameSet</div>
-                <div class="data-row-cell col-xs-1" id="typeValue">@tip.Patch</div>
+                <div class="data-row-cell" style="display:none" id="nameValue">@note.NameSet</div>
+                <div class="data-row-cell col-xs-1" id="patchValue">@note.Patch</div>
                 <div class="data-row-cell col-xs-1" id="typeValue">
-                    @Html.DisplayFor(m => m.Notes.First(t => t.Id == tip.Id).Type)
+                    @Html.DisplayFor(m => m.Notes.First(t => t.Id == note.Id).Type)
                 </div>
-                <div class="data-row-cell col-xs-8" id="textValue">@tip.Text</div>
+                <div class="data-row-cell col-xs-8" id="textValue">@note.Text</div>
             </div>
         }
     </div>

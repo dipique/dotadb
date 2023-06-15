@@ -7,6 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+    var anyOutdated = Model.Notes.Any(n => n.Patch != Model.CurrentPatch);
 }
 
 <link href="~/Content/chosen.css" rel="stylesheet" />
@@ -14,11 +15,11 @@
 <script src="~/Scripts/chosen.jquery.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
-<h1>Relationships</h1>
+<h1>@(Model.TypeName)s</h1>
 
 @if (signedIn)
 {
-    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Relationship" })
+    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = $"New {Model.TypeName}" })
 }
 
 <div class="col-xs-12">
@@ -68,7 +69,7 @@
                                 </a>
 
                             }
-                            else
+                            else if (anyOutdated)
                             {
                                 <div style="height: 15px; width: 15px; display: inline-block"></div>
                             }
@@ -79,7 +80,7 @@
                     @note.ObjectName
                 </div>
                 <div class="data-row-cell" style="display:none" id="nameValue">@note.NameSet</div>
-                <div class="data-row-cell col-xs-1" id="typeValue">@note.Patch</div>
+                <div class="data-row-cell col-xs-1" id="patchValue">@note.Patch</div>
                 <div class="data-row-cell col-xs-1" id="typeValue">
                     @Html.DisplayFor(m => Model.Notes.First(t => t.Id == note.Id).Type)
                 </div>

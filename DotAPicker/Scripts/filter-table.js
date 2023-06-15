@@ -1,9 +1,9 @@
-﻿//a filter set is a configuration object required for each filterTable. It must be a variable named "filterSet" accessible by filterFunction()
+﻿// a filter set is a configuration object required for each filterTable. It must be a variable named "filterSet" accessible by filterFunction()
 var sampleFilterSet = [[
-        "nameFilter",  //id of object with filter value
-        "multi",       //type of element with filter value (multi: multi-select, single: single-select, text: input box, row-index-exclusion)
-        "nameValue",   //id of header cells that contain the value
-        "inner"        //method of retrieving cell value (inner: inner HTML, select: select box option)
+        "nameFilter",  // id of object with filter value
+        "multi",       // type of element with filter value (multi: multi-select, single: single-select, text: input box, row-index-exclusion)
+        "nameValue",   // id of header cells that contain the value
+        "inner"        // method of retrieving cell value (inner: inner HTML, select: select box option)
     ], [
         "preferenceFilter",
         "single",
@@ -21,7 +21,7 @@ var sampleFilterSet = [[
         "inner"
     ], [
         "rowIdFilter",
-        "row-index-exclusion", //special kind of filter that excludes items based on an array of row IDs
+        "row-index-exclusion", // special kind of filter that excludes items based on an array of row IDs
         "row",
         "array"
     ]
