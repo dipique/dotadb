@@ -283,6 +283,7 @@
     <Content Include="img\hero\120px-Crystal_Maiden_icon.png" />
     <Content Include="img\hero\120px-Dark_Seer_icon.png" />
     <Content Include="img\hero\120px-Dark_Willow_icon.png" />
+    <Content Include="img\hero\120px-Dawnbreaker_icon.png" />
     <Content Include="img\hero\120px-Dazzle_icon.png" />
     <Content Include="img\hero\120px-Death_Prophet_icon.png" />
     <Content Include="img\hero\120px-Disruptor_icon.png" />
@@ -296,7 +297,9 @@
     <Content Include="img\hero\120px-Enchantress_icon.png" />
     <Content Include="img\hero\120px-Enigma_icon.png" />
     <Content Include="img\hero\120px-Faceless_Void_icon.png" />
+    <Content Include="img\hero\120px-Grimstroke_icon.png" />
     <Content Include="img\hero\120px-Gyrocopter_icon.png" />
+    <Content Include="img\hero\120px-Hoodwink_icon.png" />
     <Content Include="img\hero\120px-Huskar_icon.png" />
     <Content Include="img\hero\120px-Invoker_icon.png" />
     <Content Include="img\hero\120px-Io_icon.png" />
@@ -314,6 +317,8 @@
     <Content Include="img\hero\120px-Luna_icon.png" />
     <Content Include="img\hero\120px-Lycan_icon.png" />
     <Content Include="img\hero\120px-Magnus_icon.png" />
+    <Content Include="img\hero\120px-Marci_icon.png" />
+    <Content Include="img\hero\120px-Mars_icon.png" />
     <Content Include="img\hero\120px-Medusa_icon.png" />
     <Content Include="img\hero\120px-Meepo_icon.png" />
     <Content Include="img\hero\120px-Mirana_icon.png" />
@@ -322,6 +327,7 @@
     </Content>
     <Content Include="img\hero\120px-Monkey_King_icon.png" />
     <Content Include="img\hero\120px-Morphling_icon.png" />
+    <Content Include="img\hero\120px-Muerta_icon.png" />
     <Content Include="img\hero\120px-Naga_Siren_icon.png" />
     <Content Include="img\hero\120px-Nature%27s_Prophet_icon.png" />
     <Content Include="img\hero\120px-Necrophos_icon.png" />
@@ -335,6 +341,7 @@
     <Content Include="img\hero\120px-Phantom_Assassin_icon.png" />
     <Content Include="img\hero\120px-Phantom_Lancer_icon.png" />
     <Content Include="img\hero\120px-Phoenix_icon.png" />
+    <Content Include="img\hero\120px-Primal_Beast_icon.png" />
     <Content Include="img\hero\120px-Puck_icon.png" />
     <Content Include="img\hero\120px-Pudge_icon.png" />
     <Content Include="img\hero\120px-Pugna_icon.png" />
@@ -351,6 +358,7 @@
     <Content Include="img\hero\120px-Skywrath_Mage_icon.png" />
     <Content Include="img\hero\120px-Slardar_icon.png" />
     <Content Include="img\hero\120px-Slark_icon.png" />
+    <Content Include="img\hero\120px-Snapfire_icon.png" />
     <Content Include="img\hero\120px-Sniper_icon.png" />
     <Content Include="img\hero\120px-Spectre_icon.png" />
     <Content Include="img\hero\120px-Spirit_Breaker_icon.png" />
@@ -373,6 +381,7 @@
     <Content Include="img\hero\120px-Venomancer_icon.png" />
     <Content Include="img\hero\120px-Viper_icon.png" />
     <Content Include="img\hero\120px-Visage_icon.png" />
+    <Content Include="img\hero\120px-Void_Spirit_icon.png" />
     <Content Include="img\hero\120px-Warlock_icon.png" />
     <Content Include="img\hero\120px-Weaver_icon.png" />
     <Content Include="img\hero\120px-Windranger_icon.png" />
