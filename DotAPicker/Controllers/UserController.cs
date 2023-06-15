@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 using DotAPicker.DAL;
@@ -96,7 +94,7 @@ namespace DotAPicker.Controllers
                 return Index().Error("You're not allowed to that.");
             }
 
-            return RedirectToAction("Index").Success("Updated!");
+            return RedirectToAction("Index", "Hero").Success("Updated!");
         }
 
         public static bool IsUniqueUserName(User user, IEnumerable<User> users) => !users.Any(u => (user.Id <= 0 || user.Id != u.Id) 

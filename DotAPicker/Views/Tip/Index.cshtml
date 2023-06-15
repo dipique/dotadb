@@ -41,7 +41,8 @@
     <div class="data-row">
         <div class="header-cell col-xs-2" style="min-width: 175px">Subject Name</div>
         <div class="header-cell" style="display:none">Name Set</div>
-        <div class="header-cell col-xs-2">Type</div>
+        <div class="header-cell col-xs-1">Patch</div>
+        <div class="header-cell col-xs-1">Type</div>
         <div class="header-cell col-xs-8">Text</div>
     </div>
     <div id="filterTable">
@@ -59,7 +60,10 @@
                     }
                 </div>
                 <div class="data-row-cell" style="display:none" id="nameValue">@Model[x].NameSet</div>
-                <div class="data-row-cell col-xs-2" id="typeValue">
+                <div class="data-row-cell col-xs-1" id="typeValue">
+                    @Model[x].Patch
+                </div>
+                <div class="data-row-cell col-xs-1" id="typeValue">
                     @Html.DisplayFor(m => m.First(t => t.Id == Model[x].Id).Type)
                 </div>
                 <div class="data-row-cell col-xs-8" id="textValue">@Model[x].Text</div>
