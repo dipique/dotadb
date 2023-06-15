@@ -111,28 +111,27 @@ span.hor-more {
     display: none; /* hidden initially */
 }
 
-a.create-link {
-    background: url(../img/create.svg) no-repeat center center;
+a.create-link, a.delete-link, a.edit-link, a.upgrade-link {
     display: inline-block;
     width: 15px;
     height: 15px;
     text-indent: -9999px; /* hides link text */
+}
+
+a.create-link {
+    background: url(../img/create.svg) no-repeat center center;
 }
 
 a.delete-link {
     background: url(../img/delete.svg) no-repeat center center;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    text-indent: -9999px; /* hides link text */
 }
 
 a.edit-link {
     background: url(../img/edit.svg) no-repeat center center;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    text-indent: -9999px; /* hides link text */
+}
+
+a.upgrade-link {
+    background: url(../img/upgrade.svg) no-repeat center center;
 }
 
 .link-padding {

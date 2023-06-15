@@ -6,18 +6,20 @@ using System.Web.Mvc;
 
 using DotAPicker.DAL;
 using DotAPicker.Models;
+using DotAPicker.ViewModels;
 
 namespace DotAPicker.Controllers
 {
     public abstract class DotANoteContoller<T> : DotAController where T:DotANote, new()
     {
         // GET: Tip
-        public ActionResult Index() => View("Index", GetDbSet.Where(n => n.UserId == CurrentUser.Id).ToList());
+        public ActionResult Index() => View("Index", new DotANoteViewModel<T>(GetDbSet.Where(n => n.UserId == CurrentUser.Id).ToList(), CurrentUser.CurrentPatch));
 
         public DbSet<T> GetDbSet => (DbSet<T>)typeof(DotAContext).GetProperties()
                                                                  .Single(p => p.PropertyType.IsGenericType &&
                                                                               p.PropertyType.GenericTypeArguments[0] == typeof(T))
                                                                  .GetValue(db);
+
         public string TypeString => typeof(T).Name;
 
         public ActionResult Create(int heroID = -1, bool returnToHeroList = false)
@@ -91,6 +93,21 @@ namespace DotAPicker.Controllers
 
             TempData["SelectedHeroID"] = heroID;
             return RedirectToAction("Index", "Hero", new { }).Success($"{TypeString} deleted.");
+        }
+
+        // GET: Tip/Upgrade/5
+        public ActionResult Upgrade(int id)
+        {
+            var note = GetDbSet.FirstOrDefault(h => h.Id == id);
+            if (note == null) return Index().Error("Note not found.");
+
+            note.Patch = CurrentUser.CurrentPatch;
+            if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
+            {
+                return Index().Error("You're not allowed to that.");
+            }
+
+            return Index().Success($"{TypeString} upgraded to current patch.");
         }
     }
 }

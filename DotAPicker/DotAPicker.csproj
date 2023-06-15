@@ -224,6 +224,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DotANoteViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\PasswordResetViewModel.cs" />
@@ -397,6 +398,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="img\upgrade.svg" />
     <Content Include="Sample Data\default-dpexport-180320051612.xml" />
     <Content Include="Sample Data\dota.db" />
     <Content Include="Sample Data\labels.txt" />

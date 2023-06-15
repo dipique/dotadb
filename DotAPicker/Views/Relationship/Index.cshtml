@@ -1,5 +1,6 @@
 ﻿@using DotAPicker.Models
-@model List<Relationship>
+@using DotAPicker.ViewModels
+@model DotANoteViewModel<Relationship>
 
 @{
     ViewBag.Title = "Relationships";
@@ -43,31 +44,46 @@
         <div class="header-cell col-xs-2" style="min-width: 175px">Subject Name</div>
         <div class="header-cell col-xs-2" style="min-width: 175px">Object Name</div>
         <div class="header-cell" style="display:none">Name Set</div>
-        <div class="header-cell col-xs-2">Type</div>
+        <div class="header-cell col-xs-1">Patch</div>
+        <div class="header-cell col-xs-1">Type</div>
         <div class="header-cell col-xs-6">Text</div>
     </div>
     <div id="filterTable">
-        @for (int x = 0; x < Model.Count(); x++)
+        @foreach (var note in Model.Notes)
         {
             <div class="data-row">
                 <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
-                    @Model[x].SubjectName
+                    @note.SubjectName
                     @if (signedIn)
                     {
-                        <div class="link-padding">
-                            @Html.ActionLink("(edit)", "Edit", new { id = Model[x].Id }, new { @class = "edit-link", title = "Edit Tip" })
-                            @Html.ActionLink("(delete)", "Delete", new { id = Model[x].Id }, new { @class = "delete-link", title = "Delete Tip" })
+                        <div class="link-padding" style="float:right">
+                            @Html.ActionLink("(edit)", "Edit", new { id = note.Id }, new { @class = "edit-link", title = "Edit Relationship" })
+                            @Html.ActionLink("(delete)", "Delete", new { id = note.Id }, new { @class = "delete-link", title = "Delete Relationship" })
+                            @if (note.Patch != Model.CurrentPatch)
+                            {
+                                <a class="upgrade-patch-link" href="/Relationship/Upgrade/@note.Id" title="Upgrade Relationship (to latest patch)">
+                                    <svg width="15px" height="15px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#000000" d="M256 29.816l-231 154v106.368l231-154 231 154V183.816zm0 128.043L105 259.783v90.283l151-101.925 151 101.925v-90.283zm0 112l-87 58.725v67.6l87-58 87 58v-67.6zm0 89.957l-87 58v64.368l87-58 87 58v-64.368z" />
+                                    </svg>
+                                </a>
+
+                            }
+                            else
+                            {
+                                <div style="height: 15px; width: 15px; display: inline-block"></div>
+                            }
                         </div>
                     }
                 </div>
                 <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
-                    @Model[x].ObjectName
+                    @note.ObjectName
                 </div>
-                <div class="data-row-cell" style="display:none" id="nameValue">@Model[x].NameSet</div>
-                <div class="data-row-cell col-xs-2" id="typeValue">
-                    @Html.DisplayFor(m => m.First(t => t.Id == Model[x].Id).Type)
+                <div class="data-row-cell" style="display:none" id="nameValue">@note.NameSet</div>
+                <div class="data-row-cell col-xs-1" id="typeValue">@note.Patch</div>
+                <div class="data-row-cell col-xs-1" id="typeValue">
+                    @Html.DisplayFor(m => Model.Notes.First(t => t.Id == note.Id).Type)
                 </div>
-                <div class="data-row-cell col-xs-6" id="textValue">@Model[x].Text</div>
+                <div class="data-row-cell col-xs-6" id="textValue">@note.Text</div>
             </div>
         }
     </div>
@@ -94,6 +110,5 @@
         "text",
         "textValue",
         "inner"
-    ]
-    ];
+    ]];
 </script>
