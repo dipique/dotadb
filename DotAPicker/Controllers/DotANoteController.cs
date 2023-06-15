@@ -12,8 +12,11 @@ namespace DotAPicker.Controllers
 {
     public abstract class DotANoteContoller<T> : DotAController where T:DotANote, new()
     {
-        // GET: Tip
-        public ActionResult Index() => View("Index", new DotANoteViewModel<T>(GetDbSet.Where(n => n.UserId == CurrentUser.Id).ToList(), CurrentUser.CurrentPatch));
+        public ActionResult Index() => View("Index", new DotANoteViewModel<T>(
+            GetDbSet.Where(n => n.UserId == CurrentUser.Id)
+                    .Where(n => CurrentUser.ShowDeprecatedRelationships || !n.Deprecated)
+                    .ToList()
+        , CurrentUser.CurrentPatch));
 
         public DbSet<T> GetDbSet => (DbSet<T>)typeof(DotAContext).GetProperties()
                                                                  .Single(p => p.PropertyType.IsGenericType &&
@@ -64,9 +67,10 @@ namespace DotAPicker.Controllers
             if (model == null) return Index().Error("Some'n goofy happened, try again. Or, you know, don't.");
 
             GetDbSet.Attach(model);
+            db.Entry(model).State = EntityState.Modified;
             if (!db.SaveChangesB(CurrentUser.IsAuthenticated))
             {
-                return Index().Error("You're not allowed to that.");
+                return Index().Error("You're not allowed to do that.");
             }
 
             if (!returnToHeroList || model.HeroSubjectId == null) return Index().Success("Changes saved.");
