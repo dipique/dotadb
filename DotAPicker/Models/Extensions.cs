@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using System.Reflection;
+using System.ComponentModel;
 
 namespace DotAPicker.Models
 {
@@ -60,7 +61,7 @@ namespace DotAPicker.Models
                 members = members.Where(m => (m.GetCustomAttribute<ObjectAffiliation>()?.TypeName ?? affiliationType.Name) == affiliationType.Name);
             }
 
-            return members.Select(m => m.Name);
+            return members.Select(m => m.GetCustomAttribute<DisplayAttribute>()?.Name ?? m.Name);
         }
     }
 }

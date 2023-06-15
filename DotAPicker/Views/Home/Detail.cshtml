@@ -94,7 +94,7 @@
 
 @{
     //Relationships - counters
-    var relationships = Model.Hero.Relationships.Where(r => r.Type == TipType.Counter);
+    var relationships = Model.Hero.Relationships.Where(r => r.Type == NoteType.Counter);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 
@@ -160,7 +160,7 @@
 
 @{
     //Relationships - Synergies
-    relationships = Model.Hero.Relationships.Where(r => r.Type == TipType.Synergy);
+    relationships = Model.Hero.Relationships.Where(r => r.Type == NoteType.Synergy);
     remainder = relationships.Count() % COL_COUNT;
     fullRows = (relationships.Count() - remainder) / COL_COUNT;
 

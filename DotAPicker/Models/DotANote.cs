@@ -69,7 +69,7 @@ namespace DotAPicker.Models
 
         public virtual string NameSet => $"{HeroSubject?.Name}|{HeroSubject?.AltNames}|{LabelSubject}";
 
-        public TipType Type { get; set; } = TipType.Counter;
+        public NoteType Type { get; set; } = NoteType.Counter;
 
         [Required]
         [DataType(DataType.MultilineText)]
@@ -91,25 +91,23 @@ namespace DotAPicker.Models
         public string Source { get; set; }
     }
 
-    public enum TipType
+    public enum NoteType
     {
+        [ObjectAffiliation(nameof(Relationship))]
         Counter,
 
-        [ObjectAffiliation(nameof(Tip))]
         Strategy,
 
-        [ObjectAffiliation(nameof(Tip))]
         [Display(Name = "Item Build")]
         ItemBuild,
 
-        [ObjectAffiliation(nameof(Tip))]
         [Display(Name = "Ability Build")]
         AbilityBuild,
 
-        [ObjectAffiliation(nameof(Tip))]
         [Display(Name = "Abilty Use")]
         AbilityUse,
 
+        [ObjectAffiliation(nameof(Relationship))]
         Synergy,
 
         Other

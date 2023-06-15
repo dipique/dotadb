@@ -15,7 +15,7 @@
 <script src="~/Scripts/chosen.jquery.js"></script>
 <script src="~/Scripts/filter-table.js"></script>
 
-<h1>@(Model.TypeName)s</h1>
+<h1>@Model.GetName(plural: true)</h1>
 
 @if (signedIn)
 {
@@ -23,19 +23,19 @@
 }
 
 <div class="col-xs-12">
-    <div class="col-xs-2">
-        <input type="text" class="text-search" id="nameFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+    <div style="padding-left: 0; width: 250px; display: inline-block">
+        <input type="text" class="text-search" style="width: inherit" id="nameFilter" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
     </div>
-    <div class="col-xs-3">
-        <select multiple data-placeholder="Search by @Model.GetName(lowerCase: true) type" id="typeFilter" class="form-control" onchange="filterFunction()">
-            @foreach (string option in Extensions.GetEnumOptions(typeof(TipType), Model.Type))
+    <div style="width: 180px; vertical-align: top; display: inline-block">
+        <select multiple data-placeholder="Search by @Model.GetName(lowerCase: true) type" id="typeFilter" class="form-control" style="height: 30px" onchange="filterFunction()">
+            @foreach (string option in Extensions.GetEnumOptions(typeof(NoteType), Model.Type))
             {
                 <option value="@option">@option</option>
             }
         </select>
     </div>
-    <div class="col-xs-7">
-        <input type="text" class="text-search" id="textFilter" style="display:inline-block" onkeyup="filterFunction()" placeholder="Search @Model.GetName(lowerCase: true) text..." />
+    <div style="width: 250px; display: inline-block">
+        <input type="text" class="text-search" style="width: inherit" id="textFilter" onkeyup="filterFunction()" placeholder="Search @Model.GetName(lowerCase: true) text..." />
     </div>
 </div>
 
@@ -86,9 +86,7 @@
 </div>
 
 <script>
-    $("#typeFilter").chosen({
-        width: "300px"
-    });
+    $("#typeFilter").chosen({ height: '30px' });
 
     var filterSet = [[
         "nameFilter",
