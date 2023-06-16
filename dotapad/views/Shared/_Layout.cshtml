@@ -1,0 +1,97 @@
+﻿@using DotAPicker.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DotAPad, the Personal DotA Database</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="~/Scripts/util.js"></script>
+    <link href="~/Content/popdown.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Styles", false)
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+
+@{
+    var user = (User)Session["user"];
+    var signedIn = user != null && user.IsAuthenticated;
+    var signInText = user == null ? string.Empty
+                                    : $"{user.Name}{(user.IsAuthenticated ? string.Empty : " (anonymous)")}";
+    var userAction = signedIn ? "Edit" : "Details";
+}
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("DotAPad", (signedIn ? "Index" : "Login"), (signedIn ? "Home" : "Login"), new { area = "" }, new { @class = "navbar-brand" })                
+            </div>
+
+            <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Hero Picker", "Index", "Home")</li>
+                <li>@Html.ActionLink("Heroes", "Index", "Hero")</li>
+                <li>@Html.ActionLink("Tips", "Index", "Tip")</li>
+                <li>@Html.ActionLink("Relationships", "Index", "Relationship")</li>
+                <li>@Html.ActionLink("Dev Log", "Index", "DevLog")</li>
+            </ul>   
+                @if (signedIn)
+                {
+                    <ul class="navbar-nav navbar-right lo-navbar">
+                        <li>
+                            <div class="lo-dropdown">
+                                <button class="lo-dropbtn">
+                                    Settings
+                                    <i class="lo-fa lo-fa-caret-down"></i>
+                                </button>
+                                <div class="lo-dropdown-content">
+                                    @Html.ActionLink("Password Reset", "PasswordReset", "Settings")
+                                    @Html.ActionLink("Delete Profile", "DeleteProfile", "Settings")
+                                    @Html.ActionLink("Replace Profile", "ReplaceProfile", "Settings")
+                                    @Html.ActionLink("Export Profile", "ExportProfile", "Settings")
+                                    @Html.ActionLink("Import Profile", "ImportProfile", "Settings")
+                                    @Html.ActionLink("Import Labels", "ImportLabels", "Settings")
+                                </div>
+                            </div>                        
+                        </li>
+                        <li>@Html.ActionLink("Log out", "LogOut", "Login", null, null)</li>
+                    </ul>
+                } else
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li>@Html.ActionLink("Register", "Register", "Login")</li>
+                        <li>@Html.ActionLink("Log In", "Login", "Login")</li>
+                    </ul>
+                }
+
+                @if (user != null)
+                {
+                    <ul class="nav navbar-nav pull-right" style="padding: 15px 5px 15px 0px">
+                        <li style="color: azure; padding-right: 5px; line-height: 20px;">user:</li>
+                        <li style="color: pink">@Html.ActionLink(signInText, userAction, "User", new { id = user.Id }, new { @style = "color: pink; display: inline; padding-left: 0" })</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="popdown-view">
+        @Html.Partial("Popdown")
+    </div>
+
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Daniel Kaschel</p>
+    </footer>
+</body>
+</html>

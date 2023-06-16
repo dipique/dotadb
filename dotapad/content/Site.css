@@ -1,0 +1,221 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: small;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+tr .selected {
+    background-color: lightpink;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Instead of making a scrolling table, these are for divs to make a scrolling list */
+
+.scrolling-container {    
+    height: 600px;
+    position: relative;
+}
+
+.header-scrolling-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+.header-cell {
+    min-width: 100px; /* Header & data cell widths need to be coordinated if larger */
+    background-color: #f1f1f1;
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
+
+/* Hero detail formatting */
+.hor-title-header-row {
+    display:flex;
+}
+.hor-title-header-cell {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+    padding: 6px 9px 6px 9px; /* Add some padding (TRBL) */
+}
+
+.hor-data-row {
+    display: flex;
+}
+
+.hor-data-cell {
+    min-width: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px; /* Increase font-size */
+    padding: 3px 5px 3px 5px; /* Add some padding (TRBL) */
+    font-family: Arial;
+}
+
+#Hero_Notes {
+    min-height: 100px;
+}
+
+.add-ally, .add-enemy {
+    display: inline;
+}
+
+.hor-more .more {
+    display: none;
+}
+
+span.hor-more {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.allyDetail, .enemyDetail {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 6px;
+}
+
+.counter-row, .synergy-row, .tip-row {
+    border: none;
+    box-shadow: 0 2px 4px rgba(51, 51, 51, .25);
+    margin: 2px 2px;
+}
+
+.tip-header, .relationship-header {
+    text-decoration: underline;
+}
+
+.detail-column {
+    display: none; /* hidden initially */
+}
+
+a.create-link, a.delete-link, a.edit-link, a.upgrade-link {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px; /* hides link text */
+}
+
+a.create-link {
+    background: url(../img/create.svg) no-repeat center center;
+}
+
+a.delete-link {
+    background: url(../img/delete.svg) no-repeat center center;
+}
+
+a.edit-link {
+    background: url(../img/edit.svg) no-repeat center center;
+}
+
+a.upgrade-link {
+    background: url(../img/upgrade.svg) no-repeat center center;
+}
+
+.link-padding {
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/*Dropdown menu*/
+
+/* Navbar container */
+.lo-navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+}
+
+    /* Links inside the navbar */
+    .lo-navbar a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+/* The dropdown container */
+.lo-dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+    /* Dropdown button */
+    .lo-dropdown .lo-dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+    }
+
+    /* Add a red background color to navbar links on hover */
+    .navbar a:hover, .lo-dropdown:hover .lo-dropbtn {
+        background-color: gray;
+    }
+
+/* Dropdown content (hidden by default) */
+.lo-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    /* Links inside the dropdown */
+    .lo-dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+        /* Add a grey background color to dropdown links on hover */
+        .lo-dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+/* Show the dropdown menu on hover */
+.lo-dropdown:hover .lo-dropdown-content {
+    display: block;
+}
+
+/* Display the missing hero image on links to change it */
+.missing-hero-img {
+    background: url("/img/hero/120px-Missing_icon.png") no-repeat top left;
+    float: left;
+    margin: 0 3px 3px 2px;
+    width: 90px;
+    height: 51px;
+    text-indent: -9999px; /* hides link text */
+}

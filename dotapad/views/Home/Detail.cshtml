@@ -1,0 +1,227 @@
+﻿@using DotAPicker.Models;
+@using DotAPicker.ViewModels;
+@using DotAPicker.Utilities;
+@model HeroViewModel
+
+<div class="hor-data-row">
+    <div class="hor-data-cell" style="border: none;">
+        @{ 
+            var missingImage = Model.MissingImage;
+            if (missingImage)
+            {
+                <img alt="Image" src="@HeroViewModel.MissingImgName" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+            }
+            else
+            {
+                <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51"> 
+            }
+        }
+        <strong>@Model.Hero.Name</strong> 
+        <a class="detail-remove delete-link" href="javascript: void(0)" id="@Model.Hero.Id" title="Remove from Selection">
+            (remove)
+        </a>
+        <br />
+        @Model.Hero.Notes
+    </div>
+</div>
+
+
+@{  //Tips
+
+    //Tips are in 3-column sets, so we start by figuring out how many columns/rows we'll have
+    const int COL_COUNT = 3;
+    int remainder = Model.Hero.Tips.Count() % COL_COUNT; //if this isn't 0, we'll need to deal with the missing column
+    int fullRows = (Model.Hero.Tips.Count() - remainder) / COL_COUNT;
+
+    //The loop unit is rows, and we need an extra row for remainders
+    int loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
+
+    if (loopCount > 0)
+    { 
+        //opening div for the tip section
+        <div class="hor-data-row tip-row"><div class="hor-data-cell" style="border:none">        
+            @{
+                //create each row
+                for (int x = 0; x < loopCount; x++)
+                {
+                    //opening div
+                    <div class="type hor-data-row">
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var tip = @Model.Hero.Tips.Skip(x * COL_COUNT).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="tip-header">
+                                    @tip.Type.GetDisplayName()
+                                </div>                            
+                                <p>@tip.Text</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                tip = @Model.Hero.Tips.Skip(x * COL_COUNT + 1).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="tip-header">
+                                        @tip.Type.GetDisplayName()
+                                    </div>
+                                    <p>@tip.Text</p>
+                                </div>
+                            }
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                tip = @Model.Hero.Tips.Skip(x * COL_COUNT + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="tip-header">
+                                        @tip.Type.GetDisplayName()
+                                    </div>
+                                    <p>@tip.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }        
+        </div></div>
+    }
+}
+
+@{
+    //Relationships - counters
+    var relationships = Model.Hero.Relationships.Where(r => r.Type == NoteType.Counter);
+    remainder = relationships.Count() % COL_COUNT;
+    fullRows = (relationships.Count() - remainder) / COL_COUNT;
+
+    //The loop unit is rows, and we need an extra row for remainders
+    loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
+
+    if (loopCount > 0)
+    {
+        //opening div for the tip section
+        <div class="hor-data-row counter-row"><div class="hor-data-cell" style="border:none"> 
+            <strong>Counters</strong>
+            @{
+                //create each row
+                for (int x = 0; x < loopCount; x++)
+                {
+                    //opening div
+                    <div class="type hor-data-row">
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var r = relationships.Skip(x * COL_COUNT).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="relationship-header">
+                                    @($"{r.SubjectName}->{r.ObjectName}")
+                                </div>                            
+                                <p>@r.Text</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 1).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @($"{r.SubjectName}->{r.ObjectName}")
+                                    </div>
+                                    <p>@r.Text</p>
+                                </div>
+                            }
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @($"{r.SubjectName}->{r.ObjectName}")
+                                    </div>
+                                    <p>@r.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div></div>
+    }
+}
+
+@{
+    //Relationships - Synergies
+    relationships = Model.Hero.Relationships.Where(r => r.Type == NoteType.Synergy);
+    remainder = relationships.Count() % COL_COUNT;
+    fullRows = (relationships.Count() - remainder) / COL_COUNT;
+
+    //The loop unit is rows, and we need an extra row for remainders
+    loopCount = fullRows;
+    if (remainder > 0)
+    {
+        loopCount++;
+    }
+
+    if (loopCount > 0)
+    {
+        //opening div for the tip section
+        <div class="hor-data-row synergy-row">
+            <div class="hor-data-cell" style="border:none">
+                <strong>Synergies</strong>
+                @{
+                    //create each row
+                    for (int x = 0; x < loopCount; x++)
+                    {
+                        //opening div
+                        <div class="type hor-data-row">
+                        @{
+                            //first column
+                            bool partialRow = fullRows <= x;
+                            var r = relationships.Skip(x * COL_COUNT).Take(1).First();
+                            <div class="hor-data-cell" style="border:none">
+                                <div class="relationship-header">
+                                    @($"{r.SubjectName}->{r.ObjectName}")
+                                </div>                            
+                                <p>@r.Text</p>
+                            </div>
+
+                            //second column
+                            if (!partialRow || remainder == 2)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 1).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @($"{r.SubjectName}->{r.ObjectName}")
+                                    </div>
+                                    <p>@r.Text</p>
+                                </div>
+                            }
+
+                            //third column
+                            if (!partialRow)
+                            {
+                                r = relationships.Skip(x * COL_COUNT + 2).Take(1).First();
+                                <div class="hor-data-cell" style="border:none">
+                                    <div class="relationship-header">
+                                        @($"{r.SubjectName}->{r.ObjectName}")
+                                    </div>
+                                    <p>@r.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

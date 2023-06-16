@@ -1,0 +1,378 @@
+﻿@using DotAPicker.Models
+@using DotAPicker.ViewModels
+@model TableViewModel<Hero>
+
+@{
+    ViewBag.Title = "Hero Picker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+}
+
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<link href="~/Content/filter-table.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
+
+<div class="container-fluid" style="min-width: 1366px; margin-left: 20px;">
+    <div class="row">
+        @*Title*@
+        <div class="col-xs-3">
+            <h1>DotA Hero Picker</h1>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Instructions</a>
+    </div>
+    <div class="info col-xs-5" style="display: none">
+        <div>
+            <p>
+                This is the picking screen where you can choose 5 allies and 5 enemies so you can see all the notes you spent all that time writing.
+            </p>
+            <p>
+                You can search by name, preference, and any labels you assigned. When you find the hero you were looking for, click the "allies" or "enemies" link to add them. 
+            </p>
+            <p>
+                <strong>Tip:</strong> From the hero name search box, you can add the top hero to enemies by pressing Enter, or to allies by pressing Shift-Enter.
+            </p>
+            <p>
+                Once added, you can remove a hero by clicking the red X next to the hero name. But... do it gently. Heroes have feelings, too.
+            </p>
+            <p>
+                Lastly, if you're wondering why this app is so ugly, it's because I suck at this front end shit. Sorry about that. Believe it or not even this took me a pretty long time.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var infoShown = false;
+        function toggleInfo() {
+            if (infoShown) {
+                $(".info").hide();
+            } else {
+                $(".info").show();
+            }
+            infoShown = !infoShown;
+        }
+    </script>
+
+    <div class="row">
+        @*Filter section*@
+        <div class="col-xs-11">
+            <div class="row">
+                <div class="col-xs-3" style="min-width: 200px; max-width: 200px">
+                    <input class="text-search" type="text" id="nameFilter" placeholder="Search by hero name..." />
+                </div>
+                <div class="col-xs-1" style="min-width: 50px; max-width: 50px"></div>
+                <div class="col-xs-3" style="min-width: 250px; max-width: 250px">
+                    <select multiple data-placeholder="Search by hero preference" id="typeFilter" onchange="filterFunctionAfterArrayUpdate()">
+                        @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-xs-1" style="min-width: 25px; max-width: 25px"></div>
+                <div class="col-xs-3" style="min-width: 250px; max-width: 250px">
+                    <select multiple data-placeholder="Search by label" id="labelFilter" onchange="filterChange()">
+                        @foreach (string option in Model.Items.SelectMany(i => i.DescriptionLabels).Distinct())
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4" style="min-width: 440px; max-width: 440px"><h4>Hero List</h4></div>
+        <div class="col-xs-4 detail-column" style="margin-left: 10px;"><h4>Allies</h4></div>
+        <div class="col-xs-4 detail-column"><h4>Enemies</h4></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4" style="min-width: 440px; max-width: 440px; margin-right: 10px;">
+            @{
+                var viewModel = new TableConstructorViewModel<Hero>()
+                {
+                    SignedIn = signedIn,
+                    Items = Model.Items,
+                    Columns = new List<TableColumn<Hero>>() {
+                                new TableColumn<Hero>(nameof(Hero.Name), minWidth: 175, sortable: false), //no sortable fields since it clears pick values atm                                
+                                new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "nameValue"),
+                                new TableColumn<Hero>(nameof(Hero.Labels), display: false, valueID: "labelValue"),
+                                new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", sortable: false, dropDownSettings: new DropDownSettings() {
+                                    DropdownClass = "hero-pref",
+                                    RequiresSignIn = true
+                                }),
+                                new TableColumn<Hero>(null, header: "Add to...", minWidth: 140, valueID: "addTo", rawHTML: "<a href=\"\" class=\"add-ally\">(allies)</a> <a href=\"\" class=\"add-enemy\">(enemies)</a>")
+                            }
+                };
+
+                //Set the sort field, if applicable
+                var sortColumn = viewModel.Columns.FirstOrDefault(c => c.Property.Name == Model.SortField);
+                if (sortColumn != null)
+                {
+                    sortColumn.SortDirection = Model.SortDirection;
+                }
+
+                Html.RenderPartial("HeroTable", viewModel);
+            }
+
+        </div>
+        <div class="col-xs-4">
+            @*Ally Section*@
+            <div class="allyDetails detail-column" id="allyDetails">
+                <div class="allyDetail" id="ad1"></div>
+                <div class="allyDetail" id="ad2"></div>
+                <div class="allyDetail" id="ad3"></div>
+                <div class="allyDetail" id="ad4"></div>
+                <div class="allyDetail" id="ad5"></div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            @*Enemy Section*@
+            <div class="enemyDetails detail-column" id="enemyDetails">
+                <div class="enemyDetail" id="ed1"></div>
+                <div class="enemyDetail" id="ed2"></div>
+                <div class="enemyDetail" id="ed3"></div>
+                <div class="enemyDetail" id="ed4"></div>
+                <div class="enemyDetail" id="ed5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var infoShown = false;
+    function toggleInfo() {
+        if (infoShown) {
+            $(".info").hide();
+        } else {
+            $(".info").show();
+        }
+        infoShown = !infoShown;
+    }
+
+    var filterSet = [[
+        "nameFilter",
+        "text",
+        "nameValue",
+        "inner"
+    ], [
+        "labelFilter",
+        "multi-value",
+        "labelValue",
+        "inner"
+    ], [
+        "typeFilter",
+        "multi",
+        "typeValue",
+        @(signedIn ? Html.Raw("\"select\"") : Html.Raw("\"inner\""))
+    ], [
+        "chosenArray",
+        "row-index-exclusion",
+        "row",
+        "array"
+    ]
+    ];
+
+    $("#labelFilter").chosen({
+        width: "250px"
+    });
+
+    var allyArray = [-1, -1, -1, -1, -1];
+    var enemyArray = [-1, -1, -1, -1, -1];
+    var chosenArray = [];
+
+    function updateChosenArray() {
+        var chosenSet = new Set();
+        allyArray.forEach(function (value) {
+            if (value > -1) {
+                chosenSet.add(value)
+            }
+        });
+        enemyArray.forEach(function (value) {
+            if (value > -1) {
+                chosenSet.add(value)
+            }
+        });
+        chosenArray = Array.from(chosenSet);
+    }
+
+    function filterFunctionAfterArrayUpdate() {
+        updateChosenArray();
+        filterFunction();
+    }
+
+    function filterChange() {
+        filterFunction();
+    }
+
+
+    //Register keyboard events
+    $('#nameFilter').keyup(function (e) {
+        //alert(e.keyCode);
+        //if enter is pressed
+        if (e.keyCode == 13) {
+            //if shift key is pressed (meaning ally add)
+            if (e.shiftKey) {
+                //if there's at least one open slot for an ally
+                if (nextAllyIndex() != -1) {
+                    //if there's a valid hero ID selected
+                    var i = firstVisibleItemIndex();
+                    if (i != -1) {
+                        //Add to the list of allies
+                        addAlly(i);
+                    }
+                }
+            } else {  //Add to enemies
+                //if there's at least one open slot for an enemy
+                if (nextEnemyIndex() != -1) {
+                    //if there's a valid hero ID selected
+                    var i = firstVisibleItemIndex();
+                    if (i != -1) {
+                        //Add to the list of enemies
+                        addEnemy(i);
+                    }
+                }
+
+            }
+        } else {
+            //if enter wasn't pushed, just filter the table
+            filterFunctionAfterArrayUpdate();
+        }
+    });
+
+    $("#typeFilter").chosen({
+        width: "250px"
+    });
+
+    $(".add-ally").click(function () {
+        addAlly(this.parentElement.parentElement.id);
+        return false;
+    });
+    $(".add-enemy").click(function () {
+        addEnemy(this.parentElement.parentElement.id);
+        return false;
+    });
+
+    $("div").on("click", ".detail-remove", function () {
+        //remove the details
+        this.parentElement.parentElement.parentElement.innerHTML = "";
+
+        //clear that element in the array so a new hero can be added
+        var heroID = this.id;
+        removeHeroFromArray(heroID);
+
+        //refresh selection list to re-add the hero
+        filterFunctionAfterArrayUpdate();
+
+        //hide the detail columns if there are no more details to show
+        if (noSelectedHeroes()) {
+            $("div.detail-column").each(function () {
+                this.style.display = "none";
+            });
+        }
+    });
+
+    function removeHeroFromArray(heroID)
+    {
+        for (var x = 0; x < 5; x++) {
+            //check for matching ally index
+            if (allyArray[x] == heroID) {
+                allyArray[x] = -1;
+                break;
+            }
+
+            //check for matching enemy index
+            if (enemyArray[x] == heroID) {
+                enemyArray[x] = -1;
+                break;
+            }
+        }
+    }
+
+    function nextAllyIndex() {
+        for (var x = 0; x < 5; x++) {
+            if (allyArray[x] == -1) {
+                return x;
+            }
+        }
+
+        //if no indices are available...
+        return -1;
+    }
+
+    function nextEnemyIndex() {
+        for (var x = 0; x < 5; x++) {
+            if (enemyArray[x] == -1) {
+                return x;
+            }
+        }
+
+        //if no indices are available...
+        return -1;
+    }
+
+    function addAlly(id) {
+        var index = nextAllyIndex();
+        var selector = ".allyDetails #ad" + (index + 1);
+        $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
+        allyArray[index] = id;
+
+        //clear search and make sure it doesn't appear on the list anymore
+        resetSearch();
+
+        //make the section visible if it isn't currently
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
+    }
+
+    function addEnemy(id) {
+        var index = nextEnemyIndex();
+        var selector = ".enemyDetails #ed" + (index + 1);
+        $(selector).load('@Url.Action("Detail", "Home")?id=' + id);
+        enemyArray[index] = id;
+
+        //clear search and make sure it doesn't appear on the list anymore
+        resetSearch();
+
+        //make the section visible if it isn't currently
+        $("div.detail-column").each(function () {
+            this.style.display = "block";
+        });
+    }
+
+    function resetSearch() {
+        //reset the hero search text
+        $("#nameFilter").val("");
+        filterFunctionAfterArrayUpdate();
+
+        //if keeping the preference means there aren't any results, reset it as well
+        if (countVisibleItems() < 1 && getEl("typeFilter").selectedIndex >= 0) { //no heros, but preferences are chosen
+            $("#typeFilter option").prop('selected', false).trigger('chosen:updated');
+            filterFunctionAfterArrayUpdate();
+        }
+    }
+
+    function noSelectedHeroes() {
+        for (var x = 0; x < 5; x++) {
+            if (enemyArray[x] != -1) {
+                return false;
+            }
+        }
+
+        for (var x = 0; x < 5; x++) {
+            if (allyArray[x] != -1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    $(".hero-pref").change(function () {
+        $('.popdown-view').load('home/UpdatePreference?heroID=' + this.id + '&preference=' + this.options[this.selectedIndex].text);
+    });
+</script>

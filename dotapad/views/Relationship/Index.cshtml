@@ -1,0 +1,112 @@
+﻿@using DotAPicker.Models
+@using DotAPicker.ViewModels
+@model DotANoteViewModel<Relationship>
+
+@{
+    ViewBag.Title = "Relationships";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+    var anyOutdated = Model.Notes.Any(n => n.Patch != Model.CurrentPatch);
+}
+
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<link href="~/Content/filter-table.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
+
+<h1>@Model.GetName(plural: true)</h1>
+
+@if (signedIn)
+{
+    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = $"New {Model.TypeName}" })
+}
+
+<div class="col-xs-12">
+    <div style="padding-left: 0; width: 250px; display: inline-block">
+        <input type="text" class="text-search" style="width: inherit" id="nameFilter" onkeyup="filterFunction()" placeholder="Search hero or label name..." />
+    </div>
+    <div style="width: 180px; vertical-align: top; display: inline-block">
+        <select multiple data-placeholder="Search by @Model.GetName(lowerCase: true) type" id="typeFilter" class="form-control" style="height: 30px" onchange="filterFunction()">
+            @foreach (string option in Extensions.GetEnumOptions(typeof(NoteType), Model.Type))
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+    <div style="width: 250px; display: inline-block">
+        <input type="text" class="text-search" style="width: inherit" id="textFilter" onkeyup="filterFunction()" placeholder="Search @Model.GetName(lowerCase: true) text..." />
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="data-row">
+        <div class="header-cell col-xs-2" style="min-width: 175px">Subject Name</div>
+        <div class="header-cell col-xs-2" style="min-width: 175px">Object Name</div>
+        <div class="header-cell" style="display:none">Name Set</div>
+        <div class="header-cell col-xs-1">Patch</div>
+        <div class="header-cell col-xs-1">Type</div>
+        <div class="header-cell col-xs-6">Text</div>
+    </div>
+    <div id="filterTable">
+        @foreach (var note in Model.Notes)
+        {
+            <div class="data-row">
+                <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
+                    @note.SubjectName
+                    @if (signedIn)
+                    {
+                        <div class="link-padding" style="float:right">
+                            @Html.ActionLink("(edit)", "Edit", new { id = note.Id }, new { @class = "edit-link", title = $"Edit {Model.TypeName}" })
+                            @Html.ActionLink("(delete)", "Delete", new { id = note.Id }, new { @class = "delete-link", title = $"Delete {Model.TypeName}" })
+                            @if (note.Patch != Model.CurrentPatch)
+                            {
+                                <a class="upgrade-patch-link" href="/@Model.TypeName/Upgrade/@note.Id" title="Upgrade {Model.TypeName} (to latest patch)">
+                                    <svg width="15px" height="15px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#000000" d="M256 29.816l-231 154v106.368l231-154 231 154V183.816zm0 128.043L105 259.783v90.283l151-101.925 151 101.925v-90.283zm0 112l-87 58.725v67.6l87-58 87 58v-67.6zm0 89.957l-87 58v64.368l87-58 87 58v-64.368z" />
+                                    </svg>
+                                </a>
+
+                            }
+                            else if (anyOutdated)
+                            {
+                                <div style="height: 15px; width: 15px; display: inline-block"></div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="data-row-cell col-xs-2" style="min-width: 175px" id="heroName">
+                    @note.ObjectName
+                </div>
+                <div class="data-row-cell" style="display:none" id="nameValue">@note.NameSet</div>
+                <div class="data-row-cell col-xs-1" id="patchValue">@note.Patch</div>
+                <div class="data-row-cell col-xs-1" id="typeValue">
+                    @Html.DisplayFor(m => Model.Notes.First(t => t.Id == note.Id).Type)
+                </div>
+                <div class="data-row-cell col-xs-6" id="textValue">@note.Text</div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $("#typeFilter").chosen();
+
+    //filterSet object that configures the filterTable
+    var filterSet = [[
+        "nameFilter",
+        "text",
+        "nameValue",
+        "inner"
+    ], [
+        "typeFilter",
+        "multi",
+        "typeValue",
+        "inner"
+    ], [
+        "textFilter",
+        "text",
+        "textValue",
+        "inner"
+    ]];
+</script>

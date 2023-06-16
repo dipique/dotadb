@@ -1,0 +1,39 @@
+﻿@model DotAPicker.ViewModels.UploadHeroImageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upload Hero Image</h2>
+
+<p>
+    Upload a hero image. You can only do this if one doesn't already exist--not just for you, but for anyone. Because I don't want to host y'all's pron collection. Has to be a 120x68 PNG too. Because I can, and it doesn't take a lot of power to get to my head.
+</p>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PostedFile, new { type = "file", @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.HeroID);
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload Hero Image" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

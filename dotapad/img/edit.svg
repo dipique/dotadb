@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="Layer_1" inkscape:export-filename="C:\Users\HernanS\Desktop\bet_one1.png" inkscape:export-xdpi="59.880001" inkscape:export-ydpi="59.880001" inkscape:version="0.48.4 r9939" sodipodi:docname="bet_one.svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:ns1="http://sozi.baierouge.fr" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 47.9 48"
+	 style="enable-background:new 0 0 47.9 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#BF0000;}
+	.st1{fill:url(#polygon8104_1_);}
+	.st2{fill:url(#polygon8117_1_);}
+	.st3{fill:url(#polygon8138_1_);}
+	.st4{fill:url(#polygon8155_1_);}
+	.st5{fill:url(#polyline8174_1_);}
+	.st6{fill:url(#polyline8193_1_);}
+	.st7{opacity:0.6;}
+	.st8{fill:url(#polygon8234_1_);}
+	.st9{fill:url(#polygon8241_1_);}
+	.st10{opacity:0.3;}
+	.st11{fill:url(#polygon8250_1_);}
+	.st12{fill:url(#polygon8257_1_);}
+	.st13{opacity:0.4;}
+	.st14{fill:url(#path8280_1_);}
+	.st15{fill:url(#polygon8289_1_);}
+	.st16{fill:url(#polygon8296_1_);}
+	.st17{fill:url(#polygon8305_1_);}
+	.st18{fill:url(#polygon8312_1_);}
+	.st19{fill-opacity:0;}
+	.st20{opacity:8.700000e-03;fill:#FEFEFE;enable-background:new    ;}
+	.st21{opacity:1.740000e-02;fill:#FDFDFD;enable-background:new    ;}
+	.st22{opacity:2.610000e-02;fill:#FCFCFC;enable-background:new    ;}
+	.st23{opacity:3.480000e-02;fill:#FBFBFB;enable-background:new    ;}
+	.st24{opacity:4.350000e-02;fill:#FAFAFA;enable-background:new    ;}
+	.st25{opacity:5.220000e-02;fill:#F9F9F9;enable-background:new    ;}
+	.st26{opacity:6.090000e-02;fill:#F8F8F8;enable-background:new    ;}
+	.st27{opacity:6.960000e-02;fill:#F7F7F7;enable-background:new    ;}
+	.st28{opacity:7.830000e-02;fill:#F6F6F6;enable-background:new    ;}
+	.st29{opacity:8.700000e-02;fill:#F5F5F5;enable-background:new    ;}
+	.st30{opacity:9.570000e-02;fill:#F4F4F4;enable-background:new    ;}
+	.st31{opacity:0.1043;fill:#F3F3F3;enable-background:new    ;}
+	.st32{opacity:0.113;fill:#F2F2F2;enable-background:new    ;}
+	.st33{opacity:0.1217;fill:#F1F1F1;enable-background:new    ;}
+	.st34{opacity:0.1304;fill:#F0F0F0;enable-background:new    ;}
+	.st35{opacity:0.1391;fill:#EFEFEF;enable-background:new    ;}
+	.st36{opacity:0.1478;fill:#EEEEEE;enable-background:new    ;}
+	.st37{opacity:0.1565;fill:#EDEDED;enable-background:new    ;}
+	.st38{opacity:0.1652;fill:#ECECEC;enable-background:new    ;}
+	.st39{opacity:0.1739;fill:#EBEBEB;enable-background:new    ;}
+	.st40{opacity:0.1826;fill:#EAEAEA;enable-background:new    ;}
+	.st41{opacity:0.1913;fill:#E9E9E9;enable-background:new    ;}
+	.st42{opacity:0.2;fill:#E8E8E8;enable-background:new    ;}
+	.st43{opacity:0.2087;fill:#E7E7E7;enable-background:new    ;}
+	.st44{opacity:0.2174;fill:#E6E6E6;enable-background:new    ;}
+	.st45{opacity:0.2261;fill:#E5E5E5;enable-background:new    ;}
+	.st46{opacity:0.2348;fill:#E4E4E4;enable-background:new    ;}
+	.st47{opacity:0.2435;fill:#E3E3E3;enable-background:new    ;}
+	.st48{opacity:0.2522;fill:#E2E2E2;enable-background:new    ;}
+	.st49{opacity:0.2609;fill:#E1E1E1;enable-background:new    ;}
+	.st50{opacity:0.2696;fill:#E0E0E0;enable-background:new    ;}
+	.st51{opacity:0.2783;fill:#DFDFDF;enable-background:new    ;}
+	.st52{opacity:0.287;fill:#DEDEDE;enable-background:new    ;}
+	.st53{opacity:0.2957;fill:#DDDDDD;enable-background:new    ;}
+	.st54{opacity:0.3043;fill:#DCDCDC;enable-background:new    ;}
+	.st55{opacity:0.313;fill:#DBDBDB;enable-background:new    ;}
+	.st56{opacity:0.3217;fill:#DADADA;enable-background:new    ;}
+	.st57{opacity:0.3304;fill:#D9D9D9;enable-background:new    ;}
+	.st58{opacity:0.3391;fill:#D8D8D8;enable-background:new    ;}
+	.st59{opacity:0.3478;fill:#D7D7D7;enable-background:new    ;}
+	.st60{opacity:0.3565;fill:#D6D6D6;enable-background:new    ;}
+	.st61{opacity:0.3652;fill:#D5D5D5;enable-background:new    ;}
+	.st62{opacity:0.3739;fill:#D4D4D4;enable-background:new    ;}
+	.st63{opacity:0.3826;fill:#D3D3D3;enable-background:new    ;}
+	.st64{opacity:0.3913;fill:#D2D2D2;enable-background:new    ;}
+	.st65{opacity:0.4;fill:#D1D1D1;enable-background:new    ;}
+	.st66{opacity:0.4087;fill:#D0D0D0;enable-background:new    ;}
+	.st67{opacity:0.4174;fill:#CFCFCF;enable-background:new    ;}
+	.st68{opacity:0.4261;fill:#CECECE;enable-background:new    ;}
+	.st69{opacity:0.4348;fill:#CDCDCD;enable-background:new    ;}
+	.st70{opacity:0.4435;fill:#CCCCCC;enable-background:new    ;}
+	.st71{opacity:0.4522;fill:#CBCBCB;enable-background:new    ;}
+	.st72{opacity:0.4609;fill:#CACACA;enable-background:new    ;}
+	.st73{opacity:0.4696;fill:#C9C9C9;enable-background:new    ;}
+	.st74{opacity:0.4783;fill:#C8C8C8;enable-background:new    ;}
+	.st75{opacity:0.487;fill:#C7C7C7;enable-background:new    ;}
+	.st76{opacity:0.4957;fill:#C6C6C6;enable-background:new    ;}
+	.st77{opacity:0.5043;fill:#C5C5C5;enable-background:new    ;}
+	.st78{opacity:0.513;fill:#C4C4C4;enable-background:new    ;}
+	.st79{opacity:0.5217;fill:#C3C3C3;enable-background:new    ;}
+	.st80{opacity:0.5304;fill:#C2C2C2;enable-background:new    ;}
+	.st81{opacity:0.5391;fill:#C1C1C1;enable-background:new    ;}
+	.st82{opacity:0.5478;fill:#C0C0C0;enable-background:new    ;}
+	.st83{opacity:0.5565;fill:#BFBFBF;enable-background:new    ;}
+	.st84{opacity:0.5652;fill:#BEBEBE;enable-background:new    ;}
+	.st85{opacity:0.5739;fill:#BDBDBD;enable-background:new    ;}
+	.st86{opacity:0.5826;fill:#BCBCBC;enable-background:new    ;}
+	.st87{opacity:0.5913;fill:#BBBBBB;enable-background:new    ;}
+	.st88{opacity:0.6;fill:#BABABA;enable-background:new    ;}
+	.st89{opacity:0.6087;fill:#B9B9B9;enable-background:new    ;}
+	.st90{opacity:0.6174;fill:#B8B8B8;enable-background:new    ;}
+	.st91{opacity:0.6261;fill:#B7B7B7;enable-background:new    ;}
+	.st92{opacity:0.6348;fill:#B6B6B6;enable-background:new    ;}
+	.st93{opacity:0.6435;fill:#B5B5B5;enable-background:new    ;}
+	.st94{opacity:0.6522;fill:#B4B4B4;enable-background:new    ;}
+	.st95{opacity:0.6609;fill:#B3B3B3;enable-background:new    ;}
+	.st96{opacity:0.6696;fill:#B2B2B2;enable-background:new    ;}
+	.st97{opacity:0.6783;fill:#B1B1B1;enable-background:new    ;}
+	.st98{opacity:0.687;fill:#B0B0B0;enable-background:new    ;}
+	.st99{opacity:0.6957;fill:#AFAFAF;enable-background:new    ;}
+	.st100{opacity:0.7043;fill:#AEAEAE;enable-background:new    ;}
+	.st101{opacity:0.713;fill:#ADADAD;enable-background:new    ;}
+	.st102{opacity:0.7217;fill:#ACACAC;enable-background:new    ;}
+	.st103{opacity:0.7304;fill:#ABABAB;enable-background:new    ;}
+	.st104{opacity:0.7391;fill:#AAAAAA;enable-background:new    ;}
+	.st105{opacity:0.7478;fill:#A9A9A9;enable-background:new    ;}
+	.st106{opacity:0.7565;fill:#A8A8A8;enable-background:new    ;}
+	.st107{opacity:0.7652;fill:#A7A7A7;enable-background:new    ;}
+	.st108{opacity:0.7739;fill:#A6A6A6;enable-background:new    ;}
+	.st109{opacity:0.7826;fill:#A5A5A5;enable-background:new    ;}
+	.st110{opacity:0.7913;fill:#A4A4A4;enable-background:new    ;}
+	.st111{opacity:0.8;fill:#A3A3A3;enable-background:new    ;}
+	.st112{opacity:0.8087;fill:#A2A2A2;enable-background:new    ;}
+	.st113{opacity:0.8174;fill:#A1A1A1;enable-background:new    ;}
+	.st114{opacity:0.8261;fill:#A0A0A0;enable-background:new    ;}
+	.st115{opacity:0.8348;fill:#9F9F9F;enable-background:new    ;}
+	.st116{opacity:0.8435;fill:#9E9E9E;enable-background:new    ;}
+	.st117{opacity:0.8522;fill:#9D9D9D;enable-background:new    ;}
+	.st118{opacity:0.8609;fill:#9C9C9C;enable-background:new    ;}
+	.st119{opacity:0.8696;fill:#9B9B9B;enable-background:new    ;}
+	.st120{opacity:0.8783;fill:#9A9A9A;enable-background:new    ;}
+	.st121{opacity:0.887;fill:#999999;enable-background:new    ;}
+	.st122{opacity:0.8957;fill:#989898;enable-background:new    ;}
+	.st123{opacity:0.9043;fill:#979797;enable-background:new    ;}
+	.st124{opacity:0.913;fill:#969696;enable-background:new    ;}
+	.st125{opacity:0.9217;fill:#959595;enable-background:new    ;}
+	.st126{opacity:0.9304;fill:#949494;enable-background:new    ;}
+	.st127{opacity:0.9391;fill:#939393;enable-background:new    ;}
+	.st128{opacity:0.9478;fill:#929292;enable-background:new    ;}
+	.st129{opacity:0.9565;fill:#919191;enable-background:new    ;}
+	.st130{opacity:0.9652;fill:#909090;enable-background:new    ;}
+	.st131{opacity:0.9739;fill:#8F8F8F;enable-background:new    ;}
+	.st132{opacity:0.9826;fill:#8E8E8E;enable-background:new    ;}
+	.st133{opacity:0.9913;fill:#8D8D8D;enable-background:new    ;}
+	.st134{fill:#8C8C8C;}
+</style>
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview10589" inkscape:current-layer="Layer_1" inkscape:cx="314.27829" inkscape:cy="127.63919" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="745" inkscape:window-maximized="1" inkscape:window-width="1304" inkscape:window-x="54" inkscape:window-y="-8" inkscape:zoom="1.0934588" objecttolerance="10" pagecolor="#ffffff" showgrid="false">
+	</sodipodi:namedview>
+<g id="g20007" transform="translate(157.51 -199.03)">
+	<path id="path8083" inkscape:connector-curvature="0" class="st0" d="M-110,207.8c2.3-2.4-5.8-10.7-8.3-8.3c-2.1,2.1-5,5-5,5
+		l8.3,8.3C-115,212.8-112.2,209.9-110,207.8L-110,207.8z"/>
+	
+		<linearGradient id="polygon8104_1_" gradientUnits="userSpaceOnUse" x1="-129.561" y1="48.0394" x2="-117.8441" y2="48.0394" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+		<stop  offset="0" style="stop-color:#3F3F3F"/>
+		<stop  offset="0.3315" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.5281" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.6854" style="stop-color:#333333"/>
+		<stop  offset="0.8427" style="stop-color:#A4A4A4"/>
+		<stop  offset="0.8705" style="stop-color:#9A9A9A"/>
+		<stop  offset="0.9192" style="stop-color:#7D7D7D"/>
+		<stop  offset="0.9826" style="stop-color:#4E4E4E"/>
+		<stop  offset="1" style="stop-color:#3F3F3F"/>
+	</linearGradient>
+	<polygon id="polygon8104" class="st1" points="-126.3,207.5 -118.1,215.8 -113,210.8 -121.3,202.5 	"/>
+	
+		<linearGradient id="polygon8117_1_" gradientUnits="userSpaceOnUse" x1="-129.5539" y1="7.246" x2="-117.8441" y2="7.246" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+		<stop  offset="0" style="stop-color:#E4BD96"/>
+		<stop  offset="0.2303" style="stop-color:#D59658"/>
+		<stop  offset="0.5" style="stop-color:#E4BD96"/>
+		<stop  offset="0.7753" style="stop-color:#D59658"/>
+		<stop  offset="1" style="stop-color:#E4BD96"/>
+	</linearGradient>
+	<polygon id="polygon8117" class="st2" points="-155,244.4 -146.3,227.4 -138,235.7 	"/>
+	
+		<linearGradient id="polygon8138_1_" gradientUnits="userSpaceOnUse" x1="-125.6584" y1="1.5578" x2="-121.2184" y2="1.9477" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+		<stop  offset="0" style="stop-color:#191919"/>
+		<stop  offset="0.3708" style="stop-color:#666666"/>
+		<stop  offset="0.3921" style="stop-color:#565656"/>
+		<stop  offset="0.4356" style="stop-color:#3B3B3B"/>
+		<stop  offset="0.4857" style="stop-color:#252525"/>
+		<stop  offset="0.5443" style="stop-color:#161616"/>
+		<stop  offset="0.6166" style="stop-color:#0D0D0D"/>
+		<stop  offset="0.7181" style="stop-color:#060606"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</linearGradient>
+	<polygon id="polygon8138" class="st3" points="-155,244.4 -148.5,241.1 -151.7,237.9 	"/>
+	<g id="g8140">
+		
+			<linearGradient id="polygon8155_1_" gradientUnits="userSpaceOnUse" x1="-123.5576" y1="45.3983" x2="-123.5576" y2="10.9336" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+			<stop  offset="0" style="stop-color:#FFFF00"/>
+			<stop  offset="0.1047" style="stop-color:#FFEC00"/>
+			<stop  offset="0.2571" style="stop-color:#FFD800"/>
+			<stop  offset="0.4309" style="stop-color:#FFCA00"/>
+			<stop  offset="0.6427" style="stop-color:#FFC200"/>
+			<stop  offset="1" style="stop-color:#FFBF00"/>
+		</linearGradient>
+		<polygon id="polygon8155" class="st4" points="-123.2,209.4 -134.8,220.9 -145,231.2 -145.4,231.3 -145.8,231.7 -145.8,235.5 
+			-142.1,235.5 -141.7,234.5 -131.5,224.2 -119.9,212.7 -121.4,211.1 		"/>
+		
+			<linearGradient id="polyline8174_1_" gradientUnits="userSpaceOnUse" x1="-119.6084" y1="12.9418" x2="-119.6084" y2="45.3983" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+			<stop  offset="0" style="stop-color:#FFBF00"/>
+			<stop  offset="2.020000e-02" style="stop-color:#F2B407"/>
+			<stop  offset="0.128" style="stop-color:#BC8712"/>
+			<stop  offset="0.2457" style="stop-color:#946818"/>
+			<stop  offset="0.3747" style="stop-color:#78531A"/>
+			<stop  offset="0.521" style="stop-color:#67461B"/>
+			<stop  offset="0.6993" style="stop-color:#5D3F1B"/>
+			<stop  offset="1" style="stop-color:#5A3D1B"/>
+		</linearGradient>
+		<polyline id="polyline8174" class="st5" points="-142.8,235.6 -138,235.7 -127.7,225.4 -117.4,215.1 -119.9,212.7 -131.5,224.2 
+			-142.9,235.6 		"/>
+		
+			<linearGradient id="polyline8193_1_" gradientUnits="userSpaceOnUse" x1="-127.7649" y1="13.359" x2="-127.7649" y2="45.4054" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+			<stop  offset="0" style="stop-color:#FFBF00"/>
+			<stop  offset="2.020000e-02" style="stop-color:#F2B407"/>
+			<stop  offset="0.128" style="stop-color:#BC8712"/>
+			<stop  offset="0.2457" style="stop-color:#946818"/>
+			<stop  offset="0.3747" style="stop-color:#78531A"/>
+			<stop  offset="0.521" style="stop-color:#67461B"/>
+			<stop  offset="0.6993" style="stop-color:#5D3F1B"/>
+			<stop  offset="1" style="stop-color:#5A3D1B"/>
+		</linearGradient>
+		<polyline id="polyline8193" class="st6" points="-145,231.2 -134.8,220.9 -123.2,209.4 -125.7,206.9 -136,217.1 -146.3,227.4 
+			-145.8,232.1 		"/>
+	</g>
+	<g id="g8227" class="st7">
+		
+			<linearGradient id="polygon8234_1_" gradientUnits="userSpaceOnUse" x1="1055.3536" y1="386.8673" x2="1061.4636" y2="386.8673" gradientTransform="matrix(-0.6676 -1.350000e-02 -3.080000e-02 1.5277 574.4719 -341.1671)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8234" class="st8" points="-142,235.4 -145.8,235.5 -145.8,235.5 -142,235.8 		"/>
+		
+			<linearGradient id="polygon8241_1_" gradientUnits="userSpaceOnUse" x1="-505.3189" y1="466.9951" x2="-499.1989" y2="466.9951" gradientTransform="matrix(0.6676 1.350000e-02 3.080000e-02 -1.5277 180.9528 955.8531)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8241" class="st9" points="-138.2,235.7 -138.2,235.6 -142,235.4 -142,235.8 		"/>
+	</g>
+	<g id="g8243" class="st10">
+		
+			<linearGradient id="polygon8250_1_" gradientUnits="userSpaceOnUse" x1="236.3916" y1="724.9259" x2="242.5016" y2="724.9259" gradientTransform="matrix(2.680000e-02 0.6979 -1.5269 5.860000e-02 954.5923 23.9466)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8250" class="st11" points="-145.7,231.4 -145.7,235.4 -145.8,235.4 -146.2,231.4 		"/>
+		
+			<linearGradient id="polygon8257_1_" gradientUnits="userSpaceOnUse" x1="314.5401" y1="129.0493" x2="320.6501" y2="129.0493" gradientTransform="matrix(-2.680000e-02 -0.6979 1.5269 -5.860000e-02 -334.5776 458.4994)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8257" class="st12" points="-146.1,227.4 -146.1,227.4 -145.7,231.4 -146.2,231.4 		"/>
+	</g>
+	<g id="g8259" class="st13">
+		
+			<linearGradient id="path8280_1_" gradientUnits="userSpaceOnUse" x1="-123.7906" y1="57.9086" x2="-123.7906" y2="55.8186" gradientTransform="matrix(0.7071 0.7071 0.7071 -0.7071 -66.1956 330.5816)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="0.1075" style="stop-color:#FAFAFA"/>
+			<stop  offset="0.2312" style="stop-color:#ECECEC"/>
+			<stop  offset="0.363" style="stop-color:#D5D5D5"/>
+			<stop  offset="0.5005" style="stop-color:#B5B5B5"/>
+			<stop  offset="0.6425" style="stop-color:#8B8B8B"/>
+			<stop  offset="0.7882" style="stop-color:#585858"/>
+			<stop  offset="0.9342" style="stop-color:#1D1D1D"/>
+			<stop  offset="1" style="stop-color:#000000"/>
+		</linearGradient>
+		<path id="path8280" inkscape:connector-curvature="0" class="st14" d="M-117.7,199.5c0.5,1.2,2.3,2.9,3.5,4c1.2,1.2,2.9,3,4.1,3.5
+			c0.3-1-1.1-3.5-2.6-5C-114.3,200.6-116.7,199.2-117.7,199.5L-117.7,199.5z"/>
+	</g>
+	<g id="g8282" class="st7">
+		
+			<linearGradient id="polygon8289_1_" gradientUnits="userSpaceOnUse" x1="-57.6373" y1="301.1234" x2="-51.5273" y2="301.1234" gradientTransform="matrix(0.7208 0.7218 2.8534 -2.8493 -939.384 1110.7095)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8289" class="st15" points="-122,211.4 -117.5,215.2 -117.5,215.1 -121.4,210.8 		"/>
+		
+			<linearGradient id="polygon8296_1_" gradientUnits="userSpaceOnUse" x1="607.142" y1="552.2716" x2="613.2521" y2="552.2716" gradientTransform="matrix(-0.7208 -0.7218 -2.8534 2.8493 1891.7887 -924.2236)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8296" class="st16" points="-125.6,206.8 -125.8,207 -122,211.4 -121.4,210.9 		"/>
+	</g>
+	<g id="g8298" class="st7">
+		
+			<linearGradient id="polygon8305_1_" gradientUnits="userSpaceOnUse" x1="676.5721" y1="468.1149" x2="682.6821" y2="468.1149" gradientTransform="matrix(-0.7208 -0.7218 -2.8534 2.8493 1706.2087 -638.8235)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8305" class="st17" points="-116.9,206.3 -121.4,202.5 -121.4,202.6 -117.5,206.9 		"/>
+		
+			<linearGradient id="polygon8312_1_" gradientUnits="userSpaceOnUse" x1="-127.0719" y1="385.2748" x2="-120.9619" y2="385.2748" gradientTransform="matrix(0.7208 0.7218 2.8534 -2.8493 -1124.974 1396.0596)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#070606"/>
+		</linearGradient>
+		<polygon id="polygon8312" class="st18" points="-113.3,210.9 -113.1,210.7 -116.9,206.3 -117.5,206.9 		"/>
+	</g>
+	<g id="g8331">
+		<path id="path8333" inkscape:connector-curvature="0" class="st19" d="M-112.8,244.4c0,1.4-10,2.5-22.4,2.5
+			c-12.3,0-22.4-1.1-22.4-2.5c0-1.4,10-2.5,22.4-2.5C-122.8,241.9-112.8,243-112.8,244.4z"/>
+		<path id="path8335" inkscape:connector-curvature="0" class="st20" d="M-135.3,247c-12.2,0-22.2-1.1-22.2-2.5
+			c0-1.4,9.9-2.5,22.2-2.5c12.3,0,22.2,1.1,22.2,2.5C-113.1,245.8-123.1,247-135.3,247z"/>
+		<path id="path8337" inkscape:connector-curvature="0" class="st21" d="M-135.5,246.9c-12.1,0-22-1.1-22-2.5c0-1.4,9.8-2.5,22-2.5
+			c12.2,0,22,1.1,22,2.5C-113.5,245.8-123.3,246.9-135.5,246.9z"/>
+		<path id="path8339" inkscape:connector-curvature="0" class="st22" d="M-135.6,246.9c-12,0-21.8-1.1-21.8-2.5
+			c0-1.4,9.8-2.5,21.8-2.5c12.1,0,21.8,1.1,21.8,2.5C-113.8,245.8-123.6,246.9-135.6,246.9z"/>
+		<path id="path8341" inkscape:connector-curvature="0" class="st23" d="M-135.8,246.9c-12,0-21.6-1.1-21.6-2.5
+			c0-1.4,9.7-2.5,21.6-2.5c12,0,21.6,1.1,21.6,2.5C-114.1,245.8-123.8,246.9-135.8,246.9z"/>
+		<path id="path8343" inkscape:connector-curvature="0" class="st24" d="M-135.9,246.9c-11.9,0-21.5-1.1-21.5-2.4
+			c0-1.4,9.6-2.4,21.5-2.4c11.9,0,21.5,1.1,21.5,2.4C-114.5,245.8-124.1,246.9-135.9,246.9z"/>
+		<path id="path8345" inkscape:connector-curvature="0" class="st25" d="M-136.1,246.9c-11.8,0-21.3-1.1-21.3-2.4
+			c0-1.3,9.5-2.4,21.3-2.4c11.8,0,21.3,1.1,21.3,2.4C-114.8,245.8-124.3,246.9-136.1,246.9L-136.1,246.9z"/>
+		<path id="path8347" inkscape:connector-curvature="0" class="st26" d="M-136.2,246.8c-11.7,0-21.1-1.1-21.1-2.4
+			c0-1.3,9.4-2.4,21.1-2.4c11.7,0,21.1,1.1,21.1,2.4C-115.1,245.8-124.6,246.8-136.2,246.8z"/>
+		<path id="path8349" inkscape:connector-curvature="0" class="st27" d="M-136.4,246.8c-11.6,0-20.9-1.1-20.9-2.4
+			c0-1.3,9.4-2.4,20.9-2.4c11.6,0,20.9,1.1,20.9,2.4C-115.5,245.8-124.8,246.8-136.4,246.8z"/>
+		<path id="path8351" inkscape:connector-curvature="0" class="st28" d="M-136.6,246.8c-11.5,0-20.7-1.1-20.7-2.4
+			c0-1.3,9.3-2.4,20.7-2.4c11.5,0,20.7,1.1,20.7,2.4C-115.8,245.7-125.1,246.8-136.6,246.8z"/>
+		<path id="path8353" inkscape:connector-curvature="0" class="st29" d="M-136.7,246.8c-11.4,0-20.6-1-20.6-2.3
+			c0-1.3,9.2-2.3,20.6-2.3c11.4,0,20.6,1,20.6,2.3C-116.2,245.7-125.4,246.8-136.7,246.8z"/>
+		<path id="path8355" inkscape:connector-curvature="0" class="st30" d="M-136.9,246.8c-11.3,0-20.4-1-20.4-2.3
+			c0-1.3,9.1-2.3,20.4-2.3c11.3,0,20.4,1,20.4,2.3C-116.5,245.7-125.6,246.8-136.9,246.8z"/>
+		<path id="path8357" inkscape:connector-curvature="0" class="st31" d="M-137,246.7c-11.2,0-20.2-1-20.2-2.3c0-1.3,9-2.3,20.2-2.3
+			c11.2,0,20.2,1,20.2,2.3C-116.8,245.7-125.9,246.7-137,246.7z"/>
+		<path id="path8359" inkscape:connector-curvature="0" class="st32" d="M-137.2,246.7c-11.1,0-20-1-20-2.3c0-1.3,9-2.3,20-2.3
+			c11.1,0,20,1,20,2.3C-117.2,245.7-126.1,246.7-137.2,246.7z"/>
+		<path id="path8361" inkscape:connector-curvature="0" class="st33" d="M-137.3,246.7c-11,0-19.9-1-19.9-2.3
+			c0-1.2,8.9-2.3,19.9-2.3c11,0,19.9,1,19.9,2.3C-117.5,245.7-126.4,246.7-137.3,246.7z"/>
+		<path id="path8363" inkscape:connector-curvature="0" class="st34" d="M-137.5,246.7c-10.9,0-19.7-1-19.7-2.2
+			c0-1.2,8.8-2.2,19.7-2.2c10.9,0,19.7,1,19.7,2.2C-117.8,245.7-126.6,246.7-137.5,246.7z"/>
+		<path id="path8365" inkscape:connector-curvature="0" class="st35" d="M-137.7,246.6c-10.8,0-19.5-1-19.5-2.2
+			c0-1.2,8.7-2.2,19.5-2.2c10.8,0,19.5,1,19.5,2.2C-118.2,245.7-126.9,246.6-137.7,246.6z"/>
+		
+			<ellipse id="ellipse8367" sodipodi:cx="348.733" sodipodi:cy="466.59799" sodipodi:rx="19.318001" sodipodi:ry="2.191" class="st36" cx="-137.8" cy="244.4" rx="19.3" ry="2.2">
+		</ellipse>
+		<path id="path8369" inkscape:connector-curvature="0" class="st37" d="M-138,246.6c-10.6,0-19.1-1-19.1-2.2
+			c0-1.2,8.6-2.2,19.1-2.2c10.6,0,19.1,1,19.1,2.2C-118.8,245.6-127.4,246.6-138,246.6z"/>
+		<path id="path8371" inkscape:connector-curvature="0" class="st38" d="M-138.1,246.6c-10.5,0-19-1-19-2.1c0-1.2,8.5-2.1,19-2.1
+			c10.5,0,19,1,19,2.1C-119.2,245.6-127.7,246.6-138.1,246.6z"/>
+		<path id="path8373" inkscape:connector-curvature="0" class="st39" d="M-138.3,246.6c-10.4,0-18.8-1-18.8-2.1
+			c0-1.2,8.4-2.1,18.8-2.1c10.4,0,18.8,1,18.8,2.1C-119.5,245.6-127.9,246.6-138.3,246.6z"/>
+		<path id="path8375" inkscape:connector-curvature="0" class="st40" d="M-138.4,246.5c-10.3,0-18.6-0.9-18.6-2.1
+			c0-1.2,8.3-2.1,18.6-2.1c10.3,0,18.6,0.9,18.6,2.1C-119.8,245.6-128.2,246.5-138.4,246.5z"/>
+		
+			<ellipse id="ellipse8377" sodipodi:cx="347.95001" sodipodi:cy="466.59799" sodipodi:rx="18.426001" sodipodi:ry="2.0869999" class="st41" cx="-138.6" cy="244.4" rx="18.4" ry="2.1">
+		</ellipse>
+		<path id="path8379" inkscape:connector-curvature="0" class="st42" d="M-138.8,246.5c-10.1,0-18.2-0.9-18.2-2.1
+			c0-1.1,8.2-2.1,18.2-2.1c10.1,0,18.2,0.9,18.2,2.1C-120.5,245.6-128.7,246.5-138.8,246.5z"/>
+		
+			<ellipse id="ellipse8381" sodipodi:cx="347.63699" sodipodi:cy="466.59799" sodipodi:rx="18.068001" sodipodi:ry="2.0450001" class="st43" cx="-138.9" cy="244.4" rx="18.1" ry="2">
+		</ellipse>
+		
+			<ellipse id="ellipse8383" sodipodi:cx="347.479" sodipodi:cy="466.59799" sodipodi:rx="17.889999" sodipodi:ry="2.023" class="st44" cx="-139.1" cy="244.4" rx="17.9" ry="2">
+		</ellipse>
+		
+			<ellipse id="ellipse8385" sodipodi:cx="347.323" sodipodi:cy="466.59799" sodipodi:rx="17.711" sodipodi:ry="2.003" class="st45" cx="-139.2" cy="244.4" rx="17.7" ry="2">
+		</ellipse>
+		
+			<ellipse id="ellipse8387" sodipodi:cx="347.16699" sodipodi:cy="466.59799" sodipodi:rx="17.533001" sodipodi:ry="1.9809999" class="st46" cx="-139.4" cy="244.4" rx="17.5" ry="2">
+		</ellipse>
+		<path id="path8389" inkscape:connector-curvature="0" class="st47" d="M-139.5,246.4c-9.6,0-17.4-0.9-17.4-2c0-1.1,7.8-2,17.4-2
+			c9.6,0,17.4,0.9,17.4,2C-122.2,245.5-129.9,246.4-139.5,246.4z"/>
+		
+			<ellipse id="ellipse8391" sodipodi:cx="346.854" sodipodi:cy="466.59799" sodipodi:rx="17.176001" sodipodi:ry="1.939" class="st48" cx="-139.7" cy="244.4" rx="17.2" ry="1.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8393" sodipodi:cx="346.69699" sodipodi:cy="466.59799" sodipodi:rx="16.997" sodipodi:ry="1.919" class="st49" cx="-139.8" cy="244.4" rx="17" ry="1.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8395" sodipodi:cx="346.54001" sodipodi:cy="466.59799" sodipodi:rx="16.818001" sodipodi:ry="1.897" class="st50" cx="-140" cy="244.4" rx="16.8" ry="1.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8397" sodipodi:cx="346.384" sodipodi:cy="466.59799" sodipodi:rx="16.641001" sodipodi:ry="1.877" class="st51" cx="-140.2" cy="244.4" rx="16.6" ry="1.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8399" sodipodi:cx="346.22699" sodipodi:cy="466.59799" sodipodi:rx="16.461" sodipodi:ry="1.8559999" class="st52" cx="-140.3" cy="244.4" rx="16.5" ry="1.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8401" sodipodi:cx="346.07001" sodipodi:cy="466.59799" sodipodi:rx="16.283001" sodipodi:ry="1.835" class="st53" cx="-140.5" cy="244.4" rx="16.3" ry="1.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8403" sodipodi:cx="345.914" sodipodi:cy="466.59799" sodipodi:rx="16.104" sodipodi:ry="1.814" class="st54" cx="-140.6" cy="244.4" rx="16.1" ry="1.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8405" sodipodi:cx="345.75699" sodipodi:cy="466.59799" sodipodi:rx="15.926" sodipodi:ry="1.793" class="st55" cx="-140.8" cy="244.4" rx="15.9" ry="1.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8407" sodipodi:cx="345.60101" sodipodi:cy="466.59799" sodipodi:rx="15.748" sodipodi:ry="1.772" class="st56" cx="-140.9" cy="244.4" rx="15.7" ry="1.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8409" sodipodi:cx="345.44299" sodipodi:cy="466.59799" sodipodi:rx="15.568" sodipodi:ry="1.751" class="st57" cx="-141.1" cy="244.4" rx="15.6" ry="1.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8411" sodipodi:cx="345.28699" sodipodi:cy="466.59799" sodipodi:rx="15.391" sodipodi:ry="1.73" class="st58" cx="-141.3" cy="244.4" rx="15.4" ry="1.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8413" sodipodi:cx="345.13101" sodipodi:cy="466.59799" sodipodi:rx="15.212" sodipodi:ry="1.709" class="st59" cx="-141.4" cy="244.4" rx="15.2" ry="1.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8415" sodipodi:cx="344.974" sodipodi:cy="466.59799" sodipodi:rx="15.033" sodipodi:ry="1.688" class="st60" cx="-141.6" cy="244.4" rx="15" ry="1.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8417" sodipodi:cx="344.81699" sodipodi:cy="466.59799" sodipodi:rx="14.854" sodipodi:ry="1.6670001" class="st61" cx="-141.7" cy="244.4" rx="14.9" ry="1.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8419" sodipodi:cx="344.66101" sodipodi:cy="466.59799" sodipodi:rx="14.677" sodipodi:ry="1.646" class="st62" cx="-141.9" cy="244.4" rx="14.7" ry="1.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8421" sodipodi:cx="344.504" sodipodi:cy="466.59799" sodipodi:rx="14.498" sodipodi:ry="1.625" class="st63" cx="-142" cy="244.4" rx="14.5" ry="1.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8423" sodipodi:cx="344.34799" sodipodi:cy="466.59799" sodipodi:rx="14.319" sodipodi:ry="1.604" class="st64" cx="-142.2" cy="244.4" rx="14.3" ry="1.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8425" sodipodi:cx="344.19" sodipodi:cy="466.59799" sodipodi:rx="14.141" sodipodi:ry="1.5829999" class="st65" cx="-142.4" cy="244.4" rx="14.1" ry="1.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8427" sodipodi:cx="344.034" sodipodi:cy="466.59799" sodipodi:rx="13.962" sodipodi:ry="1.563" class="st66" cx="-142.5" cy="244.4" rx="14" ry="1.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8429" sodipodi:cx="343.87799" sodipodi:cy="466.59799" sodipodi:rx="13.784" sodipodi:ry="1.541" class="st67" cx="-142.7" cy="244.4" rx="13.8" ry="1.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8431" sodipodi:cx="343.72101" sodipodi:cy="466.59799" sodipodi:rx="13.605" sodipodi:ry="1.521" class="st68" cx="-142.8" cy="244.4" rx="13.6" ry="1.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8433" sodipodi:cx="343.564" sodipodi:cy="466.59799" sodipodi:rx="13.427" sodipodi:ry="1.5" class="st69" cx="-143" cy="244.4" rx="13.4" ry="1.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8435" sodipodi:cx="343.40701" sodipodi:cy="466.59799" sodipodi:rx="13.248" sodipodi:ry="1.479" class="st70" cx="-143.1" cy="244.4" rx="13.2" ry="1.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8437" sodipodi:cx="343.25101" sodipodi:cy="466.59799" sodipodi:rx="13.069" sodipodi:ry="1.4579999" class="st71" cx="-143.3" cy="244.4" rx="13.1" ry="1.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8439" sodipodi:cx="343.095" sodipodi:cy="466.59799" sodipodi:rx="12.892" sodipodi:ry="1.437" class="st72" cx="-143.4" cy="244.4" rx="12.9" ry="1.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8441" sodipodi:cx="342.93799" sodipodi:cy="466.59799" sodipodi:rx="12.712" sodipodi:ry="1.416" class="st73" cx="-143.6" cy="244.4" rx="12.7" ry="1.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8443" sodipodi:cx="342.78101" sodipodi:cy="466.59799" sodipodi:rx="12.534" sodipodi:ry="1.395" class="st74" cx="-143.8" cy="244.4" rx="12.5" ry="1.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8445" sodipodi:cx="342.625" sodipodi:cy="466.59799" sodipodi:rx="12.356" sodipodi:ry="1.374" class="st75" cx="-143.9" cy="244.4" rx="12.4" ry="1.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8447" sodipodi:cx="342.46799" sodipodi:cy="466.59799" sodipodi:rx="12.177" sodipodi:ry="1.353" class="st76" cx="-144.1" cy="244.4" rx="12.2" ry="1.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8449" sodipodi:cx="342.31201" sodipodi:cy="466.59799" sodipodi:rx="11.999" sodipodi:ry="1.332" class="st77" cx="-144.2" cy="244.4" rx="12" ry="1.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8451" sodipodi:cx="342.15399" sodipodi:cy="466.59799" sodipodi:rx="11.819" sodipodi:ry="1.311" class="st78" cx="-144.4" cy="244.4" rx="11.8" ry="1.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8453" sodipodi:cx="341.99799" sodipodi:cy="466.59799" sodipodi:rx="11.642" sodipodi:ry="1.29" class="st79" cx="-144.5" cy="244.4" rx="11.6" ry="1.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8455" sodipodi:cx="341.84201" sodipodi:cy="466.59799" sodipodi:rx="11.464" sodipodi:ry="1.2690001" class="st80" cx="-144.7" cy="244.4" rx="11.5" ry="1.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8457" sodipodi:cx="341.685" sodipodi:cy="466.59799" sodipodi:rx="11.284" sodipodi:ry="1.248" class="st81" cx="-144.9" cy="244.4" rx="11.3" ry="1.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8459" sodipodi:cx="341.52802" sodipodi:cy="466.59799" sodipodi:rx="11.106" sodipodi:ry="1.227" class="st82" cx="-145" cy="244.4" rx="11.1" ry="1.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8461" sodipodi:cx="341.37201" sodipodi:cy="466.59799" sodipodi:rx="10.928" sodipodi:ry="1.206" class="st83" cx="-145.2" cy="244.4" rx="10.9" ry="1.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8463" sodipodi:cx="341.215" sodipodi:cy="466.59799" sodipodi:rx="10.749" sodipodi:ry="1.1849999" class="st84" cx="-145.3" cy="244.4" rx="10.7" ry="1.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8465" sodipodi:cx="341.05899" sodipodi:cy="466.59799" sodipodi:rx="10.57" sodipodi:ry="1.164" class="st85" cx="-145.5" cy="244.4" rx="10.6" ry="1.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8467" sodipodi:cx="340.901" sodipodi:cy="466.59799" sodipodi:rx="10.392" sodipodi:ry="1.1440001" class="st86" cx="-145.6" cy="244.4" rx="10.4" ry="1.1">
+		</ellipse>
+		
+			<ellipse id="ellipse8469" sodipodi:cx="340.745" sodipodi:cy="466.59799" sodipodi:rx="10.214" sodipodi:ry="1.122" class="st87" cx="-145.8" cy="244.4" rx="10.2" ry="1.1">
+		</ellipse>
+		
+			<ellipse id="ellipse8471" sodipodi:cx="340.58899" sodipodi:cy="466.59799" sodipodi:rx="10.035" sodipodi:ry="1.102" class="st88" cx="-146" cy="244.4" rx="10" ry="1.1">
+		</ellipse>
+		
+			<ellipse id="ellipse8473" sodipodi:cx="340.43201" sodipodi:cy="466.59799" sodipodi:rx="9.8559999" sodipodi:ry="1.08" class="st89" cx="-146.1" cy="244.4" rx="9.9" ry="1.1">
+		</ellipse>
+		
+			<ellipse id="ellipse8475" sodipodi:cx="340.27499" sodipodi:cy="466.59799" sodipodi:rx="9.6780005" sodipodi:ry="1.0599999" class="st90" cx="-146.3" cy="244.4" rx="9.7" ry="1.1">
+		</ellipse>
+		
+			<ellipse id="ellipse8477" sodipodi:cx="340.11801" sodipodi:cy="466.59799" sodipodi:rx="9.4989996" sodipodi:ry="1.038" class="st91" cx="-146.4" cy="244.4" rx="9.5" ry="1">
+		</ellipse>
+		
+			<ellipse id="ellipse8479" sodipodi:cx="339.96201" sodipodi:cy="466.59799" sodipodi:rx="9.3210001" sodipodi:ry="1.018" class="st92" cx="-146.6" cy="244.4" rx="9.3" ry="1">
+		</ellipse>
+		
+			<ellipse id="ellipse8481" sodipodi:cx="339.806" sodipodi:cy="466.59799" sodipodi:rx="9.1429996" sodipodi:ry="0.99599999" class="st93" cx="-146.7" cy="244.4" rx="9.1" ry="1">
+		</ellipse>
+		
+			<ellipse id="ellipse8483" sodipodi:cx="339.64801" sodipodi:cy="466.59799" sodipodi:rx="8.9639997" sodipodi:ry="0.97600001" class="st94" cx="-146.9" cy="244.4" rx="9" ry="1">
+		</ellipse>
+		
+			<ellipse id="ellipse8485" sodipodi:cx="339.492" sodipodi:cy="466.59799" sodipodi:rx="8.7849998" sodipodi:ry="0.954" class="st95" cx="-147.1" cy="244.4" rx="8.8" ry="1">
+		</ellipse>
+		
+			<ellipse id="ellipse8487" sodipodi:cx="339.336" sodipodi:cy="466.59799" sodipodi:rx="8.6070004" sodipodi:ry="0.93400002" class="st96" cx="-147.2" cy="244.4" rx="8.6" ry="0.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8489" sodipodi:cx="339.17899" sodipodi:cy="466.59799" sodipodi:rx="8.4280005" sodipodi:ry="0.912" class="st97" cx="-147.4" cy="244.4" rx="8.4" ry="0.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8491" sodipodi:cx="339.022" sodipodi:cy="466.59799" sodipodi:rx="8.25" sodipodi:ry="0.89200002" class="st98" cx="-147.5" cy="244.4" rx="8.3" ry="0.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8493" sodipodi:cx="338.86499" sodipodi:cy="466.59799" sodipodi:rx="8.0710001" sodipodi:ry="0.87" class="st99" cx="-147.7" cy="244.4" rx="8.1" ry="0.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8495" sodipodi:cx="338.70901" sodipodi:cy="466.59799" sodipodi:rx="7.8930001" sodipodi:ry="0.85000002" class="st100" cx="-147.8" cy="244.4" rx="7.9" ry="0.9">
+		</ellipse>
+		
+			<ellipse id="ellipse8497" sodipodi:cx="338.55301" sodipodi:cy="466.59799" sodipodi:rx="7.7150002" sodipodi:ry="0.82800001" class="st101" cx="-148" cy="244.4" rx="7.7" ry="0.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8499" sodipodi:cx="338.396" sodipodi:cy="466.59799" sodipodi:rx="7.5349998" sodipodi:ry="0.80800003" class="st102" cx="-148.1" cy="244.4" rx="7.5" ry="0.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8501" sodipodi:cx="338.23901" sodipodi:cy="466.59799" sodipodi:rx="7.3569999" sodipodi:ry="0.787" class="st103" cx="-148.3" cy="244.4" rx="7.4" ry="0.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8503" sodipodi:cx="338.082" sodipodi:cy="466.59799" sodipodi:rx="7.1789999" sodipodi:ry="0.76599997" class="st104" cx="-148.5" cy="244.4" rx="7.2" ry="0.8">
+		</ellipse>
+		
+			<ellipse id="ellipse8505" sodipodi:cx="337.92599" sodipodi:cy="466.59799" sodipodi:rx="7" sodipodi:ry="0.745" class="st105" cx="-148.6" cy="244.4" rx="7" ry="0.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8507" sodipodi:cx="337.76999" sodipodi:cy="466.59799" sodipodi:rx="6.822" sodipodi:ry="0.72399998" class="st106" cx="-148.8" cy="244.4" rx="6.8" ry="0.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8509" sodipodi:cx="337.612" sodipodi:cy="466.59799" sodipodi:rx="6.6430001" sodipodi:ry="0.70300001" class="st107" cx="-148.9" cy="244.4" rx="6.6" ry="0.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8511" sodipodi:cx="337.45599" sodipodi:cy="466.59799" sodipodi:rx="6.4650002" sodipodi:ry="0.68199998" class="st108" cx="-149.1" cy="244.4" rx="6.5" ry="0.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8513" sodipodi:cx="337.29999" sodipodi:cy="466.59799" sodipodi:rx="6.2859998" sodipodi:ry="0.66100001" class="st109" cx="-149.2" cy="244.4" rx="6.3" ry="0.7">
+		</ellipse>
+		
+			<ellipse id="ellipse8515" sodipodi:cx="337.14301" sodipodi:cy="466.59799" sodipodi:rx="6.1069999" sodipodi:ry="0.63999999" class="st110" cx="-149.4" cy="244.4" rx="6.1" ry="0.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8517" sodipodi:cx="336.98599" sodipodi:cy="466.59799" sodipodi:rx="5.9299998" sodipodi:ry="0.61900002" class="st111" cx="-149.6" cy="244.4" rx="5.9" ry="0.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8519" sodipodi:cx="336.82901" sodipodi:cy="466.59799" sodipodi:rx="5.75" sodipodi:ry="0.59799999" class="st112" cx="-149.7" cy="244.4" rx="5.8" ry="0.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8521" sodipodi:cx="336.673" sodipodi:cy="466.59799" sodipodi:rx="5.572" sodipodi:ry="0.57700002" class="st113" cx="-149.9" cy="244.4" rx="5.6" ry="0.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8523" sodipodi:cx="336.517" sodipodi:cy="466.59799" sodipodi:rx="5.3940001" sodipodi:ry="0.55599999" class="st114" cx="-150" cy="244.4" rx="5.4" ry="0.6">
+		</ellipse>
+		
+			<ellipse id="ellipse8525" sodipodi:cx="336.35901" sodipodi:cy="466.59799" sodipodi:rx="5.2150002" sodipodi:ry="0.53500003" class="st115" cx="-150.2" cy="244.4" rx="5.2" ry="0.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8527" sodipodi:cx="336.203" sodipodi:cy="466.59799" sodipodi:rx="5.0370002" sodipodi:ry="0.514" class="st116" cx="-150.3" cy="244.4" rx="5" ry="0.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8529" sodipodi:cx="336.047" sodipodi:cy="466.59799" sodipodi:rx="4.8579998" sodipodi:ry="0.493" class="st117" cx="-150.5" cy="244.4" rx="4.9" ry="0.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8531" sodipodi:cx="335.89001" sodipodi:cy="466.59799" sodipodi:rx="4.6799998" sodipodi:ry="0.47299999" class="st118" cx="-150.7" cy="244.4" rx="4.7" ry="0.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8533" sodipodi:cx="335.733" sodipodi:cy="466.59799" sodipodi:rx="4.5009999" sodipodi:ry="0.45100001" class="st119" cx="-150.8" cy="244.4" rx="4.5" ry="0.5">
+		</ellipse>
+		
+			<ellipse id="ellipse8535" sodipodi:cx="335.57599" sodipodi:cy="466.59799" sodipodi:rx="4.322" sodipodi:ry="0.43099999" class="st120" cx="-151" cy="244.4" rx="4.3" ry="0.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8537" sodipodi:cx="335.42001" sodipodi:cy="466.59799" sodipodi:rx="4.1440001" sodipodi:ry="0.40900001" class="st121" cx="-151.1" cy="244.4" rx="4.1" ry="0.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8539" sodipodi:cx="335.26401" sodipodi:cy="466.59799" sodipodi:rx="3.9660001" sodipodi:ry="0.389" class="st122" cx="-151.3" cy="244.4" rx="4" ry="0.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8541" sodipodi:cx="335.10599" sodipodi:cy="466.59799" sodipodi:rx="3.7869999" sodipodi:ry="0.36700001" class="st123" cx="-151.4" cy="244.4" rx="3.8" ry="0.4">
+		</ellipse>
+		
+			<ellipse id="ellipse8543" sodipodi:cx="334.95001" sodipodi:cy="466.59799" sodipodi:rx="3.608" sodipodi:ry="0.347" class="st124" cx="-151.6" cy="244.4" rx="3.6" ry="0.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8545" sodipodi:cx="334.793" sodipodi:cy="466.59799" sodipodi:rx="3.4300001" sodipodi:ry="0.32499999" class="st125" cx="-151.8" cy="244.4" rx="3.4" ry="0.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8547" sodipodi:cx="334.63699" sodipodi:cy="466.59799" sodipodi:rx="3.2509999" sodipodi:ry="0.30500001" class="st126" cx="-151.9" cy="244.4" rx="3.3" ry="0.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8549" sodipodi:cx="334.48001" sodipodi:cy="466.59799" sodipodi:rx="3.073" sodipodi:ry="0.28299999" class="st127" cx="-152.1" cy="244.4" rx="3.1" ry="0.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8551" sodipodi:cx="334.323" sodipodi:cy="466.59799" sodipodi:rx="2.895" sodipodi:ry="0.26300001" class="st128" cx="-152.2" cy="244.4" rx="2.9" ry="0.3">
+		</ellipse>
+		
+			<ellipse id="ellipse8553" sodipodi:cx="334.16699" sodipodi:cy="466.59799" sodipodi:rx="2.7160001" sodipodi:ry="0.241" class="st129" cx="-152.4" cy="244.4" rx="2.7" ry="0.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8555" sodipodi:cx="334.01099" sodipodi:cy="466.59799" sodipodi:rx="2.5380001" sodipodi:ry="0.221" class="st130" cx="-152.5" cy="244.4" rx="2.5" ry="0.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8557" sodipodi:cx="333.854" sodipodi:cy="466.59799" sodipodi:rx="2.358" sodipodi:ry="0.199" class="st131" cx="-152.7" cy="244.4" rx="2.4" ry="0.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8559" sodipodi:cx="333.69699" sodipodi:cy="466.59799" sodipodi:rx="2.181" sodipodi:ry="0.17900001" class="st132" cx="-152.8" cy="244.4" rx="2.2" ry="0.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8561" sodipodi:cx="333.54001" sodipodi:cy="466.59799" sodipodi:rx="2.0009999" sodipodi:ry="0.15700001" class="st133" cx="-153" cy="244.4" rx="2" ry="0.2">
+		</ellipse>
+		
+			<ellipse id="ellipse8563" sodipodi:cx="333.38199" sodipodi:cy="466.59799" sodipodi:rx="1.822" sodipodi:ry="0.13699999" class="st134" cx="-153.2" cy="244.4" rx="1.8" ry="0.1">
+		</ellipse>
+	</g>
+</g>
+</svg>

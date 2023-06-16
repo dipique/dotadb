@@ -1,0 +1,30 @@
+﻿@model bool
+
+@{ 
+    var isChecked = Model ? "checked=checked" : "";
+}
+
+<!-- Rounded switch -->
+<label class="switch">
+    <input type="checkbox" id="@ViewData.TemplateInfo.HtmlFieldPrefix" @isChecked name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@Model.ToString().ToLower()">
+    <span class="slider round"></span>
+</label>
+
+<script>
+    //Yes, this is an awful way to accomplish this goal. But I'm tired and unpaid so deal.
+    var val_@ViewData.TemplateInfo.HtmlFieldPrefix = "@Model.ToString().ToLower()";
+    $("#@ViewData.TemplateInfo.HtmlFieldPrefix").click(function () {
+        if (val_@ViewData.TemplateInfo.HtmlFieldPrefix == "false") {
+            val_@ViewData.TemplateInfo.HtmlFieldPrefix = "true";
+        } else {
+            val_@ViewData.TemplateInfo.HtmlFieldPrefix = "false";
+        }
+        $(this).val(val_@ViewData.TemplateInfo.HtmlFieldPrefix);
+        var isC = val_@ViewData.TemplateInfo.HtmlFieldPrefix == "true";
+        if (isC) {
+            $(this).attr('checked', true);
+        } else {
+            $(this).removeAttr('checked');
+        }
+    });
+</script>

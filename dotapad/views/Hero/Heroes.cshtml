@@ -1,0 +1,208 @@
+﻿@using DotAPicker.Models
+@using DotAPicker.ViewModels
+@model TableViewModel<Hero>
+
+@{
+    ViewBag.Title = "Heroes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.SelectedHeroID > 0)
+    {
+
+    }
+    else
+    {
+        ViewBag.SelectedHeroID = Model.Items.FirstOrDefault()?.Id ?? 0;
+    }
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+}
+
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/filter-table.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link href="~/Content/filter-table.css" rel="stylesheet" />
+
+
+<div class="container-fluid" style="width: 1020px; min-width: 720px; margin-left: 20px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <h1>Heroes</h1>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <a href="javascript:void(0)" class="show-info" style="padding-top: 100px" onclick="toggleInfo()">Show/Hide Instructions</a>
+    </div>
+    <div class="info col-xs-8" style="display: none">
+        <div>
+            <p>
+                Use this screen to do most of your note taking. Make sure you're logged in or you won't be able to change anything!
+            </p>
+            <p>
+                <strong>Tip:</strong> From the hero name search box, you can add the top hero to enemies by pressing Enter, or to allies by pressing Shift-Enter.
+            </p>
+            <p>
+                There are three types of information you can keep for each hero:
+                <ol>
+                    <li><strong>Hero notes</strong> - General notes on the hero, labels to help categorize, and preference rank. You can also keep alternative names that you'll be able to search by.</li>
+                    <li><strong>Tips</strong> - A tip is a categorized piece of advice for how to play a hero (or type of hero), like how to itemize or how to use a certain skill.</li>
+                    <li><strong>Relationships</strong> - Relationships contain ways that different heroes (or groups of heroes) synergize or counter each other.</li>
+                </ol>
+            </p>
+            <p>
+                You can quickly change the preference using the dropdown boxes in the hero list.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var infoShown = false;
+        function toggleInfo() {
+            if (infoShown) {
+                $(".info").hide();
+            } else {
+                $(".info").show();
+            }
+            infoShown = !infoShown;
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="row">
+                <div class="col-xs-3">
+                    <input class="text-search" type="text" id="nameFilter" placeholder="Search by hero name..." />
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3">
+                    <select multiple data-placeholder="Search by hero preference" id="typeFilter" onchange="filterChange()">
+                        @foreach (string option in Enum.GetNames(typeof(HeroPreference)))
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3">
+                    <select multiple data-placeholder="Search by label" id="labelFilter" onchange="filterChange()">
+                        @foreach (string option in Model.Items.SelectMany(i => i.DescriptionLabels).Distinct())
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 style="display:inline-block">Hero List</h4>
+            @if (signedIn)
+            {
+                <div class="link-padding">
+                    @Html.ActionLink("(new)", "Create", new { }, new { @class = "create-link", title = "New Hero" })
+                </div>
+            }
+        </div>
+        <div class="col-xs-7"><h4>Hero Details</h4></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            @{
+                var viewModel = new TableConstructorViewModel<Hero>()
+                {
+                    SignedIn = signedIn,
+                    Items = Model.Items,
+                    Columns = new List<TableColumn<Hero>>() {
+                            new TableColumn<Hero>(nameof(Hero.Name), minWidth: 200),
+                            new TableColumn<Hero>(nameof(Hero.NameSet), display: false, valueID: "nameValue"),
+                            new TableColumn<Hero>(nameof(Hero.Labels), display: false, valueID: "labelValue"),
+                            new TableColumn<Hero>(nameof(Hero.Preference), minWidth: 110, valueID: "typeValue", dropDownSettings: new DropDownSettings() {
+                                DropdownClass = "hero-pref",
+                                RequiresSignIn = true
+                            })
+                        }
+                };
+
+                //Set the sort field, if applicable
+                var sortColumn = viewModel.Columns.FirstOrDefault(c => c.Property.Name == Model.SortField);
+                if (sortColumn != null)
+                {
+                    sortColumn.SortDirection = Model.SortDirection;
+                }
+
+                Html.RenderPartial("HeroTable", viewModel);
+            }
+        </div>
+        <div class="col-xs-7">
+            @*Hero detail section*@
+            <div class="heroDetails"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#typeFilter").chosen({
+        width: "250px"
+    });
+
+    $("#labelFilter").chosen({
+        width: "250px"
+    });
+
+    function filterChange() {
+        filterFunction();
+    }
+
+    var filterSet = [[
+        "nameFilter",
+        "text",
+        "nameValue",
+        "inner"
+    ], [
+        "labelFilter",
+        "multi-value",
+        "labelValue",
+        "inner"
+    ], [
+        "typeFilter",
+        "multi",
+        "typeValue",
+        @(signedIn ? Html.Raw("\"select\"") : Html.Raw("\"inner\""))
+    ]
+    ];
+
+    //Register keyboard events
+    $('#nameFilter').keyup(function (e) {
+        if (e.keyCode == 13) { //enter
+            if (countVisibleItems() == 1) {
+                var heroRow = $("div.data-row#" + firstVisibleItemIndex())[0];
+                selectRow(heroRow);
+            }
+        } else {
+            filterFunction();
+        }
+    });
+
+    //Causes clicking a row to load the detail partial view
+    $('.data-row').click(function () {
+        selectRow(this);
+    });
+
+    function selectRow(heroRow) {
+        $(heroRow).addClass('selected').siblings().removeClass('selected');
+        $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + heroRow.id);
+    }
+
+    //Make the first hero auto-load details
+    $('.heroDetails').load('@Url.Action("Detail", "Hero")?id=' + @ViewBag.SelectedHeroID);
+
+    $(".hero-pref").change(function () {
+        //Make the popdown appear on preference change, if applicable
+        $('.popdown-view').load('hero/UpdatePreference?heroID=' + this.id + '&preference=' + this.options[this.selectedIndex].text);
+    });
+
+</script>
+

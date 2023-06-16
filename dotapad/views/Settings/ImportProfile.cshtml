@@ -1,0 +1,49 @@
+﻿@model DotAPicker.ViewModels.ImportProfileViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/sliders.css")" rel="stylesheet" type="text/css" />
+
+<h2>Import Profile</h2>
+
+<p>
+    <strong>
+        This will clear your existing profile, if any data exists, and import the data from this file. Be careful! All your data will disappear! Poof! Like the wind! Be sure you've exported your data just in case.
+    </strong>
+</p>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IncludeNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IncludeNotes)
+                @Html.ValidationMessageFor(model => model.IncludeNotes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PostedFile, new { type = "file", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Import Profile" class="btn btn-default" />
+                <br />
+                <i>(this might take a minute)</i>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

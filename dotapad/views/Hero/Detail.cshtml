@@ -1,0 +1,205 @@
+﻿@using DotAPicker.ViewModels
+@model HeroViewModel
+
+@{
+    var missingImage = Model.MissingImage;
+    if (missingImage)
+    {
+        if (Model.SignedIn)
+        {
+            @Html.ActionLink("Update image", "UploadHeroImage", "Settings", new { heroID = Model.Hero.Id }, new { @class = "missing-hero-img" })
+        }
+        else
+        {
+            <img alt="Image" src="@HeroViewModel.MissingImgName" style="float: left; margin: 0 3px 3px 2px" width="90" height="51">
+        }
+    }
+    else
+    {
+        <img alt="Image" src="@Model.GetImgName()" style="float: left; margin: 0 3px 3px 2px" width="90" height="51">
+    }
+
+        <strong>@(Model.Hero?.Name)</strong>
+
+    if (Model.SignedIn && Model.Hero != null)
+    {
+        <div class="link-padding">
+            @Html.ActionLink("(edit)", "Edit", new { id = Model.Hero.Id }, new { @class = "edit-link", title = "Edit Hero" })
+            @Html.ActionLink("(delete)", "Delete", new { id = Model.Hero.Id }, new { @class = "delete-link", title = "Delete Hero" })
+        </div>
+    }
+}
+
+<br />
+
+@(Model.Hero?.Notes)
+
+<div class="container" style="max-width: 600px">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Tips</h4>
+            @if (Model.SignedIn && Model.Hero != null)
+            {
+            <div class="link-padding">
+                <a href="javascript:void(0)" class="create-link create-tip" title="New Tip"></a>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="hor-title-header-row row">
+        <div class="hor-title-header-cell col-xs-2">Type</div>
+        <div class="hor-title-header-cell col-xs-3">Subject</div>
+        <div class="hor-title-header-cell col-xs-7">Source</div>
+    </div>
+
+    @for (int x = 0; x < Model.Hero.Tips.Count(); x++)
+    {
+        <div class="hor-data-row row">
+            <div class="hor-data-cell col-xs-2">@Html.DisplayFor(Model => Model.Hero.Tips[x].Type)</div>
+            <div class="hor-data-cell col-xs-3">@Html.DisplayFor(Model => Model.Hero.Tips[x].SubjectName)</div>
+            <div class="hor-data-cell col-xs-7">@Html.DisplayFor(Model => Model.Hero.Tips[x].Source)</div>
+        </div>
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="col-xs-11">
+                @Html.DisplayFor(Model => Model.Hero.Tips[x].Text)
+            </div>
+            @if (Model.SignedIn)
+            {
+                <div class="link-padding col-xs-1">
+                    <a class="edit-link edit-tip" href="javascript:void(0)" id="@Model.Hero.Tips[x].Id" title="Edit Tip"></a>
+                    @Html.ActionLink("(delete)", "Delete", "Tip", new { id = Model.Hero.Tips[x].Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Tip" })
+                </div>
+            }
+        </div>
+    }
+    @if (Model.Hero.Tips.Count() == 0)
+    {
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="hor-data-cell col-xs-12" style="border-bottom: inset">
+                <span>This hero doesn't have any tips yet.</span>
+                @if (Model.SignedIn)
+                {
+                    @Html.ActionLink("Click here to add one!", "Create", "Tip", new { heroID = Model.Hero.Id, returnToHeroList = true }, new { title = "New Tip" })
+                }
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Relationships</h4>
+            <div class="link-padding">
+                @if (Model.SignedIn)
+                {
+                    <a href="javascript:void(0)" class="create-link create-relationship" title="New Relationship"></a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="hor-title-header-row row">
+        <div class="hor-title-header-cell col-xs-2">Type</div>
+        <div class="hor-title-header-cell col-xs-3">Subject</div>
+        <div class="hor-title-header-cell col-xs-3">Object</div>
+        <div class="hor-title-header-cell col-xs-4">Source</div>
+    </div>
+
+    @foreach (var r in Model.Hero.Relationships)
+    {
+        <div class="hor-data-row row">
+            <div class="hor-data-cell col-xs-2">@r.Type</div>
+            <div class="hor-data-cell col-xs-3">@r.SubjectName</div>
+            <div class="hor-data-cell col-xs-3">@r.ObjectName</div>
+            <div class="hor-data-cell col-xs-4">@r.Source</div>
+        </div>
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="col-xs-11">
+                @r.Text
+            </div>
+            @if (Model.SignedIn)
+            {
+                <div class="link-padding col-xs-1">
+                    <a class="edit-link edit-relationship" href="javascript:void(0)" id="@r.Id" title="Edit Relationship"></a>
+                    @Html.ActionLink("(delete)", "Delete", "Relationship", new { id = r.Id, returnToHeroList = true }, new { @class = "delete-link", title = "Delete Relationship" })
+                </div>
+            }
+        </div>
+    }
+
+    @if (Model.Hero.Relationships.Count() == 0)
+    {
+        <div class="hor-data-row row" style="border-bottom: inset">
+            <div class="hor-data-cell col-xs-12" style="border-bottom: inset">
+                This hero doesn't have any relationships yet.
+                @if (Model.SignedIn)
+                {
+                    @Html.ActionLink("Click here to add one!", "Create", "Relationship", new { heroID = Model.Hero.Id, returnToHeroList = true }, new { title = "New Relationship" })
+                }
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 style="display: inline-block">Labels</h4>
+            <ul>
+                @foreach (var label in Model.Hero.DescriptionLabels)
+                {
+                    <li>@label</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.delete-link').click(function () {
+            return window.confirm("Are you sure you want to delete this? You can't undo it and it'll hurt his feelings reeeeeeaaaaalllll bad.");
+        });
+
+        $("#tip-dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 550
+        });
+
+        $("#relationship-dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 650
+        });
+
+        $('.create-tip').click(function () {
+            $('#tip-dialog').load("@($"{Url.Action("CreateTip", "Hero")}?heroID={Model.Hero.Id}")", function (response, status, xhr) {
+                $('#tip-dialog').dialog('open');
+            });
+        });
+
+        $('.create-relationship').click(function () {
+            $('#relationship-dialog').load("@($"{Url.Action("CreateRelationship", "Hero")}?heroID={Model.Hero.Id}")", function (response, status, xhr) {
+                $('#relationship-dialog').dialog('open');
+            });
+        });
+
+        $('.edit-tip').click(function () {
+            var noteID = this.id;
+            $('#tip-dialog').load("@($"{Url.Action("EditTip", "Hero")}?id=")" + noteID, function (response, status, xhr) {
+                $('#tip-dialog').dialog('open');
+            });
+        });
+
+        $('.edit-relationship').click(function () {
+            var noteID = this.id;
+            $('#relationship-dialog').load("@($"{Url.Action("EditRelationship", "Hero")}?id=")" + noteID, function (response, status, xhr) {
+                $('#relationship-dialog').dialog('open');
+            });
+        });
+
+    });
+</script>
+
+<div id="tip-dialog" style="overflow: hidden"></div>
+<div id="relationship-dialog" style="overflow: hidden"></div>
