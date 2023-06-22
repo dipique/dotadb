@@ -1,0 +1,1 @@
+export const PickerFilterBar = () => <div>Filter bar</div>

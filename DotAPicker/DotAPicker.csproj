@@ -190,6 +190,7 @@
     <Compile Include="Controllers\DotAController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PickerController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
@@ -409,6 +410,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="img\upgrade.svg" />
+    <Content Include="js\index.html" />
     <Content Include="Sample Data\default-dpexport-180320051612.xml" />
     <Content Include="Sample Data\dota.db" />
     <Content Include="Sample Data\labels.txt" />
@@ -580,6 +582,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Picker\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tmp\" />
@@ -594,6 +597,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="js\index.tsx" />
+    <TypeScriptCompile Include="js\picker\HeroCanvas.tsx" />
+    <TypeScriptCompile Include="js\picker\HeroList.tsx" />
+    <TypeScriptCompile Include="js\picker\Picker.tsx" />
+    <TypeScriptCompile Include="js\picker\PickerFilterBar.tsx" />
+    <TypeScriptCompile Include="js\picker\PickerPage.tsx" />
+    <TypeScriptCompile Include="js\shared\ToggledInstructions.tsx" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>

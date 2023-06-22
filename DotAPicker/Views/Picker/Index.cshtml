@@ -1,0 +1,15 @@
+﻿@using DotAPicker.Models
+
+@{
+    ViewBag.Title = "Hero Picker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var signedIn = ((User)Session["user"])?.IsAuthenticated == true;
+}
+
+<div style="min-width: 1366px; margin-left: 10px;">
+    <h1>@ViewBag.Title</h1>
+    <div id="pickerRoot"></div>
+</div>
+
+<script src="../../js/dist/main.js"></script>

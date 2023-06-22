@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "monitor": "webpack --mode development -w",
+    "initMonitor": "npm run install && npm run monitor",
     "start": "webpack serve --port 3000",
+    "build:dev": "webpack --mode development",
     "build": "set $env:NODE_ENV=production; webpack"
   },
   "keywords": [],
