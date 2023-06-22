@@ -1,8 +1,27 @@
+import { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ToggledInstructions } from '../shared/ToggledInstructions'
 import { Picker } from './Picker'
 
 export const PickerPage = () => {
+    const [ testText, setTestText ] = useState('')
+
+    useEffect(() => {
+        fetch('/Picker/Heroes')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                
+                setTestText(data
+                    ? data.length
+                        ? `${data.length} heroes received from api`
+                        : 'Items property empty or undefined'
+                    : 'Empty response received'
+                )
+            })
+
+    }, []) // first load
+
     return <div>
         <ToggledInstructions instructions={[
             { text: 'This is the picking screen where you can choose 5 allies and 5 enemies so you can see all the notes you spent all that time writing.' },
@@ -12,6 +31,7 @@ export const PickerPage = () => {
             { text: 'Lastly, if you\'re wondering why this app is so ugly, it\'s because I suck at this front end shit. Sorry about that. Believe it or not even this took me a pretty long time.' },
         ]} />
         <Picker />
+        <div>{testText}</div>
     </div>
 }
 
