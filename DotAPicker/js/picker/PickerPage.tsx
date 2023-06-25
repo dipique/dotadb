@@ -2,24 +2,20 @@ import { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ToggledInstructions } from '../shared/ToggledInstructions'
 import { Picker } from './Picker'
+import { getHeroes } from '../db'
 
 export const PickerPage = () => {
     const [ testText, setTestText ] = useState('')
 
     useEffect(() => {
-        fetch('/Picker/Heroes')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                
-                setTestText(data
-                    ? data.length
-                        ? `${data.length} heroes received from api`
-                        : 'Items property empty or undefined'
-                    : 'Empty response received'
-                )
-            })
-
+        getHeroes().then(heroes => {               
+            setTestText(heroes
+                ? heroes.length
+                    ? `${heroes.length} heroes received from api`
+                    : 'Items property empty or undefined'
+                : 'Empty response received'
+            )
+        })
     }, []) // first load
 
     return <div>

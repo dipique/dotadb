@@ -4,7 +4,7 @@ import { PickerFilterBar } from './PickerFilterBar'
 
 export const Picker = () => {
     return <div>
-        <PickerFilterBar />
+        <PickerFilterBar heroes={[]} updateFilter={console.log} />
         <HeroList />
         <HeroCanvas />
     </div>
